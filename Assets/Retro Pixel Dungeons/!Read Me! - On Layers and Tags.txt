@@ -1,0 +1,29 @@
+Thank you for purchasing the Retro Pixel Dungeons!
+Herein are some important usage instructions on how to set up layers and tags for the tileset to work as much 'out of the box' as possible.
+IMPORTANT NOTE: If you already have a layer and tag setup for your project and don't want to overwrite it, see the Manual Setup Tips further below.
+
+
+---PRE-CONFIGURED TAGS & LAYER SETUP INSTRUCTIONS---
+In this main folder, you may've noticed a .ZIP-archive attached. In the archive, there's a TagManager.asset file.
+This TagManager has the sorting layers set up to work with RPD, but remember that using this file will overwrite any tags and layers setup already in place.
+It is highly recommended that you first go into the ProjectSettings-folder of your project and backup the existing TagManager.asset before proceeding.
+
+Once you're ready to proceed, follow these steps:
+1. Open the TagManager .ZIP-archive in the Retro Pixel Dungeons main folder.
+2. Extract the TagManager.asset file in the archive to your ProjectSettings-folder.
+	Example location: <MainProjectFolder>\ProjectSettings\
+	When asked to overwrite, choose 'Yes/Overwrite'.
+3. You're all set! To ensure that it worked, go into any object or background tile prefab and make sure that its Sorting Layer is set to "Objects + Player" and "Background" respectively.
+
+
+---MANUAL SETUP TIPS---
+If you don't want to overwrite your existing tags and layers setup file, here's a couple of tips on how to assign Sorting Layers to objects and tile pieces.
+1. Objects - All Prefabs in the Prefabs\Deco Objects sub-folder should be assigned a Sorting Layer that is rendered on top of the background tiles.
+2. Tiles - Likewise, all Prefabs in the Floors, Stairs and Walls folders should be assigned a Sorting Layer that is rendered below the Objects.
+This applies to the Shadow Tiles as well. Make sure to assign them an Order in Layer above the floor  tiles, for instance, so that they render on top of them.
+3. The Roof prefabs, however, should ideally be assigned a sorting layer above the objects. That way, you won't get objects rendering on top of the roof tiles.
+4. If you're using the included automatic sprite sorting scripts, be sure to assign the Player Character the same Sorting Layer as the Objects. Otherwise, the player might render always on top of or always below the object sprites.
+
+For any further questions, contact me at either;
+E-mail: marcus@perdiv.com
+Twitter: https://twitter.com/caffeinegamer

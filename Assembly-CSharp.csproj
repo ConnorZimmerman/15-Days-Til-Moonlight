@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LangVersion>4</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{773FBBFE-DF3F-E1FE-DC18-F6870FFCBC3F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_1_1;UNITY_2017_1;UNITY_2017;UNITY_ANALYTICS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;ENABLE_SPRITE_MASKING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_VIDEO;ENABLE_RMGUI;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_STYLE_SHEETS;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Retro Pixel Dungeons\Scripts\DemoStairs.cs" />
+     <Compile Include="Assets\Retro Pixel Dungeons\Scripts\SpriteSorter.cs" />
+     <Compile Include="Assets\Retro Pixel Dungeons\Scripts\TopDownCharacter.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\EnemyDialogue.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\EnemyHealthManager.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\EnemyMasterScript.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\EnemyStaminaManager.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\EnemyTypeDefiner.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\EnemyTypes\BasicEnemy\EnemyTestScript.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\EnemyTypes\BasicEnemy\TrackingRaycast.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\EnemyTypes\RangedEnemyFolder\BasicRangedEnemy.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\EnemyTypes\RangedEnemyFolder\EnemyRangedAttack.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\EnemyTypes\RangedEnemyFolder\RangedDamage.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\EngagedWithPlayer.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\FearCounter.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\HurtPlayer.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\HurtPlayerUpdated.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\LargeBasicEnemy.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\Pathfinding.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\PathTracker.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\RecognizeStalkZone.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\SlimeController.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\StaminaCounter.cs" />
+     <Compile Include="Assets\Scripts\Enemy Scripts\WayPoints.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\HurtEnemy.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerHealthManager.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerPathTracker.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerStaminaManager.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerStartPoint.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerStats.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\ShieldBlock.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\DialogueHolder.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\DialogueManager.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\EnemyUIManager.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\FloatingNumbers.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\PlayerUIManager.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\UIManager.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\VolumeController.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\VolumeManager.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\AllWaypoints.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\BoundsScript.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\DestroyOverTime.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\GoldPickUp.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\Grid.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\Heap.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\LoadNewArea.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\MoneyManager.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\MusicController.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\MusicSwitcher.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\Node.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\PathRequestManager.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\RandomMovement.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\Reload.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\SFXManager.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\VillagerMovement.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\WaypointRaycast.cs" />
+     <Compile Include="Assets\Shield Pack Free\MouseRotationScript.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\ImportBehaviour.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SortingLayerExposed.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\SpriteDepthInMap.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TileAnimator.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledInitialShaderProperties.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TiledMap.cs" />
+     <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TileObject.cs" />
+     <None Include="Assets\Tiled2Unity\Imported\Inside Mirror.tiled2unity.xml" />
+     <None Include="Assets\Retro Pixel Dungeons\Scripts\!Read Me! - Notes on Scripts.txt" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
+     <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
+     <None Include="Assets\Tiled2Unity\Imported\Dungeon Room 2.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
+     <None Include="Assets\Retro Pixel Dungeons\Animations\!ReadMe! - Animations.txt" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaDepth.shader" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaDiffuseDepth.shader" />
+     <None Include="Assets\Tiled2Unity\Imported\Dungeon.tiled2unity.xml" />
+     <None Include="Assets\Shield Pack Free\ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\test_area.tiled2unity.xml" />
+     <None Include="Assets\Retro Pixel Dungeons\!Read Me! - On Layers and Tags.txt" />
+     <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Textures\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\16x16 dungeon.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Imported\Test_Snow.tiled2unity.xml" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaColorKey.shader" />
+     <None Include="Assets\Tiled2Unity\Shaders\shaDepthColorKey.shader" />
+     <None Include="Assets\Tiled2Unity\License.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Timeline">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

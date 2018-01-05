@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 60109b110edc1154fac67f348b0a7bcc
+labels:
+- Weapon
+- Shield
+- Mythical
+- Melee
+- Medieval
+- Knight
+- Fantasy
+- Defense
+- Armor
+- Armour
+- War
+- Magic
+NativeFormatImporter:
+  mainObjectFileID: -1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
