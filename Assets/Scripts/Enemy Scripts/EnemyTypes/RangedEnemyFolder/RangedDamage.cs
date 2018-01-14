@@ -16,11 +16,14 @@ public class RangedDamage : MonoBehaviour
     private PlayerController thePlayer;
     public int knifeDirection;
 
+    private ShieldBlock playerShield;
+
     // Use this for initialization
     void Start()
     {
         playerEngagement = FindObjectOfType<EngagedWithPlayer>();
         thePlayer = FindObjectOfType<PlayerController>();
+        playerShield = thePlayer.GetComponentInChildren<ShieldBlock>();
         thisKnife = this.gameObject;
         sfxMan = FindObjectOfType<SFXManager>();
         rangedDeathStrike = false;
@@ -80,7 +83,7 @@ public class RangedDamage : MonoBehaviour
             }
         }
 
-         if (FindObjectOfType<ShieldBlock>().shieldOn)
+        if (playerShield.shieldOn)
         {
             if (knifeDirection - thePlayer.directionInt == -2
                 || knifeDirection - thePlayer.directionInt == 2)

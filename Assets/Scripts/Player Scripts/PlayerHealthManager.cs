@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class PlayerHealthManager : MonoBehaviour {
+public class PlayerHealthManager : MonoBehaviour
+{
 
     public int playerMaxHealth;
 
@@ -24,22 +25,25 @@ public class PlayerHealthManager : MonoBehaviour {
 
     public float playerHealthPercent;
 
-   // private PlayerController thePlayer;
+    private GlobalDataScript globalData;
+
+    // private PlayerController thePlayer;
 
     // Use this for initialization
-    void Start() {
-        oldPlayerCurrentHealth = playerCurrentHealth;
+    void Start()
+    {
         playerDamage = false;
         playerSprite = GetComponent<SpriteRenderer>();
-
-       // thePlayer = FindObjectOfType<PlayerController>();
+        playerCurrentHealth = GlobalDataScript.globalPlayerCurrentHealth;
+        oldPlayerCurrentHealth = playerCurrentHealth;
+        // thePlayer = FindObjectOfType<PlayerController>();
     }
 
-    
+
     // Update is called once per frame
     void Update()
     {
-        
+
 
         if (playerCurrentHealth <= 0)
         {
@@ -87,7 +91,7 @@ public class PlayerHealthManager : MonoBehaviour {
             flashCounter -= Time.deltaTime;
         }
 
-        
+
         playerHealthPercent = (float)(double)playerCurrentHealth / playerMaxHealth * 100;
     }
 

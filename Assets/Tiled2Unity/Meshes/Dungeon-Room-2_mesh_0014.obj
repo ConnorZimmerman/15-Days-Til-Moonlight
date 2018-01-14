@@ -1,0 +1,29 @@
+﻿# Tiled2Unity generated file. Do not modify by hand.
+# Wavefront file for 'Dungeon-Room-2_mesh_0014.obj'
+
+# Vertices (Count = 8)
+v -192 -464 0
+v -208 -464 0
+v -208 -448 0
+v -192 -448 0
+v -240 -512 0
+v -256 -512 0
+v -256 -496 0
+v -240 -496 0
+
+# Texture cooridinates (Count = 4)
+vt 0.25 0.1363636
+vt 0.3125 0.1363636
+vt 0.3125 0.1818182
+vt 0.25 0.1818182
+
+# Normal
+vn 0 0 -1
+
+# Mesh description
+g Dungeon-Room-2_mesh_0014
+
+# Faces
+f 1/1/1 2/2/1 3/3/1 4/4/1
+f 5/1/1 6/2/1 7/3/1 8/4/1
+

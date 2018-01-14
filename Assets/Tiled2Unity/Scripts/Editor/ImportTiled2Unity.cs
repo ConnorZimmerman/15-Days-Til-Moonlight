@@ -73,10 +73,9 @@ namespace Tiled2Unity
             return startsWith && endsWith;
         }
 
-        public string GetMeshAssetPath(string file)
+        public string GetMeshAssetPath(string mapName, string meshName)
         {
-            string name = System.IO.Path.GetFileNameWithoutExtension(file);
-            string meshAsset = String.Format("{0}/Meshes/{1}.obj", this.assetPathToTiled2UnityRoot, name);
+            string meshAsset = String.Format("{0}/Meshes/{1}/{2}.obj", this.assetPathToTiled2UnityRoot, mapName, meshName);
             return meshAsset;
         }
 
@@ -99,11 +98,14 @@ namespace Tiled2Unity
             string filter = String.Format("t:material {0}", name);
             string folder = this.assetPathToTiled2UnityRoot + "/Materials";
             string[] files = AssetDatabase.FindAssets(filter, new string[] { folder });
-            if (files.Length > 0)
+            foreach (var f in files)
             {
-                return AssetDatabase.GUIDToAssetPath(files[0]);
+                string assetPath = AssetDatabase.GUIDToAssetPath(f);
+                if (String.Compare(Path.GetFileNameWithoutExtension(assetPath), name, true) == 0)
+                {
+                    return assetPath;
+                }
             }
-
             return "";
         }
 

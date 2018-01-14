@@ -2,9 +2,9 @@
 // Note: This parital class is not compiled in for WebPlayer builds.
 // The Unity Webplayer is deprecated. If you *must* use it then make sure Tiled2Unity assets are imported via another build target first.
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -49,7 +49,7 @@ namespace Tiled2Unity
 
         public static float GetAttributeAsFloat(XElement elem, string attrName)
         {
-            return Convert.ToSingle(elem.Attribute(attrName).Value);
+            return Convert.ToSingle(elem.Attribute(attrName).Value, CultureInfo.InvariantCulture);
         }
 
         public static float GetAttributeAsFloat(XElement elem, string attrName, float defaultValue)
@@ -108,10 +108,51 @@ namespace Tiled2Unity
             return GetStringAsEnum<T>(enumString);
         }
 
-
         public static string GetAttributeAsFullPath(XElement elem, string attrName)
         {
             return System.IO.Path.GetFullPath(elem.Attribute(attrName).Value);
+        }
+
+        public static Color GetAttributeAsColor(XElement elem, string attrName)
+        {
+            string htmlColor = GetAttributeAsString(elem, attrName);
+
+            // Sometimes Tiled saves out color without the leading # but we expect it to be there
+            if (!htmlColor.StartsWith("#"))
+            {
+                htmlColor = "#" + htmlColor;
+            }
+
+            if (htmlColor.Length == 9)
+            {
+                // ARBG
+                byte a = byte.Parse(htmlColor.Substring(1, 2), System.Globalization.NumberStyles.HexNumber);
+                byte r = byte.Parse(htmlColor.Substring(3, 2), System.Globalization.NumberStyles.HexNumber);
+                byte g = byte.Parse(htmlColor.Substring(5, 2), System.Globalization.NumberStyles.HexNumber);
+                byte b = byte.Parse(htmlColor.Substring(7, 2), System.Globalization.NumberStyles.HexNumber);
+                return new Color32(r, g, b, a);
+            }
+            else if (htmlColor.Length == 7)
+            {
+                // RBA
+                byte r = byte.Parse(htmlColor.Substring(1, 2), System.Globalization.NumberStyles.HexNumber);
+                byte g = byte.Parse(htmlColor.Substring(3, 2), System.Globalization.NumberStyles.HexNumber);
+                byte b = byte.Parse(htmlColor.Substring(5, 2), System.Globalization.NumberStyles.HexNumber);
+                return new Color32(r, g, b, 255);
+            }
+
+            // If we're here then we've got a bad color format. Just return an ugly color.
+            return Color.magenta;
+        }
+
+        public static Color GetAttributeAsColor(XElement elem, string attrName, Color defaultValue)
+        {
+            XAttribute attr = elem.Attribute(attrName);
+            if (attr == null)
+            {
+                return defaultValue;
+            }
+            return GetAttributeAsColor(elem, attrName);
         }
 
         public static void ReadyToWrite(string path)
@@ -121,9 +162,12 @@ namespace Tiled2Unity
             info.Directory.Create();
 
             // Make sure file is not readonly
-            if ((info.Attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+            if (info.Exists)
             {
-                throw new UnityException(String.Format("{0} is read-only", path));
+                if ((info.Attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                {
+                    throw new UnityException(String.Format("{0} is read-only", path));
+                }
             }
         }
 

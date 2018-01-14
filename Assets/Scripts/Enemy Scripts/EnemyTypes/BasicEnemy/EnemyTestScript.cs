@@ -386,12 +386,12 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 //The enemies shield is up as it tries to recover stamina
                 if (actionDecision == 3)
                 {
-                    //Shield();
-                    myRigidbody.velocity = new Vector2(0, 0);
+                    Shield();
+                    // myRigidbody.velocity = new Vector2(0, 0);
                     enemyRecover = true;
                     //enemyShield = false;
                     attackLock = true;
-                    enemyMoving = false;
+                    // enemyMoving = false;
                 }
 
                 /*The enemy is trying to put distance between itself and the player (either just being
@@ -446,12 +446,12 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 }
                 if (actionDecision == 3)
                 {
-                    //Shield();
-                    myRigidbody.velocity = new Vector2(0, 0);
+                    Shield();
+                    // myRigidbody.velocity = new Vector2(0, 0);
                     enemyRecover = true;
                     //enemyShield = false;
                     attackLock = true;
-                    enemyMoving = false;
+                    // enemyMoving = false;
                 }
 
                 if (actionDecision == 4)
@@ -504,12 +504,12 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
                 if (actionDecision == 3)
                 {
-                    //Shield();
-                    myRigidbody.velocity = new Vector2(0, 0);
+                    Shield();
+                    // myRigidbody.velocity = new Vector2(0, 0);
                     enemyRecover = true;
                     // enemyShield = false;
                     attackLock = true;
-                    enemyMoving = false;
+                    // enemyMoving = false;
                 }
 
                 if (actionDecision == 4)
@@ -559,11 +559,11 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
                 if (actionDecision == 3)
                 {
-                    myRigidbody.velocity = new Vector2(0, 0);
-                    //Shield();
+                    // myRigidbody.velocity = new Vector2(0, 0);
+                    Shield();
                     enemyRecover = true;
                     attackLock = true;
-                    enemyMoving = false;
+                    // enemyMoving = false;
                 }
 
 
@@ -672,7 +672,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 actionDecision = 0;
             }
 
-            if (attackWhileBlocking == 1)
+            if (attackWhileBlocking == 1 && !attackLock)
             {
                 actionDecision = 3;
             }

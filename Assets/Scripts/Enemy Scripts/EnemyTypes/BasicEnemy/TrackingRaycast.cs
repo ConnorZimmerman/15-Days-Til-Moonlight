@@ -31,43 +31,53 @@ public class TrackingRaycast : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemyScript.following && enemyScript.enemyMoving)
+        if (enemyScript.following)
         {
             distanceToPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
             Vector3 targetDir = playerObject.transform.position - enemyObject.transform.position;
 
-            if (!enemyScript.isPathfinding)
+            // if (!enemyScript.isPathfinding)
+            // {
+            RaycastHit2D hit = Physics2D.Raycast(enemyObject.transform.position, targetDir, distanceToPlayer, 1 << 8 | 1 << 9);
+            // Debug.Log(hit.collider.tag);
+            if (hit.collider.tag == "Player")
             {
-                RaycastHit2D hit = Physics2D.Raycast(enemyObject.transform.position, targetDir, distanceToPlayer, 1 << 8 | 1 << 9);
-                if (hit.collider.tag == "Player")
-                {
-                    lineOfSight = true;
-                }
-                else
-                {
-                    lineOfSight = false;
-                }
+                lineOfSight = true;
             }
-        }
-        if (!lineOfSight)
-        {
-            lineOfSight = false;
-            enemyPos = enemyObject.transform.position;
-            playerPos = playerObject.transform.position;
-            if (!enqueue)
+            else
             {
-                enqueue = true;
-                PathRequestManager.RequestPath(enemyPos, playerPos, OnPathFound);
+                lineOfSight = false;
+                enemyPos = enemyObject.transform.position;
+                playerPos = playerObject.transform.position;
+                if (!enqueue)
+                {
+                    enqueue = true;
+                    PathRequestManager.RequestPath(enemyPos, playerPos, OnPathFound);
+                }
+                // }
             }
-            // pathFound = pathfinder.FindPath(enemyPos, playerPos);
+            if (!lineOfSight)
+            {
+                lineOfSight = false;
+                enemyPos = enemyObject.transform.position;
+                playerPos = playerObject.transform.position;
+                if (!enqueue)
+                {
+                    enqueue = true;
+                    PathRequestManager.RequestPath(enemyPos, playerPos, OnPathFound);
+                }
+                // pathFound = pathfinder.FindPath(enemyPos, playerPos);
+            }
         }
     }
-    public void OnPathFound(Vector2[] newPath)
+    public void OnPathFound(Vector2[] newPath, bool pathSuccessful)
     {
-        path = newPath;
-        // StopCoroutine("FollowPath");
-        // StartCoroutine("FollowPath");
-
+        if (pathSuccessful)
+        {
+            path = newPath;
+            // StopCoroutine("FollowPath");
+            // StartCoroutine("FollowPath");
+        }
     }
 
     public void OnDrawGizmos()

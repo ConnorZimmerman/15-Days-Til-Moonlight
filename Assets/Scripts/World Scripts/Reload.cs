@@ -101,6 +101,8 @@ public class Reload : MonoBehaviour
                     theCamera.transform.position = new Vector3(transform.position.x, transform.position.y,
                         theCamera.transform.position.z);
                 }
+                PlayerPrefs.DeleteAll();
+                PlayerPrefs.SetInt("Global Music Tracker", 0);
                 SceneManager.LoadScene("Main", LoadSceneMode.Single);
             }
         }

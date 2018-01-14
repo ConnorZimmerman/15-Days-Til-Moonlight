@@ -29,7 +29,7 @@ public class EnemyRangedAttack : MonoBehaviour
     //public List<Node> pathFound;
     public Vector2[] path;
     public bool enqueue;
-    public Vector3 targetDir; 
+    public Vector3 targetDir;
     // Use this for initialization
     void Start()
     {
@@ -78,11 +78,13 @@ public class EnemyRangedAttack : MonoBehaviour
 
 
                 //Check to see if it's time to attack
-                if (timeUntilAttack <= 0)
+                if (timeUntilAttack <= 0 && rangedEnemy.following)
                 {
                     //Raycast to see if there is line of sight to target
                     RaycastHit2D hit = Physics2D.Raycast(rotatingObject.transform.position, targetDir, distanceToPlayer, 1 << 8 | 1 << 9);
-
+                    // if (hit.collider.tag != null)
+                    // {
+                    Debug.Log(hit.collider.tag);
                     if (hit.collider.tag == "Player")
                     {
                         lineOfSight = true;
@@ -91,9 +93,19 @@ public class EnemyRangedAttack : MonoBehaviour
                         newKnife.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(0f, throwForce));
                         timeUntilAttack = 2;
                     }
+                    // }
                     else
                     {
                         lineOfSight = false;
+                        enemyPos = enemyObject.transform.position;
+                        playerPos = playerObject.transform.position;
+                        if (!enqueue)
+                        {
+                            enqueue = true;
+                            PathRequestManager.RequestPath(enemyPos, playerPos, OnPathFound);
+                            enqueue = false;
+                        }
+                        // }
                     }
                 }
             }
@@ -102,34 +114,17 @@ public class EnemyRangedAttack : MonoBehaviour
         {
             inRange = false;
         }
-        if (!lineOfSight)
-        {
-            //Debug.Log(hit.collider.tag);
-            lineOfSight = false;
-            rangedEnemy.isAttackingOne = false;
-            enemyPos = enemyObject.transform.position;
-            playerPos = playerObject.transform.position;
-            // pathFound = pathfinder.FindPath(enemyPos, playerPos);
-            if (!enqueue)
-            {
-                enqueue = true;
-                PathRequestManager.RequestPath(enemyPos, playerPos, OnPathFound);
-            }
-        }
     }
 
-    public void OnPathFound(Vector2[] newPath)
+
+    public void OnPathFound(Vector2[] newPath, bool pathSuccessful)
     {
-        //if(pathSuccessful){
-        Debug.Log("Hello");
-        path = newPath;
-        foreach (var n in newPath)
+        if (pathSuccessful)
         {
-            Debug.Log(n);
+            path = newPath;
+            // StopCoroutine("FollowPath");
+            // StartCoroutine("FollowPath");
         }
-        // StopCoroutine("FollowPath");
-        // StartCoroutine("FollowPath");
-        //}
     }
     public void OnTriggerEnter2D(Collider2D other)
     {

@@ -630,7 +630,7 @@ public class BasicRangedEnemy : MonoBehaviour
                                 if (enemyPos != n)
                                 {
                                     transform.position = Vector2.MoveTowards(transform.position,
-                                    n, (speed-3.2f) * Time.deltaTime);
+                                    n, (speed-2f) * Time.deltaTime);
                                 }
                                 if (!snipeSpotFour)
                                 {
