@@ -58,13 +58,14 @@ public class HurtEnemy : MonoBehaviour
         {
             playerEngagement = other.gameObject.transform.GetChild(0).GetComponent<EngagedWithPlayer>();
         }
-        catch{
+        catch
+        {
             return;
         }
         enemyStaminaMan = other.gameObject.GetComponent<EnemyStaminaManager>();
         theEnemy = other.gameObject.GetComponent<EnemyTestScript>();
 
-        if (other.gameObject.tag == "Enemy" && playerEngagement.thePlayerDeathStrike || other.gameObject.tag == "LargeEnemyBasic" && playerEngagement.thePlayerDeathStrike || other.gameObject.tag == "BasicRangedEnemy" //&& playerEngagement.thePlayerDeathStrike
+        if (other.gameObject.tag == "Enemy" && playerEngagement.thePlayerDeathStrike || other.gameObject.tag == "LargeEnemyBasic" && playerEngagement.thePlayerDeathStrike || other.gameObject.tag == "BasicRangedEnemy" && playerEngagement.thePlayerDeathStrike
             || other.gameObject.tag == "Enemy1")
         {
             enemyHit = true;
@@ -73,6 +74,7 @@ public class HurtEnemy : MonoBehaviour
       && playerEngagement.faceOff)
             {
                 playerEngagement.strikeBlock = true;
+                sfxMan.swordsColliding.volume = 1;
                 sfxMan.swordsColliding.Play();
                 Instantiate(swordClash, swordClashPoint.position, swordClashPoint.rotation);
             }
@@ -103,6 +105,7 @@ public class HurtEnemy : MonoBehaviour
             || other.gameObject.tag == "LargeEnemyBasic" && other.gameObject.GetComponent<EnemyTestScript>().enemyShield)//!thePlayer.deathStrike)//
         {
             enemyStaminaMan.enemyCurrentStamina -= 400;
+            sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, swordClashPoint.position, swordClashPoint.rotation);
 

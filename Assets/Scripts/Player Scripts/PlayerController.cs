@@ -678,7 +678,7 @@ public class PlayerController : MonoBehaviour
                 preAttack = false;
                 attackLock = true;
 
-                staminaMan.playerCurrentStamina -= 400;
+                staminaMan.playerCurrentStamina -= 1000;
                 //staminaAttackDrainBool = true;
             }
         }

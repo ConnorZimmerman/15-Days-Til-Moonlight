@@ -15,14 +15,16 @@ public class RangedDamage : MonoBehaviour
     public bool rangedDeathStrike;
     private PlayerController thePlayer;
     public int knifeDirection;
-
     private ShieldBlock playerShield;
+    private float distanceToPlayer;
+    private GameObject playerObject;
 
     // Use this for initialization
     void Start()
     {
         playerEngagement = FindObjectOfType<EngagedWithPlayer>();
         thePlayer = FindObjectOfType<PlayerController>();
+        playerObject = GameObject.Find("Player");
         playerShield = thePlayer.GetComponentInChildren<ShieldBlock>();
         thisKnife = this.gameObject;
         sfxMan = FindObjectOfType<SFXManager>();
@@ -109,10 +111,16 @@ public class RangedDamage : MonoBehaviour
         }
         else if (other.gameObject.tag == "Wall")
         {
+            distanceToPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
+            if (distanceToPlayer < 12)
+            {
+                sfxMan.swordsColliding.volume = ((distanceToPlayer - 12) / -12) * ((distanceToPlayer - 12) / -12) - .1f;
+                sfxMan.swordsColliding.Play();
+            }
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
-            //sfxMan.swordsColliding.Play();
             thisKnife.SetActive(false);
         }
+        
 
     }
     public void OnTriggerExit2D(Collider2D other)

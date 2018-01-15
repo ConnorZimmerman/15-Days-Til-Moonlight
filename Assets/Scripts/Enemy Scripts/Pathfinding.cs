@@ -38,48 +38,55 @@ public class Pathfinding : MonoBehaviour
         Node startNode = grid.NodeFromWorldPoint(startPos);
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
 
-        if (startNode.walkable && targetNode.walkable)
+        int counter = 0;
+        // while (!targetNode.walkable)
+        // {
+        //     counter++;
+        //     targetNode = grid.NodeFromWorldPointAlternate(targetPos, counter);
+        // }
+        // while(!startNode.walkable){
+        //     counter++;
+        //     startNode = grid.NodeFromWorldPointAlternate(startPos, counter);
+        // }
+
+        Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
+        HashSet<Node> closedSet = new HashSet<Node>();
+        openSet.Add(startNode);
+
+        while (openSet.Count > 0)
         {
+            Node currentNode = openSet.RemoveFirst();
+            closedSet.Add(currentNode);
 
-            Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
-            HashSet<Node> closedSet = new HashSet<Node>();
-            openSet.Add(startNode);
-
-            while (openSet.Count > 0)
+            if (currentNode == targetNode)
             {
-                Node currentNode = openSet.RemoveFirst();
-                closedSet.Add(currentNode);
+                //sw.Stop();
+                //print("Path found: " + sw.ElapsedMilliseconds + " ms");
+                pathSuccess = true;
+                waypoints = RetracePath(startNode, targetNode);
 
-                if (currentNode == targetNode)
+                break;
+            }
+            foreach (Node neighbor in grid.GetNeighbors(currentNode))
+            {
+                if (!neighbor.walkable || closedSet.Contains(neighbor))
                 {
-                    //sw.Stop();
-                    //print("Path found: " + sw.ElapsedMilliseconds + " ms");
-                    pathSuccess = true;
-                    waypoints = RetracePath(startNode, targetNode);
-
-                    break;
+                    continue;
                 }
-                foreach (Node neighbor in grid.GetNeighbors(currentNode))
+                int newMovementCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor);
+                if (newMovementCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
                 {
-                    if (!neighbor.walkable || closedSet.Contains(neighbor))
-                    {
-                        continue;
-                    }
-                    int newMovementCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor);
-                    if (newMovementCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
-                    {
-                        neighbor.gCost = newMovementCostToNeighbor;
-                        neighbor.hCost = GetDistance(neighbor, targetNode);
-                        neighbor.parent = currentNode;
+                    neighbor.gCost = newMovementCostToNeighbor;
+                    neighbor.hCost = GetDistance(neighbor, targetNode);
+                    neighbor.parent = currentNode;
 
-                        if (!openSet.Contains(neighbor))
-                        {
-                            openSet.Add(neighbor);
-                        }
-                        else
-                        {
-                            openSet.UpdateItem(neighbor);
-                        }
+                    if (!openSet.Contains(neighbor))
+                    {
+                        openSet.Add(neighbor);
+                    }
+                    else
+                    {
+                        openSet.UpdateItem(neighbor);
                     }
                 }
             }

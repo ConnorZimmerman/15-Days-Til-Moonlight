@@ -339,21 +339,21 @@ public class EngagedWithPlayer : MonoBehaviour
                     if (enemyMoveDirectionX == 0)
                     {
                         enemyTransform.position = new Vector2(enemyTransform.position.x,
-                        enemyTransform.position.y + 0.41f);
+                        enemyTransform.position.y + 0.31f);
                     }
                     if (enemyMoveDirectionX == 1)
                     {
-                        enemyTransform.position = new Vector2(enemyTransform.position.x + 0.41f,
+                        enemyTransform.position = new Vector2(enemyTransform.position.x + 0.31f,
                         enemyTransform.position.y);
                     }
                     if (enemyMoveDirectionX == 2)
                     {
                         enemyTransform.position = new Vector2(enemyTransform.position.x,
-                        enemyTransform.position.y - 0.41f);
+                        enemyTransform.position.y - 0.31f);
                     }
                     if (enemyMoveDirectionX == 3)
                     {
-                        enemyTransform.position = new Vector2(enemyTransform.position.x - 0.41f,
+                        enemyTransform.position = new Vector2(enemyTransform.position.x - 0.31f,
                         enemyTransform.position.y);
                     }
                     attacking = true;
@@ -454,7 +454,8 @@ public class EngagedWithPlayer : MonoBehaviour
         // {
         if (playerStaminaDrain && playerShield.shieldOn && !deathStrike && colliderOn)
         {
-            playerStaminaMan.playerCurrentStamina -= 400;
+            playerStaminaMan.playerCurrentStamina -= 1000;
+            sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
             enemyStamina.enemyCurrentStamina -= 400;
@@ -488,6 +489,7 @@ public class EngagedWithPlayer : MonoBehaviour
             {
                 sfxMan.enemyAttack.Play();
             }
+            sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
             enemyStamina.enemyCurrentStamina -= 400;
@@ -530,7 +532,8 @@ public class EngagedWithPlayer : MonoBehaviour
         rangedDmg++;
         if (!knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike && rangedDmg >= 2)
         {
-            playerStaminaMan.playerCurrentStamina -= 400;
+            playerStaminaMan.playerCurrentStamina -= 1000;
+            sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
             enemyStamina.enemyCurrentStamina -= 400;

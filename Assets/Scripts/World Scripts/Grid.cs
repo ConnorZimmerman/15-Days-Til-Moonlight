@@ -86,6 +86,19 @@ public class Grid : MonoBehaviour
 
         return grid[x, y];
     }
+    public Node NodeFromWorldPointAlternate(Vector2 worldPosition, int counter)
+    {
+        float percentX = ((worldPosition.x - transform.position.x + gridWorldSize.x / 2) / gridWorldSize.x);
+        float percentY = ((worldPosition.y - transform.position.y + gridWorldSize.y / 2) / gridWorldSize.y);
+
+        percentX = Mathf.Clamp01(percentX);
+        percentY = Mathf.Clamp01(percentY);
+
+        int x = Mathf.RoundToInt((gridSizeX - 1) * percentX) + counter;
+        int y = Mathf.RoundToInt((gridSizeY - 1) * percentY) + counter;
+
+        return grid[x, y];
+    }
     //public List<Node> path;
     void OnDrawGizmos()
     {

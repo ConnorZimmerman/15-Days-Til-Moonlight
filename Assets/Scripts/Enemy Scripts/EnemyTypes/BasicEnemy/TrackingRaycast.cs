@@ -14,7 +14,6 @@ public class TrackingRaycast : MonoBehaviour
     //public List<Node> pathFound;
     public Vector2[] path;
     private Pathfinding pathfinder;
-
     public bool enqueue;
 
     // Use this for initialization
@@ -51,8 +50,10 @@ public class TrackingRaycast : MonoBehaviour
                 playerPos = playerObject.transform.position;
                 if (!enqueue)
                 {
+                    // enemyScript.following = false;
                     enqueue = true;
                     PathRequestManager.RequestPath(enemyPos, playerPos, OnPathFound);
+                    // enemyScript.following = true;
                 }
                 // }
             }

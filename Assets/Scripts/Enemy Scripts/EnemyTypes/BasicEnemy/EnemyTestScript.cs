@@ -297,6 +297,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         anim.SetBool("Recovery Attack", playerEngagement.recovAttack);
         anim.SetBool("Fred is dead", enemyHealthMan.fredIsDead);
         anim.SetBool("Damage Possible", playerEngagement.enemyDamagePossible);
+        anim.SetBool("Enqueue", raycastPath.enqueue);
 
 
         if (enemyShield)
@@ -766,7 +767,10 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     {
         if (other.gameObject.name == "Player" && playerEngagement.colliderOn == false && playerEngagement.wallBlock == false)
         {
-            following = true;
+            // if (!raycastPath.enqueue)
+            // {
+            // }
+                following = true;
 
             if (!deathSeven && enemyMoving)
             {

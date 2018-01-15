@@ -287,6 +287,7 @@ public class BasicRangedEnemy : MonoBehaviour
         anim.SetBool("Recovery Attack", playerEngagement.recovAttack);
         anim.SetBool("Fred is dead", enemyHealthMan.fredIsDead);
         anim.SetBool("Damage Possible", playerEngagement.enemyDamagePossible);
+        anim.SetBool("Enqueue", rangedAttack.enqueue);
 
         if (enemyShield)
         {
@@ -621,7 +622,7 @@ public class BasicRangedEnemy : MonoBehaviour
                     }
                     else
                     {
-                        if (rangedAttack.path != null)
+                        if (rangedAttack.path != null && !rangedAttack.enqueue)
                         {
                             //enemyMoving = true;
                             foreach (Vector2 n in rangedAttack.path)

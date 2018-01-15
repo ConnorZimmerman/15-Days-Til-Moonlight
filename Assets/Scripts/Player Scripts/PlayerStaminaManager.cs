@@ -89,16 +89,16 @@ public class PlayerStaminaManager : MonoBehaviour
         
 
         if (thePlayer.dashActive == false && thePlayer.sprintActive == false
-            && thePlayer.attackBool == false && thePlayer.attackBoolMouse == false && playerCurrentStamina <= 20000)
+            && thePlayer.attackBool == false && thePlayer.attackBoolMouse == false && playerCurrentStamina <= 10000)
         {
             if (staminaTimer == 2 && staminaLock == false && theShield.shieldOn == false)
             {
-                playerCurrentStamina += 8;
+                playerCurrentStamina += 32;
                 staminaCharge = true;
             }
             else if (theShield.shieldOn == true && staminaTimer == 2 && staminaLock == false)
             {
-                playerCurrentStamina += 6;
+                playerCurrentStamina += 20;
                 staminaCharge = true;
             }
         }
