@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private PlayerStaminaManager staminaMan;
     private Animator anim;
     public Rigidbody2D myRigidbody;
-    private bool playerMoving;
+    public bool playerMoving;
     public Vector2 lastMove;
     private Vector2 moveInput;
     private static bool playerExists;
@@ -105,6 +105,8 @@ public class PlayerController : MonoBehaviour
     public float sprintTimer;
     public bool sprintPossible;
 
+    private TerrainManager terrainManager;
+
     // Use this for initialization
     void Start()
     {
@@ -148,6 +150,8 @@ public class PlayerController : MonoBehaviour
         enemyTargetObject = this.gameObject;
         dmObject = GameObject.Find("Dialogue Manager");
         theDM = dmObject.GetComponent<DialogueManager>();
+
+        terrainManager = FindObjectOfType<TerrainManager>();
 
         damagePossible = false;
         attackPossible = true;
@@ -448,6 +452,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             soFast = false;
+            moveSpeed = 2;
         }
 
         if (sprintPossible)

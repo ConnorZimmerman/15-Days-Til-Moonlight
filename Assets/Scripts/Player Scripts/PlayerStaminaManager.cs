@@ -24,6 +24,7 @@ public class PlayerStaminaManager : MonoBehaviour
 
     public GameObject playerStaminaObject;
     public GameObject dmObject;
+    private GlobalDataScript globalData;
 
     // Use this for initialization
     void Start()
@@ -34,8 +35,7 @@ public class PlayerStaminaManager : MonoBehaviour
 
         playerStaminaObject = GameObject.Find("Player");
         thePlayer = playerStaminaObject.GetComponent<PlayerController>();
-
-
+        playerCurrentStamina = GlobalDataScript.globalPlayerCurrentStamina;
     }
 
     // Update is called once per frame
@@ -68,9 +68,9 @@ public class PlayerStaminaManager : MonoBehaviour
         //if (thePlayer.damagePossible == true || thePlayer.attackBoolMouse == true)
         //if (thePlayer.damagePossible == true && PlayerController.staminaAttackDrainBool 
         //if (thePlayer.damagePossible == true && thePlayer.staminaAttackDrainBool)
-            //|| thePlayer.attackBoolMouse == true
-            
-       // {
+        //|| thePlayer.attackBoolMouse == true
+
+        // {
         //    playerCurrentStamina -= 400;
         //}
 
@@ -86,7 +86,7 @@ public class PlayerStaminaManager : MonoBehaviour
             staminaCharge = true;
             staminaTimer = 2;
         }
-        
+
 
         if (thePlayer.dashActive == false && thePlayer.sprintActive == false
             && thePlayer.attackBool == false && thePlayer.attackBoolMouse == false && playerCurrentStamina <= 10000)

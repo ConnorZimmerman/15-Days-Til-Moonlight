@@ -45,10 +45,10 @@ public class MusicController : MonoBehaviour
         if (musicCanPlay)
         {
 
-            if (!musicTracks[currentTrack].isPlaying)
-            {
-                musicTracks[currentTrack].Play();
-            }
+            // if (!musicTracks[currentTrack].isPlaying)
+            // {
+            //     musicTracks[currentTrack].Play();
+            // }
         }
         else
         {
@@ -57,10 +57,10 @@ public class MusicController : MonoBehaviour
 
     }
 
-    public void SwitchTrack(int newTrack)
-    {
-        musicTracks[currentTrack].Stop();
-        currentTrack = newTrack;
-        musicTracks[currentTrack].Play();
-    }
+    // public void SwitchTrack(int newTrack)
+    // {
+    //     musicTracks[currentTrack].Stop();
+    //     currentTrack = newTrack;
+    //     musicTracks[currentTrack].Play();
+    // }
 }

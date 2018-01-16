@@ -22,6 +22,9 @@ public class VolumeManager : MonoBehaviour {
 
         for(int i = 0; i < vcObjects.Length; i++)
         {
+            if(vcObjects[i].name == "Overworld"){
+                continue;
+            }
             vcObjects[i].SetAudioLvl(currentVolumeLvl);
         }
 	}

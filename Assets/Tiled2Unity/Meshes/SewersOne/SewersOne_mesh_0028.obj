@@ -1,0 +1,29 @@
+﻿# Tiled2Unity generated file. Do not modify by hand.
+# Wavefront file for 'SewersOne_mesh_0028.obj'
+
+# Vertices (Count = 8)
+v -55 -23 0
+v -56 -23 0
+v -56 -22 0
+v -55 -22 0
+v -58 -26 0
+v -59 -26 0
+v -59 -25 0
+v -58 -25 0
+
+# Texture cooridinates (Count = 4)
+vt 0.8125 0.4545454
+vt 0.875 0.4545454
+vt 0.875 0.5
+vt 0.8125 0.5
+
+# Normal
+vn 0 0 -1
+
+# Mesh description
+g SewersOne_mesh_0028
+
+# Faces
+f 1/1/1 2/2/1 3/3/1 4/4/1
+f 5/1/1 6/2/1 7/3/1 8/4/1
+

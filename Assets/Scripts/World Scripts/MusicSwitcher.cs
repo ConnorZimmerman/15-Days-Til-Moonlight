@@ -15,11 +15,11 @@ public class MusicSwitcher : MonoBehaviour {
 
        theMC = FindObjectOfType<MusicController>();
 
-        if(switchOnStart)
-        {
-            theMC.SwitchTrack(newTrack);
-            gameObject.SetActive(false);
-        }
+        // if(switchOnStart)
+        // {
+        //     theMC.SwitchTrack(newTrack);
+        //     gameObject.SetActive(false);
+        // }
 	}
 
 	// Update is called once per frame
@@ -27,12 +27,12 @@ public class MusicSwitcher : MonoBehaviour {
 
 	}
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.gameObject.name == "Player")
-        {
-            theMC.SwitchTrack(newTrack);
-            gameObject.SetActive(false);
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if(other.gameObject.name == "Player")
+    //     {
+    //         theMC.SwitchTrack(newTrack);
+    //         gameObject.SetActive(false);
+    //     }
+    // }
 }

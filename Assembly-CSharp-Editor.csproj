@@ -65,6 +65,7 @@
      <Compile Include="Assets\Tiled2Unity\Scripts\Editor\Tiled2UnityMenuItems.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Editor\TiledAssetPostProcessor.cs" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDiffuseDepth-Instanced.shader" />
+     <None Include="Assets\Tiled2Unity\Imported\SewersOne.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Inside Mirror.tiled2unity.xml" />
      <None Include="Assets\Retro Pixel Dungeons\Scripts\!Read Me! - Notes on Scripts.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
@@ -79,6 +80,7 @@
      <None Include="Assets\Tiled2Unity\Shaders\shaDiffuseDepth.shader" />
      <None Include="Assets\Tiled2Unity\Imported\Dungeon.tiled2unity.xml" />
      <None Include="Assets\Shield Pack Free\ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\Dungeon Room 3.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\test_area.tiled2unity.xml" />
      <None Include="Assets\Retro Pixel Dungeons\!Read Me! - On Layers and Tags.txt" />
      <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />

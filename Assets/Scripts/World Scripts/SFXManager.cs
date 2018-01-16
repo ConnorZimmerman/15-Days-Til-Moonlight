@@ -10,6 +10,7 @@ public class SFXManager : MonoBehaviour
     public AudioSource enemyAttack;
     public AudioSource swordsColliding;
     public AudioSource blood;
+    public AudioSource waterWalk;
 
     private static bool sfxManager;
 

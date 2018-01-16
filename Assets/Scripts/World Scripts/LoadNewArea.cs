@@ -13,7 +13,7 @@ public class LoadNewArea : MonoBehaviour
     private PlayerController thePlayer;
 
     private PlayerHealthManager playerHealth;
-
+    private PlayerStaminaManager playerStamina;
     public GameObject startPoint;
 
     // Use this for initialization
@@ -28,6 +28,7 @@ public class LoadNewArea : MonoBehaviour
     {
         thePlayer = FindObjectOfType<PlayerController>();
         playerHealth = FindObjectOfType<PlayerHealthManager>();
+        playerStamina = FindObjectOfType<PlayerStaminaManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -37,6 +38,7 @@ public class LoadNewArea : MonoBehaviour
             //SceneManager.LoadScene(levelToLoad);
             //            GlobalDataScript.globalPlayerCurrentHealth = playerHealth.playerCurrentHealth;
             PlayerPrefs.SetInt("Global Player Current Health", playerHealth.playerCurrentHealth);
+            PlayerPrefs.SetInt("Global Player Current Stamina", playerStamina.playerCurrentStamina);
             //PlayerPrefs.SetInt("Global Music Tracker", 0);
             SceneManager.LoadScene("Lvl 2", LoadSceneMode.Single);
             thePlayer.startPoint = exitPoint;

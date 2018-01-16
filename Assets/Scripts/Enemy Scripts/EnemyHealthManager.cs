@@ -13,7 +13,8 @@ public class EnemyHealthManager : MonoBehaviour
 
     public EnemyTestScript enemy;
     public PlayerStats thePlayerStats; //player stats added to give xp upon enemies death
-    public PlayerController thePlayer;
+                                       // public PlayerController thePlayer;
+    public GameObject thePlayer;
 
     public float enemyHealthPercent; /*All health/stamina has percentages for the enemy to calculate
     its priorities more efficiently*/
@@ -33,8 +34,9 @@ public class EnemyHealthManager : MonoBehaviour
         enemyMaster = enemyObject.GetComponent<EnemyMasterScript>();
         thePlayerStats = FindObjectOfType<PlayerStats>();
         bodyCollider = enemyObject.GetComponent<BoxCollider2D>();
+        thePlayer = GameObject.Find("Player");
 
-        deathCounter = 2; 
+        deathCounter = 2;
 
         fredIsDead = false;
 
@@ -55,6 +57,10 @@ public class EnemyHealthManager : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             Destroy(bodyCollider);
+            if (deathCounter == 2)
+            {
+                thePlayer.GetComponent<PlayerStaminaManager>().playerCurrentStamina += 1000;
+            }
             deathCounter -= Time.deltaTime;
             fredIsDead = true;
         }

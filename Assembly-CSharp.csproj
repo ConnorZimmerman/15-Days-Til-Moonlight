@@ -109,6 +109,7 @@
      <Compile Include="Assets\Scripts\World Scripts\RandomMovement.cs" />
      <Compile Include="Assets\Scripts\World Scripts\Reload.cs" />
      <Compile Include="Assets\Scripts\World Scripts\SFXManager.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\TerrainManager.cs" />
      <Compile Include="Assets\Scripts\World Scripts\VillagerMovement.cs" />
      <Compile Include="Assets\Scripts\World Scripts\WaypointRaycast.cs" />
      <Compile Include="Assets\Shield Pack Free\MouseRotationScript.cs" />
@@ -132,6 +133,7 @@
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TileObject.cs" />
      <Compile Include="Assets\Tiled2Unity\Scripts\Runtime\TmxObject.cs" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDiffuseDepth-Instanced.shader" />
+     <None Include="Assets\Tiled2Unity\Imported\SewersOne.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Inside Mirror.tiled2unity.xml" />
      <None Include="Assets\Retro Pixel Dungeons\Scripts\!Read Me! - Notes on Scripts.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
@@ -146,6 +148,7 @@
      <None Include="Assets\Tiled2Unity\Shaders\shaDiffuseDepth.shader" />
      <None Include="Assets\Tiled2Unity\Imported\Dungeon.tiled2unity.xml" />
      <None Include="Assets\Shield Pack Free\ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\Dungeon Room 3.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\test_area.tiled2unity.xml" />
      <None Include="Assets\Retro Pixel Dungeons\!Read Me! - On Layers and Tags.txt" />
      <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />

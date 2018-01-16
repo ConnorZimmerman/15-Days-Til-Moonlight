@@ -532,7 +532,7 @@ public class EngagedWithPlayer : MonoBehaviour
         rangedDmg++;
         if (!knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike && rangedDmg >= 2)
         {
-            playerStaminaMan.playerCurrentStamina -= 1000;
+            playerStaminaMan.playerCurrentStamina -= 2000;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);

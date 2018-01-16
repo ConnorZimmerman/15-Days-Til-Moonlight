@@ -5,11 +5,13 @@ using UnityEngine;
 public class GlobalDataScript : MonoBehaviour
 {
     public static int globalPlayerCurrentHealth;
+    public static int globalPlayerCurrentStamina;
     //public static int globalSoundTrackInstance;
     // Use this for initialization
     void Awake()
     {
         globalPlayerCurrentHealth = PlayerPrefs.GetInt("Global Player Current Health", 5);
+        globalPlayerCurrentStamina = PlayerPrefs.GetInt("Global Player Current Stamina", 10000);
         //globalSoundTrackInstance = PlayerPrefs.GetInt("Global Music Tracker", 1);
     }
 

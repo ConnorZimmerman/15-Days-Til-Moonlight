@@ -8,8 +8,12 @@ public class MoneyManager : MonoBehaviour {
     public Text moneyText;
     public int currentGold;
 
+    private PlayerHealthManager playerHealth;
+
 	// Use this for initialization
 	void Start () {
+
+        playerHealth = FindObjectOfType<PlayerHealthManager>();
 
         if (PlayerPrefs.HasKey("Current Money"))
         {
@@ -32,7 +36,8 @@ public class MoneyManager : MonoBehaviour {
 
     public void AddMoney(int goldToAdd)
     {
-        currentGold += goldToAdd;
+        playerHealth.playerCurrentHealth += 3;
+        //currentGold += goldToAdd;
         PlayerPrefs.SetInt("CurrentMoney", currentGold);
         moneyText.text = "Gold: " + currentGold;
     }
