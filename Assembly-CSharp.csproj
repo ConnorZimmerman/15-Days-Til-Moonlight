@@ -79,6 +79,8 @@
      <Compile Include="Assets\Scripts\Player Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerHealthManager.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerPathTracker.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerRangedAttack.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerRangedDamage.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerStaminaManager.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerStartPoint.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerStats.cs" />

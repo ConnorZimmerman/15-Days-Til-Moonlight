@@ -10,7 +10,7 @@ public class GlobalDataScript : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        globalPlayerCurrentHealth = PlayerPrefs.GetInt("Global Player Current Health", 5);
+        globalPlayerCurrentHealth = PlayerPrefs.GetInt("Global Player Current Health", 10);
         globalPlayerCurrentStamina = PlayerPrefs.GetInt("Global Player Current Stamina", 10000);
         //globalSoundTrackInstance = PlayerPrefs.GetInt("Global Music Tracker", 1);
     }

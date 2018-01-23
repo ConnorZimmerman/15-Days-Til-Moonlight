@@ -101,8 +101,8 @@ public class HurtEnemy : MonoBehaviour
 
 
         //switched order of operations
-        else if (other.gameObject.tag == "Enemy" && other.gameObject.GetComponent<EnemyTestScript>().enemyShield
-            || other.gameObject.tag == "LargeEnemyBasic" && other.gameObject.GetComponent<EnemyTestScript>().enemyShield)//!thePlayer.deathStrike)//
+        else if (other.gameObject.tag == "Enemy" && other.gameObject.GetComponent<EnemyTestScript>().enemyShield && !thePlayer.deathStrike
+            || other.gameObject.tag == "LargeEnemyBasic" && other.gameObject.GetComponent<EnemyTestScript>().enemyShield && !thePlayer.deathStrike)//
         {
             enemyStaminaMan.enemyCurrentStamina -= 400;
             sfxMan.swordsColliding.volume = 1;

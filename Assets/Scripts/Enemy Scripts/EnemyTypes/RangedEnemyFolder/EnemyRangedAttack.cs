@@ -38,7 +38,7 @@ public class EnemyRangedAttack : MonoBehaviour
         enemyObject = this.gameObject;
         rangedEnemy = enemyObject.GetComponent<BasicRangedEnemy>();
         rotatingObject = this.gameObject.transform.GetChild(8).gameObject;
-        throwForce = 350;
+        throwForce = 255;
         inRange = false;
         lineOfSight = true;
 

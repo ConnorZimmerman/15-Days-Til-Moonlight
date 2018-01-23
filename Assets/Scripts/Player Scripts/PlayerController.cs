@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
     public bool lockOn;
     public float lockOnHorizontal;
     public float lockOnVertical;
-    //public bool deathStrike;
+    public bool deathStrike;
     public int check;
     public int enemyInt;
     public int playerInt;
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
         minBounds = boundBox.bounds.min;
         maxBounds = boundBox.bounds.max;
 
-        //deathStrike = false;
+        deathStrike = false;
 
         playerOldHealth = playerNewHealth;
 
