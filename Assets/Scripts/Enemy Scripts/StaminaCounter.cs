@@ -6,7 +6,7 @@ public class StaminaCounter : MonoBehaviour
 {
     private HurtPlayerUpdated hurtPlayer;
 
-    private EnemyStaminaManager enemyStamina;
+    // private EnemyStaminaManager enemyStamina;
     private PlayerStaminaManager playerStamina;
 
     private SFXManager sfxMan;
@@ -23,7 +23,7 @@ public class StaminaCounter : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        enemyStamina = FindObjectOfType<EnemyStaminaManager>();
+        // enemyStamina = FindObjectOfType<EnemyStaminaManager>();
         playerStamina = FindObjectOfType<PlayerStaminaManager>();
 
         hurtPlayer = FindObjectOfType<HurtPlayerUpdated>();

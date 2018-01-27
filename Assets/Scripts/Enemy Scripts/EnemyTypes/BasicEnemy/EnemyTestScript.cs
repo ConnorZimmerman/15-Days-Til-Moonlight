@@ -6,8 +6,7 @@ using System;
 public class EnemyTestScript : MonoBehaviour //Welcome to the most complex script out of all 34 scripts
 {
     private EnemyHealthManager enemyHealthMan;
-    private EnemyStaminaManager enemyStaminaMan;
-
+    // private EnemyStaminaManager enemyStaminaMan;
     private PlayerHealthManager playerHealthMan;
     private PlayerStaminaManager playerStaminaMan;
 
@@ -16,6 +15,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     private PlayerHealthManager playerHealth;
     private EngagedWithPlayer playerEngagement;
     //    private RandomMovement randomMove;
+    public bool enemyShieldStrike;
     public float speed;
     private Rigidbody2D myRigidbody;
     public Vector2 lastMove; /*lastMove stores whichever way the character was facing last so that
@@ -60,14 +60,19 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     /*The AI Priorities: there were originally only 4 that were in order of importance, but more were
     added as I kept working so they're not in order of importance anymore... I'll eventually reorganize
     them once I don't think I'll be adding more*/
-    public bool enemyHealthOne;
-    public bool playerHealthTwo;
-    public bool enemyStaminaThree;
-    public bool playerStaminaFour;
-    public bool dodgingFive;
-    public bool patienceSix;
+    // public bool enemyHealthOne;
+    // public bool playerHealthTwo;
+    // public bool enemyStaminaThree;
+    // public bool playerStaminaFour;
+    // public bool dodgingFive;
+    // public bool patienceSix;
     public bool deathSeven;
 
+    //New experimental (simplified) priorities
+    public bool playerHealthOne;
+    public bool shieldUpTwo;
+    public bool retreatingThree;
+    public bool patienceFour;
     public bool enemyShield;
     public GameObject shieldTell; //Shield icon over the enemies head when enemy blocks
     public Transform Fred;
@@ -128,6 +133,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     private Vector2 enemyPos;
     public bool isPathfinding;
 
+    public float shieldBreakRecoveryCounter;
+
     // Use this for initialization
     void Start()
     {
@@ -135,32 +142,26 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         enemyObject = this.gameObject;
         engageWithPlayerObject = this.gameObject.transform.GetChild(0).gameObject;
         enemyHealthMan = enemyObject.GetComponent<EnemyHealthManager>();
-        enemyStaminaMan = enemyObject.GetComponent<EnemyStaminaManager>();
+        // enemyStaminaMan = enemyObject.GetComponent<EnemyStaminaManager>();
         playerEngagement = engageWithPlayerObject.GetComponent<EngagedWithPlayer>();
         stalkZoneObject = this.gameObject.transform.GetChild(7).gameObject;
         stalkZone = stalkZoneObject.GetComponent<RecognizeStalkZone>();
 
         raycastPath = enemyObject.GetComponent<TrackingRaycast>();
 
-        //enemyHealthMan = FindObjectOfType<EnemyHealthManager>();
-        //enemyStaminaMan = FindObjectOfType<EnemyStaminaManager>();
-
         playerHealthMan = FindObjectOfType<PlayerHealthManager>();
         playerStaminaMan = FindObjectOfType<PlayerStaminaManager>();
 
         playerHealth = FindObjectOfType<PlayerHealthManager>();
 
-        //stalkZone = FindObjectOfType<RecognizeStalkZone>();
-
         hurtPlayer = FindObjectOfType<HurtPlayerUpdated>();
-        //randomMove = FindObjectOfType<RandomMovement>();
-
-        //this needs to grab child object script
-        //playerEngagement = FindObjectOfType<EngagedWithPlayer>();
 
         playerObject = GameObject.Find("Player");
         thePlayer = playerObject.GetComponent<PlayerController>();
         target = playerObject;
+
+        enemyShieldStrike = false;
+        shieldBreakRecoveryCounter = 0.5f;
 
         dodgeCounter = 2.2f;
 
@@ -175,29 +176,20 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         if (!enemyExists)
         {
             enemyExists = true;
-            //DontDestroyOnLoad(transform.gameObject);
-        }
-        else
-        {
-            //Destroy(gameObject);
         }
 
         dodging = true;
         dodgeFirstTime = true;
 
         isPathfinding = false;
+        retreatingThree = false;
+        shieldUpTwo = false;
 
-        /*preAttack = false;
-        recovAttack = false;
-
-        preAttackCounter = 5f;
-        recovAttackCounter = 5f;*/
     }
 
     // Update is called once per frame
     void Update()
     {
-
         // if (enemyHealthMan.fredIsDead)
         if (enemyHealthMan.fredIsDead && enemyHealthMan.CurrentHealth <= 0)
         {
@@ -205,11 +197,19 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             actionDecision = 7;
             myRigidbody.velocity = Vector2.zero;
         }
-
-        if (thePlayer.preAttack || thePlayer.damagePossible || playerEngagement.thePlayerDeathStrike && playerEngagement.colliderOn)
+        if (enemyShieldStrike)
         {
-            dodgingFive = true;
+            shieldBreakRecoveryCounter -= Time.deltaTime;
         }
+        if (shieldBreakRecoveryCounter <= 0)
+        {
+            enemyShieldStrike = false;
+            shieldBreakRecoveryCounter = 0.5f;
+        }
+        // if (thePlayer.preAttack || thePlayer.damagePossible || playerEngagement.thePlayerDeathStrike && playerEngagement.colliderOn)
+        // {
+        //     dodgingFive = true;
+        // }
 
         if (enemyHealthMan.CurrentHealth < enemyHealthMan.oldCurrentHealth)
         {
@@ -222,29 +222,16 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             inPain = false;
             enemyHealthMan.oldCurrentHealth = enemyHealthMan.CurrentHealth;
         }
-
-        if (enemyStaminaMan.enemyCurrentStamina <= 10)
-        {
-            staminaLock -= Time.deltaTime;
-            staminaLockBool = true;
-
-            if (staminaLock <= 0)
-            {
-                enemyStaminaMan.enemyCurrentStamina = 10;
-                staminaLockBool = false;
-                staminaLock = 2;
-            }
-        }
-        else if (staminaLock == 2 && !deathSeven)
-        {
-            ChooseAction();
-            staminaLockBool = false;
-        }
-
-        if (staminaLock <= 0)
-        {
-            staminaLock = 2;
-        }
+        // if (actionTimer == 0.5)
+        // {
+        //     actionTimer -= Time.deltaTime;
+        ChooseAction();
+        // }
+        // if (actionTimer <= 0)
+        // {
+        //     actionTimer = 0.5f;
+        // }
+        staminaLockBool = false;
 
         if (dodgeFirstTime && inPain)
         {
@@ -314,8 +301,6 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         }
         if (actionTimer <= 0)
         {
-            // actionTimer = 0.2f;
-
             playerEngagement.activateAction = false;
         }
 
@@ -345,11 +330,6 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             enemyMoving = false;
         }
 
-        /* if(enemyMoving || following)
-         {
-             preAttack = false;
-         }*/
-
         /*#SwitchCases: what the enemy is doing (each case is the same [except for the direction the
         enemy is facing], but I'll explain what each actionDecision does in the 1st case)
         
@@ -366,13 +346,13 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     attackLock = false;
                 }
 
-                if (actionDecision == 1 && playerEngagement.colliderOn)//is not called upon currently
-                {
-                    myRigidbody.velocity = new Vector2(0, 0);
-                    Shield();
-                    enemyRecover = false;
-                    attackLock = true;
-                }
+                // if (actionDecision == 1 && playerEngagement.colliderOn)//is not called upon currently
+                // {
+                //     myRigidbody.velocity = new Vector2(0, 0);
+                //     Shield();
+                //     enemyRecover = false;
+                //     attackLock = true;
+                // }
 
                 /*Enemies health is its priority and it's shield is up, but it stays close to the player
                 looking for an opportunity to strike*/
@@ -385,15 +365,15 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 }
 
                 //The enemies shield is up as it tries to recover stamina
-                if (actionDecision == 3)
-                {
-                    Shield();
-                    // myRigidbody.velocity = new Vector2(0, 0);
-                    enemyRecover = true;
-                    //enemyShield = false;
-                    attackLock = true;
-                    // enemyMoving = false;
-                }
+                // if (actionDecision == 3)
+                // {
+                //     Shield();
+                //     // myRigidbody.velocity = new Vector2(0, 0);
+                //     enemyRecover = true;
+                //     //enemyShield = false;
+                //     attackLock = true;
+                //     // enemyMoving = false;
+                // }
 
                 /*The enemy is trying to put distance between itself and the player (either just being
                 hurt or trying to regain stamina*/
@@ -408,16 +388,15 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 /*The enemy is leaping away (currently pretty broken as there needs to be a timer on how
                 long the enemy is leaping away for*/
                 //if (actionDecision == 5)
-                if (actionDecision == 5 && !dodgeOnlyOnceBool)
-                {
-                    myRigidbody.velocity = new Vector2(-75, 0);
-                    enemyShield = false;
-                    dodgeCounter -= Time.deltaTime;
-                    enemyRecover = true;
-                    enemyStaminaMan.enemyCurrentStamina -= 400;
+                // if (actionDecision == 5 && !dodgeOnlyOnceBool)
+                // {
+                //     myRigidbody.velocity = new Vector2(-75, 0);
+                //     enemyShield = false;
+                //     dodgeCounter -= Time.deltaTime;
+                //     enemyRecover = true;
 
-                    dodgeOnlyOnceBool = true;
-                }
+                //     dodgeOnlyOnceBool = true;
+                // }
 
                 break;
 
@@ -430,13 +409,13 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     attackLock = false;
                 }
 
-                if (actionDecision == 1 && playerEngagement.colliderOn)
-                {
-                    myRigidbody.velocity = new Vector2(0, 0);
-                    Shield();
-                    enemyRecover = false;
-                    attackLock = true;
-                }
+                // if (actionDecision == 1 && playerEngagement.colliderOn)
+                // {
+                //     myRigidbody.velocity = new Vector2(0, 0);
+                //     Shield();
+                //     enemyRecover = false;
+                //     attackLock = true;
+                // }
 
                 if (actionDecision == 2)
                 {
@@ -445,15 +424,15 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     Shield();
                     attackLock = true;
                 }
-                if (actionDecision == 3)
-                {
-                    Shield();
-                    // myRigidbody.velocity = new Vector2(0, 0);
-                    enemyRecover = true;
-                    //enemyShield = false;
-                    attackLock = true;
-                    // enemyMoving = false;
-                }
+                // if (actionDecision == 3)
+                // {
+                //     Shield();
+                //     // myRigidbody.velocity = new Vector2(0, 0);
+                //     enemyRecover = true;
+                //     //enemyShield = false;
+                //     attackLock = true;
+                //     // enemyMoving = false;
+                // }
 
                 if (actionDecision == 4)
                 {
@@ -463,17 +442,16 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     enemyRecover = true;
                 }
 
-                if (actionDecision == 5 && !dodgeOnlyOnceBool)
-                {
-                    attackLock = true;
-                    enemyRecover = true;
-                    myRigidbody.velocity = new Vector2(75, 0);
-                    enemyShield = false;
-                    dodgeCounter -= Time.deltaTime;
-                    enemyStaminaMan.enemyCurrentStamina -= 400;
+                // if (actionDecision == 5 && !dodgeOnlyOnceBool)
+                // {
+                //     attackLock = true;
+                //     enemyRecover = true;
+                //     myRigidbody.velocity = new Vector2(75, 0);
+                //     enemyShield = false;
+                //     dodgeCounter -= Time.deltaTime;
 
-                    dodgeOnlyOnceBool = true;
-                }
+                //     dodgeOnlyOnceBool = true;
+                // }
 
                 break;
 
@@ -503,15 +481,15 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     attackLock = true;
                 }
 
-                if (actionDecision == 3)
-                {
-                    Shield();
-                    // myRigidbody.velocity = new Vector2(0, 0);
-                    enemyRecover = true;
-                    // enemyShield = false;
-                    attackLock = true;
-                    // enemyMoving = false;
-                }
+                // if (actionDecision == 3)
+                // {
+                //     Shield();
+                //     // myRigidbody.velocity = new Vector2(0, 0);
+                //     enemyRecover = true;
+                //     // enemyShield = false;
+                //     attackLock = true;
+                //     // enemyMoving = false;
+                // }
 
                 if (actionDecision == 4)
                 {
@@ -521,16 +499,15 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     attackLock = true;
                 }
 
-                if (actionDecision == 5 && !dodgeOnlyOnceBool)
-                {
-                    enemyRecover = true;
-                    myRigidbody.velocity = new Vector2(0, 75);
-                    enemyShield = false;
-                    dodgeCounter -= Time.deltaTime;
-                    enemyStaminaMan.enemyCurrentStamina -= 400;
+                // if (actionDecision == 5 && !dodgeOnlyOnceBool)
+                // {
+                //     enemyRecover = true;
+                //     myRigidbody.velocity = new Vector2(0, 75);
+                //     enemyShield = false;
+                //     dodgeCounter -= Time.deltaTime;
 
-                    dodgeOnlyOnceBool = true;
-                }
+                //     dodgeOnlyOnceBool = true;
+                // }
                 break;
 
             case 3:
@@ -542,13 +519,13 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     attackLock = false;
                 }
 
-                if (actionDecision == 1 && playerEngagement.colliderOn)
-                {
-                    myRigidbody.velocity = new Vector2(0, 0);
-                    enemyRecover = false;
-                    Shield();
-                    attackLock = true;
-                }
+                // if (actionDecision == 1 && playerEngagement.colliderOn)
+                // {
+                //     myRigidbody.velocity = new Vector2(0, 0);
+                //     enemyRecover = false;
+                //     Shield();
+                //     attackLock = true;
+                // }
 
                 if (actionDecision == 2)
                 {
@@ -558,33 +535,32 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     attackLock = true;
                 }
 
-                if (actionDecision == 3)
-                {
-                    // myRigidbody.velocity = new Vector2(0, 0);
-                    Shield();
-                    enemyRecover = true;
-                    attackLock = true;
-                    // enemyMoving = false;
-                }
+                // if (actionDecision == 3)
+                // {
+                //     // myRigidbody.velocity = new Vector2(0, 0);
+                //     Shield();
+                //     enemyRecover = true;
+                //     attackLock = true;
+                //     // enemyMoving = false;
+                // }
 
 
                 if (actionDecision == 4)
                 {
-                    Shield();
                     myRigidbody.velocity = new Vector2(0, -3);
                     enemyRecover = true;
                     attackLock = true;
+                    Shield();
                 }
 
-                if (actionDecision == 5 && !dodgeOnlyOnceBool)
-                {
-                    enemyRecover = true;
-                    myRigidbody.velocity = new Vector2(0, -75);
-                    dodgeCounter -= Time.deltaTime;
-                    enemyStaminaMan.enemyCurrentStamina -= 100;
+                // if (actionDecision == 5 && !dodgeOnlyOnceBool)
+                // {
+                //     enemyRecover = true;
+                //     myRigidbody.velocity = new Vector2(0, -75);
+                //     dodgeCounter -= Time.deltaTime;
 
-                    dodgeOnlyOnceBool = true;
-                }
+                //     dodgeOnlyOnceBool = true;
+                // }
                 break;
         }
 
@@ -601,40 +577,46 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     public void ChooseAction() /*#ActionDecisions: this is where the action decisions are made based
         on what it retrieves from the ActionPriorities() function below*/
     {
-
         if (deathSeven)
         {
             actionDecision = 7;
             return;
         }
-
         ActionPriorities();
 
-
-        if (playerStaminaFour && !deathSeven)
+        if (playerHealthOne && !deathSeven)
         {
+            // dashOrBack = UnityEngine.Random.Range(-1, 3);
+            // if (dashOrBack == 2)
+            // {
+            // actionDecision = 2;
+            // }
+            // else
+            // {
             actionDecision = 0;
+            // }
         }
-
-        else if (enemyStaminaThree && !deathSeven)
+        else if (retreatingThree && !deathSeven)
+        {
+            actionDecision = 4;
+        }
+        else if (shieldUpTwo && !deathSeven)
         {
             actionDecision = 4;
         }
 
-        else if (playerHealthTwo && !deathSeven)
+        else if (playerHealthOne && !deathSeven)
         {
             actionDecision = 0;
         }
 
-        else if (enemyHealthOne && !deathSeven)
+        else if (shieldUpTwo && !deathSeven)
         {
             actionDecision = 2;
         }
 
-        if (dodgingFive && !deathSeven)
+        if (patienceFour && !deathSeven)
         {
-
-
             if (dashOrBackActive)
             {
                 dashOrBack = UnityEngine.Random.Range(-1, 3);
@@ -648,10 +630,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             }
             else if (dashOrBack == 2)
             {
-                // actionDecision = 5;
                 actionDecision = 4;
             }
-
         }
 
         else
@@ -660,7 +640,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         }
 
 
-        if (patienceSix && !deathSeven)
+        if (patienceFour && !deathSeven)
         {
 
             if (attackWhileBlockingBool)
@@ -695,84 +675,84 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         {
             dodgingFive = true;
         }*/
-
-
-        if (stalkZone.stalkZoneOn && !enemyHealthOne && !dodgingFive && !playerEngagement.deathStrike
-            && !playerHealthTwo)
+        if (stalkZone.stalkZoneOn && !playerHealthOne && !playerEngagement.deathStrike
+            && !shieldUpTwo)
         {
-            patienceSix = true;
+            patienceFour = true;
         }
         else
         {
-            patienceSix = false;
+            patienceFour = false;
         }
 
-        if (dodging && inPain && enemyStaminaMan.enemyStaminaPercent > 50
-         && playerStaminaMan.playerStaminaPercent >= 25 && !thePlayer.damagePossible)
-        //&& playerStaminaMan.playerStaminaPercent >= 25 && !playerObject.damagePossible)
+        // if (dodging && inPain
+        //  && playerStaminaMan.playerStaminaPercent >= 25 && !thePlayer.damagePossible)
+        // {
+        //     dodgingFive = true;
+        // }
+        // else
+        // {
+        //     dodgingFive = false;
+        // }
+        if (playerStaminaMan.playerStaminaPercent >= 25 && inPain || playerStaminaMan.playerStaminaPercent >= 75 && enemyShieldStrike)
         {
-            dodgingFive = true;
-
+            retreatingThree = true;
         }
         else
         {
-            dodgingFive = false;
+            retreatingThree = false;
         }
 
-        if (enemyHealthMan.enemyHealthPercent < 0 && playerStaminaMan.playerStaminaPercent >= 25
-            && !dodgingFive
-            || inPain == true && !dodgingFive && playerStaminaMan.playerStaminaPercent >= 25)
+        if (playerStaminaMan.playerStaminaPercent >= 25 && !playerHealthOne && !retreatingThree
+        || inPain && playerStaminaMan.playerStaminaPercent >= 25)
         {
-            enemyHealthOne = true;
+            shieldUpTwo = true;
         }
         else
         {
-            enemyHealthOne = false;
+            shieldUpTwo = false;
         }
 
-        if (!patienceSix && !enemyHealthOne && playerHealthMan.playerHealthPercent < 60 && !dodging
-            || playerStaminaMan.staminaLock || !enemyHealthOne && playerStaminaMan.playerStaminaPercent <= 25)
+        if (!patienceFour && !retreatingThree
+                || playerStaminaMan.staminaLock || playerStaminaMan.playerStaminaPercent <= 25)
         {
-            playerHealthTwo = true;
+            playerHealthOne = true;
         }
         else
         {
-            playerHealthTwo = false;
+            playerHealthOne = false;
         }
 
-        if (!patienceSix && !enemyHealthOne && !playerHealthTwo
-            && enemyStaminaMan.enemyStaminaPercent < 40 && !dodgingFive
-           && playerStaminaMan.playerStaminaPercent >= 25
-           || enemyStaminaMan.enemyStaminaPercent < 40 && !playerStaminaMan.staminaLock)
-        {
-            enemyStaminaThree = true;
-        }
-        else
-        {
-            enemyStaminaThree = false;
-        }
+        // if (!patienceSix && !enemyHealthOne && !playerHealthTwo
+        //      && !dodgingFive
+        //    && playerStaminaMan.playerStaminaPercent >= 25
+        //    || !playerStaminaMan.staminaLock)
+        // {
+        //     enemyStaminaThree = true;
+        // }
+        // else
+        // {
+        //     enemyStaminaThree = false;
+        // }
 
-        if (!patienceSix && !enemyHealthOne && !playerHealthTwo && !enemyStaminaThree
-            && !dodgingFive && playerStaminaMan.playerStaminaPercent >= 25)
-        {
-            playerStaminaFour = true;
-        }
-        else
-        {
-            playerStaminaFour = false;
-        }
+        // if (!patienceSix && !enemyHealthOne && !playerHealthTwo && !enemyStaminaThree
+        //     && !dodgingFive && playerStaminaMan.playerStaminaPercent >= 25)
+        // {
+        //     playerStaminaFour = true;
+        // }
+        // else
+        // {
+        //     playerStaminaFour = false;
+        // }
     }
 
     public void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.name == "Player" && playerEngagement.colliderOn == false && playerEngagement.wallBlock == false)
         {
-            // if (!raycastPath.enqueue)
-            // {
-            // }
-                following = true;
+            following = true;
 
-            if (!deathSeven && enemyMoving)
+            if (!deathSeven) // && enemyMoving)
             {
                 if (raycastPath.lineOfSight)
                 {
@@ -784,13 +764,11 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 {
                     if (raycastPath.path != null)
                     {
-                        //enemyMoving = true;
                         foreach (Vector2 n in raycastPath.path)
                         {
                             enemyPos = enemyObject.transform.position;
                             if (enemyPos != n)
                             {
-                                //Debug.Log(n);
                                 transform.position = Vector2.MoveTowards(transform.position,
                                 n, (speed) * Time.deltaTime);
                             }
@@ -811,9 +789,6 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
                 playerTrackX = playerObject.transform.position.x;
                 playerTrackY = playerObject.transform.position.y;
-
-                //trackingMasterX = trackX - thePlayer.trackX;
-                //trackingMasterY = trackY - thePlayer.trackY;
 
                 trackingMasterX = playerTrackX - transform.position.x;
                 trackingMasterY = playerTrackY - transform.position.y;
@@ -924,6 +899,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     {
         if (other.gameObject.name == "Player")
         {
+            Debug.Log("Hi");
             following = false;
             enemyMoving = false;
         }
@@ -931,7 +907,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
     public void Shield()
     {
-        if (enemyStaminaMan.enemyCurrentStamina > 3 && staminaLockBool == false)
+        if (!enemyShieldStrike)
         {
             enemyShield = true;
         }

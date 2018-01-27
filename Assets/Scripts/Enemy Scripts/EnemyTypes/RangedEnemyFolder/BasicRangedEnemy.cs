@@ -7,7 +7,7 @@ public class BasicRangedEnemy : MonoBehaviour
 {
     private EnemyRangedAttack rangedAttack;
     private EnemyHealthManager enemyHealthMan;
-    private EnemyStaminaManager enemyStaminaMan;
+    // private EnemyStaminaManager enemyStaminaMan;
     private PlayerHealthManager playerHealthMan;
     private PlayerStaminaManager playerStaminaMan;
     public PlayerController thePlayer;
@@ -129,7 +129,7 @@ public class BasicRangedEnemy : MonoBehaviour
         enemyObject = this.gameObject;
         engageWithPlayerObject = this.gameObject.transform.GetChild(0).gameObject;
         enemyHealthMan = enemyObject.GetComponent<EnemyHealthManager>();
-        enemyStaminaMan = enemyObject.GetComponent<EnemyStaminaManager>();
+        // enemyStaminaMan = enemyObject.GetComponent<EnemyStaminaManager>();
         playerEngagement = engageWithPlayerObject.GetComponent<EngagedWithPlayer>();
         stalkZoneObject = this.gameObject.transform.GetChild(7).gameObject;
         stalkZone = stalkZoneObject.GetComponent<RecognizeStalkZone>();
@@ -213,23 +213,24 @@ public class BasicRangedEnemy : MonoBehaviour
             enemyHealthMan.oldCurrentHealth = enemyHealthMan.CurrentHealth;
         }
 
-        if (enemyStaminaMan.enemyCurrentStamina <= 10)
-        {
-            staminaLock -= Time.deltaTime;
-            staminaLockBool = true;
+        // if (enemyStaminaMan.enemyCurrentStamina <= 10)
+        // {
+        //     staminaLock -= Time.deltaTime;
+        //     staminaLockBool = true;
 
-            if (staminaLock <= 0)
-            {
-                enemyStaminaMan.enemyCurrentStamina = 10;
-                staminaLockBool = false;
-                staminaLock = 2;
-            }
-        }
-        else if (staminaLock == 2 && !deathSeven)
-        {
-            ChooseAction();
-            staminaLockBool = false;
-        }
+        //     if (staminaLock <= 0)
+        //     {
+        //         enemyStaminaMan.enemyCurrentStamina = 10;
+        //         staminaLockBool = false;
+        //         staminaLock = 2;
+        //     }
+        // }
+        // else if (staminaLock == 2 && !deathSeven)
+        // {
+        //     ChooseAction();
+        //     staminaLockBool = false;
+        // }
+        ChooseAction();
 
         if (staminaLock <= 0)
         {
@@ -370,7 +371,7 @@ public class BasicRangedEnemy : MonoBehaviour
                     enemyShield = false;
                     dodgeCounter -= Time.deltaTime;
                     // enemyRecover = true;
-                    enemyStaminaMan.enemyCurrentStamina -= 400;
+                    // enemyStaminaMan.enemyCurrentStamina -= 400;
 
                     dodgeOnlyOnceBool = true;
                 }
@@ -422,7 +423,7 @@ public class BasicRangedEnemy : MonoBehaviour
                     myRigidbody.velocity = new Vector2(75, 0);
                     enemyShield = false;
                     dodgeCounter -= Time.deltaTime;
-                    enemyStaminaMan.enemyCurrentStamina -= 400;
+                    // enemyStaminaMan.enemyCurrentStamina -= 400;
 
                     dodgeOnlyOnceBool = true;
                 }
@@ -469,7 +470,7 @@ public class BasicRangedEnemy : MonoBehaviour
                     myRigidbody.velocity = new Vector2(0, 75);
                     enemyShield = false;
                     dodgeCounter -= Time.deltaTime;
-                    enemyStaminaMan.enemyCurrentStamina -= 400;
+                    // enemyStaminaMan.enemyCurrentStamina -= 400;
 
                     dodgeOnlyOnceBool = true;
                 }
@@ -515,7 +516,7 @@ public class BasicRangedEnemy : MonoBehaviour
                     //enemyRecover = true;
                     myRigidbody.velocity = new Vector2(0, -75);
                     dodgeCounter -= Time.deltaTime;
-                    enemyStaminaMan.enemyCurrentStamina -= 100;
+                    // enemyStaminaMan.enemyCurrentStamina -= 100;
 
                     dodgeOnlyOnceBool = true;
                 }
@@ -631,7 +632,7 @@ public class BasicRangedEnemy : MonoBehaviour
                                 if (enemyPos != n)
                                 {
                                     transform.position = Vector2.MoveTowards(transform.position,
-                                    n, (speed-2f) * Time.deltaTime);
+                                    n, (speed - 2f) * Time.deltaTime);
                                 }
                                 if (!snipeSpotFour)
                                 {
@@ -771,12 +772,6 @@ public class BasicRangedEnemy : MonoBehaviour
 
     public void PlayerTooClose()
     {
-        // if(rangedAttack.distanceToPlayer < 5){
-        //     fleeTwo = true;
-        // }
-        // else{
-        //     fleeTwo = false;
-        // }
         if (rangedAttack.distanceToPlayer < 7 && !snipeSpotFour)
         {
             dodgingThree = true;

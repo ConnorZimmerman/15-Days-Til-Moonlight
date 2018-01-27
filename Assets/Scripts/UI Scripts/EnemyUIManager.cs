@@ -10,7 +10,7 @@ public class EnemyUIManager : MonoBehaviour
     public Slider staminaBar;
 
     public EnemyHealthManager enemyHealth;
-    public EnemyStaminaManager enemyStamina;
+    // public EnemyStaminaManager enemyStamina;
 
     public Text staminaTellText;
     public object staminaTellObject;
@@ -62,8 +62,8 @@ public class EnemyUIManager : MonoBehaviour
             healthbar.maxValue = enemyHealth.MaxHealth;
             healthbar.value = enemyHealth.CurrentHealth;
 
-            staminaBar.maxValue = enemyStamina.enemyMaxStamina;
-            staminaBar.value = enemyStamina.enemyCurrentStamina;
+            // staminaBar.maxValue = enemyStamina.enemyMaxStamina;
+            // staminaBar.value = enemyStamina.enemyCurrentStamina;
 
             if (enemyScript.staminaLockBool)
             {
@@ -84,8 +84,8 @@ public class EnemyUIManager : MonoBehaviour
             healthbar.maxValue = enemyHealth.MaxHealth;
             healthbar.value = enemyHealth.CurrentHealth;
 
-            staminaBar.maxValue = enemyStamina.enemyMaxStamina;
-            staminaBar.value = enemyStamina.enemyCurrentStamina;
+            // staminaBar.maxValue = enemyStamina.enemyMaxStamina;
+            // staminaBar.value = enemyStamina.enemyCurrentStamina;
 
             staminaTellText.text = "";
         }

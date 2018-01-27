@@ -30,7 +30,7 @@ public class HurtPlayerUpdated : MonoBehaviour
     private PlayerStaminaManager playerStaminaMan;
 
     private EnemyHealthManager enemyHealth;
-    public EnemyStaminaManager enemyStamina;
+    // public EnemyStaminaManager enemyStamina;
 
     //private bool noShieldBlood;
 
@@ -60,7 +60,7 @@ public class HurtPlayerUpdated : MonoBehaviour
 
     private EngagedWithPlayer playerEngagement;
 
-    private EnemyStaminaManager enemyStaminaMan;
+    // private EnemyStaminaManager enemyStaminaMan;
 
     public int counter;
 
@@ -89,7 +89,7 @@ public class HurtPlayerUpdated : MonoBehaviour
 
         playerEngagement = FindObjectOfType<EngagedWithPlayer>();
 
-        enemyStaminaMan = FindObjectOfType<EnemyStaminaManager>();
+        // enemyStaminaMan = FindObjectOfType<EnemyStaminaManager>();
 
         deathStrike = false;
 
@@ -101,27 +101,6 @@ public class HurtPlayerUpdated : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //playerInt = thePlayer.directionInt;
-        //enemyInt = enemy.moveDirectionX;
-
-
-        /*if (playerHealth.playerDamage)
-        {
-            //sfxMan.enemyAttack.Play();
-
-            Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
-            var clone = (GameObject)Instantiate(damageNumber, hitPoint.position,
-                Quaternion.Euler(Vector3.zero));
-            clone.GetComponent<FloatingNumbers>().damageNumber = currentDamage;
-
-            //showBlood = false;
-            playerHealth.playerDamage = false;
-
-        }*/
-
-        //noShieldBlood = true;
-       // enemyStamina.enemyActions = true;
-        //Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
     }
 
     public void OnTriggerEnter2D(Collider2D other)

@@ -11,101 +11,58 @@ public class EngagedWithPlayer : MonoBehaviour
     public GameObject damageNumber;
     public GameObject swordClash;
     public Transform swordClashPoint;
-
     public CircleCollider2D playerArea;
-
     private HurtPlayerUpdated hurtPlayer;
-
     private ShieldBlock shield;
     public bool shieldOn;
-
     private PlayerStats thePS;
     private EnemyTestScript enemy;
     private BasicRangedEnemy rangedEnemy;
     private GameObject enemyGameObject;
-
     public bool colliderOn;
-
     public bool attacking;
-
     private SFXManager sfxMan;
-
     public bool activateAction;
-
     public float bloodCounter;
-
     public bool bloodCounterOn;
-
     public bool engaged;
-
     public bool hit;
-
     public bool deathStrike;
     public bool thePlayerDeathStrike;
-
     private PlayerController thePlayer;
-
     private PlayerStaminaManager playerStaminaMan;
-
     private EnemyHealthManager enemyHealth;
-    public EnemyStaminaManager enemyStamina;
-
     private bool noShieldBlood;
     private PlayerHealthManager playerHealth;
     private HurtEnemy hurtEnemy;
-
     private EnemyRangedAttack rangedAttack;
     public int check;
     public int playerInt;
-    //public int enemyInt;
-
-    //private bool showBlood;
     public bool playerStaminaDrain;
-
     public bool strikeBlock;
-
     public bool faceOff;
-    // private float waitOnStrikeBlock;
-
     public bool beforeRecov;
     public float enemyAttackCounter;
-
     public bool enemyDamagePossible;
-
     /*The enemy's (and player's attack) is currently set up to be 3 different blend trees. The following
      4 variables dictate which stage the enemy is in of its attack based on timers and bools*/
     public bool preAttack;
     public float preAttackCounter;
-
     public bool recovAttack;
     public float recovAttackCounter;
-
     public float waitOnStrikeBlock;
-
     private ShieldBlock playerShield;
-
     float localAttackTimer;
-
     bool localAttackLock;
-
     Transform enemyTransform;
-
     private EnemyMasterScript enemyMaster;
-
     public bool wallBlock;
-
     private static int rangedDmg = 0;
-    //enemy.MoveDirectionX
-    //enemy.engagedWithPlayerPrivateVariables(localAttackLock)
-    //enemy.enemyShield
-    //enemy.correctSideForDeathStrikeBool
-    //enemy.enemyMoving
-    //enemy.deathSeven
-
     public int enemyMoveDirectionX;
     public bool enemyShield;
     public bool correctSideForDeathStrikeBool;
     public bool enemyMoving;
+    public bool following;
     public bool deathSeven;
 
     // Use this for initialization
@@ -122,40 +79,25 @@ public class EngagedWithPlayer : MonoBehaviour
         shield = FindObjectOfType<ShieldBlock>();
 
         thePS = FindObjectOfType<PlayerStats>();
-
-        //enemy = FindObjectOfType<EnemyTestScript>();
         enemyGameObject = this.gameObject.transform.parent.gameObject;
         enemy = enemyGameObject.GetComponent<EnemyTestScript>();
         rangedEnemy = enemyGameObject.GetComponent<BasicRangedEnemy>();
         enemyMaster = enemyGameObject.GetComponent<EnemyMasterScript>();
-        enemyStamina = enemyGameObject.GetComponent<EnemyStaminaManager>();
         enemyTransform = enemyGameObject.transform;
 
         rangedAttack = enemyGameObject.GetComponent<EnemyRangedAttack>();
 
         playerHealth = FindObjectOfType<PlayerHealthManager>();
         hurtEnemy = FindObjectOfType<HurtEnemy>();
-
-        //enemyHealth = FindObjectOfType<EnemyHealthManager>();
-
-        //enemyStamina = FindObjectOfType<EnemyStaminaManager>();
-
         playerShield = FindObjectOfType<ShieldBlock>();
-
         hitPoint = GameObject.Find("Player").transform;
-
         bloodCounter = 10;
-
         deathStrike = false;
         thePlayerDeathStrike = false;
 
-        // showBlood = false;
         playerStaminaDrain = false;
 
         faceOff = false;
-
-        //waitOnStrikeBlock = 1f;
-
 
         check = 0;
 
@@ -171,29 +113,12 @@ public class EngagedWithPlayer : MonoBehaviour
         recovAttackCounter = 0.3f;
         enemyAttackCounter = 0.06f;
 
-        //wallBlock = false; //check if enemy is colliding with non-enemy object.
-
-        //recently turned off, keep eye on ********************* 12/25
-        // if (gameObject.transform.Find("Fred"))
-        // {
-        //     damageToGive = 3;
-        //     currentDamage = 3;
-        // }
-        //if (gameObject.transform.Find("Big Fred"))
-        //{
-        //    damageToGive = 4;
-        //    currentDamage = 4;
-        //}
-        //currentDamage = enemyMaster.damageToGive;
-        //damageToGive = enemyMaster.damageToGive;
-
     }
 
     // Update is called once per frame
     void Update()
     {
         damageToGive = enemyMaster.damageToGive;
-        //enemyTestScriptVariables(localAttackLock);
 
         //Defining variables for enemy type
         if (enemyGameObject.tag == "Enemy")
@@ -203,8 +128,8 @@ public class EngagedWithPlayer : MonoBehaviour
             enemyShield = enemy.enemyShield;
             correctSideForDeathStrikeBool = enemy.correctSideForDeathStrikeBool;
             enemyMoving = enemy.enemyMoving;
+            following = enemy.following;
             deathSeven = enemy.deathSeven;
-            //enemyInt = enemy.moveDirectionX;
         }
         if (enemyGameObject.tag == "BasicRangedEnemy")
         {
@@ -213,6 +138,7 @@ public class EngagedWithPlayer : MonoBehaviour
             enemyShield = rangedEnemy.enemyShield;
             correctSideForDeathStrikeBool = rangedEnemy.correctSideForDeathStrikeBool;
             enemyMoving = rangedEnemy.enemyMoving;
+            following = rangedEnemy.following;
             deathSeven = rangedEnemy.deathSeven;
         }
 
@@ -304,18 +230,13 @@ public class EngagedWithPlayer : MonoBehaviour
         }
         if (enemyGameObject.tag == "Enemy")
         {
-            if (localAttackLock == false /*&& enemy.actionTimer >= 0.17f*/ && colliderOn && engaged
+            if (localAttackLock == false && colliderOn && engaged
                 && preAttackCounter == 0.66f && enemyAttackCounter == 0.06f
                 && recovAttackCounter == 0.3f)
             {
-                // enemy.actionTimer -= Time.deltaTime;
-
-                if (enemyStamina.enemyCurrentStamina >= 800)
-                {
-                    preAttack = true;
-                    enemyMoving = false;
-
-                }
+                preAttack = true;
+                enemyMoving = false;
+                following = false;
             }
             if (preAttack)
             {
@@ -332,10 +253,6 @@ public class EngagedWithPlayer : MonoBehaviour
             {
                 if (preAttackCounter <= 0 && preAttack)
                 {
-
-                    //moved from above
-                    //preAttack = false;
-                    //specialMove = true;
                     if (enemyMoveDirectionX == 0)
                     {
                         enemyTransform.position = new Vector2(enemyTransform.position.x,
@@ -359,7 +276,6 @@ public class EngagedWithPlayer : MonoBehaviour
                     attacking = true;
                     preAttack = false;
                     noShieldBlood = true;
-                    enemyStamina.enemyActions = true;
 
                     doingDamage();
                 }
@@ -368,11 +284,8 @@ public class EngagedWithPlayer : MonoBehaviour
             {
                 enemyDamagePossible = false;
             }
-            //if (!enemy.preAttack && !enemy.recovAttack)
-            //if(enemy.)
-            // {
-            if (enemyAttackCounter <= 0  // && attacking == true/*&& enemy.preAttackCounter <= 0*/
-            )
+
+            if (enemyAttackCounter <= 0)
             {
                 recovAttack = true;
                 recovAttackCounter -= Time.deltaTime;
@@ -385,9 +298,9 @@ public class EngagedWithPlayer : MonoBehaviour
                 preAttackCounter = 0.66f;
                 recovAttackCounter = 0.3f;
                 enemyAttackCounter = 0.06f;
-                enemyMoving = true;
+                // enemyMoving = true;
+                // following = true;
             }
-            //beforeRecov = false;
             else if (!deathStrike)
             {
                 if (shield.shieldOn)
@@ -401,15 +314,10 @@ public class EngagedWithPlayer : MonoBehaviour
                     {
                         sfxMan.enemyAttack.Play();
                     }
-                    //sfxMan.swordsColliding.Play();
                 }
-                /*Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
-                noShieldBlood = true;
-               // enemy.preAttack = false;*/
             }
             else
             {
-                enemyStamina.enemyActions = false;
                 attacking = false;
             }
         }
@@ -421,8 +329,6 @@ public class EngagedWithPlayer : MonoBehaviour
         if (other.gameObject.tag == "Collision")
         {
             wallBlock = true;
-            //enemy.following = false;
-            //enemy.enemyMoving = true;
             engaged = false;
             colliderOn = false;
         }
@@ -430,12 +336,8 @@ public class EngagedWithPlayer : MonoBehaviour
         {
             engaged = true;
             colliderOn = true;
-            //enemy.enemyMoving = false;
-            //wallBlock = false;
-        }
-        else
-        {
-            //wallBlock = false;
+            following = false;
+            enemyMoving = false;
         }
     }
 
@@ -445,20 +347,19 @@ public class EngagedWithPlayer : MonoBehaviour
         {
             activateAction = false;
             colliderOn = false;
+            following = true;
+            enemyMoving = true;
         }
     }
 
     public void doingDamage()
     {
-        // if (enemyGameObject.tag == "Enemy" && !deathSeven)
-        // {
         if (playerStaminaDrain && playerShield.shieldOn && !deathStrike && colliderOn)
         {
             playerStaminaMan.playerCurrentStamina -= 1000;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
-            enemyStamina.enemyCurrentStamina -= 400;
             return;
         }
 
@@ -472,7 +373,6 @@ public class EngagedWithPlayer : MonoBehaviour
                 sfxMan.enemyAttack.Play();
             }
             hurtPlayer.waitOnStrikeBlock = 1f;
-            enemyStamina.enemyCurrentStamina -= 400;
 
             Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
             var clone = (GameObject)Instantiate(damageNumber, hitPoint.position,
@@ -492,7 +392,6 @@ public class EngagedWithPlayer : MonoBehaviour
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
-            enemyStamina.enemyCurrentStamina -= 400;
         }
         else if (!deathSeven)
         {
@@ -501,30 +400,7 @@ public class EngagedWithPlayer : MonoBehaviour
             {
                 sfxMan.enemyAttack.Play();
             }
-            enemyStamina.enemyCurrentStamina -= 400;
         }
-        // }
-        // else if (enemyGameObject.tag == "BasicRangedEnemy" && rangedAttack.timeUntilAttack <= 0)
-        // {
-        //     // rangedDmg++;
-        //     // if (playerStaminaDrain && playerShield.shieldOn && !deathStrike && rangedDmg >= 2)
-        //     // {
-        //     //     playerStaminaMan.playerCurrentStamina -= 400;
-        //     //     sfxMan.swordsColliding.Play();
-        //     //     Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
-        //     //     enemyStamina.enemyCurrentStamina -= 400;
-        //     //     return;
-        //     // }
-        //     // else if (rangedDmg >= 2)
-        //     // {
-        //     //     playerHealth.playerCurrentHealth -= currentDamage;
-        //     //     Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
-        //     //     sfxMan.blood.Play();
-        //     //     // var clone = (GameObject)Instantiate(currentDamage, hitPoint.position,
-        //     //     //     Quaternion.Euler(Vector3.zero));
-        //     //     rangedDmg = 0;
-        //     //}
-        // }
     }
 
     public void doingDamage(int currentDamage, GameObject knifeInstance)
@@ -536,7 +412,6 @@ public class EngagedWithPlayer : MonoBehaviour
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
-            enemyStamina.enemyCurrentStamina -= 400;
             rangedDmg = 0;
             return;
         }

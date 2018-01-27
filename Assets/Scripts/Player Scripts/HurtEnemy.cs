@@ -11,47 +11,32 @@ public class HurtEnemy : MonoBehaviour
     public GameObject damageNumber;
     public GameObject swordClash;
     public Transform swordClashPoint;
-
     private PlayerStats thePS;
-
-    private EnemyStaminaManager enemyStaminaMan;
-
     public bool enemyHit;
-
     private EnemyTestScript theEnemy;
     private PlayerController thePlayer;
-
     private SFXManager sfxMan;
-
     private HurtPlayerUpdated hurtPlayer;
     private EngagedWithPlayer playerEngagement;
-
-    public bool beforeRecov;
     public bool recovVar;
-
     void Start()
     {
         sfxMan = FindObjectOfType<SFXManager>();
 
         enemyHit = false;
-
-        //theEnemy = FindObjectOfType<EnemyTestScript>();
         thePlayer = FindObjectOfType<PlayerController>();
         hurtPlayer = FindObjectOfType<HurtPlayerUpdated>();
-        //playerEngagement = FindObjectOfType<EngagedWithPlayer>();
-
-        //enemyStaminaMan = FindObjectOfType<EnemyStaminaManager>();
 
         thePS = FindObjectOfType<PlayerStats>();
 
         recovVar = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         try
@@ -62,7 +47,6 @@ public class HurtEnemy : MonoBehaviour
         {
             return;
         }
-        enemyStaminaMan = other.gameObject.GetComponent<EnemyStaminaManager>();
         theEnemy = other.gameObject.GetComponent<EnemyTestScript>();
 
         if (other.gameObject.tag == "Enemy" && playerEngagement.thePlayerDeathStrike || other.gameObject.tag == "LargeEnemyBasic" && playerEngagement.thePlayerDeathStrike || other.gameObject.tag == "BasicRangedEnemy" && playerEngagement.thePlayerDeathStrike
@@ -78,7 +62,6 @@ public class HurtEnemy : MonoBehaviour
                 sfxMan.swordsColliding.Play();
                 Instantiate(swordClash, swordClashPoint.position, swordClashPoint.rotation);
             }
-
             //was else if
             if (!thePlayer.noDamageIsTaken && !playerEngagement.attacking)
             {
@@ -98,28 +81,14 @@ public class HurtEnemy : MonoBehaviour
                 clone.GetComponent<FloatingNumbers>().damageNumber = currentDamage;
             }
         }
-
-
-        //switched order of operations
         else if (other.gameObject.tag == "Enemy" && other.gameObject.GetComponent<EnemyTestScript>().enemyShield && !thePlayer.deathStrike
             || other.gameObject.tag == "LargeEnemyBasic" && other.gameObject.GetComponent<EnemyTestScript>().enemyShield && !thePlayer.deathStrike)//
         {
-            enemyStaminaMan.enemyCurrentStamina -= 400;
+            //enemyShieldStrike = true;
+            other.gameObject.GetComponent<EnemyTestScript>().enemyShieldStrike = true;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, swordClashPoint.position, swordClashPoint.rotation);
-
-            //adding return to test
-            //return;
         }
-
-        //trying to make clash when hit inanimate objects, but it's not working yet
-        /*else if(other.gameObject.tag != "Enemy")
-        {
-            sfxMan.swordsColliding.Play();
-            Instantiate(swordClash, swordClashPoint.position, swordClashPoint.rotation);
-        }*/
-
-
     }
 }
