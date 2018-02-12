@@ -244,10 +244,8 @@ public class EngagedWithPlayer : MonoBehaviour
             }
             if (preAttackCounter <= 0)
             {
-
                 enemyAttackCounter -= Time.deltaTime;
             }
-
             if (preAttackCounter <= 0 && enemyAttackCounter > 0 && !recovAttack
                 && preAttack == true)
             {

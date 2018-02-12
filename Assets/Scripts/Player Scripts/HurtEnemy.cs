@@ -30,6 +30,7 @@ public class HurtEnemy : MonoBehaviour
         thePS = FindObjectOfType<PlayerStats>();
 
         recovVar = false;
+        // damageBurst = GameObject.Find("BloodBurst");
 
     }
 
@@ -55,7 +56,7 @@ public class HurtEnemy : MonoBehaviour
             enemyHit = true;
 
             if (playerEngagement.attacking && thePlayer.damagePossible
-      && playerEngagement.faceOff)
+            && playerEngagement.faceOff)
             {
                 playerEngagement.strikeBlock = true;
                 sfxMan.swordsColliding.volume = 1;
@@ -91,4 +92,25 @@ public class HurtEnemy : MonoBehaviour
             Instantiate(swordClash, swordClashPoint.position, swordClashPoint.rotation);
         }
     }
+
+    // public void doingDamage(int currentDamage, GameObject knifeInstance)
+    // {
+    //     rangedDmg++;
+    //     if (!knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike && rangedDmg >= 2)
+    //     {
+    //         playerStaminaMan.playerCurrentStamina -= 2000;
+    //         sfxMan.swordsColliding.volume = 1;
+    //         sfxMan.swordsColliding.Play();
+    //         Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
+    //         rangedDmg = 0;
+    //         return;
+    //     }
+    //     else if (rangedDmg >= 2 && knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike)
+    //     {
+    //         playerHealth.playerCurrentHealth -= currentDamage;
+    //         Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
+    //         sfxMan.blood.Play();
+    //         rangedDmg = 0;
+    //     }
+    // }
 }

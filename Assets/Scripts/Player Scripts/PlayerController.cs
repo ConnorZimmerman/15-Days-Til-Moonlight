@@ -288,7 +288,7 @@ public class PlayerController : MonoBehaviour
             }
 
             if (lockOnHorizontal > 0.2f || lockOnHorizontal < -0.2f
-               || lockOnVertical > 0.2f || lockOnVertical < -0.2f)
+            || lockOnVertical > 0.2f || lockOnVertical < -0.2f)
             {
                 lastMove = new Vector2(lockOnHorizontal, lockOnVertical);
             }
@@ -638,21 +638,21 @@ public class PlayerController : MonoBehaviour
             if (directionInt == 0)
             {
                 playerTransform.position = new Vector2(playerTransform.position.x,
-                playerTransform.position.y + 0.1f);
+                playerTransform.position.y + 0.05f);
             }
             if (directionInt == 1)
             {
-                playerTransform.position = new Vector2(playerTransform.position.x + 0.1f,
+                playerTransform.position = new Vector2(playerTransform.position.x + 0.05f,
                 playerTransform.position.y);
             }
             if (directionInt == 2)
             {
                 playerTransform.position = new Vector2(playerTransform.position.x,
-                playerTransform.position.y - 0.1f);
+                playerTransform.position.y - 0.05f);
             }
             if (directionInt == 3)
             {
-                playerTransform.position = new Vector2(playerTransform.position.x - 0.1f,
+                playerTransform.position = new Vector2(playerTransform.position.x - 0.05f,
                 playerTransform.position.y);
             }
             attackPossible = true;

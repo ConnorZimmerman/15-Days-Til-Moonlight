@@ -18,6 +18,7 @@ public class PlayerRangedDamage : MonoBehaviour
     private ShieldBlock playerShield;
     private float distanceToPlayer;
     private GameObject playerObject;
+    public GameObject damageBurst;
 
     // Use this for initialization
     void Start()
@@ -107,6 +108,7 @@ public class PlayerRangedDamage : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "BasicRangedEnemy")
         {
+            Instantiate(damageBurst, hitPoint.position, hitPoint.rotation);
             playerEngagement.doingDamage(1, thisKnife);
         }
         else if (other.gameObject.tag == "Wall")
