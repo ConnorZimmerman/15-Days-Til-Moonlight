@@ -277,17 +277,17 @@ public class BasicRangedEnemy : MonoBehaviour
         anim.SetBool("Enemy Following", following);
         anim.SetFloat("LastMoveX", lastMove.x);
         anim.SetFloat("LastMoveY", lastMove.y);
-        anim.SetBool("Collider On", playerEngagement.colliderOn);
-        anim.SetBool("Attacking", playerEngagement.attacking);
-        anim.SetInteger("Action Control", actionControl);
-        anim.SetFloat("Action Timer", actionTimer);
-        anim.SetBool("Player Dead", playerHealth.playerIsDead);
+        // anim.SetBool("Collider On", playerEngagement.colliderOn);
+        // anim.SetBool("Attacking", playerEngagement.attacking);
+        // anim.SetInteger("Action Control", actionControl);
+        // anim.SetFloat("Action Timer", actionTimer);
+        // anim.SetBool("Player Dead", playerHealth.playerIsDead);
         anim.SetInteger("Action Decision", actionDecision);
-        anim.SetBool("Shield On", enemyShield);
-        anim.SetBool("Preemptive Attack", playerEngagement.preAttack);
-        anim.SetBool("Recovery Attack", playerEngagement.recovAttack);
+        // anim.SetBool("Shield On", enemyShield);
+        // anim.SetBool("Preemptive Attack", playerEngagement.preAttack);
+        // anim.SetBool("Recovery Attack", playerEngagement.recovAttack);
         anim.SetBool("Fred is dead", enemyHealthMan.fredIsDead);
-        anim.SetBool("Damage Possible", playerEngagement.enemyDamagePossible);
+        // anim.SetBool("Damage Possible", playerEngagement.enemyDamagePossible);
         anim.SetBool("Enqueue", rangedAttack.enqueue);
 
         if (enemyShield)

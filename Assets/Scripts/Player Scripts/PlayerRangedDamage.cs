@@ -104,12 +104,14 @@ public class PlayerRangedDamage : MonoBehaviour
         // }
 
     }
+
+    //player is currently doing ranged damange through an enemy script, this should be updated at some point 2-20-18
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "BasicRangedEnemy")
         {
             Instantiate(damageBurst, hitPoint.position, hitPoint.rotation);
-            playerEngagement.doingDamage(1, thisKnife);
+            playerEngagement.doingDamage(1, thisKnife, this.gameObject);
         }
         else if (other.gameObject.tag == "Wall")
         {
