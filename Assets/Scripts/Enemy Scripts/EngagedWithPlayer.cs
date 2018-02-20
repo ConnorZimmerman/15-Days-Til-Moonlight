@@ -355,6 +355,7 @@ public class EngagedWithPlayer : MonoBehaviour
         if (playerStaminaDrain && playerShield.shieldOn && !deathStrike && colliderOn)
         {
             playerStaminaMan.playerCurrentStamina -= 1000;
+            playerShield.shieldLockBool = true;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
@@ -409,6 +410,7 @@ public class EngagedWithPlayer : MonoBehaviour
             playerStaminaMan.playerCurrentStamina -= 2000;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
+            playerShield.shieldLockBool = true;
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
             rangedDmg = 0;
             return;
