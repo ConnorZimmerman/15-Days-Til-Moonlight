@@ -166,7 +166,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-6a3a60db2fb385992598a3110b0010dc Assembly-CSharp.dll:.PlayerRangedAttack
+bf5f6acc2818c11051e096b551c8cca4 Assembly-CSharp.dll:.PlayerRangedAttack
 1765dffa8e88aa698321ecf9f4dd8565 Assembly-CSharp.dll:.DestroyOverTime
 329bcbf88b3c0197d230f5b9ceb88333 Assembly-CSharp.dll:Tiled2Unity.PolygonObject
 329bcbf88b3c0197d230f5b9ceb88333 Assembly-CSharp.dll:Tiled2Unity.CircleObject
@@ -178,7 +178,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 534ee60474fd0b4aef6d98b1ae5164ac Assembly-CSharp.dll:.EnemyMasterScript
 3c3f0bfcecdfff423adff6289d1ad835 Assembly-CSharp.dll:.TerrainManager
 a17b20482af53b8b8123d6a3f8a7b6ae Assembly-CSharp.dll:.StaminaCounter
-4c1c848cdf2d6a5a768d865a24b04ca7 Assembly-CSharp.dll:.ShieldBlock
+8a358c0f0127551f5397c63437681ef5 Assembly-CSharp.dll:.ShieldBlock
 7118400b964f39cae2333bb0f811ab7f Assembly-CSharp.dll:.LoadNewArea
 677e469ac90ab791089de05f07bcdb81 Assembly-CSharp.dll:.RecognizeStalkZone
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft

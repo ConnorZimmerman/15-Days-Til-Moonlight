@@ -12,6 +12,7 @@ public class PlayerRangedAttack : MonoBehaviour
     private Vector3 daggerRotationVector3;
     public GameObject rotatingObject;
     public Vector3 targetDir;
+    public int daggerCount;
 
     // Use this for initialization
     void Start()
@@ -19,6 +20,7 @@ public class PlayerRangedAttack : MonoBehaviour
         playerObject = GameObject.Find("Player");
         throwForce = 350;
         rotatingObject = this.gameObject.transform.GetChild(9).gameObject;
+        daggerCount = 5;
         // targetDir = new Vector3(0,0,10);
         // float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg -90f; //-90f (for enemy direction)
         // Quaternion q = Quaternion.AngleAxis(angle * 10, Vector3.forward);
@@ -69,7 +71,7 @@ public class PlayerRangedAttack : MonoBehaviour
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
             rotatingObject.transform.rotation = Quaternion.RotateTowards(rotatingObject.transform.rotation, q, 1000 * Time.deltaTime);
         }
-        if (Input.GetButtonDown("Throw"))
+        if (Input.GetButtonDown("Throw") && daggerCount > 0)
         {
             // Vector3 targetDir = daggerRotationVector3 - playerObject.transform.position;
             // float angle = Mathf.Atan2(throwForce, throwForce) * Mathf.Rad2Deg - 90f; //-90f (for enemy direction)
@@ -77,6 +79,7 @@ public class PlayerRangedAttack : MonoBehaviour
             //     newKnife.transform.rotation = Quaternion.RotateTowards(daggerRotationVector3.transform.rotation, q, 90 * Time.deltaTime);
 
             // GameObject newKnife = Instantiate(projectile, playerObject.transform.position, playerObject.transform.rotation);
+            daggerCount--;
             GameObject newKnife = Instantiate(projectile, rotatingObject.transform.position, rotatingObject.transform.rotation);
             // newKnife.transform.Rotate(daggerDirectionVector2 * 90);
             // Vector3 vForce = transform.forward * throwForce + transform.up * throwForce;

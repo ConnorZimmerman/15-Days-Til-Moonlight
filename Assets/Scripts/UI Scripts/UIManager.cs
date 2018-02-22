@@ -10,10 +10,11 @@ public class UIManager : MonoBehaviour
     public Text HPText;
     public PlayerHealthManager playerHealth;
     public PlayerStaminaManager playerStamina;
+    private PlayerRangedAttack playerRanged;
     private static bool UIExists;
-
+    public GameObject daggerImageObject;
     public PlayerStats thePS;
-    public Text levelText;
+    public Text daggerText;
 
     public GameObject playerHealthObject;
 
@@ -23,7 +24,10 @@ public class UIManager : MonoBehaviour
         playerStamina = FindObjectOfType<PlayerStaminaManager>();
         playerHealthObject = GameObject.Find("Player");
         playerHealth = playerHealthObject.GetComponent<PlayerHealthManager>();
-         
+        playerRanged = playerHealthObject.GetComponent<PlayerRangedAttack>();
+
+        // daggerImageObject.GetComponent<Image>().Sprite = YourSprite;
+
         if (!UIExists)
         {
             UIExists = true;
@@ -46,7 +50,7 @@ public class UIManager : MonoBehaviour
         HPText.text = "HP: " + playerHealth.playerCurrentHealth +
             "/" + playerHealth.playerMaxHealth;
 
-        levelText.text = "Lvl: " + thePS.currentLevel;
+        daggerText.text = ": " + playerRanged.daggerCount;
 
         staminaBar.maxValue = playerStamina.playerMaxStamina;
         staminaBar.value = playerStamina.playerCurrentStamina;
