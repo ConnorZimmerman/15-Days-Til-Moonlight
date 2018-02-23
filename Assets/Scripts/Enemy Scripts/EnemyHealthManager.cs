@@ -26,6 +26,9 @@ public class EnemyHealthManager : MonoBehaviour
     private EnemyMasterScript enemyMaster;
     public bool setCurrentHealthAtStart;
     public BoxCollider2D bodyCollider;
+    public ItemDrop itemDropScript;
+
+    // static ItemDrop instance;
 
     // Use this for initialization
     void Start()
@@ -35,6 +38,7 @@ public class EnemyHealthManager : MonoBehaviour
         thePlayerStats = FindObjectOfType<PlayerStats>();
         bodyCollider = enemyObject.GetComponent<BoxCollider2D>();
         thePlayer = GameObject.Find("Player");
+        itemDropScript = FindObjectOfType<ItemDrop>();
 
         deathCounter = 2;
 
@@ -68,9 +72,8 @@ public class EnemyHealthManager : MonoBehaviour
         if (deathCounter <= 0)
         {
             //thePlayer.currentEnemyExists = false; //turned off 10/10 (not sure if problem)
-
             thePlayerStats.AddExperience(expToGive);
-
+            ItemDrop.CreateItem(enemyObject);
             deathCounter = 2;
             Destroy(gameObject);
         }

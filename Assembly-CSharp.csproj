@@ -102,6 +102,8 @@
      <Compile Include="Assets\Scripts\World Scripts\GoldPickUp.cs" />
      <Compile Include="Assets\Scripts\World Scripts\Grid.cs" />
      <Compile Include="Assets\Scripts\World Scripts\Heap.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\Item.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\ItemDrop.cs" />
      <Compile Include="Assets\Scripts\World Scripts\LoadNewArea.cs" />
      <Compile Include="Assets\Scripts\World Scripts\MoneyManager.cs" />
      <Compile Include="Assets\Scripts\World Scripts\MusicController.cs" />
