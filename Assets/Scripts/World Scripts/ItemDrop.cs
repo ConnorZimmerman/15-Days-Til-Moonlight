@@ -4,20 +4,39 @@ using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
+    public string itemType;
 
-    public static void GetItem()
+    void Start()
     {
-        FindObjectOfType<PlayerRangedAttack>().daggerCount += 3;
+        itemType = this.tag;
+    }
+    public void GetItem()
+    {
+        if (itemType == "daggers")
+        {
+            int randomNum = UnityEngine.Random.Range(1, 6);
+            FindObjectOfType<PlayerRangedAttack>().daggerCount += randomNum;
+        }
+        else if(itemType == "potion"){
+            FindObjectOfType<PlayerHealthManager>().playerCurrentHealth += 3;
+        }
     }
 
-    public static void CreateItem(GameObject enemyObject)
+    public void CreateItem(GameObject enemyObject)
     {
-        Debug.Log("In Item Script");
-		int randomNum = UnityEngine.Random.Range(0, 2);
-		if(randomNum == 1){
-	        GameObject randomDrop = GameObject.Find("Item_Pouch");
-    	    GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation);
-		}
+        int randomNum = UnityEngine.Random.Range(0, 31);
+        if (enemyObject.tag == "BasicRangedEnemy" && randomNum > 5)
+        {
+            GameObject randomDrop = GameObject.Find("Item_Pouch");
+            GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation)
+            ;
+        }
+        else if (randomNum == 30)
+        {
+            GameObject randomDrop = GameObject.Find("Potion");
+            GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation)
+            ;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

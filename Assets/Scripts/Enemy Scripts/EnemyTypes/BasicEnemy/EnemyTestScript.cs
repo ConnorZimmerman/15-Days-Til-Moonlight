@@ -899,7 +899,6 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     {
         if (other.gameObject.name == "Player")
         {
-            Debug.Log("Hi");
             following = false;
             enemyMoving = false;
         }

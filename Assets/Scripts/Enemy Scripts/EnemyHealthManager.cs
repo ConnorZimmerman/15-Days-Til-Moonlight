@@ -69,11 +69,15 @@ public class EnemyHealthManager : MonoBehaviour
             fredIsDead = true;
         }
 
+        if(CurrentHealth > MaxHealth){
+            CurrentHealth = MaxHealth;
+        }
+
         if (deathCounter <= 0)
         {
             //thePlayer.currentEnemyExists = false; //turned off 10/10 (not sure if problem)
             thePlayerStats.AddExperience(expToGive);
-            ItemDrop.CreateItem(enemyObject);
+            itemDropScript.CreateItem(enemyObject);
             deathCounter = 2;
             Destroy(gameObject);
         }
