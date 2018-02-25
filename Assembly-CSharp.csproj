@@ -89,6 +89,7 @@
      <Compile Include="Assets\Scripts\UI Scripts\DialogueHolder.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\DialogueManager.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\EnemyUIManager.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\FloatingItemFind.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\FloatingNumbers.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\PlayerUIManager.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\UIManager.cs" />

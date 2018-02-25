@@ -93,7 +93,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 86d36c43c53541d667100dc90b89cfba UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 fb0b9edb4571deb16aec16f9f89c88bb Assembly-CSharp.dll:.PlayerUIManager
-f0fc5b1329e9474f6898e4160f843798 Assembly-CSharp.dll:.UIManager
+a3a38e0d61b0050c9af0d2bf2ab942c1 Assembly-CSharp.dll:.UIManager
 8d2c9404286b263876a43e040fea92c0 Assembly-CSharp.dll:.RangedDamage
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FearCounter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -108,7 +108,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 7b848b7feaa524953d09fc1851efa6da UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 7b848b7feaa524953d09fc1851efa6da UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 c24a21b131bfa67be1162db2cba4b52b UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-f7f34b968902fae0f05256f95e463ea2 Assembly-CSharp.dll:.EnemyHealthManager
+75efcbce532213a7b34242b1f9906849 Assembly-CSharp.dll:.EnemyHealthManager
 d4dc9a78c1ca3c56e869ee06827a7fd1 Assembly-CSharp.dll:.Reload
 de85c1cbf06ed96cc178816aa31cc362 Assembly-CSharp.dll:.MoneyManager
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -166,6 +166,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
+3caef283a0101d2373738de3ba14a37c Assembly-CSharp.dll:.ItemDrop
 bf5f6acc2818c11051e096b551c8cca4 Assembly-CSharp.dll:.PlayerRangedAttack
 1765dffa8e88aa698321ecf9f4dd8565 Assembly-CSharp.dll:.DestroyOverTime
 329bcbf88b3c0197d230f5b9ceb88333 Assembly-CSharp.dll:Tiled2Unity.PolygonObject
@@ -194,6 +195,7 @@ f4d07fcd24671d860c4daecee0819a34 Assembly-CSharp.dll:.GoldPickUp
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Tiled2Unity.SortingLayerExposed
 b03061f52163b96ab990c7dc423d6f2d Assembly-CSharp.dll:.SFXManager
 be943d06b0350d9a1f46e51cb0b77972 Assembly-CSharp.dll:.DialogueManager
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Item
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GlobalDataScript
 f1222864d9e8a0b0bade687ba8647b96 Assembly-CSharp.dll:.VolumeController
 b6a4e0f46582e1b4ea27adb53405c4c7 Assembly-CSharp.dll:Tiled2Unity.SpriteDepthInMap
@@ -206,3 +208,4 @@ aa7a28be4517ed3f61abea26f3bfc6d1 Assembly-CSharp.dll:.EnemyRangedAttack
 329bcbf88b3c0197d230f5b9ceb88333 Assembly-CSharp.dll:Tiled2Unity.TmxObject
 9295cdb60c86ea5a1a8042082fe6c4c6 Assembly-CSharp.dll:.VillagerMovement
 f5ce52df66dc75855b21bc13ff9f4add Assembly-CSharp.dll:.AllWaypoints
+b120f0f19acd1cdc8e5955712e5e8539 Assembly-CSharp.dll:.FloatingItemFind
