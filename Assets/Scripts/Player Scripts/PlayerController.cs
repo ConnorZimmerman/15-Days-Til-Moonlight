@@ -311,11 +311,14 @@ public class PlayerController : MonoBehaviour
 
         if (staminaMan.playerCurrentStamina <= 0)
         {
-            moveSpeed = 1f;
+            // moveSpeed = 1f;
+            moveSpeed = 4.5f;
+            sprintPossible = false;
             dashActive = false;
             sprintActive = false;
         }
-        else if (playerShield.shieldOn)
+
+        if (playerShield.shieldOn)
         {
             moveSpeed = 2.5f;
         }
@@ -327,7 +330,7 @@ public class PlayerController : MonoBehaviour
             if (directionUp)
             {
                 rayCastHitDodge = Physics2D.Raycast(playerTransform.position, transform.up, 2.1f,
-           layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
+            layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
 
                 if (rayCastHitDodge.collider != null)
                 {
@@ -353,7 +356,7 @@ public class PlayerController : MonoBehaviour
             if (directionRight)
             {
                 rayCastHitDodge = Physics2D.Raycast(playerTransform.position, transform.right, 2.1f,
-          layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
+            layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
 
                 if (rayCastHitDodge.collider != null)
                 {
@@ -381,7 +384,7 @@ public class PlayerController : MonoBehaviour
             if (directionDown)
             {
                 rayCastHitDodge = Physics2D.Raycast(playerTransform.position, -transform.up, 2.1f,
-         layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
+            layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
 
                 if (rayCastHitDodge.collider != null)
                 {
@@ -409,7 +412,7 @@ public class PlayerController : MonoBehaviour
             if (directionLeft)
             {
                 rayCastHitDodge = Physics2D.Raycast(playerTransform.position, -transform.right, 2.1f,
-         layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
+            layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
 
                 if (rayCastHitDodge.collider != null)
                 {
@@ -448,14 +451,16 @@ public class PlayerController : MonoBehaviour
             dashActive = false;
             sprintActive = false;
             soFast = false;
+            // sprintPossible = false;
         }
         else
         {
             soFast = false;
-            moveSpeed = 2;
+            // moveSpeed = 2;
+            // sprintPossible = false;
         }
 
-        if (sprintPossible)
+        if (sprintPossible && staminaMan.playerCurrentStamina >= 500)
         {
             sprintTimer -= Time.deltaTime;
             moveSpeed = 12f;
@@ -598,7 +603,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //if (!attackLock && axisInput <= -0.2f && staminaMan.playerCurrentStamina > 400)
-        if (!attackLock && axisInput <= -0.2f && staminaMan.playerCurrentStamina > 400
+        if (!attackLock && axisInput <= -0.2f
             && recovAttackCounter == 0.3f)
         {
             preAttack = true;
@@ -683,23 +688,21 @@ public class PlayerController : MonoBehaviour
                 preAttack = false;
                 attackLock = true;
 
-                staminaMan.playerCurrentStamina -= 1000;
+                // staminaMan.playerCurrentStamina -= 1000;
                 //staminaAttackDrainBool = true;
             }
         }
 
-        else if (attackLock == false && staminaMan.playerCurrentStamina < 400)
-        {
-            attackPossible = false;
-        }
+        // else if (attackLock == false && staminaMan.playerCurrentStamina < 400)
+        // {
+        //     attackPossible = false;
+        // }
         else
         {
             attackBool = false;
             damagePossible = false;
             anim.SetBool("Attack", false);
         }
-
-
 
         if (attackLock)
         {
@@ -715,7 +718,7 @@ public class PlayerController : MonoBehaviour
         //*************trying to create a backward slash******************
         if (axisInput > -0.2)
         {
-            if (axisInput <= -0.2f && staminaMan.playerCurrentStamina > 400)
+            if (axisInput <= -0.2f)
             {
                 ReverseAttack();
             }
@@ -735,18 +738,18 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (staminaMan.playerCurrentStamina < 400)
-        {
-            attacking = false;
-        }
-        else if (attackLock == false && staminaMan.playerCurrentStamina < 400)
-        {
-            attackPossible = false;
-        }
-        else
-        {
-            attackBool = false;
-        }
+        // if (staminaMan.playerCurrentStamina < 400)
+        // {
+        //     attacking = false;
+        // }
+        // else if (attackLock == false && staminaMan.playerCurrentStamina < 400)
+        // {
+        //     attackPossible = false;
+        // }
+        // else
+        // {
+        //     attackBool = false;
+        // }
 
         if (axisInput >= 0f)
         {
@@ -813,7 +816,7 @@ public class PlayerController : MonoBehaviour
     */
     public void ReverseAttack()
     {
-        Debug.Log("*************************************************************************************");
+        // Debug.Log("*************************************************************************************");
         attackingCounterNew = 0.06f;
         recovAttack = false;
 
@@ -873,7 +876,7 @@ public class PlayerController : MonoBehaviour
                 preAttack = true;
                 attackLock = true;
 
-                staminaMan.playerCurrentStamina -= 400;
+                // staminaMan.playerCurrentStamina -= 400;
                 //staminaAttackDrainBool = true;
             }
         }

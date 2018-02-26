@@ -18,6 +18,7 @@ public class HurtEnemy : MonoBehaviour
     private SFXManager sfxMan;
     private HurtPlayerUpdated hurtPlayer;
     private EngagedWithPlayer playerEngagement;
+    private PlayerStaminaManager staminaManager;
     public bool recovVar;
     void Start()
     {
@@ -26,6 +27,7 @@ public class HurtEnemy : MonoBehaviour
         enemyHit = false;
         thePlayer = FindObjectOfType<PlayerController>();
         hurtPlayer = FindObjectOfType<HurtPlayerUpdated>();
+        staminaManager = FindObjectOfType<PlayerStaminaManager>();
 
         thePS = FindObjectOfType<PlayerStats>();
 
@@ -66,7 +68,7 @@ public class HurtEnemy : MonoBehaviour
             //was else if
             if (!thePlayer.noDamageIsTaken && !playerEngagement.attacking)
             {
-                if (thePlayer.wasSprint)
+                if (thePlayer.wasSprint && staminaManager.playerCurrentStamina > 500)
                 {
                     currentDamage = damageToGive + thePS.currentAttack + 1;
                 }

@@ -27,11 +27,11 @@ public class PlayerUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerStamina.staminaLock || staminaTellCounter < 1 && staminaTellCounter > 0)
+        if (staminaTellCounter < 1 && staminaTellCounter > 0)
         {
             staminaTell.text = "-STAMINA";
         }
-        else if (thePlayer.attackPossible == false || thePlayer.dashPossible == false)
+        else if (thePlayer.attackPossible == false || thePlayer.dashPossible == false || Input.GetButtonDown("SprintX") && playerStamina.playerCurrentStamina < 500 || Input.GetButtonDown("DashX") && playerStamina.playerCurrentStamina < 1000 || Input.GetButton("Block") && playerStamina.playerCurrentStamina <= 0 || Input.GetAxisRaw("BlockX") >= 0.2f && playerStamina.playerCurrentStamina <= 0) 
         {
             staminaTellCounterStart = true;
         }

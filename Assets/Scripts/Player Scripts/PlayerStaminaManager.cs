@@ -46,6 +46,10 @@ public class PlayerStaminaManager : MonoBehaviour
             playerCurrentStamina = 0;
         }
 
+        if(playerCurrentStamina > playerMaxStamina){
+            playerCurrentStamina = playerMaxStamina;
+        }
+
         if (dialog.dialogActive == false && thePlayer.sprintActive == true && playerCurrentStamina > 0)
         {
             playerCurrentStamina -= 50;
@@ -53,7 +57,7 @@ public class PlayerStaminaManager : MonoBehaviour
 
         if (dialog.dialogActive == false && thePlayer.dashActive == true)
         {
-            playerCurrentStamina -= 2000;
+            playerCurrentStamina -= 1000;
         }
 
         //test condition
@@ -74,38 +78,38 @@ public class PlayerStaminaManager : MonoBehaviour
         //    playerCurrentStamina -= 400;
         //}
 
-        if (playerCurrentStamina <= 0)
-        {
-            staminaTimer -= Time.deltaTime;
-            staminaLock = true;
-        }
+        // if (playerCurrentStamina <= 0)
+        // {
+        //     staminaTimer -= Time.deltaTime;
+        //     staminaLock = true;
+        // }
 
-        if (staminaTimer <= 0)
-        {
-            staminaLock = false;
-            staminaCharge = true;
-            staminaTimer = 2;
-        }
+        // if (staminaTimer <= 0)
+        // {
+        //     staminaLock = false;
+        //     staminaCharge = true;
+        //     staminaTimer = 2;
+        // }
 
 
-        if (thePlayer.dashActive == false && thePlayer.sprintActive == false
-            && thePlayer.attackBool == false && thePlayer.attackBoolMouse == false && playerCurrentStamina <= 10000)
-        {
-            if (staminaTimer == 2 && staminaLock == false && theShield.shieldOn == false)
-            {
-                playerCurrentStamina += 32;
-                staminaCharge = true;
-            }
-            else if (theShield.shieldOn == true && staminaTimer == 2 && staminaLock == false)
-            {
-                playerCurrentStamina += 20;
-                staminaCharge = true;
-            }
-        }
-        else
-        {
-            staminaCharge = false;
-        }
+        // if (thePlayer.dashActive == false && thePlayer.sprintActive == false
+        //     && thePlayer.attackBool == false && thePlayer.attackBoolMouse == false && playerCurrentStamina <= 10000)
+        // {
+        //     if (staminaTimer == 2 && staminaLock == false && theShield.shieldOn == false)
+        //     {
+        //         playerCurrentStamina += 32;
+        //         staminaCharge = true;
+        //     }
+        //     else if (theShield.shieldOn == true && staminaTimer == 2 && staminaLock == false)
+        //     {
+        //         playerCurrentStamina += 20;
+        //         staminaCharge = true;
+        //     }
+        // }
+        // else
+        // {
+        //     staminaCharge = false;
+        // }
 
         playerStaminaPercent = (float)(double)playerCurrentStamina / playerMaxStamina * 100;
 
