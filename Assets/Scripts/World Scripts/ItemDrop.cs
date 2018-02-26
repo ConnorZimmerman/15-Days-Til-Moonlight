@@ -50,7 +50,7 @@ public class ItemDrop : MonoBehaviour
             GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation)
             ;
         }
-        else if (randomNum == 50)
+        if (randomNum == 50)
         {
             GameObject randomDrop = GameObject.Find("Potion");
             GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation)

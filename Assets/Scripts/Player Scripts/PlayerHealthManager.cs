@@ -43,8 +43,6 @@ public class PlayerHealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         if (playerCurrentHealth <= 0)
         {
             playerIsDead = true;
@@ -56,6 +54,11 @@ public class PlayerHealthManager : MonoBehaviour
             //return;
 
             //GetComponent<Reload>();
+        }
+
+        if (playerCurrentHealth > playerMaxHealth)
+        {
+            playerCurrentHealth = playerMaxHealth;
         }
 
         if (playerCurrentHealth < oldPlayerCurrentHealth)
