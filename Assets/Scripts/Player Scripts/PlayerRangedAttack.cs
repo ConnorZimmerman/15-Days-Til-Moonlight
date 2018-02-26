@@ -13,6 +13,7 @@ public class PlayerRangedAttack : MonoBehaviour
     public GameObject rotatingObject;
     public Vector3 targetDir;
     public int daggerCount;
+    private GlobalDataScript globalData;
 
     // Use this for initialization
     void Start()
@@ -20,7 +21,7 @@ public class PlayerRangedAttack : MonoBehaviour
         playerObject = GameObject.Find("Player");
         throwForce = 350;
         rotatingObject = this.gameObject.transform.GetChild(9).gameObject;
-        daggerCount = 5;
+        daggerCount = GlobalDataScript.globalPlayerDaggerCount;
         // targetDir = new Vector3(0,0,10);
         // float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg -90f; //-90f (for enemy direction)
         // Quaternion q = Quaternion.AngleAxis(angle * 10, Vector3.forward);

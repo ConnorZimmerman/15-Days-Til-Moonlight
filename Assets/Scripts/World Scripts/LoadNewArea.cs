@@ -6,19 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class LoadNewArea : MonoBehaviour
 {
-
     public string levelToLoad;
-
     public string exitPoint;
-
     private PlayerController thePlayer;
-
     private PlayerHealthManager playerHealth;
     private PlayerStaminaManager playerStamina;
+    private PlayerRangedAttack playerRangedAttack;
     public GameObject startPoint;
-
     public static int counter;
     public string curLvl;
+    
     // Use this for initialization
     void Start()
     {
@@ -32,6 +29,7 @@ public class LoadNewArea : MonoBehaviour
         thePlayer = FindObjectOfType<PlayerController>();
         playerHealth = FindObjectOfType<PlayerHealthManager>();
         playerStamina = FindObjectOfType<PlayerStaminaManager>();
+        playerRangedAttack = FindObjectOfType<PlayerRangedAttack>();
         curLvl = SceneManager.GetActiveScene().name;
     }
 
@@ -43,6 +41,7 @@ public class LoadNewArea : MonoBehaviour
             //            GlobalDataScript.globalPlayerCurrentHealth = playerHealth.playerCurrentHealth;
             PlayerPrefs.SetInt("Global Player Current Health", playerHealth.playerCurrentHealth);
             PlayerPrefs.SetInt("Global Player Current Stamina", playerStamina.playerCurrentStamina);
+            PlayerPrefs.SetInt("Global Player Dagger Count", playerRangedAttack.daggerCount);
             //PlayerPrefs.SetInt("Global Music Tracker", 0);
             SceneManager.LoadScene("Lvl 2", LoadSceneMode.Single);
             thePlayer.startPoint = exitPoint;
@@ -51,6 +50,7 @@ public class LoadNewArea : MonoBehaviour
         {
             PlayerPrefs.SetInt("Global Player Current Health", playerHealth.playerCurrentHealth);
             PlayerPrefs.SetInt("Global Player Current Stamina", playerStamina.playerCurrentStamina);
+            PlayerPrefs.SetInt("Global Player Dagger Count", playerRangedAttack.daggerCount);
             SceneManager.LoadScene("Lvl 3", LoadSceneMode.Single);
             thePlayer.startPoint = exitPoint;
         }
