@@ -37,7 +37,7 @@ public class TrackingRaycast : MonoBehaviour
 
             // if (!enemyScript.isPathfinding)
             // {
-            RaycastHit2D hit = Physics2D.Raycast(enemyObject.transform.position, targetDir, distanceToPlayer, 1 << 8 | 1 << 9);
+            RaycastHit2D hit = Physics2D.Raycast(enemyObject.transform.position, targetDir, distanceToPlayer, 1 << 8 | 1 << 9 | 1 << 13);
             // Debug.Log(hit.collider.tag);
             if (hit.collider.tag == "Player")
             {
