@@ -36,7 +36,7 @@ public class PauseMenu : MonoBehaviour {
 
 		menuText.text = string.Format("Current Level: {0}\nExperience: {1} / {2}\n\nVitality: {3}\nStrength: {4}\nDexterity: {5}\nIntelligence: {6}", playerStats.currentLevel, playerStats.currentExp, playerStats.toLevelUp[playerStats.currentLevel], playerStats.vitality, playerStats.strength, playerStats.dexterity, playerStats.intelligence);
 
-		toSpendText.text = string.Format("Points to spend: {0}", 0);
+		toSpendText.text = string.Format("Points to spend: {0}", playerStats.pointsToSpend);
 
 	}
 

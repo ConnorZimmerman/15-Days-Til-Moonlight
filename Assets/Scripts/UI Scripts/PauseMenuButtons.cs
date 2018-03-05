@@ -8,9 +8,9 @@ public class PauseMenuButtons : MonoBehaviour
 {
     public EventSystem eventSystem;
     private PlayerStats playerStats;
+    private PlayerHealthManager playerHealthScript;
     private GameObject lastSelected;
     private PauseMenu pauseMenuScript;
-
     private GameObject VitalityButton;
     private GameObject StrengthButton;
     private GameObject DexterityButton;
@@ -29,6 +29,7 @@ public class PauseMenuButtons : MonoBehaviour
     {
         playerStats = FindObjectOfType<PlayerStats>();
         pauseMenuScript = FindObjectOfType<PauseMenu>();
+        playerHealthScript = FindObjectOfType<PlayerHealthManager>();
         VitalityButton = GameObject.Find("VitalityButton");
         StrengthButton = GameObject.Find("StrengthButton");
         DexterityButton = GameObject.Find("DexterityButton");
@@ -81,7 +82,6 @@ public class PauseMenuButtons : MonoBehaviour
             {
                 intelligenceObject.SetActive(false);
             }
-            Debug.Log(eventSystem.currentSelectedGameObject);
             if (eventSystem.currentSelectedGameObject != VitalityButton && eventSystem.currentSelectedGameObject != StrengthButton && eventSystem.currentSelectedGameObject != DexterityButton && eventSystem.currentSelectedGameObject != IntelligenceButton)
             {
                 eventSystem.SetSelectedGameObject(lastSelected);
@@ -90,19 +90,36 @@ public class PauseMenuButtons : MonoBehaviour
     }
     public void Vitality()
     {
-        playerStats.vitality++;
+        if (playerStats.pointsToSpend > 0)
+        {
+            playerStats.vitality++;
+            playerHealthScript.playerCurrentHealth++;
+            playerStats.pointsToSpend--;
+        }
     }
     public void Strength()
     {
-        playerStats.strength++;
+        if (playerStats.pointsToSpend > 0)
+        {
+            playerStats.strength++;
+            playerStats.pointsToSpend--;
+        }
     }
     public void Dexterity()
     {
-        playerStats.dexterity++;
+        if (playerStats.pointsToSpend > 0)
+        {
+            playerStats.dexterity++;
+            playerStats.pointsToSpend--;
+        }
 
     }
     public void Intelligence()
     {
-        playerStats.intelligence++;
+        if (playerStats.pointsToSpend > 0)
+        {
+            playerStats.intelligence++;
+            playerStats.pointsToSpend--;
+        }
     }
 }
