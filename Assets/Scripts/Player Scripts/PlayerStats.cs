@@ -18,6 +18,11 @@ public class PlayerStats : MonoBehaviour {
     public int currentAttack;
     public int currentDefense;
 
+    public int vitality;
+    public int strength;
+    public int dexterity;
+    public int intelligence;
+
     private PlayerHealthManager thePlayerHealth;
 
 	// Use this for initialization
@@ -26,6 +31,10 @@ public class PlayerStats : MonoBehaviour {
         currentAttack = attackLevels[1];
         currentDefense = defenseLevels[1];
         thePlayerHealth = FindObjectOfType<PlayerHealthManager>();
+        vitality = 10;
+        strength = 2;
+        dexterity = 10;
+        intelligence = 5;
 	}
 	
 	// Update is called once per frame
