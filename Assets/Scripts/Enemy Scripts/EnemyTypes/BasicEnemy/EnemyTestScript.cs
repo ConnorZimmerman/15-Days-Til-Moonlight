@@ -895,14 +895,14 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         }
     }
 
-    public void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.name == "Player")
-        {
-            following = false;
-            enemyMoving = false;
-        }
-    }
+    // public void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (other.gameObject.name == "Player")
+    //     {
+    //         following = false;
+    //         enemyMoving = false;
+    //     }
+    // }
 
     public void Shield()
     {

@@ -18,6 +18,7 @@ public class PlayerHealthManager : MonoBehaviour
     private float flashCounter;
 
     private SpriteRenderer playerSprite;
+    private PlayerStats playerStatsScript;
 
     public float waitToReload;
 
@@ -34,7 +35,9 @@ public class PlayerHealthManager : MonoBehaviour
     {
         playerDamage = false;
         playerSprite = GetComponent<SpriteRenderer>();
+        playerStatsScript = FindObjectOfType<PlayerStats>();
         playerCurrentHealth = GlobalDataScript.globalPlayerCurrentHealth;
+        playerMaxHealth = GlobalDataScript.globalPlayerVitality;
         oldPlayerCurrentHealth = playerCurrentHealth;
         // thePlayer = FindObjectOfType<PlayerController>();
     }
@@ -43,8 +46,7 @@ public class PlayerHealthManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+        playerMaxHealth = playerStatsScript.vitality;
         if (playerCurrentHealth <= 0)
         {
             playerIsDead = true;
@@ -56,6 +58,11 @@ public class PlayerHealthManager : MonoBehaviour
             //return;
 
             //GetComponent<Reload>();
+        }
+
+        if (playerCurrentHealth > playerMaxHealth)
+        {
+            playerCurrentHealth = playerMaxHealth;
         }
 
         if (playerCurrentHealth < oldPlayerCurrentHealth)

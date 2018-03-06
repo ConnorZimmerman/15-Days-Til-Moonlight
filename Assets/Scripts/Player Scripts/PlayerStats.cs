@@ -18,7 +18,14 @@ public class PlayerStats : MonoBehaviour {
     public int currentAttack;
     public int currentDefense;
 
+    public int vitality;
+    public int strength;
+    public int dexterity;
+    public int intelligence;
+    private PauseMenuButtons pauseMenuButtonsScript;
     private PlayerHealthManager thePlayerHealth;
+    // private GlobalDataScript globalData;
+    public int pointsToSpend;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +33,13 @@ public class PlayerStats : MonoBehaviour {
         currentAttack = attackLevels[1];
         currentDefense = defenseLevels[1];
         thePlayerHealth = FindObjectOfType<PlayerHealthManager>();
+        vitality = GlobalDataScript.globalPlayerVitality;
+        currentLevel = GlobalDataScript.globalPlayerLevel;
+        currentExp = GlobalDataScript.globalPlayerCurrentXp;
+        pointsToSpend = GlobalDataScript.globalPlayerPointsToSpend;
+        strength = 2;
+        dexterity = 10;
+        intelligence = 5;
 	}
 	
 	// Update is called once per frame
@@ -45,6 +59,7 @@ public class PlayerStats : MonoBehaviour {
     {
         currentLevel++;
         currentHP = HPLevels[currentLevel];
+        pointsToSpend++;
 
         thePlayerHealth.playerMaxHealth = currentHP;
         thePlayerHealth.playerCurrentHealth += currentHP - HPLevels[currentLevel - 1];

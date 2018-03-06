@@ -5,14 +5,27 @@ using UnityEngine;
 public class GlobalDataScript : MonoBehaviour
 {
     public static int globalPlayerCurrentHealth;
+    public static int globalPlayerMaxHealth;
     public static int globalPlayerCurrentStamina;
+    public static int globalPlayerMaxStamina;
+    public static int globalPlayerLevel;
+    public static int globalPlayerCurrentXp;
+    public static int globalPlayerVitality;
     public static int globalPlayerDaggerCount;
+    public static int globalPlayerPointsToSpend;
+
     //public static int globalSoundTrackInstance;
     // Use this for initialization
     void Awake()
     {
         globalPlayerCurrentHealth = PlayerPrefs.GetInt("Global Player Current Health", 10);
+        globalPlayerMaxHealth = PlayerPrefs.GetInt("Global Player Max Health", 10);
         globalPlayerCurrentStamina = PlayerPrefs.GetInt("Global Player Current Stamina", 10000);
+        globalPlayerMaxStamina = PlayerPrefs.GetInt("Global Player Max Stamina", 10000);
+        globalPlayerCurrentXp = PlayerPrefs.GetInt("Global Player Current Xp", 0);
+        globalPlayerLevel = PlayerPrefs.GetInt("Global Player Level", 1);
+        globalPlayerPointsToSpend = PlayerPrefs.GetInt("Global Player Points To Spend", 0);
+        globalPlayerVitality = PlayerPrefs.GetInt("Global Player Vitality", 10);
         globalPlayerDaggerCount = PlayerPrefs.GetInt("Global Player Dagger Count", 5);
         //globalSoundTrackInstance = PlayerPrefs.GetInt("Global Music Tracker", 1);
     }

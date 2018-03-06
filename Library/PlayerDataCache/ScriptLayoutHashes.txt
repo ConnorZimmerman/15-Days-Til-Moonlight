@@ -208,4 +208,4 @@ aa7a28be4517ed3f61abea26f3bfc6d1 Assembly-CSharp.dll:.EnemyRangedAttack
 329bcbf88b3c0197d230f5b9ceb88333 Assembly-CSharp.dll:Tiled2Unity.TmxObject
 9295cdb60c86ea5a1a8042082fe6c4c6 Assembly-CSharp.dll:.VillagerMovement
 f5ce52df66dc75855b21bc13ff9f4add Assembly-CSharp.dll:.AllWaypoints
-b120f0f19acd1cdc8e5955712e5e8539 Assembly-CSharp.dll:.FloatingItemFind
+df085d35c866d01fb4383e5c698b1475 Assembly-CSharp.dll:.FloatingItemFind

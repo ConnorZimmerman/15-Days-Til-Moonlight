@@ -63,7 +63,7 @@ public class EnemyHealthManager : MonoBehaviour
             Destroy(bodyCollider);
             if (deathCounter == 2)
             {
-                thePlayer.GetComponent<PlayerStaminaManager>().playerCurrentStamina += 2000;
+                thePlayer.GetComponent<PlayerStaminaManager>().playerCurrentStamina += 750;
             }
             deathCounter -= Time.deltaTime;
             fredIsDead = true;
@@ -75,7 +75,6 @@ public class EnemyHealthManager : MonoBehaviour
 
         if (deathCounter <= 0)
         {
-            //thePlayer.currentEnemyExists = false; //turned off 10/10 (not sure if problem)
             thePlayerStats.AddExperience(expToGive);
             itemDropScript.CreateItem(enemyObject);
             deathCounter = 2;

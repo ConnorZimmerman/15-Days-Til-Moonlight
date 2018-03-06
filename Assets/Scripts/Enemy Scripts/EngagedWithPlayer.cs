@@ -352,7 +352,7 @@ public class EngagedWithPlayer : MonoBehaviour
 
     public void doingDamage()
     {
-        if (playerStaminaDrain && playerShield.shieldOn && !deathStrike && colliderOn)
+        if (playerStaminaDrain && playerShield.shieldOn && !deathStrike && colliderOn && !deathSeven)
         {
             playerStaminaMan.playerCurrentStamina -= 500;
             playerShield.shieldLockBool = true;
