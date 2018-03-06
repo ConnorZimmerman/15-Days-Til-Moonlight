@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HurtEnemy : MonoBehaviour
 {
-    public int damageToGive;
+    private int damageToGive;
     public int currentDamage;
     public GameObject damageBurst;
     public Transform hitPoint;
@@ -20,6 +20,8 @@ public class HurtEnemy : MonoBehaviour
     private EngagedWithPlayer playerEngagement;
     private PlayerStaminaManager staminaManager;
     public bool recovVar;
+    private PlayerStats playerStats;
+
     void Start()
     {
         sfxMan = FindObjectOfType<SFXManager>();
@@ -28,10 +30,13 @@ public class HurtEnemy : MonoBehaviour
         thePlayer = FindObjectOfType<PlayerController>();
         hurtPlayer = FindObjectOfType<HurtPlayerUpdated>();
         staminaManager = FindObjectOfType<PlayerStaminaManager>();
+        playerStats = FindObjectOfType<PlayerStats>();
 
         thePS = FindObjectOfType<PlayerStats>();
 
         recovVar = false;
+
+        damageToGive = thePS.playerDamage;
         // damageBurst = GameObject.Find("BloodBurst");
 
     }
@@ -68,7 +73,7 @@ public class HurtEnemy : MonoBehaviour
             //was else if
             if (!thePlayer.noDamageIsTaken && !playerEngagement.attacking)
             {
-                if (thePlayer.wasSprint && staminaManager.playerCurrentStamina > 500)
+                if (thePlayer.wasSprint && staminaManager.playerCurrentStamina > 50 && playerStats.dexterity == 14 && playerStats.strength == 9)
                 {
                     currentDamage = damageToGive + thePS.currentAttack + 1;
                 }

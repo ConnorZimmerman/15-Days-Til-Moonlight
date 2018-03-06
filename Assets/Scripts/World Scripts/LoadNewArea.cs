@@ -49,6 +49,9 @@ public class LoadNewArea : MonoBehaviour
             PlayerPrefs.SetInt("Global Player Level", playerStatsScript.currentLevel);
             PlayerPrefs.SetInt("Global Player Points To Spend", playerStatsScript.pointsToSpend);
             PlayerPrefs.SetInt("Global Player Vitality", playerStatsScript.vitality);
+            PlayerPrefs.SetInt("Global Player Strength", playerStatsScript.strength);
+            PlayerPrefs.SetInt("Global Player Dexterity", playerStatsScript.dexterity);
+            PlayerPrefs.SetInt("Global Player Intelligence", playerStatsScript.intelligence);
             PlayerPrefs.SetInt("Global Player Dagger Count", playerRangedAttack.daggerCount);
             //PlayerPrefs.SetInt("Global Music Tracker", 0);
             SceneManager.LoadScene("Lvl 2", LoadSceneMode.Single);
@@ -64,6 +67,9 @@ public class LoadNewArea : MonoBehaviour
             PlayerPrefs.SetInt("Global Player Level", playerStatsScript.currentLevel);
             PlayerPrefs.SetInt("Global Player Points To Spend", playerStatsScript.pointsToSpend);
             PlayerPrefs.SetInt("Global Player Vitality", playerStatsScript.vitality);
+            PlayerPrefs.SetInt("Global Player Strength", playerStatsScript.strength);
+            PlayerPrefs.SetInt("Global Player Dexterity", playerStatsScript.dexterity);
+            PlayerPrefs.SetInt("Global Player Intelligence", playerStatsScript.intelligence);
             PlayerPrefs.SetInt("Global Player Dagger Count", playerRangedAttack.daggerCount);
             SceneManager.LoadScene("Lvl 3", LoadSceneMode.Single);
             thePlayer.startPoint = exitPoint;

@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
     public bool soFast;
     public float sprintTimer;
     public bool sprintPossible;
-
+    private PlayerStats playerStats;
     private TerrainManager terrainManager;
 
     // Use this for initialization
@@ -128,6 +128,8 @@ public class PlayerController : MonoBehaviour
         layerMaskEnemy = ~layerMaskEnemyInt;
 
         rayDodgeDistance = 4;
+
+        playerStats = FindObjectOfType<PlayerStats>();
 
         playerShield = FindObjectOfType<ShieldBlock>();
 
@@ -212,7 +214,6 @@ public class PlayerController : MonoBehaviour
         wasSprint = false;
         sprintTimer = 0.2f;
         sprintPossible = false;
-
         //staminaAttackDrainBool = false;
     }
 
@@ -323,8 +324,8 @@ public class PlayerController : MonoBehaviour
             moveSpeed = 2.5f;
         }
 
-        else if (staminaMan.playerCurrentStamina >= 2000 && Input.GetButtonDown("DashX")
-            || staminaMan.playerCurrentStamina >= 2000 && Input.GetButtonDown("Dash"))
+        else if (playerStats.dexterity >= 17 && staminaMan.playerCurrentStamina >= 200 && Input.GetButtonDown("DashX")
+            || staminaMan.playerCurrentStamina >= 200 && Input.GetButtonDown("Dash"))
         {
             soFast = true;
             if (directionUp)
@@ -438,7 +439,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else if (staminaMan.playerCurrentStamina > 10 && Input.GetButtonDown("Sprint") && playerMoving || Input.GetButtonDown("SprintX") && playerMoving && !sprintPossible)
+        else if (playerStats.dexterity >= 14 && staminaMan.playerCurrentStamina > 50 && Input.GetButtonDown("Sprint") && playerMoving || playerStats.dexterity >= 14 && Input.GetButtonDown("SprintX") && playerMoving && !sprintPossible)
         {
             if (sprintTimer > 0)
             {
@@ -460,7 +461,7 @@ public class PlayerController : MonoBehaviour
             // sprintPossible = false;
         }
 
-        if (sprintPossible && staminaMan.playerCurrentStamina >= 500)
+        if (sprintPossible && staminaMan.playerCurrentStamina >= 50)
         {
             sprintTimer -= Time.deltaTime;
             moveSpeed = 12f;
@@ -473,8 +474,8 @@ public class PlayerController : MonoBehaviour
             sprintTimer = 0.2f;
         }
 
-        if (staminaMan.playerCurrentStamina <= 400 && Input.GetButtonDown("DashX")
-            || staminaMan.playerCurrentStamina <= 400 && Input.GetButtonDown("Dash"))
+        if (staminaMan.playerCurrentStamina <= 200 && Input.GetButtonDown("DashX")
+            || staminaMan.playerCurrentStamina <= 200 && Input.GetButtonDown("Dash"))
         {
             dashPossible = false;
         }
@@ -614,7 +615,7 @@ public class PlayerController : MonoBehaviour
             preAttackCounter -= Time.deltaTime;
             //preAttackCounter -= Time.frameCount;
         }
-        if (Input.GetButton("Sprint") && wasMoving || Input.GetButton("SprintX") && wasMoving)
+        if (playerStats.dexterity >= 14 && Input.GetButton("Sprint") && wasMoving || playerStats.dexterity >= 14 && Input.GetButton("SprintX") && wasMoving)
         {
             wasSprint = true;
         }
@@ -720,7 +721,7 @@ public class PlayerController : MonoBehaviour
         {
             if (axisInput <= -0.2f)
             {
-                ReverseAttack();
+                // ReverseAttack();
             }
         }
 
@@ -814,106 +815,106 @@ public class PlayerController : MonoBehaviour
         }
     }
     */
-    public void ReverseAttack()
-    {
-        // Debug.Log("*************************************************************************************");
-        attackingCounterNew = 0.06f;
-        recovAttack = false;
+    // public void ReverseAttack()
+    // {
+    //     // Debug.Log("*************************************************************************************");
+    //     attackingCounterNew = 0.06f;
+    //     recovAttack = false;
 
-        attacking = true;
-        // if (recovAttackCounter <= 0)
-        // {
-        //     preAttackCounter -= Time.deltaTime;
-        //     //preAttackCounter -= Time.frameCount;
-        // }
-        if (preAttackCounter <= 0 && preAttack)
-        {
-            if (directionInt == 0)
-            {
-                playerTransform.position = new Vector2(playerTransform.position.x,
-                playerTransform.position.y + 0.1f);
-            }
-            if (directionInt == 1)
-            {
-                playerTransform.position = new Vector2(playerTransform.position.x + 0.1f,
-                playerTransform.position.y);
-            }
-            if (directionInt == 2)
-            {
-                playerTransform.position = new Vector2(playerTransform.position.x,
-                playerTransform.position.y - 0.1f);
-            }
-            if (directionInt == 3)
-            {
-                playerTransform.position = new Vector2(playerTransform.position.x - 0.1f,
-                playerTransform.position.y);
-            }
-            attackPossible = true;
-            damagePossible = true;
-            sfxMan.playerAttack.Play();
-            //attackTimeCounter = attackTime; //I don't remember what this does.
-            attackBool = true;
-            /* if(specialMove)
-             {
-                 moveSpeed = 100000;
-                 //myRigidbody.velocity = new Vector2(0, 3);
-                 specialMove = false;
+    //     attacking = true;
+    //     // if (recovAttackCounter <= 0)
+    //     // {
+    //     //     preAttackCounter -= Time.deltaTime;
+    //     //     //preAttackCounter -= Time.frameCount;
+    //     // }
+    //     if (preAttackCounter <= 0 && preAttack)
+    //     {
+    //         if (directionInt == 0)
+    //         {
+    //             playerTransform.position = new Vector2(playerTransform.position.x,
+    //             playerTransform.position.y + 0.1f);
+    //         }
+    //         if (directionInt == 1)
+    //         {
+    //             playerTransform.position = new Vector2(playerTransform.position.x + 0.1f,
+    //             playerTransform.position.y);
+    //         }
+    //         if (directionInt == 2)
+    //         {
+    //             playerTransform.position = new Vector2(playerTransform.position.x,
+    //             playerTransform.position.y - 0.1f);
+    //         }
+    //         if (directionInt == 3)
+    //         {
+    //             playerTransform.position = new Vector2(playerTransform.position.x - 0.1f,
+    //             playerTransform.position.y);
+    //         }
+    //         attackPossible = true;
+    //         damagePossible = true;
+    //         sfxMan.playerAttack.Play();
+    //         //attackTimeCounter = attackTime; //I don't remember what this does.
+    //         attackBool = true;
+    //         /* if(specialMove)
+    //          {
+    //              moveSpeed = 100000;
+    //              //myRigidbody.velocity = new Vector2(0, 3);
+    //              specialMove = false;
 
-             }else
-             {
-                 moveSpeed = 4.5f;
-                 myRigidbody.velocity = Vector2.zero;
-             }*/
+    //          }else
+    //          {
+    //              moveSpeed = 4.5f;
+    //              myRigidbody.velocity = Vector2.zero;
+    //          }*/
 
-            myRigidbody.velocity = Vector2.zero;
+    //         myRigidbody.velocity = Vector2.zero;
 
-            anim.SetBool("Attack", true);
+    //         anim.SetBool("Attack", true);
 
-            attackingCounterNew -= Time.deltaTime;
+    //         attackingCounterNew -= Time.deltaTime;
 
-            if (attackingCounterNew <= 0)
-            {
-                preAttack = true;
-                attackLock = true;
+    //         if (attackingCounterNew <= 0)
+    //         {
+    //             preAttack = true;
+    //             attackLock = true;
 
-                // staminaMan.playerCurrentStamina -= 400;
-                //staminaAttackDrainBool = true;
-            }
-        }
+    //             // staminaMan.playerCurrentStamina -= 400;
+    //             //staminaAttackDrainBool = true;
+    //         }
+    //     }
 
-        else if (attackLock == false && staminaMan.playerCurrentStamina < 400)
-        {
-            attackPossible = false;
-        }
-        else
-        {
-            attackBool = false;
-            damagePossible = false;
-            anim.SetBool("Attack", false);
-        }
-        if (attackLock)
-        {
-            preAttackCounter = .2f;
-            recovAttack = true;
+    //     else if (attackLock == false && staminaMan.playerCurrentStamina < 400)
+    //     {
+    //         attackPossible = false;
+    //     }
+    //     else
+    //     {
+    //         attackBool = false;
+    //         damagePossible = false;
+    //         anim.SetBool("Attack", false);
+    //     }
+    //     if (attackLock)
+    //     {
+    //         preAttackCounter = .2f;
+    //         recovAttack = true;
 
-            //staminaAttackDrainBool = false;
-        }
-        if (recovAttack)
-        {
-            recovAttackCounter -= Time.deltaTime;
-        }
-        if (recovAttackCounter <= 0)
-        {
-            attackingCounterNew = 0.06f;
-            recovAttack = false;
-            //attackTimeCounter = 10;
-            recovAttackCounter = 0.3f;
-        }
-        if (!attacking)
-        {
-            damagePossible = false;
-        }
-    }
+    //         //staminaAttackDrainBool = false;
+    //     }
+    //     if (recovAttack)
+    //     {
+    //         recovAttackCounter -= Time.deltaTime;
+    //     }
+    //     if (recovAttackCounter <= 0)
+    //     {
+    //         attackingCounterNew = 0.06f;
+    //         recovAttack = false;
+    //         //attackTimeCounter = 10;
+    //         recovAttackCounter = 0.3f;
+    //     }
+    //     if (!attacking)
+    //     {
+    //         damagePossible = false;
+    //     }
+    // }
 
     public void SetBounds(BoxCollider2D newBounds)
     {

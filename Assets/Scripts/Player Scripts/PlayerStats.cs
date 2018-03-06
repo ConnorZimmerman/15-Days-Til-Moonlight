@@ -2,22 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour {
+public class PlayerStats : MonoBehaviour
+{
 
     public int currentLevel;
-
     public int currentExp;
-
+    public int playerDamage;
     public int[] toLevelUp;
-
     public int[] HPLevels;
     public int[] attackLevels;
     public int[] defenseLevels;
-
     public int currentHP;
     public int currentAttack;
     public int currentDefense;
-
     public int vitality;
     public int strength;
     public int dexterity;
@@ -27,8 +24,9 @@ public class PlayerStats : MonoBehaviour {
     // private GlobalDataScript globalData;
     public int pointsToSpend;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         currentHP = HPLevels[1];
         currentAttack = attackLevels[1];
         currentDefense = defenseLevels[1];
@@ -37,18 +35,35 @@ public class PlayerStats : MonoBehaviour {
         currentLevel = GlobalDataScript.globalPlayerLevel;
         currentExp = GlobalDataScript.globalPlayerCurrentXp;
         pointsToSpend = GlobalDataScript.globalPlayerPointsToSpend;
-        strength = 2;
-        dexterity = 10;
-        intelligence = 5;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(currentExp >= toLevelUp[currentLevel])
+        strength = GlobalDataScript.globalPlayerStrength;
+        dexterity = GlobalDataScript.globalPlayerDexterity;
+        intelligence = GlobalDataScript.globalPlayerIntelligence;
+        if (strength <= 10)
+        {
+            playerDamage = 2;
+        }
+        else if (strength >= 11)
+        {
+            playerDamage = 3;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (strength <= 10)
+        {
+            playerDamage = 2;
+        }
+        else if (strength >= 11)
+        {
+            playerDamage = 3;
+        }
+        if (currentExp >= toLevelUp[currentLevel])
         {
             LevelUp();
         }
-	}
+    }
 
     public void AddExperience(int experienceToAdd)
     {

@@ -63,7 +63,7 @@ public class EnemyHealthManager : MonoBehaviour
             Destroy(bodyCollider);
             if (deathCounter == 2)
             {
-                thePlayer.GetComponent<PlayerStaminaManager>().playerCurrentStamina += 750;
+                thePlayer.GetComponent<PlayerStaminaManager>().playerCurrentStamina += 50;
             }
             deathCounter -= Time.deltaTime;
             fredIsDead = true;

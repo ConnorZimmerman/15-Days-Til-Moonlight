@@ -754,7 +754,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
             if (!deathSeven) // && enemyMoving)
             {
-                if (raycastPath.lineOfSight)
+                if (raycastPath.lineOfSight && !playerEngagement.colliderOn)
                 {
                     raycastPath.enqueue = false;
                     transform.position = Vector2.MoveTowards(transform.position,

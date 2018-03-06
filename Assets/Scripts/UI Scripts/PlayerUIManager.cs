@@ -31,7 +31,7 @@ public class PlayerUIManager : MonoBehaviour
         {
             staminaTell.text = "-STAMINA";
         }
-        else if (thePlayer.attackPossible == false || thePlayer.dashPossible == false || Input.GetButtonDown("SprintX") && playerStamina.playerCurrentStamina < 500 || Input.GetButtonDown("DashX") && playerStamina.playerCurrentStamina < 1000 || Input.GetButton("Block") && playerStamina.playerCurrentStamina <= 0 || Input.GetAxisRaw("BlockX") >= 0.2f && playerStamina.playerCurrentStamina <= 0) 
+        else if (thePlayer.attackPossible == false || thePlayer.dashPossible == false || Input.GetButtonDown("SprintX") && playerStamina.playerCurrentStamina < 50 || Input.GetButtonDown("DashX") && playerStamina.playerCurrentStamina < 200 || Input.GetButton("Block") && playerStamina.playerCurrentStamina <= 0 || Input.GetAxisRaw("BlockX") >= 0.2f && playerStamina.playerCurrentStamina <= 0) 
         {
             staminaTellCounterStart = true;
         }

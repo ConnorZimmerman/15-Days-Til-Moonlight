@@ -11,6 +11,9 @@ public class GlobalDataScript : MonoBehaviour
     public static int globalPlayerLevel;
     public static int globalPlayerCurrentXp;
     public static int globalPlayerVitality;
+    public static int globalPlayerStrength;
+    public static int globalPlayerDexterity;
+    public static int globalPlayerIntelligence;
     public static int globalPlayerDaggerCount;
     public static int globalPlayerPointsToSpend;
 
@@ -20,13 +23,16 @@ public class GlobalDataScript : MonoBehaviour
     {
         globalPlayerCurrentHealth = PlayerPrefs.GetInt("Global Player Current Health", 10);
         globalPlayerMaxHealth = PlayerPrefs.GetInt("Global Player Max Health", 10);
-        globalPlayerCurrentStamina = PlayerPrefs.GetInt("Global Player Current Stamina", 10000);
-        globalPlayerMaxStamina = PlayerPrefs.GetInt("Global Player Max Stamina", 10000);
+        globalPlayerCurrentStamina = PlayerPrefs.GetInt("Global Player Current Stamina", 500);
+        globalPlayerMaxStamina = PlayerPrefs.GetInt("Global Player Max Stamina", 500);
         globalPlayerCurrentXp = PlayerPrefs.GetInt("Global Player Current Xp", 0);
         globalPlayerLevel = PlayerPrefs.GetInt("Global Player Level", 1);
-        globalPlayerPointsToSpend = PlayerPrefs.GetInt("Global Player Points To Spend", 0);
+        globalPlayerPointsToSpend = PlayerPrefs.GetInt("Global Player Points To Spend", 10);
         globalPlayerVitality = PlayerPrefs.GetInt("Global Player Vitality", 10);
-        globalPlayerDaggerCount = PlayerPrefs.GetInt("Global Player Dagger Count", 5);
+        globalPlayerStrength = PlayerPrefs.GetInt("Global Player Strength", 3);
+        globalPlayerDexterity = PlayerPrefs.GetInt("Global Player Dexterity", 10);
+        globalPlayerIntelligence = PlayerPrefs.GetInt("Global Player Intelligence", 5);
+        globalPlayerDaggerCount = PlayerPrefs.GetInt("Global Player Dagger Count", 0);
         //globalSoundTrackInstance = PlayerPrefs.GetInt("Global Music Tracker", 1);
     }
 
