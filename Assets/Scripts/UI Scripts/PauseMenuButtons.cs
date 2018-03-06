@@ -58,7 +58,7 @@ public class PauseMenuButtons : MonoBehaviour
             if (eventSystem.currentSelectedGameObject == StrengthButton)
             {
                 strengthObject.SetActive(true);
-                strengthText.text = "Will decrease stamina loss by 5%";
+                strengthText.text = "Will decrease stamina loss by 10% when blocking with shield";
             }
             else
             {
@@ -67,7 +67,7 @@ public class PauseMenuButtons : MonoBehaviour
             if (eventSystem.currentSelectedGameObject == DexterityButton)
             {
                 dexterityObject.SetActive(true);
-                dexterityText.text = "Will increase max stamina by 10%";
+                dexterityText.text = "Will decrease stamina loss by 5% when dashing";
             }
             else
             {
