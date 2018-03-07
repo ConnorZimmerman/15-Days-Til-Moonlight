@@ -30,9 +30,9 @@ public class GlobalDataScript : MonoBehaviour
         globalPlayerPointsToSpend = PlayerPrefs.GetInt("Global Player Points To Spend", 10);
         globalPlayerVitality = PlayerPrefs.GetInt("Global Player Vitality", 10);
         globalPlayerStrength = PlayerPrefs.GetInt("Global Player Strength", 3);
-        globalPlayerDexterity = PlayerPrefs.GetInt("Global Player Dexterity", 10);
+        globalPlayerDexterity = PlayerPrefs.GetInt("Global Player Dexterity", 14);
         globalPlayerIntelligence = PlayerPrefs.GetInt("Global Player Intelligence", 5);
-        globalPlayerDaggerCount = PlayerPrefs.GetInt("Global Player Dagger Count", 0);
+        globalPlayerDaggerCount = PlayerPrefs.GetInt("Global Player Dagger Count", 5);
         //globalSoundTrackInstance = PlayerPrefs.GetInt("Global Music Tracker", 1);
     }
 

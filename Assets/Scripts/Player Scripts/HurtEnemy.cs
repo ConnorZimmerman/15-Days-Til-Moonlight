@@ -76,17 +76,29 @@ public class HurtEnemy : MonoBehaviour
                 if (thePlayer.wasSprint && staminaManager.playerCurrentStamina > 50 && playerStats.dexterity == 14 && playerStats.strength == 9)
                 {
                     currentDamage = damageToGive + thePS.currentAttack + 1;
+                    Debug.Log(currentDamage);
                 }
                 else
                 {
                     currentDamage = damageToGive + thePS.currentAttack;
                 }
                 sfxMan.blood.Play();
-                other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(currentDamage);
-                Instantiate(damageBurst, hitPoint.position, hitPoint.rotation);
-                var clone = (GameObject)Instantiate(damageNumber, hitPoint.position,
-                    Quaternion.Euler(Vector3.zero));
-                clone.GetComponent<FloatingNumbers>().damageNumber = currentDamage;
+                if (this.gameObject.tag == "Throwing Knife")
+                {
+                    other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(1);
+                    Instantiate(damageBurst, hitPoint.position, hitPoint.rotation);
+                    var clone = (GameObject)Instantiate(damageNumber, hitPoint.position,
+                        Quaternion.Euler(Vector3.zero));
+                    clone.GetComponent<FloatingNumbers>().damageNumber = currentDamage;
+                }
+                else
+                {
+                    other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(currentDamage);
+                    Instantiate(damageBurst, hitPoint.position, hitPoint.rotation);
+                    var clone = (GameObject)Instantiate(damageNumber, hitPoint.position,
+                        Quaternion.Euler(Vector3.zero));
+                    clone.GetComponent<FloatingNumbers>().damageNumber = currentDamage;
+                }
             }
         }
         else if (other.gameObject.tag == "Enemy" && other.gameObject.GetComponent<EnemyTestScript>().enemyShield && !thePlayer.deathStrike
