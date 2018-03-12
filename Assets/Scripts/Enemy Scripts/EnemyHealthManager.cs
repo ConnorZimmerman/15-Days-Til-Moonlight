@@ -8,20 +8,14 @@ public class EnemyHealthManager : MonoBehaviour
     public int CurrentHealth;
     public int oldCurrentHealth; /*This variable was created to know when the enemy has been hurt
     it is used by functions in the enemyTestScript*/
-
     public int expToGive;
-
     public EnemyTestScript enemy;
     public PlayerStats thePlayerStats; //player stats added to give xp upon enemies death
-                                       // public PlayerController thePlayer;
     public GameObject thePlayer;
-
     public float enemyHealthPercent; /*All health/stamina has percentages for the enemy to calculate
     its priorities more efficiently*/
-
     public bool fredIsDead; //Fred is the enemy
     private float deathCounter; //how long the death animation lasts for before deleting Fred
-
     private GameObject enemyObject;
     private EnemyMasterScript enemyMaster;
     public bool setCurrentHealthAtStart;

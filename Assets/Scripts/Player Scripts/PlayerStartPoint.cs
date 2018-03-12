@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStartPoint : MonoBehaviour {
-
     private PlayerController thePlayer;
-
     private CameraController theCamera;
-
     public Vector2 startDirection;
-
     public string pointName;
 
     // Use this for initialization

@@ -74,12 +74,14 @@
      <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
      <None Include="Assets\Tiled2Unity\Imported\Dungeon Room 2.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\Tiled2Unity.cginc" />
+     <None Include="Assets\Tiled2Unity\Imported\SnowyLvl1.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
      <None Include="Assets\Retro Pixel Dungeons\Animations\!ReadMe! - Animations.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepth.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDiffuseDepth.shader" />
      <None Include="Assets\Tiled2Unity\Imported\Dungeon.tiled2unity.xml" />
      <None Include="Assets\Shield Pack Free\ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\SnowyOne.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Dungeon Room 3.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\test_area.tiled2unity.xml" />
      <None Include="Assets\Retro Pixel Dungeons\!Read Me! - On Layers and Tags.txt" />

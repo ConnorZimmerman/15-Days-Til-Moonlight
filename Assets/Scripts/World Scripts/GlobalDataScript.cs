@@ -21,18 +21,18 @@ public class GlobalDataScript : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        globalPlayerCurrentHealth = PlayerPrefs.GetInt("Global Player Current Health", 10);
-        globalPlayerMaxHealth = PlayerPrefs.GetInt("Global Player Max Health", 10);
+        globalPlayerCurrentHealth = PlayerPrefs.GetInt("Global Player Current Health", 5);
+        globalPlayerMaxHealth = PlayerPrefs.GetInt("Global Player Max Health", 5);
         globalPlayerCurrentStamina = PlayerPrefs.GetInt("Global Player Current Stamina", 500);
         globalPlayerMaxStamina = PlayerPrefs.GetInt("Global Player Max Stamina", 500);
         globalPlayerCurrentXp = PlayerPrefs.GetInt("Global Player Current Xp", 0);
         globalPlayerLevel = PlayerPrefs.GetInt("Global Player Level", 1);
-        globalPlayerPointsToSpend = PlayerPrefs.GetInt("Global Player Points To Spend", 10);
-        globalPlayerVitality = PlayerPrefs.GetInt("Global Player Vitality", 10);
+        globalPlayerPointsToSpend = PlayerPrefs.GetInt("Global Player Points To Spend", 0);
+        globalPlayerVitality = PlayerPrefs.GetInt("Global Player Vitality", 5);
         globalPlayerStrength = PlayerPrefs.GetInt("Global Player Strength", 3);
-        globalPlayerDexterity = PlayerPrefs.GetInt("Global Player Dexterity", 14);
+        globalPlayerDexterity = PlayerPrefs.GetInt("Global Player Dexterity", 10);
         globalPlayerIntelligence = PlayerPrefs.GetInt("Global Player Intelligence", 5);
-        globalPlayerDaggerCount = PlayerPrefs.GetInt("Global Player Dagger Count", 5);
+        globalPlayerDaggerCount = PlayerPrefs.GetInt("Global Player Dagger Count", 0);
         //globalSoundTrackInstance = PlayerPrefs.GetInt("Global Music Tracker", 1);
     }
 
