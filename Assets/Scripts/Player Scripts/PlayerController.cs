@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
 
         sfxMan = FindObjectOfType<SFXManager>();
 
-        //theDM = FindObjectOfType<DialogueManager>();
+        theDM = FindObjectOfType<DialogueManager>();
 
         staminaMan = GetComponent<PlayerStaminaManager>();
 

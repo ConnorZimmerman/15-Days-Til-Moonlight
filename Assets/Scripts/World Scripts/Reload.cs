@@ -32,11 +32,10 @@ public class Reload : MonoBehaviour
     void Start()
 
     {
-        FindObjectOfType<PlayerController>();
+        thePlayer = FindObjectOfType<PlayerController>();
 
         theDM = FindObjectOfType<DialogueManager>();
 
-        //EXAMPLE GRABBING SCRIPT FROM OBJECT
         playerObject = GameObject.Find("Player");
         playerHealth = playerObject.GetComponent<PlayerHealthManager>();
 

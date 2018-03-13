@@ -49,6 +49,8 @@ public class EnemyRangedAttack : MonoBehaviour
 
         enqueue = false;
 
+        attackRange = 8;
+
         // player_layer_mask = LayerMask.GetMask("Player");
         // wall_layer_mask = LayerMask.GetMask("Wall");
     }
