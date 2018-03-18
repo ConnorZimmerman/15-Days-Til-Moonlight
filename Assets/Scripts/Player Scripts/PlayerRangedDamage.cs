@@ -111,7 +111,7 @@ public class PlayerRangedDamage : MonoBehaviour
         if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "BasicRangedEnemy")
         {
             Instantiate(damageBurst, hitPoint.position, hitPoint.rotation);
-            playerEngagement.doingDamage(1, thisKnife, this.gameObject);
+            // playerEngagement.doingDamage(1, thisKnife, this.gameObject);
         }
         else if (other.gameObject.tag == "Wall")
         {

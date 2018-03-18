@@ -58,7 +58,7 @@ public class PauseMenuButtons : MonoBehaviour
             if (eventSystem.currentSelectedGameObject == StrengthButton)
             {
                 strengthObject.SetActive(true);
-                strengthText.text = "Will decrease stamina loss by 10% when blocking with shield";
+                strengthText.text = StrengthText(playerStats.strength);
             }
             else
             {
@@ -67,7 +67,7 @@ public class PauseMenuButtons : MonoBehaviour
             if (eventSystem.currentSelectedGameObject == DexterityButton)
             {
                 dexterityObject.SetActive(true);
-                dexterityText.text = "Will decrease stamina loss by 5% when dashing";
+                dexterityText.text = DexterityText(playerStats.dexterity);
             }
             else
             {
@@ -122,4 +122,102 @@ public class PauseMenuButtons : MonoBehaviour
             playerStats.pointsToSpend--;
         }
     }
+
+    // public string VitalityText(int vitality){
+
+    // }
+    public string StrengthText(int strength)
+    {
+        string strengthText;
+        if (strength == 3)
+        {
+            strengthText = "- 30 less stamina lost on block";
+            return strengthText;
+        }
+        else if (strength == 4)
+        {
+            strengthText = "- It will take 2 damage to unshield you!\n- 30 less stamina lost on block";
+            return strengthText;
+        }
+        else if (strength == 5)
+        {
+            strengthText = "- 30 less stamina lost on block";
+            return strengthText;
+        }
+        else if (strength == 5)
+        {
+            strengthText = "- +50% stamina regained for each kill!\n- It will take 3 damage to unshield you!\n30 less stamina lost on block";
+            return strengthText;
+        }
+        else if (strength == 6)
+        {
+            strengthText = "- It will take 4 damage to unshield you!\n- 30 less stamina lost on block";
+            return strengthText;
+        }
+        else if (strength == 7)
+        {
+            strengthText = "- Dash Strike: hold A and attack to +1 damage! (Requires dash)\n- 30 less stamina lost on block";
+            return strengthText;
+        }
+        else if (strength == 8)
+        {
+            strengthText = "- It will take 4 damage to unshield you!\n- 30 less stamina lost on block";
+            return strengthText;
+        }
+        else if (strength == 9)
+        {
+            strengthText = "- Rage: +1 to damage!\n- 30 less stamina lost on block";
+            return strengthText;
+        }
+        return "None";
+    }
+    public string DexterityText(int dexterity)
+    {
+        string dexterityText;
+        if (dexterity == 10)
+        {
+            dexterityText = "- +50 stamina";
+            return dexterityText;
+        }
+        else if (dexterity == 11)
+        {
+            dexterityText = "- Can throw daggers!\n- +50 stamina";
+            return dexterityText;
+        }
+        else if (dexterity == 12)
+        {
+            dexterityText = "- +50 stamina";
+            return dexterityText;
+        }
+        else if (dexterity == 13)
+        {
+            dexterityText = "- Dash: press A to dash\n- +50 stamina";
+            return dexterityText;
+        }
+        else if (dexterity == 14)
+        {
+            dexterityText = "- -10 stamina used to dash\n- +50 stamina";
+            return dexterityText;
+        }
+        else if (dexterity == 15)
+        {
+            dexterityText = "- -10 stamina used to dash\n- +50 stamina";
+            return dexterityText;
+        }
+        else if (dexterity == 16)
+        {
+            dexterityText = "- Teleport: press B to teleport\n- 30 less stamina lost on block";
+            return dexterityText;
+        }
+        else if (dexterity == 17)
+        {
+            dexterityText = "- -10 stamina used to dash\n- +50 stamina";
+            return dexterityText;
+        }
+        return "None";
+    }
+    // public string IntelligenceText(int intelligence)
+    // {
+
+    // }
 }

@@ -101,6 +101,7 @@
      <Compile Include="Assets\Scripts\World Scripts\BoundsScript.cs" />
      <Compile Include="Assets\Scripts\World Scripts\DestroyOverTime.cs" />
      <Compile Include="Assets\Scripts\World Scripts\DontDestroyOnLoad.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\FindNPCsInZone.cs" />
      <Compile Include="Assets\Scripts\World Scripts\GlobalDataScript.cs" />
      <Compile Include="Assets\Scripts\World Scripts\GoldPickUp.cs" />
      <Compile Include="Assets\Scripts\World Scripts\Grid.cs" />
@@ -112,6 +113,7 @@
      <Compile Include="Assets\Scripts\World Scripts\MusicController.cs" />
      <Compile Include="Assets\Scripts\World Scripts\MusicSwitcher.cs" />
      <Compile Include="Assets\Scripts\World Scripts\Node.cs" />
+     <Compile Include="Assets\Scripts\World Scripts\PathfindingZoneManager.cs" />
      <Compile Include="Assets\Scripts\World Scripts\PathRequestManager.cs" />
      <Compile Include="Assets\Scripts\World Scripts\RandomMovement.cs" />
      <Compile Include="Assets\Scripts\World Scripts\Reload.cs" />
@@ -143,18 +145,21 @@
      <None Include="Assets\Tiled2Unity\Imported\SewersOne.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Inside Mirror.tiled2unity.xml" />
      <None Include="Assets\Retro Pixel Dungeons\Scripts\!Read Me! - Notes on Scripts.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\SnowyB.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepth-Instanced.shader" />
      <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
      <None Include="Assets\Tiled2Unity\Imported\Dungeon Room 2.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\Tiled2Unity.cginc" />
+     <None Include="Assets\Tiled2Unity\Imported\SnowyLvl1.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
      <None Include="Assets\Retro Pixel Dungeons\Animations\!ReadMe! - Animations.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepth.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDiffuseDepth.shader" />
      <None Include="Assets\Tiled2Unity\Imported\Dungeon.tiled2unity.xml" />
      <None Include="Assets\Shield Pack Free\ReadMe.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\SnowyOne.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Dungeon Room 3.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\test_area.tiled2unity.xml" />
      <None Include="Assets\Retro Pixel Dungeons\!Read Me! - On Layers and Tags.txt" />
@@ -163,6 +168,7 @@
      <None Include="Assets\Tiled2Unity\Imported\16x16 dungeon.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Test_Snow.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDefault-Instanced.shader" />
+     <None Include="Assets\Tiled2Unity\Imported\SnowyA.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\shaColorKey-Instanced.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaColorKey.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepthColorKey.shader" />

@@ -11,22 +11,36 @@ public class GlobalDataScript : MonoBehaviour
     public static int globalPlayerLevel;
     public static int globalPlayerCurrentXp;
     public static int globalPlayerVitality;
+    public static int globalPlayerStrength;
+    public static int globalPlayerDexterity;
+    public static int globalPlayerIntelligence;
     public static int globalPlayerDaggerCount;
     public static int globalPlayerPointsToSpend;
+    public string globalPlayerStartPoint;
+    public float globalPlayerLastMoveX;
+    public float globalPlayerLastMoveY;
+    public string globalPlayerCurLvl;
 
     //public static int globalSoundTrackInstance;
-    // Use this for initialization
+    
     void Awake()
     {
-        globalPlayerCurrentHealth = PlayerPrefs.GetInt("Global Player Current Health", 10);
-        globalPlayerMaxHealth = PlayerPrefs.GetInt("Global Player Max Health", 10);
-        globalPlayerCurrentStamina = PlayerPrefs.GetInt("Global Player Current Stamina", 10000);
-        globalPlayerMaxStamina = PlayerPrefs.GetInt("Global Player Max Stamina", 10000);
+        globalPlayerCurrentHealth = PlayerPrefs.GetInt("Global Player Current Health", 5);
+        globalPlayerMaxHealth = PlayerPrefs.GetInt("Global Player Max Health", 5);
+        globalPlayerCurrentStamina = PlayerPrefs.GetInt("Global Player Current Stamina", 500);
+        globalPlayerMaxStamina = PlayerPrefs.GetInt("Global Player Max Stamina", 500);
         globalPlayerCurrentXp = PlayerPrefs.GetInt("Global Player Current Xp", 0);
         globalPlayerLevel = PlayerPrefs.GetInt("Global Player Level", 1);
         globalPlayerPointsToSpend = PlayerPrefs.GetInt("Global Player Points To Spend", 0);
-        globalPlayerVitality = PlayerPrefs.GetInt("Global Player Vitality", 10);
-        globalPlayerDaggerCount = PlayerPrefs.GetInt("Global Player Dagger Count", 5);
+        globalPlayerVitality = PlayerPrefs.GetInt("Global Player Vitality", 5);
+        globalPlayerStrength = PlayerPrefs.GetInt("Global Player Strength", 3);
+        globalPlayerDexterity = PlayerPrefs.GetInt("Global Player Dexterity", 10);
+        globalPlayerIntelligence = PlayerPrefs.GetInt("Global Player Intelligence", 5);
+        globalPlayerDaggerCount = PlayerPrefs.GetInt("Global Player Dagger Count", 0);
+        globalPlayerStartPoint = PlayerPrefs.GetString("Global Player Start Point", "StartPoint");
+        globalPlayerLastMoveX = PlayerPrefs.GetFloat("Global Player Last Move X", 0);
+        globalPlayerLastMoveY = PlayerPrefs.GetFloat("Global Player Last Move Y", -1);
+        globalPlayerCurLvl = PlayerPrefs.GetString("Global Player Cur Lvl", "SnowyA");
         //globalSoundTrackInstance = PlayerPrefs.GetInt("Global Music Tracker", 1);
     }
 

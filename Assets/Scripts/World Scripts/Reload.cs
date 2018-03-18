@@ -28,17 +28,18 @@ public class Reload : MonoBehaviour
     public PlayerStaminaManager staminaMan;
 
     public GameObject playerObject;
+    private GlobalDataScript globalData;
 
     void Start()
 
     {
-        FindObjectOfType<PlayerController>();
+        thePlayer = FindObjectOfType<PlayerController>();
 
         theDM = FindObjectOfType<DialogueManager>();
 
-        //EXAMPLE GRABBING SCRIPT FROM OBJECT
         playerObject = GameObject.Find("Player");
         playerHealth = playerObject.GetComponent<PlayerHealthManager>();
+        globalData = FindObjectOfType<GlobalDataScript>();
 
         if (!reloadExists)
         {
@@ -103,7 +104,7 @@ public class Reload : MonoBehaviour
                 }
                 PlayerPrefs.DeleteAll();
                 PlayerPrefs.SetInt("Global Music Tracker", 0);
-                SceneManager.LoadScene("Main", LoadSceneMode.Single);
+                SceneManager.LoadScene(globalData.globalPlayerCurLvl, LoadSceneMode.Single);
             }
         }
     }

@@ -109,7 +109,7 @@ public class RangedDamage : MonoBehaviour
         {
             playerEngagement.doingDamage(1, thisKnife);
         }
-        else if (other.gameObject.tag == "Wall")
+        else if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Unwalkable")
         {
             distanceToPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
             if (distanceToPlayer < 12)

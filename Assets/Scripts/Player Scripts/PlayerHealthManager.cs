@@ -36,8 +36,8 @@ public class PlayerHealthManager : MonoBehaviour
         playerDamage = false;
         playerSprite = GetComponent<SpriteRenderer>();
         playerStatsScript = FindObjectOfType<PlayerStats>();
-        playerCurrentHealth = GlobalDataScript.globalPlayerCurrentHealth;
         playerMaxHealth = GlobalDataScript.globalPlayerVitality;
+        playerCurrentHealth = GlobalDataScript.globalPlayerCurrentHealth;
         oldPlayerCurrentHealth = playerCurrentHealth;
         // thePlayer = FindObjectOfType<PlayerController>();
     }

@@ -25,6 +25,7 @@ public class PlayerStaminaManager : MonoBehaviour
     public GameObject playerStaminaObject;
     public GameObject dmObject;
     private GlobalDataScript globalData;
+    private PlayerStats playerStats;
 
     // Use this for initialization
     void Start()
@@ -32,15 +33,18 @@ public class PlayerStaminaManager : MonoBehaviour
         //thePlayer = GetComponent<PlayerController>();
         dmObject = GameObject.Find("Dialogue Manager");
         dialog = dmObject.GetComponent<DialogueManager>();
+        playerStats = FindObjectOfType<PlayerStats>();
 
         playerStaminaObject = GameObject.Find("Player");
         thePlayer = playerStaminaObject.GetComponent<PlayerController>();
         playerCurrentStamina = GlobalDataScript.globalPlayerCurrentStamina;
+        playerMaxStamina = GlobalDataScript.globalPlayerDexterity * 50;
     }
 
     // Update is called once per frame
     void Update()
     {
+        playerMaxStamina = playerStats.dexterity * 50;
         if (playerCurrentStamina < 0)
         {
             playerCurrentStamina = 0;
@@ -52,12 +56,12 @@ public class PlayerStaminaManager : MonoBehaviour
 
         if (dialog.dialogActive == false && thePlayer.sprintActive == true && playerCurrentStamina > 0)
         {
-            playerCurrentStamina -= 50;
+            playerCurrentStamina -= 5;
         }
 
         if (dialog.dialogActive == false && thePlayer.dashActive == true)
         {
-            playerCurrentStamina -= 1000;
+            playerCurrentStamina -= 200;
         }
 
         //test condition

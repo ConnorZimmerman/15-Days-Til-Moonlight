@@ -21,6 +21,7 @@ a533c2b9c4a8e3321273fbb579c5d64f Assembly-CSharp.dll:.DemoStairs
 139042f1097678ca8ca8435d36c93edb Assembly-CSharp.dll:.EngagedWithPlayer
 76b67c157fc78f887e635d573c3b4839 Assembly-CSharp.dll:Tiled2Unity.GPUInstancing
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PathRequestManager
+8fcbce925de9bec4bc274ec554ec4ef0 Assembly-CSharp.dll:.PauseMenu
 174621ec1365498eb387db14c52d0cef Assembly-CSharp.dll:.WaypointRaycast
 7b1b191f4ccdb9ce7fe3d0e649c7d98d Assembly-CSharp.dll:.WayPoints
 1d80ee4cef46dce1942b436ce6125900 Assembly-CSharp.dll:.EnemyTestScript
@@ -94,6 +95,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 fb0b9edb4571deb16aec16f9f89c88bb Assembly-CSharp.dll:.PlayerUIManager
 a3a38e0d61b0050c9af0d2bf2ab942c1 Assembly-CSharp.dll:.UIManager
+551d7f943623db7a3e453a7c3eccad41 Assembly-CSharp.dll:.PauseMenuButtons
 8d2c9404286b263876a43e040fea92c0 Assembly-CSharp.dll:.RangedDamage
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FearCounter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -130,7 +132,7 @@ dded39c0df233e55192f24010fad728a Assembly-CSharp.dll:.PlayerHealthManager
 fab3f48bb6484a76cde2b81e3201be7e Assembly-CSharp.dll:Tiled2Unity.TileObject
 e29032ca1b9bf59a7175071f7c8eeb96 Assembly-CSharp.dll:.MusicController
 1ac45e65362b8990ca8bc05364d4581e Assembly-CSharp.dll:Tiled2Unity.ImportBehaviour
-bfe6b4225e67668d285267c774d76dd9 Assembly-CSharp.dll:.PlayerStats
+b21362df67057c98d00492aa95eaf932 Assembly-CSharp.dll:.PlayerStats
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -143,7 +145,7 @@ c5b77decb97ffc0c36e810b155d27dde Assembly-CSharp.dll:Tiled2Unity.TiledMap
 46dbe8aaac854c3a9a68433eb1539c5e Assembly-CSharp.dll:.HurtPlayerUpdated
 0a1cd3f1b959840a67768b622f911092 Assembly-CSharp.dll:.VolumeManager
 7195d43671e7d6626ba360cbf7903e85 Assembly-CSharp.dll:.Pathfinding
-13d218fb115993663e74b4f33df570aa Assembly-CSharp.dll:.HurtEnemy
+edd8c156e126b64030ce1f03efe3319c Assembly-CSharp.dll:.HurtEnemy
 7dabcc03acc69eb0ae74451f23fffa8b Assembly-CSharp.dll:.Grid
 127115859090a29f2d5e1078efe7db7c Assembly-CSharp.dll:.RandomMovement
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EnemyDialogue
