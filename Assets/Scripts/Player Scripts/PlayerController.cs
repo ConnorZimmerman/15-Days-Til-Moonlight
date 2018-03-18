@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
     public bool sprintPossible;
     private PlayerStats playerStats;
     private TerrainManager terrainManager;
+    private GlobalDataScript globalData;
 
     // Use this for initialization
     void Start()
@@ -147,6 +148,8 @@ public class PlayerController : MonoBehaviour
 
         hurtEnemy = FindObjectOfType<HurtEnemy>();
 
+        globalData = FindObjectOfType<GlobalDataScript>();
+
         playerBoundBoxObject = GameObject.Find("Bounds");
 
         enemyTargetObject = this.gameObject;
@@ -174,7 +177,7 @@ public class PlayerController : MonoBehaviour
 
         canMove = true;
 
-        lastMove = new Vector2(0, -1f);
+        lastMove = new Vector2(globalData.globalPlayerLastMoveX, globalData.globalPlayerLastMoveY);
 
         currentEnemyExists = true;
 

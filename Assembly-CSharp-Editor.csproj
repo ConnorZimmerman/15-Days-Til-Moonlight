@@ -68,6 +68,7 @@
      <None Include="Assets\Tiled2Unity\Imported\SewersOne.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Inside Mirror.tiled2unity.xml" />
      <None Include="Assets\Retro Pixel Dungeons\Scripts\!Read Me! - Notes on Scripts.txt" />
+     <None Include="Assets\Tiled2Unity\Imported\SnowyB.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepth-Instanced.shader" />
      <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
@@ -90,6 +91,7 @@
      <None Include="Assets\Tiled2Unity\Imported\16x16 dungeon.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Test_Snow.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDefault-Instanced.shader" />
+     <None Include="Assets\Tiled2Unity\Imported\SnowyA.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\shaColorKey-Instanced.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaColorKey.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepthColorKey.shader" />
