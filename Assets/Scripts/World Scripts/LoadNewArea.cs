@@ -50,7 +50,8 @@ public class LoadNewArea : MonoBehaviour
         else if (other.gameObject.name == "Player" && curLvl == "SnowyA" && this.gameObject.name == "SnowyCEntry")
         {
             SetAllForLvl();
-            SceneManager.LoadScene("Lvl 2", LoadSceneMode.Single);
+            SceneManager.LoadScene("SnowyC", LoadSceneMode.Single);
+            PlayerPrefs.SetString("Global Player Start Point", "Snowy_C_A_Entrance");
         }
         // Snowy B Exits
         else if (other.gameObject.name == "Player" && curLvl == "SnowyB" && this.gameObject.name == "SnowyAEntry")
@@ -58,23 +59,26 @@ public class LoadNewArea : MonoBehaviour
             SetAllForLvl();
             SceneManager.LoadScene("SnowyA", LoadSceneMode.Single);
             PlayerPrefs.SetString("Global Player Start Point", "Snowy_A_B_Entrance");
-
         }
-        //Snowy A Exit
-        // else if(other.gameObject.name == "Player" && curLvl == "SnowyA" && this.gameObject.name == "SnowyBEntry"){
-        //     SetAllForLvl();
-        //     SceneManager.LoadScene("SnowyB", LoadSceneMode.Single);
-        //     PlayerPrefs.SetString("Global Player Start Point", "Snowy_B_A_Entrance");
-        // }
-        else if (other.gameObject.name == "Player" && curLvl == "Main")
+        else if (other.gameObject.name == "Player" && curLvl == "SnowyB" && this.gameObject.name == "SnowyDEntry")
         {
             SetAllForLvl();
-            SceneManager.LoadScene("Lvl 2", LoadSceneMode.Single);
+            SceneManager.LoadScene("SnowyD_Crossroads", LoadSceneMode.Single);
+            PlayerPrefs.SetString("Global Player Start Point", "Snowy_D_B_Entrance");
         }
-        else if (other.gameObject.name == "Player" && curLvl == "Lvl 2")
+        // Snowy C Exits
+        else if (other.gameObject.name == "Player" && curLvl == "SnowyC" && this.gameObject.name == "SnowyAEntry")
         {
             SetAllForLvl();
-            SceneManager.LoadScene("Lvl 3", LoadSceneMode.Single);
+            SceneManager.LoadScene("SnowyA", LoadSceneMode.Single);
+            PlayerPrefs.SetString("Global Player Start Point", "Snowy_A_C_Entrance");
+        }
+        // Snowy D Exits
+        else if (other.gameObject.name == "Player" && curLvl == "SnowyD_Crossroads" && this.gameObject.name == "SnowyBEntry")
+        {
+            SetAllForLvl();
+            SceneManager.LoadScene("SnowyB", LoadSceneMode.Single);
+            PlayerPrefs.SetString("Global Player Start Point", "Snowy_A_C_Entrance");
         }
     }
     public void SetAllForLvl()

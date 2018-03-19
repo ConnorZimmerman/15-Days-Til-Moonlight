@@ -128,20 +128,20 @@ public class EnemyRangedAttack : MonoBehaviour
             // StartCoroutine("FollowPath");
         }
     }
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            playerEngagement.doingDamage();
-            on = true;
-        }
-    }
-    public void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            playerEngagement.doingDamage();
-            on = false;
-        }
-    }
+    // public void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.tag == "Player")
+    //     {
+    //         playerEngagement.doingDamage();
+    //         on = true;
+    //     }
+    // }
+    // public void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (other.gameObject.tag == "Player")
+    //     {
+    //         playerEngagement.doingDamage();
+    //         on = false;
+    //     }
+    // }
 }

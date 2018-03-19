@@ -365,6 +365,7 @@ public class EngagedWithPlayer : MonoBehaviour
         if (enemyAttackCounter > 0f && deathStrike && colliderOn && !deathSeven)
         {
             currentDamage = damageToGive - thePS.currentDefense;
+            // Debug.Log("wtf");
             playerHealth.playerCurrentHealth -= currentDamage;
             sfxMan.blood.Play();
             if (enemyGameObject.tag == "Enemy")
@@ -417,6 +418,7 @@ public class EngagedWithPlayer : MonoBehaviour
         }
         else if (rangedDmg >= 2 && knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike)
         {
+            // Debug.Log("wtf");
             playerHealth.playerCurrentHealth -= currentDamage;
             Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
             sfxMan.blood.Play();
