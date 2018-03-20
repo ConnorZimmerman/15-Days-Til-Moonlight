@@ -753,7 +753,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
     public void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player" && playerEngagement.colliderOn == false && playerEngagement.wallBlock == false)
+        if (other.gameObject.name == "Player" && !playerEngagement.colliderOn && !playerEngagement.wallBlock)
         {
             following = true;
 

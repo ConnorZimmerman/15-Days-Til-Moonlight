@@ -144,6 +144,15 @@ public class EngagedWithPlayer : MonoBehaviour
 
         playerInt = thePlayer.directionInt;
 
+        if (shield.shieldOn)
+        {
+            shieldOn = true;
+        }
+        else
+        {
+            shieldOn = false;
+        }
+
         if (shieldOn)
         {
             if (enemyMoveDirectionX - thePlayer.directionInt == -2
@@ -151,9 +160,13 @@ public class EngagedWithPlayer : MonoBehaviour
             {
                 deathStrike = false;
             }
-            else
+            else if (DetermineDeathStrikeAngle())
             {
                 deathStrike = true;
+            }
+            else
+            {
+                deathStrike = false;
             }
         }
         else
@@ -198,14 +211,6 @@ public class EngagedWithPlayer : MonoBehaviour
         }
 
 
-        if (shield.shieldOn)
-        {
-            shieldOn = true;
-        }
-        else
-        {
-            shieldOn = false;
-        }
 
         if (attacking)
         {
@@ -451,5 +456,57 @@ public class EngagedWithPlayer : MonoBehaviour
     public void enemyTestScriptVariables(bool newLocalAttackLock)
     {
         localAttackLock = newLocalAttackLock;
+    }
+
+    // This method ensures that deathstrike can only occur if the enemy is either behind or on the players side
+    public bool DetermineDeathStrikeAngle()
+    {
+        GameObject playerObject = GameObject.Find("Player");
+        float playerTrackX = playerObject.transform.position.x;
+        float playerTrackY = playerObject.transform.position.y;
+
+        float trackingMasterX = playerTrackX - transform.position.x;
+        float trackingMasterY = playerTrackY - transform.position.y;
+
+        float enemyTrackX = transform.position.x;
+        float enemyTrackY = transform.position.y;
+
+        // Debug.Log("Enemy master x: " + trackingMasterX);
+        // Debug.Log("Enemy master Y: " + trackingMasterY);
+        if (trackingMasterX < 0)
+        {
+            if (trackingMasterY < 0)
+            {
+                if (thePlayer.directionInt == 0 && enemyMoveDirectionX == 3)
+                {
+                    return false;
+                }
+            }
+            else if (trackingMasterY > 0)
+            {
+                if (thePlayer.directionInt == 2 && enemyMoveDirectionX == 3)
+                {
+                    return false;
+                }
+            }
+        }
+        else if (trackingMasterX > 0)
+        {
+            if (trackingMasterY < 0)
+            {
+                if (thePlayer.directionInt == 0 && enemyMoveDirectionX == 1)
+                {
+                    return false;
+                }
+            }
+            else if (trackingMasterY > 0)
+            {
+                if (thePlayer.directionInt == 2 && enemyMoveDirectionX == 1)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
