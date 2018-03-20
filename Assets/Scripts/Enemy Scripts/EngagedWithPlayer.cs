@@ -324,6 +324,7 @@ public class EngagedWithPlayer : MonoBehaviour
 
     public void OnTriggerStay2D(Collider2D other)
     {
+        // Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "Collision")
         {
             wallBlock = true;

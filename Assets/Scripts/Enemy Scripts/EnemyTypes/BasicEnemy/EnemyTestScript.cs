@@ -383,6 +383,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     myRigidbody.velocity = new Vector2(-3, 0);
                     enemyRecover = true;
                     attackLock = true;
+                    playerEngagement.following = false;
                 }
 
                 /*The enemy is leaping away (currently pretty broken as there needs to be a timer on how
@@ -440,6 +441,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     myRigidbody.velocity = new Vector2(3, 0);
                     attackLock = true;
                     enemyRecover = true;
+                    following = false;
                 }
 
                 // if (actionDecision == 5 && !dodgeOnlyOnceBool)
@@ -497,6 +499,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     myRigidbody.velocity = new Vector2(0, 3);
                     enemyRecover = true;
                     attackLock = true;
+                    following = false;
+                    
                 }
 
                 // if (actionDecision == 5 && !dodgeOnlyOnceBool)
@@ -551,6 +555,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     enemyRecover = true;
                     attackLock = true;
                     Shield();
+                    following = false;
                 }
 
                 // if (actionDecision == 5 && !dodgeOnlyOnceBool)

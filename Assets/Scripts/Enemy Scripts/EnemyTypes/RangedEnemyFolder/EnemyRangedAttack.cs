@@ -86,7 +86,7 @@ public class EnemyRangedAttack : MonoBehaviour
                     RaycastHit2D hit = Physics2D.Raycast(rotatingObject.transform.position, targetDir, distanceToPlayer, 1 << 8 | 1 << 9);
                     // if (hit.collider.tag != null)
                     // {
-                    // Debug.Log(hit.collider.tag);
+                    Debug.Log(hit.collider.tag);
                     if (hit.collider.tag == "Player")
                     {
                         lineOfSight = true;
