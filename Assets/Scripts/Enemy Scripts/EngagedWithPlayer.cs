@@ -360,7 +360,18 @@ public class EngagedWithPlayer : MonoBehaviour
     {
         if (playerStaminaDrain && playerShield.shieldOn && !deathStrike && colliderOn && !deathSeven)
         {
-            playerStaminaMan.playerCurrentStamina -= 100;
+            PlayerStats playerStats = FindObjectOfType<PlayerStats>();
+            int playerDefense = (playerStats.strength * 30) - 90;
+            if (playerDefense < 0)
+            {
+                playerDefense = 0;
+            }
+            // this else if is added in right now to account for adding to players stamina (remove later)
+            else if (playerDefense > 100)
+            {
+                playerDefense = 100;
+            }
+            playerStaminaMan.playerCurrentStamina -= 100 - playerDefense;
             playerShield.shieldLockBool = true;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
@@ -414,7 +425,18 @@ public class EngagedWithPlayer : MonoBehaviour
         rangedDmg++;
         if (!knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike && rangedDmg >= 2)
         {
-            playerStaminaMan.playerCurrentStamina -= 50;
+            PlayerStats playerStats = FindObjectOfType<PlayerStats>();
+            int playerDefense = (playerStats.strength * 30) - 90;
+            if (playerDefense < 0)
+            {
+                playerDefense = 0;
+            }
+            // this else if is added in right now to account for adding to players stamina (remove later)
+            else if (playerDefense > 50)
+            {
+                playerDefense = 50;
+            }
+            playerStaminaMan.playerCurrentStamina -= 50 - playerDefense;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             playerShield.shieldLockBool = true;
@@ -432,27 +454,6 @@ public class EngagedWithPlayer : MonoBehaviour
         }
     }
 
-    //current player ranged damage
-    public void doingDamage(int currentDamage, GameObject knifeInstance, GameObject thePlayer)
-    {
-        // rangedDmg++;
-        // if (rangedDmg >= 2)
-        // {
-        //     playerStaminaMan.playerCurrentStamina -= 50;
-        //     sfxMan.swordsColliding.volume = 1;
-        //     sfxMan.swordsColliding.Play();
-        //     Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
-        //     rangedDmg = 0;
-        //     return;
-        // }
-        // else if (rangedDmg >= 2 && knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike)
-        // {
-        //     // playerHealth.playerCurrentHealth -= 1;
-        //     Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
-        //     sfxMan.blood.Play();
-        //     rangedDmg = 0;
-        // }
-    }
     public void enemyTestScriptVariables(bool newLocalAttackLock)
     {
         localAttackLock = newLocalAttackLock;
