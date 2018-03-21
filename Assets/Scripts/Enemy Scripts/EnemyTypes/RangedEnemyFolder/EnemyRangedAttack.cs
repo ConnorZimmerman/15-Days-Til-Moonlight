@@ -86,7 +86,7 @@ public class EnemyRangedAttack : MonoBehaviour
                     RaycastHit2D hit = Physics2D.Raycast(rotatingObject.transform.position, targetDir, distanceToPlayer, 1 << 8 | 1 << 9);
                     // if (hit.collider.tag != null)
                     // {
-                    // Debug.Log(hit.collider.tag);
+                    Debug.Log(hit.collider.tag);
                     if (hit.collider.tag == "Player")
                     {
                         lineOfSight = true;
@@ -128,20 +128,20 @@ public class EnemyRangedAttack : MonoBehaviour
             // StartCoroutine("FollowPath");
         }
     }
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            playerEngagement.doingDamage();
-            on = true;
-        }
-    }
-    public void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            playerEngagement.doingDamage();
-            on = false;
-        }
-    }
+    // public void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.tag == "Player")
+    //     {
+    //         playerEngagement.doingDamage();
+    //         on = true;
+    //     }
+    // }
+    // public void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (other.gameObject.tag == "Player")
+    //     {
+    //         playerEngagement.doingDamage();
+    //         on = false;
+    //     }
+    // }
 }

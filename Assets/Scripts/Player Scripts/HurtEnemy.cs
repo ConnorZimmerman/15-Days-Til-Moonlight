@@ -73,14 +73,29 @@ public class HurtEnemy : MonoBehaviour
             //was else if
             if (!thePlayer.noDamageIsTaken && !playerEngagement.attacking)
             {
-                if (thePlayer.wasSprint && staminaManager.playerCurrentStamina > 50 && playerStats.dexterity == 14 && playerStats.strength == 9)
+                if (thePlayer.wasSprint && staminaManager.playerCurrentStamina > 50 && playerStats.dexterity >= 14 && playerStats.strength >= 8)
                 {
-                    currentDamage = damageToGive + thePS.currentAttack + 1;
-                    Debug.Log(currentDamage);
+                    if (playerStats.strength == 10)
+                    {
+                        currentDamage = damageToGive + thePS.currentAttack + 2;
+                    }
+                    else
+                    {
+                        currentDamage = damageToGive + thePS.currentAttack + 1;
+                    }
+                    // currentDamage = damageToGive + thePS.currentAttack + 1;
+                    // Debug.Log(currentDamage);
                 }
                 else
                 {
-                    currentDamage = damageToGive + thePS.currentAttack;
+                    if (playerStats.strength == 10)
+                    {
+                        currentDamage = damageToGive + thePS.currentAttack + 1;
+                    }
+                    else
+                    {
+                        currentDamage = damageToGive + thePS.currentAttack;
+                    }
                 }
                 sfxMan.blood.Play();
                 if (this.gameObject.tag == "Throwing Knife")

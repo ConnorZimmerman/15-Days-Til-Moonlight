@@ -383,6 +383,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     myRigidbody.velocity = new Vector2(-3, 0);
                     enemyRecover = true;
                     attackLock = true;
+                    following = false;
                 }
 
                 /*The enemy is leaping away (currently pretty broken as there needs to be a timer on how
@@ -440,6 +441,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     myRigidbody.velocity = new Vector2(3, 0);
                     attackLock = true;
                     enemyRecover = true;
+                    following = false;
                 }
 
                 // if (actionDecision == 5 && !dodgeOnlyOnceBool)
@@ -497,6 +499,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     myRigidbody.velocity = new Vector2(0, 3);
                     enemyRecover = true;
                     attackLock = true;
+                    following = false;
                 }
 
                 // if (actionDecision == 5 && !dodgeOnlyOnceBool)
@@ -551,6 +554,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     enemyRecover = true;
                     attackLock = true;
                     Shield();
+                    following = false;
                 }
 
                 // if (actionDecision == 5 && !dodgeOnlyOnceBool)
@@ -748,17 +752,20 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
     public void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player" && playerEngagement.colliderOn == false && playerEngagement.wallBlock == false)
+        if (other.gameObject.name == "Player" && !playerEngagement.colliderOn && !playerEngagement.wallBlock)
         {
-            following = true;
 
             if (!deathSeven) // && enemyMoving)
             {
+                following = true;
                 if (raycastPath.lineOfSight && !playerEngagement.colliderOn)
                 {
                     raycastPath.enqueue = false;
+                    // if (!shieldUpTwo)
+                    // {
                     transform.position = Vector2.MoveTowards(transform.position,
                     playerObject.transform.position, speed * Time.deltaTime);
+                    // }
                 }
                 else
                 {

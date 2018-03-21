@@ -107,6 +107,7 @@ public class RangedDamage : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            Debug.Log("wtf");
             playerEngagement.doingDamage(1, thisKnife);
         }
         else if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Unwalkable")

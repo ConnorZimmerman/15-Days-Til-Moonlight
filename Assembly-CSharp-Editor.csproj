@@ -71,6 +71,7 @@
      <None Include="Assets\Tiled2Unity\Imported\SnowyB.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDefault.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepth-Instanced.shader" />
+     <None Include="Assets\Tiled2Unity\Imported\SnowyC.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
      <None Include="Assets\Tiled2Unity\Imported\Dungeon Room 2.tiled2unity.xml" />
@@ -80,6 +81,7 @@
      <None Include="Assets\Retro Pixel Dungeons\Animations\!ReadMe! - Animations.txt" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepth.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDiffuseDepth.shader" />
+     <None Include="Assets\Tiled2Unity\Imported\SnowyD.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Imported\Dungeon.tiled2unity.xml" />
      <None Include="Assets\Shield Pack Free\ReadMe.txt" />
      <None Include="Assets\Tiled2Unity\Imported\SnowyOne.tiled2unity.xml" />
@@ -95,6 +97,7 @@
      <None Include="Assets\Tiled2Unity\Shaders\shaColorKey-Instanced.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaColorKey.shader" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepthColorKey.shader" />
+     <None Include="Assets\Tiled2Unity\Imported\Snowy_Graveyard.tiled2unity.xml" />
      <None Include="Assets\Tiled2Unity\Shaders\shaDepthColorKey-Instanced.shader" />
      <None Include="Assets\Tiled2Unity\License.txt" />
      <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
