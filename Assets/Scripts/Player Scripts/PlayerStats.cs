@@ -73,13 +73,13 @@ public class PlayerStats : MonoBehaviour
     public void LevelUp()
     {
         currentLevel++;
-        currentHP = HPLevels[currentLevel];
         pointsToSpend++;
+        // currentHP = HPLevels[currentLevel];
 
-        thePlayerHealth.playerMaxHealth = currentHP;
-        thePlayerHealth.playerCurrentHealth += currentHP - HPLevels[currentLevel - 1];
+        // thePlayerHealth.playerMaxHealth = currentHP;
+        // thePlayerHealth.playerCurrentHealth += currentHP - HPLevels[currentLevel - 1];
 
-        currentAttack = attackLevels[currentLevel];
-        currentDefense = defenseLevels[currentLevel];
+        // currentAttack = attackLevels[currentLevel];
+        // currentDefense = defenseLevels[currentLevel];
     }
 }

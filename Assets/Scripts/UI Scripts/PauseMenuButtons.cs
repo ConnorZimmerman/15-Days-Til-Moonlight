@@ -144,27 +144,27 @@ public class PauseMenuButtons : MonoBehaviour
             strengthText = "- 30 less stamina lost on block";
             return strengthText;
         }
-        else if (strength == 5)
+        else if (strength == 6)
         {
             strengthText = "- +50% stamina regained for each kill!\n- It will take 3 damage to unshield you!\n30 less stamina lost on block";
             return strengthText;
         }
-        else if (strength == 6)
-        {
-            strengthText = "- It will take 4 damage to unshield you!\n- 30 less stamina lost on block";
-            return strengthText;
-        }
         else if (strength == 7)
         {
-            strengthText = "- Dash Strike: hold A and attack to +1 damage! (Requires dash)\n- 30 less stamina lost on block";
+            strengthText = "- 30 less stamina lost on block";
             return strengthText;
         }
         else if (strength == 8)
         {
-            strengthText = "- It will take 4 damage to unshield you!\n- 30 less stamina lost on block";
+            strengthText = "- Dash Strike: hold A and attack to +1 damage! (Requires dash)\n- 30 less stamina lost on block";
             return strengthText;
         }
         else if (strength == 9)
+        {
+            strengthText = "- It will take 4 damage to unshield you!\n- 30 less stamina lost on block";
+            return strengthText;
+        }
+        else if (strength == 10)
         {
             strengthText = "- Rage: +1 to damage!\n- 30 less stamina lost on block";
             return strengthText;

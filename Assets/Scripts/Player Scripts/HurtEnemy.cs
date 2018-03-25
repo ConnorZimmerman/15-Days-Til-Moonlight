@@ -75,7 +75,7 @@ public class HurtEnemy : MonoBehaviour
             {
                 if (thePlayer.wasSprint && staminaManager.playerCurrentStamina > 50 && playerStats.dexterity >= 14 && playerStats.strength >= 8)
                 {
-                    if (playerStats.strength == 10)
+                    if (playerStats.strength == 11)
                     {
                         currentDamage = damageToGive + thePS.currentAttack + 2;
                     }
@@ -88,7 +88,7 @@ public class HurtEnemy : MonoBehaviour
                 }
                 else
                 {
-                    if (playerStats.strength == 10)
+                    if (playerStats.strength == 11)
                     {
                         currentDamage = damageToGive + thePS.currentAttack + 1;
                     }

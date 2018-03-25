@@ -372,7 +372,8 @@ public class EngagedWithPlayer : MonoBehaviour
                 playerDefense = 100;
             }
             playerStaminaMan.playerCurrentStamina -= 100 - playerDefense;
-            playerShield.shieldLockBool = true;
+            playerShield.shieldBlocksLeft -= 2;
+            // playerShield.shieldLockBool = true;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
@@ -439,7 +440,7 @@ public class EngagedWithPlayer : MonoBehaviour
             playerStaminaMan.playerCurrentStamina -= 50 - playerDefense;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
-            playerShield.shieldLockBool = true;
+            playerShield.shieldBlocksLeft -= 1;
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
             rangedDmg = 0;
             return;

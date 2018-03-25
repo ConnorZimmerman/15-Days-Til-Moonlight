@@ -104,6 +104,7 @@ public class Reload : MonoBehaviour
                 }
                 PlayerPrefs.DeleteAll();
                 PlayerPrefs.SetInt("Global Music Tracker", 0);
+                PlayerPrefs.SetString("Global Player Cur Lvl", "SnowyA");
                 SceneManager.LoadScene(globalData.globalPlayerCurLvl, LoadSceneMode.Single);
             }
         }
