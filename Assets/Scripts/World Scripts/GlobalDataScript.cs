@@ -20,6 +20,7 @@ public class GlobalDataScript : MonoBehaviour
     public float globalPlayerLastMoveX;
     public float globalPlayerLastMoveY;
     public string globalPlayerCurLvl;
+    public int globalPlayerLockOn;
 
     //public static int globalSoundTrackInstance;
     
@@ -41,6 +42,7 @@ public class GlobalDataScript : MonoBehaviour
         globalPlayerLastMoveX = PlayerPrefs.GetFloat("Global Player Last Move X", 0);
         globalPlayerLastMoveY = PlayerPrefs.GetFloat("Global Player Last Move Y", -1);
         globalPlayerCurLvl = PlayerPrefs.GetString("Global Player Cur Lvl", "SnowyA");
+        globalPlayerLockOn = PlayerPrefs.GetInt("Global Player Lock On", 1);
         //globalSoundTrackInstance = PlayerPrefs.GetInt("Global Music Tracker", 1);
     }
 
