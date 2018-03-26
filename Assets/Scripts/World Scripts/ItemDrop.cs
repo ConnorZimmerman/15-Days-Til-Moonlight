@@ -7,11 +7,13 @@ public class ItemDrop : MonoBehaviour
     public string itemType;
     public GameObject itemDesc;
     private GameObject playerObject;
+    private PlayerStats playerStatScript;
 
     void Start()
     {
         itemType = this.tag;
         playerObject = GameObject.Find("Player");
+        playerStatScript = FindObjectOfType<PlayerStats>();
     }
     public void GetItem()
     {
@@ -43,14 +45,15 @@ public class ItemDrop : MonoBehaviour
 
     public void CreateItem(GameObject enemyObject)
     {
-        int randomNum = UnityEngine.Random.Range(0, 51);
+        int randomNum = (UnityEngine.Random.Range(0, 51)) + ((playerStatScript.intelligence * 2)- 10);
+        Debug.Log(randomNum);
         if (enemyObject.tag == "BasicRangedEnemy" && randomNum > 10)
         {
             GameObject randomDrop = GameObject.Find("Item_Pouch");
             GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation)
             ;
         }
-        if (randomNum == 50)
+        if (randomNum >= 50)
         {
             GameObject randomDrop = GameObject.Find("Potion");
             GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation)

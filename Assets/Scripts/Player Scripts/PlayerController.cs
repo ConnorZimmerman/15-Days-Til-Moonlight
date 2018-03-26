@@ -217,6 +217,15 @@ public class PlayerController : MonoBehaviour
         wasSprint = false;
         sprintTimer = 0.2f;
         sprintPossible = false;
+
+        if (globalData.globalPlayerLockOn == 1)
+        {
+            lockOn = true;
+        }
+        else
+        {
+            lockOn = false;
+        }
         //staminaAttackDrainBool = false;
     }
 

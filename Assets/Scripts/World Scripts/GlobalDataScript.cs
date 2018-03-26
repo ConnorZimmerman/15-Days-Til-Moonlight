@@ -20,6 +20,7 @@ public class GlobalDataScript : MonoBehaviour
     public float globalPlayerLastMoveX;
     public float globalPlayerLastMoveY;
     public string globalPlayerCurLvl;
+    public int globalPlayerLockOn;
 
     //public static int globalSoundTrackInstance;
     
@@ -31,16 +32,17 @@ public class GlobalDataScript : MonoBehaviour
         globalPlayerMaxStamina = PlayerPrefs.GetInt("Global Player Max Stamina", 500);
         globalPlayerCurrentXp = PlayerPrefs.GetInt("Global Player Current Xp", 75);
         globalPlayerLevel = PlayerPrefs.GetInt("Global Player Level", 11);
-        globalPlayerPointsToSpend = PlayerPrefs.GetInt("Global Player Points To Spend", 0);
+        globalPlayerPointsToSpend = PlayerPrefs.GetInt("Global Player Points To Spend", 10);
         globalPlayerVitality = PlayerPrefs.GetInt("Global Player Vitality", 5);
-        globalPlayerStrength = PlayerPrefs.GetInt("Global Player Strength", 8);
-        globalPlayerDexterity = PlayerPrefs.GetInt("Global Player Dexterity", 15);
+        globalPlayerStrength = PlayerPrefs.GetInt("Global Player Strength", 3);
+        globalPlayerDexterity = PlayerPrefs.GetInt("Global Player Dexterity", 10);
         globalPlayerIntelligence = PlayerPrefs.GetInt("Global Player Intelligence", 5);
         globalPlayerDaggerCount = PlayerPrefs.GetInt("Global Player Dagger Count", 0);
         globalPlayerStartPoint = PlayerPrefs.GetString("Global Player Start Point", "SnowyA_StartPoint");
         globalPlayerLastMoveX = PlayerPrefs.GetFloat("Global Player Last Move X", 0);
         globalPlayerLastMoveY = PlayerPrefs.GetFloat("Global Player Last Move Y", -1);
         globalPlayerCurLvl = PlayerPrefs.GetString("Global Player Cur Lvl", "SnowyA");
+        globalPlayerLockOn = PlayerPrefs.GetInt("Global Player Lock On", 1);
         //globalSoundTrackInstance = PlayerPrefs.GetInt("Global Music Tracker", 1);
     }
 

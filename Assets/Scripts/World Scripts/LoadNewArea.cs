@@ -14,7 +14,6 @@ public class LoadNewArea : MonoBehaviour
     private PlayerRangedAttack playerRangedAttack;
     private PlayerStats playerStatsScript;
     private PlayerStartPoint startPoint;
-    // public GameObject startPoint;
     public static int counter;
     public string curLvl;
 
@@ -113,6 +112,14 @@ public class LoadNewArea : MonoBehaviour
         PlayerPrefs.SetFloat("Global Player Last Move X", thePlayer.lastMove.x);
         PlayerPrefs.SetFloat("Global Player Last Move Y", thePlayer.lastMove.y);
         PlayerPrefs.SetString("Global Player Cur Lvl", curLvl);
+        if (thePlayer.lockOn)
+        {
+            PlayerPrefs.SetInt("Global Player Lock On", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Global Player Lock On", 0);
+        }
     }
 
 }
