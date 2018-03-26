@@ -73,7 +73,7 @@ public class HurtEnemy : MonoBehaviour
             //was else if
             if (!thePlayer.noDamageIsTaken && !playerEngagement.attacking)
             {
-                if (thePlayer.wasSprint && staminaManager.playerCurrentStamina > 50 && playerStats.dexterity >= 14 && playerStats.strength >= 8)
+                if (thePlayer.wasSprint && staminaManager.playerCurrentStamina > 50 && playerStats.dexterity >= 14 && playerStats.strength >= 9)
                 {
                     if (playerStats.strength == 11)
                     {
