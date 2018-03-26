@@ -50,18 +50,21 @@ public class PlayerStaminaManager : MonoBehaviour
             playerCurrentStamina = 0;
         }
 
-        if(playerCurrentStamina > playerMaxStamina){
+        if (playerCurrentStamina > playerMaxStamina)
+        {
             playerCurrentStamina = playerMaxStamina;
         }
 
         if (dialog.dialogActive == false && thePlayer.sprintActive == true && playerCurrentStamina > 0)
         {
-            playerCurrentStamina -= 5;
+            playerCurrentStamina -= 5 - DexterityModifier();
+            Debug.Log(DexterityModifier());
         }
 
         if (dialog.dialogActive == false && thePlayer.dashActive == true)
         {
             playerCurrentStamina -= 200;
+
         }
 
         //test condition
@@ -117,6 +120,26 @@ public class PlayerStaminaManager : MonoBehaviour
 
         playerStaminaPercent = (float)(double)playerCurrentStamina / playerMaxStamina * 100;
 
+    }
+    int DexterityModifier()
+    {
+        if (playerStats.dexterity >= 17 && playerStats.dexterity < 19)
+        {
+            return 1;
+        }
+        else if (playerStats.dexterity >= 19 && playerStats.dexterity < 21)
+        {
+            return 2;
+        }
+        else if (playerStats.dexterity >= 21 && playerStats.dexterity < 23)
+        {
+            return 3;
+        }
+        else if (playerStats.dexterity >= 23)
+        {
+            return 4;
+        }
+        return 0;
     }
 
     public void SetMaxStamina()
