@@ -196,7 +196,7 @@ public class PauseMenuButtons : MonoBehaviour
         }
         else if (dexterity == 14)
         {
-            dexterityText = "- -10 stamina used to dash\n- +50 stamina";
+            dexterityText = "- +50 stamina";
             return dexterityText;
         }
         else if (dexterity == 15)
@@ -206,10 +206,20 @@ public class PauseMenuButtons : MonoBehaviour
         }
         else if (dexterity == 16)
         {
-            dexterityText = "- Teleport: press B to teleport\n- 30 less stamina lost on block";
+            dexterityText = "- Teleport: press B to teleport\n- +50 stamina";
             return dexterityText;
         }
         else if (dexterity == 17)
+        {
+            dexterityText = "- -10 stamina used to dash\n- +50 stamina";
+            return dexterityText;
+        }
+        else if (dexterity == 18)
+        {
+            dexterityText = "- +50 stamina";
+            return dexterityText;
+        }
+        else if (dexterity == 19)
         {
             dexterityText = "- -10 stamina used to dash\n- +50 stamina";
             return dexterityText;
@@ -218,6 +228,5 @@ public class PauseMenuButtons : MonoBehaviour
     }
     // public string IntelligenceText(int intelligence)
     // {
-
     // }
 }
