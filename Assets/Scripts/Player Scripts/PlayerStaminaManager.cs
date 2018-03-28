@@ -58,7 +58,6 @@ public class PlayerStaminaManager : MonoBehaviour
         if (dialog.dialogActive == false && thePlayer.sprintActive == true && playerCurrentStamina > 0)
         {
             playerCurrentStamina -= 5 - DexterityModifier();
-            Debug.Log(DexterityModifier());
         }
 
         if (dialog.dialogActive == false && thePlayer.dashActive == true)

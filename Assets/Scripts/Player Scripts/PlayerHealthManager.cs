@@ -52,9 +52,10 @@ public class PlayerHealthManager : MonoBehaviour
             playerIsDead = true;
             //PlayerController.staminaAttackDrainBool = false;
             //thePlayer.staminaAttackDrainBool = false;
+            PlayerPrefs.SetString("Global Player Cur Lvl", "SnowyA");
+            PlayerPrefs.SetString("Global Player Start Point", "SnowyA_StartPoint");
 
             gameObject.SetActive(false);
-
             //return;
 
             //GetComponent<Reload>();
