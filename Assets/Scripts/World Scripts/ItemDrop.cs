@@ -46,7 +46,6 @@ public class ItemDrop : MonoBehaviour
     public void CreateItem(GameObject enemyObject)
     {
         int randomNum = (UnityEngine.Random.Range(0, 51)) + ((playerStatScript.intelligence * 2)- 10);
-        Debug.Log(randomNum);
         if (enemyObject.tag == "BasicRangedEnemy" && randomNum > 10)
         {
             GameObject randomDrop = GameObject.Find("Item_Pouch");

@@ -84,7 +84,7 @@ public class LoadNewArea : MonoBehaviour
         {
             SetAllForLvl();
             SceneManager.LoadScene("Snowy_Graveyard", LoadSceneMode.Single);
-            PlayerPrefs.GetString("Global Player Start Point", "Snowy_Graveyard_Crossroads");
+            PlayerPrefs.SetString("Global Player Start Point", "Snowy_Graveyard_Crossroads");
         }
         // Snowy Graveyard Exits
         else if (other.gameObject.name == "Player" && curLvl == "Snowy_Graveyard" && this.gameObject.name == "Snowy_Crossroads_Entry")
@@ -92,7 +92,7 @@ public class LoadNewArea : MonoBehaviour
             SetAllForLvl();
             Debug.Log("hmmm");
             SceneManager.LoadScene("SnowyD_Crossroads", LoadSceneMode.Single);
-            PlayerPrefs.GetString("Global Player Start Point", "Snowy_D_Graveyard_Entry");
+            PlayerPrefs.SetString("Global Player Start Point", "Snowy_D_Graveyard_Entry");
         }
     }
     public void SetAllForLvl()
