@@ -9,6 +9,7 @@ public class PauseMenuButtons : MonoBehaviour
     public EventSystem eventSystem;
     private PlayerStats playerStats;
     private PlayerHealthManager playerHealthScript;
+    private PlayerStaminaManager playerStaminaScript;
     private GameObject lastSelected;
     private PauseMenu pauseMenuScript;
     private GameObject VitalityButton;
@@ -30,6 +31,7 @@ public class PauseMenuButtons : MonoBehaviour
         playerStats = FindObjectOfType<PlayerStats>();
         pauseMenuScript = FindObjectOfType<PauseMenu>();
         playerHealthScript = FindObjectOfType<PlayerHealthManager>();
+        playerStaminaScript = FindObjectOfType<PlayerStaminaManager>();
         VitalityButton = GameObject.Find("VitalityButton");
         StrengthButton = GameObject.Find("StrengthButton");
         DexterityButton = GameObject.Find("DexterityButton");
@@ -110,6 +112,7 @@ public class PauseMenuButtons : MonoBehaviour
         if (playerStats.pointsToSpend > 0)
         {
             playerStats.dexterity++;
+            playerStaminaScript.playerCurrentStamina += 50;
             playerStats.pointsToSpend--;
         }
 
