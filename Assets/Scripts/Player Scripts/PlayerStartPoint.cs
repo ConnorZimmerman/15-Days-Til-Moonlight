@@ -17,7 +17,7 @@ public class PlayerStartPoint : MonoBehaviour {
         // {
             globalData = FindObjectOfType<GlobalDataScript>();
             startPoint = globalData.globalPlayerStartPoint;
-            // thePlayer.transform.position = GameObject.Find(startPoint).transform.position;
+            thePlayer.transform.position = GameObject.Find(startPoint).transform.position;
             // thePlayer.transform.position = transform.position;
 
             theCamera = FindObjectOfType<CameraController>();

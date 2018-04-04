@@ -61,6 +61,7 @@ public class HurtEnemy : MonoBehaviour
             || other.gameObject.tag == "Enemy1")
         {
             enemyHit = true;
+            staminaManager.playerCurrentStamina += 20;
 
             if (playerEngagement.attacking && thePlayer.damagePossible
             && playerEngagement.faceOff)
