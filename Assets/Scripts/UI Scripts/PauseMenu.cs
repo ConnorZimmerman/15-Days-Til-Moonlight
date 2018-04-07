@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject lvlUpPanel;
     private GameObject inventoryPanel;
     public bool pauseStatus;
-	private bool lvlUpPanelStatus;
+	public bool lvlUpPanelStatus;
 	private bool inventoryPanelStatus;
     public Text menuText;
     public Text toSpendText;

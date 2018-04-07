@@ -327,7 +327,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         }
         else
         {
-            enemyMoving = false;
+            // enemyMoving = false;
         }
 
         /*#SwitchCases: what the enemy is doing (each case is the same [except for the direction the
