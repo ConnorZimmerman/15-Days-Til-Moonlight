@@ -16,6 +16,7 @@ public class PauseMenuButtons : MonoBehaviour
     private GameObject StrengthButton;
     private GameObject DexterityButton;
     private GameObject IntelligenceButton;
+    private GameObject ItemSlot0AButton;
     public GameObject vitalityObject;
     public Text vitalityText;
     public GameObject strengthObject;
@@ -24,6 +25,7 @@ public class PauseMenuButtons : MonoBehaviour
     public Text dexterityText;
     public GameObject intelligenceObject;
     public Text intelligenceText;
+    public GameObject currentSelectedGameObject;
 
     // Use this for initialization
     void Start()
@@ -36,57 +38,89 @@ public class PauseMenuButtons : MonoBehaviour
         StrengthButton = GameObject.Find("StrengthButton");
         DexterityButton = GameObject.Find("DexterityButton");
         IntelligenceButton = GameObject.Find("IntelligenceButton");
+        ItemSlot0AButton = GameObject.Find("ItemSlot0AButton");
+
     }
 
     // Update is called once per frame
     public void Update()
     {
-
+        currentSelectedGameObject = eventSystem.currentSelectedGameObject;
         if (pauseMenuScript.pauseStatus)
         {
-            if (eventSystem.currentSelectedGameObject == VitalityButton || eventSystem.currentSelectedGameObject == StrengthButton || eventSystem.currentSelectedGameObject == DexterityButton || eventSystem.currentSelectedGameObject == IntelligenceButton)
+            currentSelectedGameObject = GameObject.Find("ItemSlot0AButton");
+                if (eventSystem.currentSelectedGameObject == VitalityButton || eventSystem.currentSelectedGameObject == StrengthButton || eventSystem.currentSelectedGameObject == DexterityButton || eventSystem.currentSelectedGameObject == IntelligenceButton || eventSystem.currentSelectedGameObject == ItemSlot0AButton)
+                {
+                    lastSelected = eventSystem.currentSelectedGameObject;
+                }
+                if (eventSystem.currentSelectedGameObject != VitalityButton && eventSystem.currentSelectedGameObject != StrengthButton && eventSystem.currentSelectedGameObject != DexterityButton && eventSystem.currentSelectedGameObject != IntelligenceButton || eventSystem.currentSelectedGameObject != ItemSlot0AButton)
+                {
+                    eventSystem.SetSelectedGameObject(lastSelected);
+                }
+            if (pauseMenuScript.lvlUpPanelStatus)
             {
-                lastSelected = eventSystem.currentSelectedGameObject;
-            }
-            if (eventSystem.currentSelectedGameObject == VitalityButton)
-            {
-                vitalityObject.SetActive(true);
-                vitalityText.text = "Will increase max health by 1";
+                if (eventSystem.currentSelectedGameObject == VitalityButton || eventSystem.currentSelectedGameObject == StrengthButton || eventSystem.currentSelectedGameObject == DexterityButton || eventSystem.currentSelectedGameObject == IntelligenceButton || eventSystem.currentSelectedGameObject == ItemSlot0AButton)
+                {
+                    lastSelected = eventSystem.currentSelectedGameObject;
+                }
+
+                if (eventSystem.currentSelectedGameObject == VitalityButton)
+                {
+                    vitalityObject.SetActive(true);
+                    vitalityText.text = "Will increase max health by 1";
+                }
+                else
+                {
+                    vitalityObject.SetActive(false);
+                }
+
+                if (eventSystem.currentSelectedGameObject == StrengthButton)
+                {
+                    strengthObject.SetActive(true);
+                    strengthText.text = StrengthText(playerStats.strength);
+                }
+                else
+                {
+                    strengthObject.SetActive(false);
+                }
+
+                if (eventSystem.currentSelectedGameObject == DexterityButton)
+                {
+                    dexterityObject.SetActive(true);
+                    dexterityText.text = DexterityText(playerStats.dexterity);
+                }
+                else
+                {
+                    dexterityObject.SetActive(false);
+                }
+
+                if (eventSystem.currentSelectedGameObject == IntelligenceButton)
+                {
+                    intelligenceObject.SetActive(true);
+                    intelligenceText.text = "Will increase drop rate probability by 1%";
+                }
+                else
+                {
+                    intelligenceObject.SetActive(false);
+                }
+                // Ensures that the last button cannot be scrolled off from
+                if (eventSystem.currentSelectedGameObject != VitalityButton && eventSystem.currentSelectedGameObject != StrengthButton && eventSystem.currentSelectedGameObject != DexterityButton && eventSystem.currentSelectedGameObject != IntelligenceButton || eventSystem.currentSelectedGameObject != ItemSlot0AButton)
+                {
+                    eventSystem.SetSelectedGameObject(lastSelected);
+                }
             }
             else
             {
-                vitalityObject.SetActive(false);
-            }
-            if (eventSystem.currentSelectedGameObject == StrengthButton)
-            {
-                strengthObject.SetActive(true);
-                strengthText.text = StrengthText(playerStats.strength);
-            }
-            else
-            {
-                strengthObject.SetActive(false);
-            }
-            if (eventSystem.currentSelectedGameObject == DexterityButton)
-            {
-                dexterityObject.SetActive(true);
-                dexterityText.text = DexterityText(playerStats.dexterity);
-            }
-            else
-            {
-                dexterityObject.SetActive(false);
-            }
-            if (eventSystem.currentSelectedGameObject == IntelligenceButton)
-            {
-                intelligenceObject.SetActive(true);
-                intelligenceText.text = "Will increase drop rate probability by 1%";
-            }
-            else
-            {
-                intelligenceObject.SetActive(false);
-            }
-            if (eventSystem.currentSelectedGameObject != VitalityButton && eventSystem.currentSelectedGameObject != StrengthButton && eventSystem.currentSelectedGameObject != DexterityButton && eventSystem.currentSelectedGameObject != IntelligenceButton)
-            {
-                eventSystem.SetSelectedGameObject(lastSelected);
+                // Bleh
+                currentSelectedGameObject = GameObject.Find("ItemSlot0AButton");
+                // if (eventSystem.currentSelectedGameObject == VitalityButton || eventSystem.currentSelectedGameObject == StrengthButton || eventSystem.currentSelectedGameObject == DexterityButton || eventSystem.currentSelectedGameObject == IntelligenceButton || eventSystem.currentSelectedGameObject == ItemSlot0AButton)
+                // {
+                //     lastSelected = eventSystem.currentSelectedGameObject;
+                // }
+                if (eventSystem.currentSelectedGameObject != VitalityButton && eventSystem.currentSelectedGameObject != StrengthButton && eventSystem.currentSelectedGameObject != DexterityButton && eventSystem.currentSelectedGameObject != IntelligenceButton || eventSystem.currentSelectedGameObject != ItemSlot0AButton)
+                {
+                    eventSystem.SetSelectedGameObject(lastSelected);
+                }
             }
         }
     }
@@ -124,6 +158,11 @@ public class PauseMenuButtons : MonoBehaviour
             playerStats.intelligence++;
             playerStats.pointsToSpend--;
         }
+    }
+    public void ItemSlot0A()
+    {
+        playerStats.vitality++;
+        playerHealthScript.playerCurrentHealth++;
     }
 
     // public string VitalityText(int vitality){

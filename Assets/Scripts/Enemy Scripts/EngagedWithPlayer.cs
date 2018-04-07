@@ -423,8 +423,7 @@ public class EngagedWithPlayer : MonoBehaviour
 
     public void doingDamage(int currentDamage, GameObject knifeInstance)
     {
-        rangedDmg++;
-        if (!knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike && rangedDmg >= 2)
+        if (!knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike)
         {
             PlayerStats playerStats = FindObjectOfType<PlayerStats>();
             int playerDefense = (playerStats.strength * 30) - 90;
@@ -442,16 +441,14 @@ public class EngagedWithPlayer : MonoBehaviour
             sfxMan.swordsColliding.Play();
             playerShield.shieldBlocksLeft -= 1;
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
-            rangedDmg = 0;
             return;
         }
-        else if (rangedDmg >= 2 && knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike)
+        else if (knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike)
         {
             // Debug.Log("wtf");
             playerHealth.playerCurrentHealth -= currentDamage;
             Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
             sfxMan.blood.Play();
-            rangedDmg = 0;
         }
     }
 
