@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
 
     private PlayerStats playerStats;
+    private PauseMenuButtons pauseMenuButtonsScript;
     public GameObject pauseMenu;
     public GameObject lvlUpPanel;
     private GameObject inventoryPanel;
@@ -20,6 +21,7 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         playerStats = FindObjectOfType<PlayerStats>();
+        pauseMenuButtonsScript = FindObjectOfType<PauseMenuButtons>();
         pauseMenu = GameObject.Find("LvlUpMenu");
         lvlUpPanel = GameObject.Find("LvlUpPanel");
         inventoryPanel = GameObject.Find("InventoryPanel");
@@ -51,12 +53,14 @@ public class PauseMenu : MonoBehaviour
 			lvlUpPanelStatus = false;
             inventoryPanel.SetActive(true);
 			inventoryPanelStatus = true;
+            pauseMenuButtonsScript.justSwitched = true;
         }
 		else if(pauseStatus && inventoryPanelStatus && Input.GetButtonDown("RSwitch") || pauseStatus && inventoryPanelStatus && Input.GetButtonDown("LSwitch")){
 			inventoryPanel.SetActive(false);
 			inventoryPanelStatus = false;
 			lvlUpPanel.SetActive(true);
 			lvlUpPanelStatus = true;
+            pauseMenuButtonsScript.justSwitched = true;
 		}
 
         menuText.text = string.Format("Current Level: {0}\nExperience: {1} / {2}\n\nVitality: {3}\nStrength: {4}\nDexterity: {5}\nIntelligence: {6}", playerStats.currentLevel, playerStats.currentExp, playerStats.toLevelUp[playerStats.currentLevel], playerStats.vitality, playerStats.strength, playerStats.dexterity, playerStats.intelligence);

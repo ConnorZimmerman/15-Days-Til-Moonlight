@@ -91,6 +91,8 @@
      <Compile Include="Assets\Scripts\UI Scripts\EnemyUIManager.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\FloatingItemFind.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\FloatingNumbers.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\ItemSlot.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\ItemSlotManager.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\PauseMenuButtons.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\PlayerUIManager.cs" />

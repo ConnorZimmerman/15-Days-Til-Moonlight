@@ -12,19 +12,46 @@ public class PauseMenuButtons : MonoBehaviour
     private PlayerStaminaManager playerStaminaScript;
     private GameObject lastSelected;
     private PauseMenu pauseMenuScript;
+
+    // Lvl Up Buttons
     private GameObject VitalityButton;
-    private GameObject StrengthButton;
-    private GameObject DexterityButton;
-    private GameObject IntelligenceButton;
-    private GameObject ItemSlot0AButton;
     public GameObject vitalityObject;
     public Text vitalityText;
+
+    private GameObject StrengthButton;
     public GameObject strengthObject;
     public Text strengthText;
+
+    private GameObject DexterityButton;
     public GameObject dexterityObject;
     public Text dexterityText;
+
+    private GameObject IntelligenceButton;
     public GameObject intelligenceObject;
     public Text intelligenceText;
+
+    // Inventory Buttons
+    private GameObject ItemSlot0AButton;
+    private GameObject ItemSlot0BButton;
+    private GameObject ItemSlot0CButton;
+    private GameObject ItemSlot0DButton;
+    private GameObject ItemSlot0EButton;
+    private GameObject ItemSlot1AButton;
+    private GameObject ItemSlot1BButton;
+    private GameObject ItemSlot1CButton;
+    private GameObject ItemSlot1DButton;
+    private GameObject ItemSlot1EButton;
+    private GameObject ItemSlot2AButton;
+    private GameObject ItemSlot2BButton;
+    private GameObject ItemSlot2CButton;
+    private GameObject ItemSlot2DButton;
+    private GameObject ItemSlot2EButton;
+    private GameObject ItemSlot3AButton;
+    private GameObject ItemSlot3BButton;
+    private GameObject ItemSlot3CButton;
+    private GameObject ItemSlot3DButton;
+    private GameObject ItemSlot3EButton;
+    public bool justSwitched;
     public GameObject currentSelectedGameObject;
 
     // Use this for initialization
@@ -39,7 +66,26 @@ public class PauseMenuButtons : MonoBehaviour
         DexterityButton = GameObject.Find("DexterityButton");
         IntelligenceButton = GameObject.Find("IntelligenceButton");
         ItemSlot0AButton = GameObject.Find("ItemSlot0AButton");
-
+        ItemSlot0BButton = GameObject.Find("ItemSlot0BButton");
+        ItemSlot0CButton = GameObject.Find("ItemSlot0CButton");
+        ItemSlot0DButton = GameObject.Find("ItemSlot0DButton");
+        ItemSlot0EButton = GameObject.Find("ItemSlot0EButton");
+        ItemSlot1AButton = GameObject.Find("ItemSlot1AButton");
+        ItemSlot1BButton = GameObject.Find("ItemSlot1BButton");
+        ItemSlot1CButton = GameObject.Find("ItemSlot1CButton");
+        ItemSlot1DButton = GameObject.Find("ItemSlot1DButton");
+        ItemSlot1EButton = GameObject.Find("ItemSlot1EButton");
+        ItemSlot2AButton = GameObject.Find("ItemSlot2AButton");
+        ItemSlot2BButton = GameObject.Find("ItemSlot2BButton");
+        ItemSlot2CButton = GameObject.Find("ItemSlot2CButton");
+        ItemSlot2DButton = GameObject.Find("ItemSlot2DButton");
+        ItemSlot2EButton = GameObject.Find("ItemSlot2EButton");
+        ItemSlot3AButton = GameObject.Find("ItemSlot3AButton");
+        ItemSlot3BButton = GameObject.Find("ItemSlot3BButton");
+        ItemSlot3CButton = GameObject.Find("ItemSlot3CButton");
+        ItemSlot3DButton = GameObject.Find("ItemSlot3DButton");
+        ItemSlot3EButton = GameObject.Find("ItemSlot3EButton");
+        justSwitched = true;
     }
 
     // Update is called once per frame
@@ -48,17 +94,66 @@ public class PauseMenuButtons : MonoBehaviour
         currentSelectedGameObject = eventSystem.currentSelectedGameObject;
         if (pauseMenuScript.pauseStatus)
         {
-            currentSelectedGameObject = GameObject.Find("ItemSlot0AButton");
-                if (eventSystem.currentSelectedGameObject == VitalityButton || eventSystem.currentSelectedGameObject == StrengthButton || eventSystem.currentSelectedGameObject == DexterityButton || eventSystem.currentSelectedGameObject == IntelligenceButton || eventSystem.currentSelectedGameObject == ItemSlot0AButton)
-                {
-                    lastSelected = eventSystem.currentSelectedGameObject;
-                }
-                if (eventSystem.currentSelectedGameObject != VitalityButton && eventSystem.currentSelectedGameObject != StrengthButton && eventSystem.currentSelectedGameObject != DexterityButton && eventSystem.currentSelectedGameObject != IntelligenceButton || eventSystem.currentSelectedGameObject != ItemSlot0AButton)
-                {
-                    eventSystem.SetSelectedGameObject(lastSelected);
-                }
+            if (eventSystem.currentSelectedGameObject == VitalityButton ||
+            eventSystem.currentSelectedGameObject == StrengthButton ||
+            eventSystem.currentSelectedGameObject == DexterityButton ||
+            eventSystem.currentSelectedGameObject == IntelligenceButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot0AButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot0BButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot0CButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot0DButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot0EButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot1AButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot1BButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot1CButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot1DButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot1EButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot2AButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot2BButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot2CButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot2DButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot2EButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot3AButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot3BButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot3CButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot3DButton ||
+            eventSystem.currentSelectedGameObject == ItemSlot3EButton)
+            {
+                lastSelected = eventSystem.currentSelectedGameObject;
+            }
+
+            if (eventSystem.currentSelectedGameObject != VitalityButton && eventSystem.currentSelectedGameObject != StrengthButton && eventSystem.currentSelectedGameObject != DexterityButton && eventSystem.currentSelectedGameObject != IntelligenceButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot0AButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot0BButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot0CButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot0DButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot0EButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot1AButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot1BButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot1CButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot1DButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot1EButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot2AButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot2BButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot2CButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot2DButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot2EButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot3AButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot3BButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot3CButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot3DButton ||
+            eventSystem.currentSelectedGameObject != ItemSlot3EButton)
+            {
+                eventSystem.SetSelectedGameObject(lastSelected);
+            }
+            
             if (pauseMenuScript.lvlUpPanelStatus)
             {
+                if (justSwitched)
+                {
+                    eventSystem.SetSelectedGameObject(GameObject.Find("VitalityButton"));
+                }
+                justSwitched = false;
                 if (eventSystem.currentSelectedGameObject == VitalityButton || eventSystem.currentSelectedGameObject == StrengthButton || eventSystem.currentSelectedGameObject == DexterityButton || eventSystem.currentSelectedGameObject == IntelligenceButton || eventSystem.currentSelectedGameObject == ItemSlot0AButton)
                 {
                     lastSelected = eventSystem.currentSelectedGameObject;
@@ -111,16 +206,11 @@ public class PauseMenuButtons : MonoBehaviour
             }
             else
             {
-                // Bleh
-                currentSelectedGameObject = GameObject.Find("ItemSlot0AButton");
-                // if (eventSystem.currentSelectedGameObject == VitalityButton || eventSystem.currentSelectedGameObject == StrengthButton || eventSystem.currentSelectedGameObject == DexterityButton || eventSystem.currentSelectedGameObject == IntelligenceButton || eventSystem.currentSelectedGameObject == ItemSlot0AButton)
-                // {
-                //     lastSelected = eventSystem.currentSelectedGameObject;
-                // }
-                if (eventSystem.currentSelectedGameObject != VitalityButton && eventSystem.currentSelectedGameObject != StrengthButton && eventSystem.currentSelectedGameObject != DexterityButton && eventSystem.currentSelectedGameObject != IntelligenceButton || eventSystem.currentSelectedGameObject != ItemSlot0AButton)
+                if (justSwitched)
                 {
-                    eventSystem.SetSelectedGameObject(lastSelected);
+                    eventSystem.SetSelectedGameObject(GameObject.Find("ItemSlot0AButton"));
                 }
+                justSwitched = false;
             }
         }
     }
@@ -165,9 +255,6 @@ public class PauseMenuButtons : MonoBehaviour
         playerHealthScript.playerCurrentHealth++;
     }
 
-    // public string VitalityText(int vitality){
-
-    // }
     public string StrengthText(int strength)
     {
         string strengthText;
