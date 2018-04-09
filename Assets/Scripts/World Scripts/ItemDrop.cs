@@ -8,12 +8,14 @@ public class ItemDrop : MonoBehaviour
     public GameObject itemDesc;
     private GameObject playerObject;
     private PlayerStats playerStatScript;
+    private ItemSlotManager itemSlotManagerScript;
 
     void Start()
     {
         itemType = this.tag;
         playerObject = GameObject.Find("Player");
         playerStatScript = FindObjectOfType<PlayerStats>();
+        itemSlotManagerScript = FindObjectOfType<ItemSlotManager>();
     }
     public void GetItem()
     {
@@ -65,6 +67,8 @@ public class ItemDrop : MonoBehaviour
         if (other.gameObject.name == "Player")
         {
             GetItem();
+            // Debug.Log(this.gameObject.tag);
+            itemSlotManagerScript.ItemPickUp(this.gameObject.tag);
             Destroy(gameObject);
         }
     }
