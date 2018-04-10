@@ -55,7 +55,7 @@ public class PauseMenuButtons : MonoBehaviour
     public GameObject currentSelectedGameObject;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         playerStats = FindObjectOfType<PlayerStats>();
         pauseMenuScript = FindObjectOfType<PauseMenu>();
