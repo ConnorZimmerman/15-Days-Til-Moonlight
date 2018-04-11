@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class GlobalDataScript : MonoBehaviour
 {
@@ -23,7 +26,7 @@ public class GlobalDataScript : MonoBehaviour
     public int globalPlayerLockOn;
 
     //public static int globalSoundTrackInstance;
-    
+
     void Awake()
     {
         globalPlayerCurrentHealth = PlayerPrefs.GetInt("Global Player Current Health", 5);
@@ -46,17 +49,32 @@ public class GlobalDataScript : MonoBehaviour
         //globalSoundTrackInstance = PlayerPrefs.GetInt("Global Music Tracker", 1);
     }
 
+    //  LOOK IN UNITY SERIALIZATION
+    public void Save()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
+        PlayerData data = new PlayerData();
+        file.Close();
+    }
+
+    public void Load()
+    {
+        if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
+            PlayerData data = (PlayerData)bf.Deserialize(file);
+            file.Close();
+        }
+    }
 }
 
-//PlayerPrefs are how Unity permanently saves variables
-//PlayerPrefs are named with a string name such as "XP Total" or "Player Current Health"
-//the numeric value after the string name is what value will be used if none has been saved previously
-//for example if the players current health never changed it might be 
-//playerCurrentHealth = PlayerPrefs.GetFloat ("Player Current Health", 100);
-//if the playerCurrentHealth has changed and was saved previously it will ignore the 100
+[Serializable]
+class PlayerData : MonoBehaviour
+{
 
+}
 
-//accesses saved variable into your public static float
-//playerXPTotal = PlayerPrefs.GetFloat ("XP Total", 0);
 
 

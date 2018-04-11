@@ -28,29 +28,22 @@ public class ItemSlotManager : MonoBehaviour
         }
     }
 
-    // // Update is called once per frame
-    // void Update()
-    // {
-
-    // }
-
     public void ItemPickUp(string itemName)
     {
-        Debug.Log("Getting here");
-        Debug.Log(listOfSlots[0].slotStatus);
+        // Debug.Log("Getting here" + listOfSlots.Count);
         for (int i = 0; i < listOfSlots.Count; i++)
         {
-            if (i > 5 && i < 10)
+            if (i >= 5 && i < 10)
+            {
+                rowIndex = 1;
+            }
+            else if (i >= 10 && i < 15)
             {
                 rowIndex = 2;
             }
-            else if (i > 11 && i < 15)
+            else if (i >= 15)
             {
                 rowIndex = 3;
-            }
-            else if (i > 15)
-            {
-                rowIndex = 4;
             }
             if (listOfSlots[i].slotStatus == "open")
             {
@@ -60,6 +53,8 @@ public class ItemSlotManager : MonoBehaviour
             }
         }
         slotIndex -= (rowIndex * 5);
+        // Debug.Log("Row " + rowIndex);
+        // Debug.Log("Slot " + slotIndex);
         if (itemName == "potion")
         {
 
@@ -69,7 +64,6 @@ public class ItemSlotManager : MonoBehaviour
         {
             itemSection.transform.GetChild(rowIndex).GetChild(slotIndex).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("DaggerImage").GetComponent<Image>().sprite;
         }
-        // Debug.Log(itemSection.transform.GetChild(slotIndex).GetChild(slotIndex).GetChild(0).GetChild(1).name);
     }
 
     public void ItemSelect()
