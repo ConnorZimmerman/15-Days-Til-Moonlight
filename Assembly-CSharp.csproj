@@ -85,6 +85,7 @@
      <Compile Include="Assets\Scripts\Player Scripts\PlayerStartPoint.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\ShieldBlock.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\UsingItemManager.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\DialogueHolder.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\DialogueManager.cs" />

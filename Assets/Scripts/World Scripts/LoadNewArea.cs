@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 // using UnityEditor;
 using UnityEngine;
@@ -14,13 +14,15 @@ public class LoadNewArea : MonoBehaviour
     private PlayerRangedAttack playerRangedAttack;
     private PlayerStats playerStatsScript;
     private PlayerStartPoint startPoint;
+    private GlobalDataScript globalDataScript;
+    private ItemSlotManager itemSlotManager;
     public static int counter;
     public string curLvl;
 
     // Use this for initialization
     void Start()
     {
-
+        // globalDataScript.Load();
 
     }
 
@@ -33,6 +35,8 @@ public class LoadNewArea : MonoBehaviour
         playerRangedAttack = FindObjectOfType<PlayerRangedAttack>();
         playerStatsScript = FindObjectOfType<PlayerStats>();
         startPoint = FindObjectOfType<PlayerStartPoint>();
+        globalDataScript = FindObjectOfType<GlobalDataScript>();
+        itemSlotManager = FindObjectOfType<ItemSlotManager>();
         curLvl = SceneManager.GetActiveScene().name;
     }
 
@@ -90,13 +94,15 @@ public class LoadNewArea : MonoBehaviour
         else if (other.gameObject.name == "Player" && curLvl == "Snowy_Graveyard" && this.gameObject.name == "Snowy_Crossroads_Entry")
         {
             SetAllForLvl();
-            Debug.Log("hmmm");
             SceneManager.LoadScene("SnowyD_Crossroads", LoadSceneMode.Single);
             PlayerPrefs.SetString("Global Player Start Point", "Snowy_D_Graveyard_Entry");
         }
     }
     public void SetAllForLvl()
     {
+        // Debug.Log(itemSlotManager.listOfSlots[0].itemName);
+        globalDataScript.Save(itemSlotManager.listOfSlots);
+
         PlayerPrefs.SetInt("Global Player Current Health", playerHealth.playerCurrentHealth);
         PlayerPrefs.SetInt("Global Player Max Health", playerHealth.playerMaxHealth);
         PlayerPrefs.SetInt("Global Player Current Stamina", playerStamina.playerCurrentStamina);

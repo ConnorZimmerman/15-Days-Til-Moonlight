@@ -12,6 +12,7 @@ public class PauseMenuButtons : MonoBehaviour
     private PlayerStaminaManager playerStaminaScript;
     private GameObject lastSelected;
     private PauseMenu pauseMenuScript;
+    private ItemSlotManager itemSlotManagerScript;
 
     // Lvl Up Buttons
     private GameObject VitalityButton;
@@ -53,6 +54,7 @@ public class PauseMenuButtons : MonoBehaviour
     private GameObject ItemSlot3EButton;
     public bool justSwitched;
     public GameObject currentSelectedGameObject;
+    public Text descriptionText;
 
     // Use this for initialization
     void Awake()
@@ -61,10 +63,13 @@ public class PauseMenuButtons : MonoBehaviour
         pauseMenuScript = FindObjectOfType<PauseMenu>();
         playerHealthScript = FindObjectOfType<PlayerHealthManager>();
         playerStaminaScript = FindObjectOfType<PlayerStaminaManager>();
+        itemSlotManagerScript = FindObjectOfType<ItemSlotManager>();
+
         VitalityButton = GameObject.Find("VitalityButton");
         StrengthButton = GameObject.Find("StrengthButton");
         DexterityButton = GameObject.Find("DexterityButton");
         IntelligenceButton = GameObject.Find("IntelligenceButton");
+
         ItemSlot0AButton = GameObject.Find("ItemSlot0AButton");
         ItemSlot0BButton = GameObject.Find("ItemSlot0BButton");
         ItemSlot0CButton = GameObject.Find("ItemSlot0CButton");
@@ -85,6 +90,9 @@ public class PauseMenuButtons : MonoBehaviour
         ItemSlot3CButton = GameObject.Find("ItemSlot3CButton");
         ItemSlot3DButton = GameObject.Find("ItemSlot3DButton");
         ItemSlot3EButton = GameObject.Find("ItemSlot3EButton");
+
+        descriptionText = GameObject.Find("DescriptionText").GetComponent<Text>();
+
         justSwitched = true;
     }
 
@@ -146,7 +154,7 @@ public class PauseMenuButtons : MonoBehaviour
             {
                 eventSystem.SetSelectedGameObject(lastSelected);
             }
-            
+
             if (pauseMenuScript.lvlUpPanelStatus)
             {
                 if (justSwitched)
@@ -204,13 +212,14 @@ public class PauseMenuButtons : MonoBehaviour
                     eventSystem.SetSelectedGameObject(lastSelected);
                 }
             }
-            else
+            else if (pauseMenuScript.inventoryPanelStatus)
             {
                 if (justSwitched)
                 {
                     eventSystem.SetSelectedGameObject(GameObject.Find("ItemSlot0AButton"));
                 }
                 justSwitched = false;
+                descriptionText.text = itemSlotManagerScript.listOfSlots[MappingButtonNums(lastSelected.name)].itemDescription;
             }
         }
     }
@@ -251,8 +260,8 @@ public class PauseMenuButtons : MonoBehaviour
     }
     public void ItemSlot0A()
     {
-        playerStats.vitality++;
-        playerHealthScript.playerCurrentHealth++;
+        // playerStats.vitality++;
+        // playerHealthScript.playerCurrentHealth++;
     }
 
     public string StrengthText(int strength)
@@ -358,4 +367,90 @@ public class PauseMenuButtons : MonoBehaviour
     // public string IntelligenceText(int intelligence)
     // {
     // }
+
+    public int MappingButtonNums(string lastSelected)
+    {
+        int numToReturn = 0;
+        if (lastSelected == "ItemSlot0AButton")
+        {
+            numToReturn = 0;
+        }
+        else if (lastSelected == "ItemSlot0BButton")
+        {
+            numToReturn = 1;
+        }
+        else if (lastSelected == "ItemSlot0CButton")
+        {
+            numToReturn = 2;
+        }
+        else if (lastSelected == "ItemSlot0DButton")
+        {
+            numToReturn = 3;
+        }
+        else if (lastSelected == "ItemSlot0EButton")
+        {
+            numToReturn = 4;
+        }
+        else if (lastSelected == "ItemSlot1AButton")
+        {
+            numToReturn = 5;
+        }
+        else if (lastSelected == "ItemSlot1BButton")
+        {
+            numToReturn = 6;
+        }
+        else if (lastSelected == "ItemSlot1CButton")
+        {
+            numToReturn = 7;
+        }
+        else if (lastSelected == "ItemSlot1DButton")
+        {
+            numToReturn = 8;
+        }
+        else if (lastSelected == "ItemSlot1EButton")
+        {
+            numToReturn = 9;
+        }
+        else if (lastSelected == "ItemSlot2AButton")
+        {
+            numToReturn = 10;
+        }
+        else if (lastSelected == "ItemSlot2BButton")
+        {
+            numToReturn = 11;
+        }
+        else if (lastSelected == "ItemSlot2CButton")
+        {
+            numToReturn = 12;
+        }
+        else if (lastSelected == "ItemSlot2DButton")
+        {
+            numToReturn = 13;
+        }
+        else if (lastSelected == "ItemSlot2EButton")
+        {
+            numToReturn = 14;
+        }
+        else if (lastSelected == "ItemSlot3AButton")
+        {
+            numToReturn = 15;
+        }
+        else if (lastSelected == "ItemSlot3BButton")
+        {
+            numToReturn = 16;
+        }
+        else if (lastSelected == "ItemSlot3CButton")
+        {
+            numToReturn = 17;
+        }
+        else if (lastSelected == "ItemSlot3DButton")
+        {
+            numToReturn = 18;
+        }
+        else if (lastSelected == "ItemSlot3EButton")
+        {
+            numToReturn = 19;
+        }
+        return numToReturn;
+    }
 }

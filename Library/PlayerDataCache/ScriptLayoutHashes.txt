@@ -21,7 +21,7 @@ a533c2b9c4a8e3321273fbb579c5d64f Assembly-CSharp.dll:.DemoStairs
 139042f1097678ca8ca8435d36c93edb Assembly-CSharp.dll:.EngagedWithPlayer
 76b67c157fc78f887e635d573c3b4839 Assembly-CSharp.dll:Tiled2Unity.GPUInstancing
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PathRequestManager
-8fcbce925de9bec4bc274ec554ec4ef0 Assembly-CSharp.dll:.PauseMenu
+1e9e703a345537bfd19770b967da05ca Assembly-CSharp.dll:.PauseMenu
 174621ec1365498eb387db14c52d0cef Assembly-CSharp.dll:.WaypointRaycast
 7b1b191f4ccdb9ce7fe3d0e649c7d98d Assembly-CSharp.dll:.WayPoints
 1d80ee4cef46dce1942b436ce6125900 Assembly-CSharp.dll:.EnemyTestScript
@@ -93,9 +93,11 @@ c63db43c730fa2cbb8ca07de15898cb6 UnityEngine.UI.dll:UnityEngine.UI.Toggle
 f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 86d36c43c53541d667100dc90b89cfba UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
+0c59d7bfe8594d493e3422baafc4d00e Assembly-CSharp.dll:.CharacterSelect
+1245034132a724a1cca33e000e2a83e6 Assembly-CSharp.dll:.ItemSlot
 fb0b9edb4571deb16aec16f9f89c88bb Assembly-CSharp.dll:.PlayerUIManager
-a3a38e0d61b0050c9af0d2bf2ab942c1 Assembly-CSharp.dll:.UIManager
-551d7f943623db7a3e453a7c3eccad41 Assembly-CSharp.dll:.PauseMenuButtons
+b34284ea526e90857ee63ce7ae0c2ef0 Assembly-CSharp.dll:.UIManager
+06571683f127097a5c7261e2a694e748 Assembly-CSharp.dll:.PauseMenuButtons
 8d2c9404286b263876a43e040fea92c0 Assembly-CSharp.dll:.RangedDamage
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FearCounter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -152,7 +154,7 @@ edd8c156e126b64030ce1f03efe3319c Assembly-CSharp.dll:.HurtEnemy
 746f164a290f6b56b183410cc7a388b2 Assembly-CSharp.dll:Tiled2Unity.TiledInitialShaderProperties
 f149f24230a6358c2804c5fae71459a2 Assembly-CSharp.dll:Tiled2Unity.TileAnimator
 2dd38a3c995d687779445f00d27a8348 Assembly-CSharp.dll:.BasicRangedEnemy
-7ab144b414582fafab484b2dd9620c5a Assembly-CSharp.dll:.PlayerStartPoint
+2e10ccb2452005901cfd3693a4b8b497 Assembly-CSharp.dll:.PlayerStartPoint
 974e027287a6aa28bc9b91b47b31c4e2 Assembly-CSharp.dll:.PlayerPathTracker
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -170,6 +172,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 3caef283a0101d2373738de3ba14a37c Assembly-CSharp.dll:.ItemDrop
 bf5f6acc2818c11051e096b551c8cca4 Assembly-CSharp.dll:.PlayerRangedAttack
+a454ccade09a256510cb56fb0d01ce0d Assembly-CSharp.dll:.PathfindingZoneManager
 1765dffa8e88aa698321ecf9f4dd8565 Assembly-CSharp.dll:.DestroyOverTime
 329bcbf88b3c0197d230f5b9ceb88333 Assembly-CSharp.dll:Tiled2Unity.PolygonObject
 329bcbf88b3c0197d230f5b9ceb88333 Assembly-CSharp.dll:Tiled2Unity.CircleObject
@@ -181,8 +184,8 @@ bf5f6acc2818c11051e096b551c8cca4 Assembly-CSharp.dll:.PlayerRangedAttack
 534ee60474fd0b4aef6d98b1ae5164ac Assembly-CSharp.dll:.EnemyMasterScript
 3c3f0bfcecdfff423adff6289d1ad835 Assembly-CSharp.dll:.TerrainManager
 a17b20482af53b8b8123d6a3f8a7b6ae Assembly-CSharp.dll:.StaminaCounter
-8a358c0f0127551f5397c63437681ef5 Assembly-CSharp.dll:.ShieldBlock
-7118400b964f39cae2333bb0f811ab7f Assembly-CSharp.dll:.LoadNewArea
+5995678f7195cfb4747b7580003f7b81 Assembly-CSharp.dll:.ShieldBlock
+3130336bee55d9143f727fea51d615aa Assembly-CSharp.dll:.LoadNewArea
 677e469ac90ab791089de05f07bcdb81 Assembly-CSharp.dll:.RecognizeStalkZone
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -198,11 +201,12 @@ f4d07fcd24671d860c4daecee0819a34 Assembly-CSharp.dll:.GoldPickUp
 b03061f52163b96ab990c7dc423d6f2d Assembly-CSharp.dll:.SFXManager
 be943d06b0350d9a1f46e51cb0b77972 Assembly-CSharp.dll:.DialogueManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Item
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GlobalDataScript
+1aed1ace7017942223023eb605d841ab Assembly-CSharp.dll:.GlobalDataScript
 f1222864d9e8a0b0bade687ba8647b96 Assembly-CSharp.dll:.VolumeController
 b6a4e0f46582e1b4ea27adb53405c4c7 Assembly-CSharp.dll:Tiled2Unity.SpriteDepthInMap
 d290070ecf091336e70150a7db25d112 Assembly-CSharp.dll:Tiled2Unity.ObjectLayer
-df6f5026dfcf388d53a6446fe8b4ccd7 Assembly-CSharp.dll:.TrackingRaycast
+a3432b559772779cf3ed7de6d46ffc00 Assembly-CSharp.dll:.ItemSlotManager
+4bfc06473eb50d1a2199ebc6eed48cdd Assembly-CSharp.dll:.TrackingRaycast
 aa7a28be4517ed3f61abea26f3bfc6d1 Assembly-CSharp.dll:.EnemyRangedAttack
 8cd128f127f13516debb30df55c3c09f Assembly-CSharp.dll:.PlayerStaminaManager
 974e027287a6aa28bc9b91b47b31c4e2 Assembly-CSharp.dll:.PathTracker
