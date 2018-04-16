@@ -52,6 +52,17 @@ public class PauseMenuButtons : MonoBehaviour
     private GameObject ItemSlot3CButton;
     private GameObject ItemSlot3DButton;
     private GameObject ItemSlot3EButton;
+
+    // Armor slots
+    private GameObject HeadSlotButton;
+    private GameObject BodyArmorButton;
+    private GameObject GlovesButton;
+    private GameObject BootsButton;
+    private GameObject RingOneButton;
+    private GameObject RingTwoButton;
+    private GameObject RingThreeButton;
+    private GameObject RingFourButton;
+
     public bool justSwitched;
     public GameObject currentSelectedGameObject;
     public Text descriptionText;
@@ -91,6 +102,15 @@ public class PauseMenuButtons : MonoBehaviour
         ItemSlot3DButton = GameObject.Find("ItemSlot3DButton");
         ItemSlot3EButton = GameObject.Find("ItemSlot3EButton");
 
+        HeadSlotButton = GameObject.Find("HeadButton");
+        BodyArmorButton = GameObject.Find("BodyArmorButton");
+        GlovesButton = GameObject.Find("GlovesButton");
+        BootsButton = GameObject.Find("BootsButton");
+        RingOneButton = GameObject.Find("RingOneButton");
+        RingTwoButton = GameObject.Find("RingTwoButton");
+        RingThreeButton = GameObject.Find("RingThreeButton");
+        RingFourButton = GameObject.Find("RingFourButton");
+
         descriptionText = GameObject.Find("DescriptionText").GetComponent<Text>();
 
         justSwitched = true;
@@ -125,7 +145,15 @@ public class PauseMenuButtons : MonoBehaviour
             eventSystem.currentSelectedGameObject == ItemSlot3BButton ||
             eventSystem.currentSelectedGameObject == ItemSlot3CButton ||
             eventSystem.currentSelectedGameObject == ItemSlot3DButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot3EButton)
+            eventSystem.currentSelectedGameObject == ItemSlot3EButton ||
+            eventSystem.currentSelectedGameObject == HeadSlotButton ||
+            eventSystem.currentSelectedGameObject == BodyArmorButton ||
+            eventSystem.currentSelectedGameObject == GlovesButton ||
+            eventSystem.currentSelectedGameObject == BootsButton ||
+            eventSystem.currentSelectedGameObject == RingOneButton ||
+            eventSystem.currentSelectedGameObject == RingTwoButton ||
+            eventSystem.currentSelectedGameObject == RingThreeButton ||
+            eventSystem.currentSelectedGameObject == RingFourButton)
             {
                 lastSelected = eventSystem.currentSelectedGameObject;
             }
@@ -150,7 +178,15 @@ public class PauseMenuButtons : MonoBehaviour
             eventSystem.currentSelectedGameObject != ItemSlot3BButton ||
             eventSystem.currentSelectedGameObject != ItemSlot3CButton ||
             eventSystem.currentSelectedGameObject != ItemSlot3DButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot3EButton)
+            eventSystem.currentSelectedGameObject != ItemSlot3EButton ||
+            eventSystem.currentSelectedGameObject != HeadSlotButton ||
+            eventSystem.currentSelectedGameObject != BodyArmorButton ||
+            eventSystem.currentSelectedGameObject != GlovesButton ||
+            eventSystem.currentSelectedGameObject != BootsButton ||
+            eventSystem.currentSelectedGameObject != RingOneButton ||
+            eventSystem.currentSelectedGameObject != RingTwoButton ||
+            eventSystem.currentSelectedGameObject != RingThreeButton ||
+            eventSystem.currentSelectedGameObject != RingFourButton)
             {
                 eventSystem.SetSelectedGameObject(lastSelected);
             }
@@ -219,7 +255,19 @@ public class PauseMenuButtons : MonoBehaviour
                     eventSystem.SetSelectedGameObject(GameObject.Find("ItemSlot0AButton"));
                 }
                 justSwitched = false;
-                descriptionText.text = itemSlotManagerScript.listOfSlots[MappingButtonNums(lastSelected.name)].itemDescription;
+
+                int itemNumber = MappingButtonNums(lastSelected.name);
+                descriptionText.text = itemSlotManagerScript.listOfSlots[itemNumber].itemDescription;
+                if (itemNumber < 20)
+                {
+                    // Debug.Log(itemNumber);
+                    // Debug.Log(itemNumber);
+                    // descriptionText.text = itemSlotManagerScript.listOfSlots[itemNumber].itemDescription;
+                }
+                else
+                {
+                    // descriptionText.text = itemSlotManagerScript.listOfSlots[itemNumber].itemDescription;
+                }
             }
         }
     }
@@ -451,6 +499,43 @@ public class PauseMenuButtons : MonoBehaviour
         {
             numToReturn = 19;
         }
+        else if (lastSelected == "HeadSlotButton")
+        {
+            numToReturn = 20;
+        }
+        else if (lastSelected == "BodyArmorButton")
+        {
+            numToReturn = 21;
+        }
+        else if (lastSelected == "GlovesButton")
+        {
+            numToReturn = 22;
+        }
+        else if (lastSelected == "BootButton")
+        {
+            numToReturn = 23;
+        }
+        else if (lastSelected == "RingOneButton")
+        {
+            numToReturn = 24;
+        }
+        else if (lastSelected == "RingTwoButton")
+        {
+            numToReturn = 25;
+        }
+        else if (lastSelected == "RingThreeButton")
+        {
+            numToReturn = 26;
+        }
+        else if (lastSelected == "RingFourButton")
+        {
+            numToReturn = 27;
+        }
         return numToReturn;
     }
+
+    // public int MapEquippedItemButtons(string lastSelected){
+    //     int numToReturn = 0;
+    //     return numToReturn;        
+    // }
 }

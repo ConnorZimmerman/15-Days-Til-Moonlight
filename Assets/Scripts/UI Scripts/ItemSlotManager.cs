@@ -8,6 +8,7 @@ public class ItemSlotManager : MonoBehaviour
 {
     private GlobalDataScript globalDataScript;
     public List<ItemSlot> listOfSlots;
+    // public List<ItemSlot> equippedArmor;
     public GameObject itemSection;
     public int slotIndex = 0;
     public int rowIndex = 1;
@@ -58,7 +59,6 @@ public class ItemSlotManager : MonoBehaviour
                 foreach (Transform itemSlot in inventoryRow.transform)
                 {
                     itemSlot.GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
-
                 }
             }
         }
