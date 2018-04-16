@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     private GameObject shieldImageObject;
     public Text daggerText;
     public Text shieldText;
+    private Text potionText;
     public GameObject playerHealthObject;
 
     // Use this for initialization
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour
         daggerTextObject = GameObject.Find("DaggerText");
         shieldTextObject = GameObject.Find("ShieldText");
         shieldImageObject = GameObject.Find("ShieldImage");
+        potionText = GameObject.Find("PotionText").GetComponent<Text>();
 
         shieldTextObject.SetActive(false);
         shieldImageObject.SetActive(false);
@@ -77,6 +79,8 @@ public class UIManager : MonoBehaviour
 
         daggerText.text = ": " + playerRanged.daggerCount;
         shieldText.text = ": " + shieldBlockScript.shieldBlocksLeft;
+        potionText.text = " x " + ItemSlotManager.potionCount;
+
 
         staminaBar.maxValue = playerStamina.playerMaxStamina;
         staminaBar.value = playerStamina.playerCurrentStamina;

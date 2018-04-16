@@ -58,6 +58,11 @@ public class ShieldBlock : MonoBehaviour
         {
             shieldBlock.isTrigger = false;
             shieldOn = true;
+            // thePlayer.lockOn = true;
+        }
+        else
+        {
+            // thePlayer.lockOn = false;
         }
 
         if (axisInput <= 0f || shieldLockBool)

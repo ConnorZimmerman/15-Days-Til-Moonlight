@@ -37,11 +37,11 @@ public class ItemDrop : MonoBehaviour
         }
         else if (itemType == "potion")
         {
-            FindObjectOfType<PlayerHealthManager>().playerCurrentHealth += 3;
-            var clone = (GameObject)Instantiate(itemDesc, playerObject.transform.position,
-                Quaternion.Euler(Vector3.zero));
-            clone.GetComponent<FloatingItemFind>().itemType = " health";
-            clone.GetComponent<FloatingItemFind>().daggerCount = 3;
+            // FindObjectOfType<PlayerHealthManager>().playerCurrentHealth += 3;
+            // var clone = (GameObject)Instantiate(itemDesc, playerObject.transform.position,
+            //     Quaternion.Euler(Vector3.zero));
+            // clone.GetComponent<FloatingItemFind>().itemType = " health";
+            // clone.GetComponent<FloatingItemFind>().daggerCount = 3;
         }
     }
 
