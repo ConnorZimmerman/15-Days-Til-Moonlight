@@ -36,7 +36,7 @@ public class EnemyMasterScript : MonoBehaviour
         {
             enemyMaxHealth = 3;
             locateEnemyClass = 1;
-            damageToGive = 3;
+            damageToGive = 2;
             return;
         }
         if (this.gameObject.transform.tag == "LargeEnemyBasic")
@@ -48,7 +48,7 @@ public class EnemyMasterScript : MonoBehaviour
         }
         if(this.gameObject.transform.tag == "BasicRangedEnemy"){
             enemyMaxHealth = 2;
-            damageToGive = 2;
+            damageToGive = 1;
             return;
         }
     }

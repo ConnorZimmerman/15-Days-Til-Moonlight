@@ -50,13 +50,13 @@ public class ItemDrop : MonoBehaviour
         int randomNum = (UnityEngine.Random.Range(0, 51)) + ((playerStatScript.intelligence * 2)- 10);
         if (enemyObject.tag == "BasicRangedEnemy" && randomNum > 10)
         {
-            GameObject randomDrop = GameObject.Find("Item_Pouch");
+            GameObject randomDrop = GameObject.Find("daggers");
             GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation)
             ;
         }
         if (randomNum >= 50)
         {
-            GameObject randomDrop = GameObject.Find("Potion");
+            GameObject randomDrop = GameObject.Find("potion");
             GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation)
             ;
         }

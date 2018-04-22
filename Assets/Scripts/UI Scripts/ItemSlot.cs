@@ -13,14 +13,15 @@ public class ItemSlot : MonoBehaviour
     public string itemName;
     public string itemDescription;
     public string slotStatus;
-    // public Image itemImage;
     public int parentIndex;
-    public ItemSlot(string itemName = "", string itemDescription = "", string slotStatus = "open", int parentIndex = 0)
+    public int defenseAmount;
+
+    public ItemSlot(string itemName = "", string itemDescription = "", string slotStatus = "open", int parentIndex = 0, int defenseAmount = 0)
     {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.slotStatus = slotStatus;
-        // this.itemImage = itemImage;
         this.parentIndex = parentIndex;
+        this.defenseAmount = 0;
     }
 }

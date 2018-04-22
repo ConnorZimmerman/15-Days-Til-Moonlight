@@ -49,20 +49,21 @@ public class GlobalDataScript : MonoBehaviour
         //globalSoundTrackInstance = PlayerPrefs.GetInt("Global Music Tracker", 1);
     }
 
-    public void Save(List<ItemSlot> inventory)
+    public void Save(List<ItemSlot> inventory, List<ItemSlot> equippedList)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Create);
-        // Debug.Log(inventory.Count);
 
-        PlayerData data = new PlayerData(inventory);
+        PlayerData data = new PlayerData(inventory, equippedList);
 
         bf.Serialize(file, data);
         file.Close();
     }
 
-    public static List<string> Load()
+    public static Dictionary<string, List<string>> Load()
     {
+        Dictionary<string, List<string>> playerDataDict = new Dictionary<string, List<string>>();
+
         if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -71,12 +72,15 @@ public class GlobalDataScript : MonoBehaviour
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
-            return data.inventory;
+            playerDataDict.Add("playerInventory", data.inventory);
+            playerDataDict.Add("equippedInventory", data.equippedArmor);
+
+            return playerDataDict;
         }
         else
         {
             Debug.Log("No file to return");
-            return new List<string>();
+            return new Dictionary<string, List<string>>();
         }
     }
 }
@@ -85,18 +89,22 @@ public class GlobalDataScript : MonoBehaviour
 class PlayerData
 {
     public List<string> inventory;
-    // public List<string> equippedArmor;
+    public List<string> equippedArmor;
     // public string type;
 
-    public PlayerData(List<ItemSlot> oldInventory)
+    public PlayerData(List<ItemSlot> oldInventory, List<ItemSlot> equippedList)
     {
         this.inventory = new List<string>();
-        // this.equippedArmor = new List<string>();
+        this.equippedArmor = new List<string>();
         // Debug.Log(oldInventory[0].slotStatus);
         // type = inventory[0].type;
         foreach (ItemSlot item in oldInventory.ToArray())
         {
             this.inventory.Add(item.itemName);
+        }
+        foreach (ItemSlot item in equippedList.ToArray())
+        {
+            this.equippedArmor.Add(item.itemName);
         }
     }
 

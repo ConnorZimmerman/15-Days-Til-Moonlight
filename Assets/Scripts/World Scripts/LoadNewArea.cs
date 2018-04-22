@@ -101,7 +101,7 @@ public class LoadNewArea : MonoBehaviour
     public void SetAllForLvl()
     {
         // Debug.Log(itemSlotManager.listOfSlots[0].itemName);
-        globalDataScript.Save(itemSlotManager.listOfSlots);
+        globalDataScript.Save(itemSlotManager.listOfSlots, itemSlotManager.equippedArmor);
 
         PlayerPrefs.SetInt("Global Player Current Health", playerHealth.playerCurrentHealth);
         PlayerPrefs.SetInt("Global Player Max Health", playerHealth.playerMaxHealth);

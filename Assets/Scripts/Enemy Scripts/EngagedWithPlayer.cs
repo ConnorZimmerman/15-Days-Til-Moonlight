@@ -382,7 +382,7 @@ public class EngagedWithPlayer : MonoBehaviour
 
         if (enemyAttackCounter > 0f && deathStrike && colliderOn && !deathSeven)
         {
-            currentDamage = damageToGive - thePS.currentDefense;
+            currentDamage = damageToGive - CalculatePlayerDefense(thePS.defense);
             // Debug.Log("wtf");
             playerHealth.playerCurrentHealth -= currentDamage;
             sfxMan.blood.Play();
@@ -446,6 +446,7 @@ public class EngagedWithPlayer : MonoBehaviour
         else if (knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike)
         {
             // Debug.Log("wtf");
+            currentDamage -= CalculatePlayerDefense(thePS.defense);
             playerHealth.playerCurrentHealth -= currentDamage;
             Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
             sfxMan.blood.Play();
@@ -507,5 +508,16 @@ public class EngagedWithPlayer : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public int CalculatePlayerDefense(int defense)
+    {
+        int damageReduction = 0;
+        int randomNum = UnityEngine.Random.Range(1, 11);
+        if (randomNum <= defense)
+        {
+            damageReduction = 1;
+        }
+        return damageReduction;
     }
 }
