@@ -10,7 +10,7 @@ public class PauseMenuButtons : MonoBehaviour
     private PlayerStats playerStats;
     private PlayerHealthManager playerHealthScript;
     private PlayerStaminaManager playerStaminaScript;
-    private GameObject lastSelected;
+    public GameObject lastSelected;
     private PauseMenu pauseMenuScript;
     private ItemSlotManager itemSlotManagerScript;
 
@@ -62,7 +62,6 @@ public class PauseMenuButtons : MonoBehaviour
     private GameObject RingTwoButton;
     private GameObject RingThreeButton;
     private GameObject RingFourButton;
-
     public bool justSwitched;
     public GameObject currentSelectedGameObject;
     public Text descriptionText;
@@ -257,16 +256,18 @@ public class PauseMenuButtons : MonoBehaviour
                 justSwitched = false;
 
                 int itemNumber = MappingButtonNums(lastSelected.name);
-                descriptionText.text = itemSlotManagerScript.listOfSlots[itemNumber].itemDescription;
                 if (itemNumber < 20)
                 {
+                    descriptionText.text = itemSlotManagerScript.listOfSlots[itemNumber].itemDescription;
+                    // Debug.Log("getting here");
+                    // Debug.Log(itemSlotManagerScript.listOfSlots[itemNumber].itemDescription);
                     // Debug.Log(itemNumber);
                     // Debug.Log(itemNumber);
                     // descriptionText.text = itemSlotManagerScript.listOfSlots[itemNumber].itemDescription;
                 }
                 else
                 {
-                    // descriptionText.text = itemSlotManagerScript.listOfSlots[itemNumber].itemDescription;
+                    descriptionText.text = itemSlotManagerScript.equippedArmor[itemNumber- 20].itemDescription;
                 }
             }
         }
@@ -499,7 +500,7 @@ public class PauseMenuButtons : MonoBehaviour
         {
             numToReturn = 19;
         }
-        else if (lastSelected == "HeadSlotButton")
+        else if (lastSelected == "HeadButton")
         {
             numToReturn = 20;
         }

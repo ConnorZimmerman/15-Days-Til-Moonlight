@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
     private PlayerStats playerStats;
     private TerrainManager terrainManager;
     private GlobalDataScript globalData;
+    private EquipmentBuffManager equipmentBuffManagerScript;
 
     // Use this for initialization
     void Start()
@@ -226,7 +227,10 @@ public class PlayerController : MonoBehaviour
         {
             lockOn = false;
         }
-        //staminaAttackDrainBool = false;
+
+        equipmentBuffManagerScript = FindObjectOfType<EquipmentBuffManager>();
+
+        // Debug.Log(equipmentBuffManagerScript.PlayerDefenseCalculator());
     }
 
     // Update is called once per frame

@@ -11,16 +11,18 @@ public class PlayerStats : MonoBehaviour
     public int[] toLevelUp;
     public int[] HPLevels;
     public int[] attackLevels;
-    public int[] defenseLevels;
+    // public int[] defenseLevels;
     public int currentHP;
     public int currentAttack;
-    public int currentDefense;
+    // public int currentDefense;
     public int vitality;
     public int strength;
     public int dexterity;
     public int intelligence;
+    public int defense;
     private PauseMenuButtons pauseMenuButtonsScript;
     private PlayerHealthManager thePlayerHealth;
+    private EquipmentBuffManager equipmentBuffManagerScript;
     // private GlobalDataScript globalData;
     public int pointsToSpend;
 
@@ -29,7 +31,7 @@ public class PlayerStats : MonoBehaviour
     {
         currentHP = HPLevels[1];
         currentAttack = attackLevels[1];
-        currentDefense = defenseLevels[1];
+        equipmentBuffManagerScript = FindObjectOfType<EquipmentBuffManager>();
         thePlayerHealth = FindObjectOfType<PlayerHealthManager>();
         vitality = GlobalDataScript.globalPlayerVitality;
         currentLevel = GlobalDataScript.globalPlayerLevel;
@@ -38,6 +40,8 @@ public class PlayerStats : MonoBehaviour
         strength = GlobalDataScript.globalPlayerStrength;
         dexterity = GlobalDataScript.globalPlayerDexterity;
         intelligence = GlobalDataScript.globalPlayerIntelligence;
+        defense = equipmentBuffManagerScript.PlayerDefenseCalculator();
+        
         if (strength <= 10)
         {
             playerDamage = 2;
