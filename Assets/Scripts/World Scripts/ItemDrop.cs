@@ -50,7 +50,7 @@ public class ItemDrop : MonoBehaviour
         // eventually add in method to do random calculations
         int randomNum = LuckCalculator();
         Debug.Log("Luck: " + randomNum);
-        if (enemyObject.tag == "BasicRangedEnemy" && randomNum > 20)
+        if (enemyObject.tag == "BasicRangedEnemy" && randomNum > 70)
         {
             GameObject randomDrop = GameObject.Find("daggers");
             GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation)
@@ -66,63 +66,68 @@ public class ItemDrop : MonoBehaviour
 
     public int LuckCalculator()
     {
-        int randomNum = (UnityEngine.Random.Range(0, 101)) + ((playerStatScript.intelligence) - 5);
-        // tier 2
-        if (randomNum >= 100)
+        int randomNum = (UnityEngine.Random.Range(0, 51)) + ((playerStatScript.intelligence) - 5);
+        if (randomNum >= 50)
         {
-            if (playerStatScript.intelligence >= 10)
+            randomNum = (UnityEngine.Random.Range(50, 101)) + ((playerStatScript.intelligence) - 5);
+
+            // tier 2
+            if (randomNum >= 100)
             {
-                randomNum = (UnityEngine.Random.Range(101, 201)) + ((playerStatScript.intelligence) - 5);
-            }
-            else
-            {
-                randomNum = (UnityEngine.Random.Range(101, 201));
-            }
-            // tier 3
-            if (randomNum >= 200)
-            {
-                if (playerStatScript.intelligence >= 20)
+                if (playerStatScript.intelligence >= 10)
                 {
-                    randomNum = (UnityEngine.Random.Range(201, 301)) + ((playerStatScript.intelligence) - 5);
+                    randomNum = (UnityEngine.Random.Range(101, 201)) + ((playerStatScript.intelligence) - 5);
                 }
                 else
                 {
-                    randomNum = (UnityEngine.Random.Range(201, 301));
+                    randomNum = (UnityEngine.Random.Range(101, 201));
                 }
-                // tier 4
-                if (randomNum >= 300)
+                // tier 3
+                if (randomNum >= 200)
                 {
-                    if (playerStatScript.intelligence >= 30)
+                    if (playerStatScript.intelligence >= 20)
                     {
-                        randomNum = (UnityEngine.Random.Range(301, 401)) + ((playerStatScript.intelligence) - 5);
+                        randomNum = (UnityEngine.Random.Range(201, 301)) + ((playerStatScript.intelligence) - 5);
                     }
                     else
                     {
-                        randomNum = (UnityEngine.Random.Range(301, 401));
+                        randomNum = (UnityEngine.Random.Range(201, 301));
                     }
-                }
-                // tier 5
-                if (randomNum >= 400)
-                {
-                    if (playerStatScript.intelligence >= 40)
+                    // tier 4
+                    if (randomNum >= 300)
                     {
-                        randomNum = (UnityEngine.Random.Range(401, 501)) + ((playerStatScript.intelligence) - 5);
+                        if (playerStatScript.intelligence >= 30)
+                        {
+                            randomNum = (UnityEngine.Random.Range(301, 401)) + ((playerStatScript.intelligence) - 5);
+                        }
+                        else
+                        {
+                            randomNum = (UnityEngine.Random.Range(301, 401));
+                        }
                     }
-                    else
+                    // tier 5
+                    if (randomNum >= 400)
                     {
-                        randomNum = (UnityEngine.Random.Range(401, 501));
+                        if (playerStatScript.intelligence >= 40)
+                        {
+                            randomNum = (UnityEngine.Random.Range(401, 501)) + ((playerStatScript.intelligence) - 5);
+                        }
+                        else
+                        {
+                            randomNum = (UnityEngine.Random.Range(401, 501));
+                        }
                     }
-                }
-                // tier 6
-                if (randomNum >= 500)
-                {
-                    if (playerStatScript.intelligence >= 50)
+                    // tier 6
+                    if (randomNum >= 500)
                     {
-                        randomNum = (UnityEngine.Random.Range(501, 601)) + ((playerStatScript.intelligence) - 5);
-                    }
-                    else
-                    {
-                        randomNum = (UnityEngine.Random.Range(501, 601));
+                        if (playerStatScript.intelligence >= 50)
+                        {
+                            randomNum = (UnityEngine.Random.Range(501, 601)) + ((playerStatScript.intelligence) - 5);
+                        }
+                        else
+                        {
+                            randomNum = (UnityEngine.Random.Range(501, 601));
+                        }
                     }
                 }
             }
