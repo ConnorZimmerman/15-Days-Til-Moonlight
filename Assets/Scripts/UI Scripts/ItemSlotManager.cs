@@ -209,6 +209,55 @@ public class ItemSlotManager : MonoBehaviour
             listOfSlots[counter].itemDescription = "+2 to defense";
             imageName = "simpleHelmetImage";
         }
+        else if (itemName == "simpleGloves")
+        {
+            listOfSlots[counter].slotStatus = "closed";
+            listOfSlots[counter].itemName = "simpleGloves";
+            listOfSlots[counter].itemDescription = "+1 to defense";
+            imageName = "simpleGlovesImage";
+        }
+        else if (itemName == "simpleBoots")
+        {
+            listOfSlots[counter].slotStatus = "closed";
+            listOfSlots[counter].itemName = "simpleBoots";
+            listOfSlots[counter].itemDescription = "+1 to defense";
+            imageName = "simpleBootsImage";
+        }
+        else if (itemName == "simpleChest")
+        {
+            listOfSlots[counter].slotStatus = "closed";
+            listOfSlots[counter].itemName = "simpleChest";
+            listOfSlots[counter].itemDescription = "+4 to defense";
+            imageName = "simpleChestImage";
+        }
+        else if (itemName == "ringOfRoses")
+        {
+            listOfSlots[counter].slotStatus = "closed";
+            listOfSlots[counter].itemName = "ringOfRoses";
+            listOfSlots[counter].itemDescription = "+1 to vitality";
+            imageName = "ringOfRosesImage";
+        }
+        else if (itemName == "ringOfEarth")
+        {
+            listOfSlots[counter].slotStatus = "closed";
+            listOfSlots[counter].itemName = "ringOfEarth";
+            listOfSlots[counter].itemDescription = "+1 to dexterity";
+            imageName = "ringOfEarthImage";
+        }
+        else if (itemName == "ringOfKnowledge")
+        {
+            listOfSlots[counter].slotStatus = "closed";
+            listOfSlots[counter].itemName = "ringOfKnowledge";
+            listOfSlots[counter].itemDescription = "+1 to intelligence";
+            imageName = "ringOfKnowledgeImage";
+        }
+        else if (itemName == "ringOfTheBull")
+        {
+            listOfSlots[counter].slotStatus = "closed";
+            listOfSlots[counter].itemName = "ringOfTheBull";
+            listOfSlots[counter].itemDescription = "+1 to strength";
+            imageName = "ringOfTheBullImage";
+        }
         return imageName;
     }
 
