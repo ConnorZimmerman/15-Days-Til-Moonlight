@@ -373,7 +373,6 @@ public class EngagedWithPlayer : MonoBehaviour
             }
             playerStaminaMan.playerCurrentStamina -= 100 - playerDefense;
             playerShield.shieldBlocksLeft -= 2;
-            // playerShield.shieldLockBool = true;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
@@ -383,7 +382,6 @@ public class EngagedWithPlayer : MonoBehaviour
         if (enemyAttackCounter > 0f && deathStrike && colliderOn && !deathSeven)
         {
             currentDamage = damageToGive - CalculatePlayerDefense(thePS.defense);
-            // Debug.Log("wtf");
             playerHealth.playerCurrentHealth -= currentDamage;
             sfxMan.blood.Play();
             if (enemyGameObject.tag == "Enemy")
@@ -445,11 +443,19 @@ public class EngagedWithPlayer : MonoBehaviour
         }
         else if (knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike)
         {
-            // Debug.Log("wtf");
             currentDamage -= CalculatePlayerDefense(thePS.defense);
             playerHealth.playerCurrentHealth -= currentDamage;
-            Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
-            sfxMan.blood.Play();
+
+            if (currentDamage > 0)
+            {
+                Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
+                sfxMan.blood.Play();
+            }
+            else
+            {
+                sfxMan.swordsColliding.Play();
+                Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
+            }
         }
     }
 
@@ -513,7 +519,7 @@ public class EngagedWithPlayer : MonoBehaviour
     public int CalculatePlayerDefense(int defense)
     {
         int damageReduction = 0;
-        
+
         Debug.Log("defense" + defense);
 
         int randomNum = UnityEngine.Random.Range(1, 11);
