@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-
     private PlayerStats playerStats;
     private PauseMenuButtons pauseMenuButtonsScript;
     private PlayerHealthManager playerHealthManagerScript;
@@ -77,7 +76,6 @@ public class PauseMenu : MonoBehaviour
         toSpendText.text = string.Format("Points to spend: {0}", playerStats.pointsToSpend);
 
     }
-
 }
 
 

@@ -267,7 +267,7 @@ public class PauseMenuButtons : MonoBehaviour
                 }
                 else
                 {
-                    descriptionText.text = itemSlotManagerScript.equippedArmor[itemNumber- 20].itemDescription;
+                    descriptionText.text = itemSlotManagerScript.equippedArmor[itemNumber - 20].itemDescription;
                 }
             }
         }
@@ -512,7 +512,7 @@ public class PauseMenuButtons : MonoBehaviour
         {
             numToReturn = 22;
         }
-        else if (lastSelected == "BootButton")
+        else if (lastSelected == "BootsButton")
         {
             numToReturn = 23;
         }
