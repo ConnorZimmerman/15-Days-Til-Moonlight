@@ -5,11 +5,13 @@ using UnityEngine;
 public class EquipmentBuffManager : MonoBehaviour
 {
     private ItemSlotManager itemSlotManagerScript;
+    private PlayerStats playerStatsScript;
 
     // Use this for initialization
     void Awake()
     {
         itemSlotManagerScript = FindObjectOfType<ItemSlotManager>();
+        playerStatsScript = FindObjectOfType<PlayerStats>();
     }
 
     // // Update is called once per frame

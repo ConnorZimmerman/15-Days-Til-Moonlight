@@ -8,6 +8,7 @@ public class ItemSlotManager : MonoBehaviour
 {
     private GlobalDataScript globalDataScript;
     private PauseMenuButtons pauseMenuButtonsScript;
+    private PlayerStats playerStatScript;
     public List<ItemSlot> listOfSlots;
     public GameObject itemSection;
     public List<ItemSlot> equippedArmor;
@@ -22,6 +23,7 @@ public class ItemSlotManager : MonoBehaviour
     {
         globalDataScript = FindObjectOfType<GlobalDataScript>();
         pauseMenuButtonsScript = FindObjectOfType<PauseMenuButtons>();
+        playerStatScript = FindObjectOfType<PlayerStats>();
 
         Dictionary<string, List<string>> playerDataDict = GlobalDataScript.Load();
 
@@ -102,8 +104,6 @@ public class ItemSlotManager : MonoBehaviour
         }
 
         slotIndex -= (rowIndex * 5);
-        Debug.Log("slot " + slotIndex);
-        Debug.Log("row " + rowIndex);
 
         if (itemName == "potion")
         {
@@ -208,6 +208,7 @@ public class ItemSlotManager : MonoBehaviour
                 equippedArmor[0].itemName = "";
                 equippedArmor[0].slotStatus = "open";
                 equippedArmor[0].itemDescription = "";
+                equippedArmor[0].defenseAmount = 0;
 
                 equippedSection.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
             }
@@ -221,6 +222,7 @@ public class ItemSlotManager : MonoBehaviour
                 equippedArmor[2].itemName = "";
                 equippedArmor[2].slotStatus = "open";
                 equippedArmor[2].itemDescription = "";
+                equippedArmor[2].defenseAmount = 0;
 
                 equippedSection.transform.GetChild(2).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
             }
@@ -234,7 +236,7 @@ public class ItemSlotManager : MonoBehaviour
                 equippedArmor[3].itemName = "";
                 equippedArmor[3].slotStatus = "open";
                 equippedArmor[3].itemDescription = "";
-                equippedSection = GameObject.Find("EquippedSection");
+                equippedArmor[3].defenseAmount = 0;
 
                 equippedSection.transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
             }
@@ -248,7 +250,7 @@ public class ItemSlotManager : MonoBehaviour
                 equippedArmor[1].itemName = "";
                 equippedArmor[1].slotStatus = "open";
                 equippedArmor[1].itemDescription = "";
-                equippedSection = GameObject.Find("EquippedSection");
+                equippedArmor[1].defenseAmount = 0;
 
                 equippedSection.transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
             }
@@ -262,7 +264,8 @@ public class ItemSlotManager : MonoBehaviour
                 equippedArmor[4].itemName = "";
                 equippedArmor[4].slotStatus = "open";
                 equippedArmor[4].itemDescription = "";
-                equippedSection = GameObject.Find("EquippedSection");
+                equippedArmor[4].defenseAmount = 0;
+                playerStatScript.vitality -= 1;
 
                 equippedSection.transform.GetChild(4).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
             }
@@ -276,7 +279,8 @@ public class ItemSlotManager : MonoBehaviour
                 equippedArmor[5].itemName = "";
                 equippedArmor[5].slotStatus = "open";
                 equippedArmor[5].itemDescription = "";
-                equippedSection = GameObject.Find("EquippedSection");
+                equippedArmor[5].defenseAmount = 0;
+                playerStatScript.dexterity -= 1;
 
                 equippedSection.transform.GetChild(5).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
             }
@@ -290,7 +294,8 @@ public class ItemSlotManager : MonoBehaviour
                 equippedArmor[6].itemName = "";
                 equippedArmor[6].slotStatus = "open";
                 equippedArmor[6].itemDescription = "";
-                equippedSection = GameObject.Find("EquippedSection");
+                equippedArmor[6].defenseAmount = 0;
+                playerStatScript.intelligence -= 1;
 
                 equippedSection.transform.GetChild(6).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
             }
@@ -304,7 +309,8 @@ public class ItemSlotManager : MonoBehaviour
                 equippedArmor[7].itemName = "";
                 equippedArmor[7].slotStatus = "open";
                 equippedArmor[7].itemDescription = "";
-                equippedSection = GameObject.Find("EquippedSection");
+                equippedArmor[7].defenseAmount = 0;
+                playerStatScript.strength -= 1;
 
                 equippedSection.transform.GetChild(7).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
             }
@@ -427,7 +433,8 @@ public class ItemSlotManager : MonoBehaviour
             equippedArmor[counter].slotStatus = "closed";
             equippedArmor[counter].itemName = "ringOfRoses";
             equippedArmor[counter].itemDescription = "+1 to vitality";
-            // equippedArmor[counter].defenseAmount = 2;
+            playerStatScript.vitality += 1;
+
             imageName = "ringOfRosesImage";
         }
         else if (itemName == "ringOfEarth")
@@ -435,7 +442,8 @@ public class ItemSlotManager : MonoBehaviour
             equippedArmor[counter].slotStatus = "closed";
             equippedArmor[counter].itemName = "ringOfEarth";
             equippedArmor[counter].itemDescription = "+1 to dexterity";
-            // equippedArmor[counter].defenseAmount = 2;
+            playerStatScript.dexterity += 1;
+
             imageName = "ringOfEarthImage";
         }
         else if (itemName == "ringOfKnowledge")
@@ -443,7 +451,8 @@ public class ItemSlotManager : MonoBehaviour
             equippedArmor[counter].slotStatus = "closed";
             equippedArmor[counter].itemName = "ringOfKnowledge";
             equippedArmor[counter].itemDescription = "+1 to intelligence";
-            // equippedArmor[counter].defenseAmount = 2;
+            playerStatScript.intelligence += 1;
+
             imageName = "ringOfKnowledgeImage";
         }
         else if (itemName == "ringOfTheBull")
@@ -451,7 +460,8 @@ public class ItemSlotManager : MonoBehaviour
             equippedArmor[counter].slotStatus = "closed";
             equippedArmor[counter].itemName = "ringOfTheBull";
             equippedArmor[counter].itemDescription = "+1 to strength";
-            // equippedArmor[counter].defenseAmount = 2;
+            playerStatScript.strength += 1;
+
             imageName = "ringOfTheBullImage";
         }
         return imageName;
