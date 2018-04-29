@@ -75,6 +75,7 @@ public class ItemSlotManager : MonoBehaviour
     {
         if (itemName != "potion")
         {
+            rowIndex = 0;
             for (int i = 0; i < listOfSlots.Count; i++)
             {
                 if (i >= 5 && i < 10)
@@ -90,17 +91,19 @@ public class ItemSlotManager : MonoBehaviour
                     rowIndex = 3;
                 }
 
+                slotIndex = i;
                 if (listOfSlots[i].slotStatus == "open")
                 {
                     listOfSlots[i].itemName = itemName;
                     PopulateItemSlot(itemName, i);
-                    slotIndex = i;
                     break;
                 }
             }
         }
 
         slotIndex -= (rowIndex * 5);
+        Debug.Log("slot " + slotIndex);
+        Debug.Log("row " + rowIndex);
 
         if (itemName == "potion")
         {
@@ -115,7 +118,7 @@ public class ItemSlotManager : MonoBehaviour
     public void ItemSelect()
     {
         int itemNumber = pauseMenuButtonsScript.MappingButtonNums(pauseMenuButtonsScript.lastSelected.name);
-        Debug.Log("***** " + itemNumber);
+
         if (itemNumber < 20)
         {
             if (listOfSlots[itemNumber].itemName == "simpleHelmet")
@@ -133,7 +136,7 @@ public class ItemSlotManager : MonoBehaviour
 
                 equippedSection.transform.GetChild(2).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("simpleGlovesImage").GetComponent<Image>().sprite;
 
-                PopulateEquippedSlot(listOfSlots[itemNumber].itemName, 1);
+                PopulateEquippedSlot(listOfSlots[itemNumber].itemName, 2);
                 ClearInventorySpot(itemNumber);
             }
             else if (listOfSlots[itemNumber].itemName == "simpleBoots")
@@ -142,7 +145,7 @@ public class ItemSlotManager : MonoBehaviour
 
                 equippedSection.transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("simpleBootsImage").GetComponent<Image>().sprite;
 
-                PopulateEquippedSlot(listOfSlots[itemNumber].itemName, 2);
+                PopulateEquippedSlot(listOfSlots[itemNumber].itemName, 3);
                 ClearInventorySpot(itemNumber);
             }
             else if (listOfSlots[itemNumber].itemName == "simpleChest")
@@ -151,7 +154,7 @@ public class ItemSlotManager : MonoBehaviour
 
                 equippedSection.transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("simpleChestImage").GetComponent<Image>().sprite;
 
-                PopulateEquippedSlot(listOfSlots[itemNumber].itemName, 3);
+                PopulateEquippedSlot(listOfSlots[itemNumber].itemName, 1);
                 ClearInventorySpot(itemNumber);
             }
             else if (listOfSlots[itemNumber].itemName == "ringOfRoses")
@@ -193,95 +196,117 @@ public class ItemSlotManager : MonoBehaviour
         }
         if (itemNumber > 19)
         {
-            Debug.Log("item number: " + itemNumber);
-            if (equippedArmor[0].itemName == "simpleHelmet")
+            equippedSection = GameObject.Find("EquippedSection");
+
+            if (itemNumber == 20)
             {
+                if (equippedArmor[0].itemName == "simpleHelmet")
+                {
+                    ItemPickUp("simpleHelmet");
+                }
+
                 equippedArmor[0].itemName = "";
                 equippedArmor[0].slotStatus = "open";
                 equippedArmor[0].itemDescription = "";
-                equippedSection = GameObject.Find("EquippedSection");
 
                 equippedSection.transform.GetChild(0).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
-
-                ItemPickUp("simpleHelmet");
             }
-            else if (equippedArmor[2].itemName == "simpleGloves")
+            else if (itemNumber == 22)
             {
-                Debug.Log("getting here");
+                if (equippedArmor[2].itemName == "simpleGloves")
+                {
+                    ItemPickUp("simpleGloves");
+                }
+
                 equippedArmor[2].itemName = "";
                 equippedArmor[2].slotStatus = "open";
                 equippedArmor[2].itemDescription = "";
-                equippedSection = GameObject.Find("EquippedSection");
 
                 equippedSection.transform.GetChild(2).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
-
-                ItemPickUp("simpleGloves");
             }
-            else if (equippedArmor[3].itemName == "simpleBoots")
+            else if (itemNumber == 23)
             {
+                if (equippedArmor[3].itemName == "simpleBoots")
+                {
+                    ItemPickUp("simpleBoots");
+                }
+
                 equippedArmor[3].itemName = "";
                 equippedArmor[3].slotStatus = "open";
                 equippedArmor[3].itemDescription = "";
                 equippedSection = GameObject.Find("EquippedSection");
 
                 equippedSection.transform.GetChild(3).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
-
-                ItemPickUp("simpleBoots");
             }
-            else if (equippedArmor[1].itemName == "simpleChest")
+            else if (itemNumber == 21)
             {
+                if (equippedArmor[1].itemName == "simpleChest")
+                {
+                    ItemPickUp("simpleChest");
+                }
+
                 equippedArmor[1].itemName = "";
                 equippedArmor[1].slotStatus = "open";
                 equippedArmor[1].itemDescription = "";
                 equippedSection = GameObject.Find("EquippedSection");
 
                 equippedSection.transform.GetChild(1).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
-
-                ItemPickUp("simpleChest");
             }
-            else if (equippedArmor[4].itemName == "ringOfRoses")
+            else if (itemNumber == 24)
             {
+                if (equippedArmor[4].itemName == "ringOfRoses")
+                {
+                    ItemPickUp("ringOfRoses");
+                }
+
                 equippedArmor[4].itemName = "";
                 equippedArmor[4].slotStatus = "open";
                 equippedArmor[4].itemDescription = "";
                 equippedSection = GameObject.Find("EquippedSection");
 
                 equippedSection.transform.GetChild(4).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
-
-                ItemPickUp("ringOfRoses");
             }
-            else if (equippedArmor[5].itemName == "ringOfEarth")
+            else if (itemNumber == 25)
             {
+                if (equippedArmor[5].itemName == "ringOfEarth")
+                {
+                    ItemPickUp("ringOfEarth");
+                }
+
                 equippedArmor[5].itemName = "";
                 equippedArmor[5].slotStatus = "open";
                 equippedArmor[5].itemDescription = "";
                 equippedSection = GameObject.Find("EquippedSection");
 
                 equippedSection.transform.GetChild(5).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
-
-                ItemPickUp("ringOfEarth");
             }
-            else if (equippedArmor[6].itemName == "ringOfKnowledge")
+            else if (itemNumber == 26)
             {
+                if (equippedArmor[6].itemName == "ringOfKnowledge")
+                {
+                    ItemPickUp("ringOfKnowledge");
+                }
+
                 equippedArmor[6].itemName = "";
                 equippedArmor[6].slotStatus = "open";
                 equippedArmor[6].itemDescription = "";
                 equippedSection = GameObject.Find("EquippedSection");
 
                 equippedSection.transform.GetChild(6).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
-
-                ItemPickUp("ringOfKnowledge");
             }
-            else if (equippedArmor[7].itemName == "ringOfTheBull")
+            else if (itemNumber == 27)
             {
+                if (equippedArmor[7].itemName == "ringOfTheBull")
+                {
+                    ItemPickUp("ringOfTheBull");
+                }
+
                 equippedArmor[7].itemName = "";
                 equippedArmor[7].slotStatus = "open";
                 equippedArmor[7].itemDescription = "";
                 equippedSection = GameObject.Find("EquippedSection");
 
                 equippedSection.transform.GetChild(7).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
-
-                ItemPickUp("ringOfTheBull");
             }
         }
     }
@@ -447,14 +472,17 @@ public class ItemSlotManager : MonoBehaviour
         {
             rowIndex = 3;
         }
+        itemSection = GameObject.Find("ItemSection");
+
+        listOfSlots[itemNumber].itemName = "";
+        listOfSlots[itemNumber].itemDescription = "";
+        listOfSlots[itemNumber].slotStatus = "open";
+
         itemNumber -= (rowIndex * 5);
 
         itemSection.transform.GetChild(rowIndex).GetChild(itemNumber).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
 
-        itemSection = GameObject.Find("ItemSection");
-        listOfSlots[itemNumber].itemName = "";
-        listOfSlots[itemNumber].itemDescription = "";
-        listOfSlots[itemNumber].slotStatus = "open";
+
     }
 
     public void InventoryReset()
