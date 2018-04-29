@@ -40,8 +40,7 @@ public class PlayerStats : MonoBehaviour
         strength = GlobalDataScript.globalPlayerStrength;
         dexterity = GlobalDataScript.globalPlayerDexterity;
         intelligence = GlobalDataScript.globalPlayerIntelligence;
-        defense = equipmentBuffManagerScript.PlayerDefenseCalculator();
-        
+
         if (strength <= 10)
         {
             playerDamage = 2;
@@ -55,6 +54,8 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        defense = equipmentBuffManagerScript.PlayerDefenseCalculator();
+
         if (strength <= 10)
         {
             playerDamage = 2;

@@ -12,21 +12,26 @@ public class Reload : MonoBehaviour
     public PlayerHealthManager playerHealth;
     public PlayerController thePlayer;
     private DialogueManager theDM;
+    private LoadNewArea loadNewAreaScript;
     public float waitToReload;
     private static bool reloadExists;
     public bool reloadIs;
     public PlayerStaminaManager staminaMan;
     public GameObject playerObject;
     private GlobalDataScript globalData;
+    private ItemSlotManager itemSlotManagerScript;
 
     void Start()
 
     {
         thePlayer = FindObjectOfType<PlayerController>();
+        loadNewAreaScript = FindObjectOfType<LoadNewArea>();
 
         theDM = FindObjectOfType<DialogueManager>();
 
         playerObject = GameObject.Find("Player");
+        itemSlotManagerScript = FindObjectOfType<ItemSlotManager>();
+
         playerHealth = playerObject.GetComponent<PlayerHealthManager>();
         globalData = FindObjectOfType<GlobalDataScript>();
 
@@ -43,6 +48,10 @@ public class Reload : MonoBehaviour
 
         if (playerHealth.playerCurrentHealth <= 0)
         {
+            itemSlotManagerScript.InventoryReset();
+            globalData.Save(itemSlotManagerScript.listOfSlots, itemSlotManagerScript.equippedArmor);
+            // loadNewAreaScript.SetAllForLvl();
+
             waitToReload -= Time.deltaTime;
             reloadIs = true;
 
