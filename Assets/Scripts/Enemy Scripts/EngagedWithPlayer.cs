@@ -513,6 +513,9 @@ public class EngagedWithPlayer : MonoBehaviour
     public int CalculatePlayerDefense(int defense)
     {
         int damageReduction = 0;
+        
+        Debug.Log("defense" + defense);
+
         int randomNum = UnityEngine.Random.Range(1, 11);
         if (randomNum <= defense)
         {

@@ -19,6 +19,7 @@ public class EquipmentBuffManager : MonoBehaviour
     public int PlayerDefenseCalculator()
     {
         int defense = 0;
+
         foreach (ItemSlot item in itemSlotManagerScript.equippedArmor)
         {
             defense += item.defenseAmount;
