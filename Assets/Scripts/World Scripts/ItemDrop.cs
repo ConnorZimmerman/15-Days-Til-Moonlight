@@ -62,6 +62,47 @@ public class ItemDrop : MonoBehaviour
             GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation);
         }
 
+        if (randomNum >= 135 && randomNum < 150)
+        {
+            GameObject randomDrop = GameObject.Find("simpleGloves");
+            GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation);
+        }
+        else if (randomNum >= 151 && randomNum < 165)
+        {
+            GameObject randomDrop = GameObject.Find("simpleBoots");
+            GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation);
+        }
+        else if (randomNum >= 165 && randomNum < 170)
+        {
+            GameObject randomDrop = GameObject.Find("ringOfRoses");
+            GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation);
+        }
+        else if (randomNum >= 170 && randomNum < 175)
+        {
+            GameObject randomDrop = GameObject.Find("ringOfEarth");
+            GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation);
+        }
+        else if (randomNum >= 175 && randomNum < 180)
+        {
+            GameObject randomDrop = GameObject.Find("ringOfKnowledge");
+            GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation);
+        }
+        else if (randomNum >= 180 && randomNum < 185)
+        {
+            GameObject randomDrop = GameObject.Find("ringOfTheBull");
+            GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation);
+        }
+        else if (randomNum >= 185 && randomNum < 195)
+        {
+            GameObject randomDrop = GameObject.Find("simpleHelmet");
+            GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation);
+        }
+        else if (randomNum >= 195 && randomNum < 200)
+        {
+            GameObject randomDrop = GameObject.Find("simpleBoots");
+            GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation);
+        }
+
     }
 
     public int LuckCalculator()
@@ -140,7 +181,6 @@ public class ItemDrop : MonoBehaviour
         if (other.gameObject.name == "Player")
         {
             GetItem();
-            // Debug.Log(this.gameObject.tag);
             itemSlotManagerScript.ItemPickUp(this.gameObject.tag);
             Destroy(gameObject);
         }
