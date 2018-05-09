@@ -97,9 +97,9 @@ public class ItemDrop : MonoBehaviour
             GameObject randomDrop = GameObject.Find("simpleHelmet");
             GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation);
         }
-        else if (randomNum >= 195 && randomNum < 200)
+        else if (randomNum >= 195)
         {
-            GameObject randomDrop = GameObject.Find("simpleBoots");
+            GameObject randomDrop = GameObject.Find("simpleChest");
             GameObject newItem = Instantiate(randomDrop, enemyObject.transform.position, enemyObject.transform.rotation);
         }
 
@@ -107,17 +107,17 @@ public class ItemDrop : MonoBehaviour
 
     public int LuckCalculator()
     {
-        int randomNum = (UnityEngine.Random.Range(0, 51)) + ((playerStatScript.intelligence) - 5);
-        if (randomNum >= 50)
+        int randomNum = (UnityEngine.Random.Range(0, 51)) + ((playerStatScript.intelligence));
+        if (randomNum >= 40)
         {
-            randomNum = (UnityEngine.Random.Range(50, 101)) + ((playerStatScript.intelligence) - 5);
+            randomNum = (UnityEngine.Random.Range(50, 101)) + ((playerStatScript.intelligence));
 
             // tier 2
-            if (randomNum >= 100)
+            if (randomNum >= 95)
             {
                 if (playerStatScript.intelligence >= 10)
                 {
-                    randomNum = (UnityEngine.Random.Range(101, 201)) + ((playerStatScript.intelligence) - 5);
+                    randomNum = (UnityEngine.Random.Range(101, 201)) + ((playerStatScript.intelligence));
                 }
                 else
                 {
@@ -128,7 +128,7 @@ public class ItemDrop : MonoBehaviour
                 {
                     if (playerStatScript.intelligence >= 20)
                     {
-                        randomNum = (UnityEngine.Random.Range(201, 301)) + ((playerStatScript.intelligence) - 5);
+                        randomNum = (UnityEngine.Random.Range(201, 301)) + ((playerStatScript.intelligence));
                     }
                     else
                     {
@@ -139,7 +139,7 @@ public class ItemDrop : MonoBehaviour
                     {
                         if (playerStatScript.intelligence >= 30)
                         {
-                            randomNum = (UnityEngine.Random.Range(301, 401)) + ((playerStatScript.intelligence) - 5);
+                            randomNum = (UnityEngine.Random.Range(301, 401)) + ((playerStatScript.intelligence));
                         }
                         else
                         {
@@ -151,7 +151,7 @@ public class ItemDrop : MonoBehaviour
                     {
                         if (playerStatScript.intelligence >= 40)
                         {
-                            randomNum = (UnityEngine.Random.Range(401, 501)) + ((playerStatScript.intelligence) - 5);
+                            randomNum = (UnityEngine.Random.Range(401, 501)) + ((playerStatScript.intelligence));
                         }
                         else
                         {
@@ -163,7 +163,7 @@ public class ItemDrop : MonoBehaviour
                     {
                         if (playerStatScript.intelligence >= 50)
                         {
-                            randomNum = (UnityEngine.Random.Range(501, 601)) + ((playerStatScript.intelligence) - 5);
+                            randomNum = (UnityEngine.Random.Range(501, 601)) + ((playerStatScript.intelligence));
                         }
                         else
                         {
