@@ -395,8 +395,8 @@ public class EngagedWithPlayer : MonoBehaviour
                 Quaternion.Euler(Vector3.zero));
             clone.GetComponent<FloatingNumbers>().damageNumber = currentDamage;
         }
-        if (attacking && thePlayer.damagePossible
-        && faceOff)
+
+        if (attacking && thePlayer.damagePossible && faceOff)
         {
             strikeBlock = true;
 
@@ -477,20 +477,23 @@ public class EngagedWithPlayer : MonoBehaviour
         float enemyTrackX = transform.position.x;
         float enemyTrackY = transform.position.y;
 
+        Debug.Log("ok ok ok " + thePlayer.directionInt);
+        Debug.Log("ok ok ok enemy " + enemyMoveDirectionX);
+
         // Debug.Log("Enemy master x: " + trackingMasterX);
         // Debug.Log("Enemy master Y: " + trackingMasterY);
         if (trackingMasterX < 0)
         {
             if (trackingMasterY < 0)
             {
-                if (thePlayer.directionInt == 0 && enemyMoveDirectionX == 3)
+                if (thePlayer.directionInt == 0 && enemyMoveDirectionX == 3 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 0 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 1 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 3)
                 {
                     return false;
                 }
             }
             else if (trackingMasterY > 0)
             {
-                if (thePlayer.directionInt == 2 && enemyMoveDirectionX == 3)
+                if (thePlayer.directionInt == 2 && enemyMoveDirectionX == 3 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 0 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 1 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 3)
                 {
                     return false;
                 }
@@ -500,14 +503,15 @@ public class EngagedWithPlayer : MonoBehaviour
         {
             if (trackingMasterY < 0)
             {
-                if (thePlayer.directionInt == 0 && enemyMoveDirectionX == 1)
+                if (thePlayer.directionInt == 0 && enemyMoveDirectionX == 1 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 0 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 3)
                 {
                     return false;
                 }
             }
             else if (trackingMasterY > 0)
             {
-                if (thePlayer.directionInt == 2 && enemyMoveDirectionX == 1)
+                // extra ||s for bug where enemy can still hit player when blocking
+                if (thePlayer.directionInt == 2 && enemyMoveDirectionX == 1 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 0 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 1 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 3)
                 {
                     return false;
                 }
