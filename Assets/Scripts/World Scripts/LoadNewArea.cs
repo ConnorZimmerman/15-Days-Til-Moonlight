@@ -90,6 +90,12 @@ public class LoadNewArea : MonoBehaviour
             SceneManager.LoadScene("Snowy_Graveyard", LoadSceneMode.Single);
             PlayerPrefs.SetString("Global Player Start Point", "Snowy_Graveyard_Crossroads");
         }
+        else if (other.gameObject.name == "Player" && curLvl == "SnowyD_Crossroads" && this.gameObject.name == "SnowyE_maze_entrance")
+        {
+            SetAllForLvl();
+            SceneManager.LoadScene("SnowyE_maze_entrance", LoadSceneMode.Single);
+            PlayerPrefs.SetString("Global Player Start Point", "SnowyE_maze_entrance");
+        }
         // Snowy Graveyard Exits
         else if (other.gameObject.name == "Player" && curLvl == "Snowy_Graveyard" && this.gameObject.name == "Snowy_Crossroads_Entry")
         {
@@ -97,10 +103,16 @@ public class LoadNewArea : MonoBehaviour
             SceneManager.LoadScene("SnowyD_Crossroads", LoadSceneMode.Single);
             PlayerPrefs.SetString("Global Player Start Point", "Snowy_D_Graveyard_Entry");
         }
+        // Snowy E Maze Exits
+        else if (other.gameObject.name == "Player" && curLvl == "SnowyE_maze_entrance" && this.gameObject.name == "Snowy_Crossroads_Entry")
+        {
+            SetAllForLvl();
+            SceneManager.LoadScene("SnowyD_Crossroads", LoadSceneMode.Single);
+            PlayerPrefs.SetString("Global Player Start Point", "Snowy_D_Maze_Entry");
+        }
     }
     public void SetAllForLvl()
     {
-        // Debug.Log(itemSlotManager.listOfSlots[0].itemName);
         globalDataScript.Save(itemSlotManager.listOfSlots, itemSlotManager.equippedArmor);
 
         PlayerPrefs.SetInt("Global Player Current Health", playerHealth.playerCurrentHealth);
