@@ -29,15 +29,15 @@ public class LoadNewArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        thePlayer = FindObjectOfType<PlayerController>();
-        playerHealth = FindObjectOfType<PlayerHealthManager>();
-        playerStamina = FindObjectOfType<PlayerStaminaManager>();
-        playerRangedAttack = FindObjectOfType<PlayerRangedAttack>();
-        playerStatsScript = FindObjectOfType<PlayerStats>();
-        startPoint = FindObjectOfType<PlayerStartPoint>();
-        globalDataScript = FindObjectOfType<GlobalDataScript>();
-        itemSlotManager = FindObjectOfType<ItemSlotManager>();
-        curLvl = SceneManager.GetActiveScene().name;
+        // thePlayer = FindObjectOfType<PlayerController>();
+        // playerHealth = FindObjectOfType<PlayerHealthManager>();
+        // playerStamina = FindObjectOfType<PlayerStaminaManager>();
+        // playerRangedAttack = FindObjectOfType<PlayerRangedAttack>();
+        // playerStatsScript = FindObjectOfType<PlayerStats>();
+        // startPoint = FindObjectOfType<PlayerStartPoint>();
+        // globalDataScript = FindObjectOfType<GlobalDataScript>();
+        // itemSlotManager = FindObjectOfType<ItemSlotManager>();
+        // curLvl = SceneManager.GetActiveScene().name;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -76,6 +76,12 @@ public class LoadNewArea : MonoBehaviour
             SceneManager.LoadScene("SnowyA", LoadSceneMode.Single);
             PlayerPrefs.SetString("Global Player Start Point", "Snowy_A_C_Entrance");
         }
+        else if (other.gameObject.name == "Player" && curLvl == "SnowyC" && this.gameObject.name == "MountainAEntry")
+        {
+            SetAllForLvl();
+            SceneManager.LoadScene("MountainA", LoadSceneMode.Single);
+            PlayerPrefs.SetString("Global Player Start Point", "Mountain_Snowy_A_Entrance");
+        }
         // Snowy D Exits
         else if (other.gameObject.name == "Player" && curLvl == "SnowyD_Crossroads" && this.gameObject.name == "SnowyBEntry")
         {
@@ -103,12 +109,25 @@ public class LoadNewArea : MonoBehaviour
             SceneManager.LoadScene("SnowyD_Crossroads", LoadSceneMode.Single);
             PlayerPrefs.SetString("Global Player Start Point", "Snowy_D_Graveyard_Entry");
         }
+        else if (other.gameObject.name == "Player" && curLvl == "Snowy_Graveyard" && this.gameObject.name == "Dungeon_A_Entry")
+        {
+            SetAllForLvl();
+            SceneManager.LoadScene("DungeonA", LoadSceneMode.Single);
+            PlayerPrefs.SetString("Global Player Start Point", "DungeonA_Snowy_Graveyard");
+        }
         // Snowy E Maze Exits
         else if (other.gameObject.name == "Player" && curLvl == "SnowyE_maze_entrance" && this.gameObject.name == "Snowy_Crossroads_Entry")
         {
             SetAllForLvl();
             SceneManager.LoadScene("SnowyD_Crossroads", LoadSceneMode.Single);
             PlayerPrefs.SetString("Global Player Start Point", "Snowy_D_Maze_Entry");
+        }
+        // Mountain A Exits
+        else if (other.gameObject.name == "Player" && curLvl == "MountainA" && this.gameObject.name == "SnowyCEntry")
+        {
+            SetAllForLvl();
+            SceneManager.LoadScene("SnowyC", LoadSceneMode.Single);
+            PlayerPrefs.SetString("Global Player Start Point", "Snowy_C_Mountain_Entrance");
         }
     }
     public void SetAllForLvl()
@@ -138,6 +157,19 @@ public class LoadNewArea : MonoBehaviour
         {
             PlayerPrefs.SetInt("Global Player Lock On", 0);
         }
+    }
+
+    public void UpdateVariables()
+    {
+        thePlayer = FindObjectOfType<PlayerController>();
+        playerHealth = FindObjectOfType<PlayerHealthManager>();
+        playerStamina = FindObjectOfType<PlayerStaminaManager>();
+        playerRangedAttack = FindObjectOfType<PlayerRangedAttack>();
+        playerStatsScript = FindObjectOfType<PlayerStats>();
+        startPoint = FindObjectOfType<PlayerStartPoint>();
+        globalDataScript = FindObjectOfType<GlobalDataScript>();
+        itemSlotManager = FindObjectOfType<ItemSlotManager>();
+        curLvl = SceneManager.GetActiveScene().name;
     }
 
 }
