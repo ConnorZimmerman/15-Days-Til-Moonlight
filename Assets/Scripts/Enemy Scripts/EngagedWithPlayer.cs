@@ -477,9 +477,6 @@ public class EngagedWithPlayer : MonoBehaviour
         float enemyTrackX = transform.position.x;
         float enemyTrackY = transform.position.y;
 
-        Debug.Log("ok ok ok " + thePlayer.directionInt);
-        Debug.Log("ok ok ok enemy " + enemyMoveDirectionX);
-
         // Debug.Log("Enemy master x: " + trackingMasterX);
         // Debug.Log("Enemy master Y: " + trackingMasterY);
         if (trackingMasterX < 0)

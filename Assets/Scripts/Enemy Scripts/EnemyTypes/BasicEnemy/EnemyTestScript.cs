@@ -206,10 +206,12 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             enemyShieldStrike = false;
             shieldBreakRecoveryCounter = 0.5f;
         }
-        // if (thePlayer.preAttack || thePlayer.damagePossible || playerEngagement.thePlayerDeathStrike && playerEngagement.colliderOn)
-        // {
-        //     dodgingFive = true;
-        // }
+
+        if (following)
+        {
+            FollowingPlayer();
+            ChooseDirection();
+        }
 
         if (enemyHealthMan.CurrentHealth < enemyHealthMan.oldCurrentHealth)
         {
@@ -750,150 +752,13 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         // }
     }
 
-    public void OnTriggerStay2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.name == "Player" && !playerEngagement.colliderOn && !playerEngagement.wallBlock)
         {
-
             if (!deathSeven) // && enemyMoving)
             {
                 following = true;
-                if (raycastPath.lineOfSight && !playerEngagement.colliderOn)
-                {
-                    raycastPath.enqueue = false;
-                    // if (!shieldUpTwo)
-                    // {
-                    transform.position = Vector2.MoveTowards(transform.position,
-                    playerObject.transform.position, speed * Time.deltaTime);
-                    // }
-                }
-                else
-                {
-                    if (raycastPath.path != null)
-                    {
-                        foreach (Vector2 n in raycastPath.path)
-                        {
-                            enemyPos = enemyObject.transform.position;
-                            if (enemyPos != n)
-                            {
-                                transform.position = Vector2.MoveTowards(transform.position,
-                                n, (speed) * Time.deltaTime);
-                            }
-                            if (!raycastPath.lineOfSight)
-                            {
-                                raycastPath.enqueue = false;
-                                break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        enemyMoving = false;
-                        following = false;
-                    }
-                }
-
-
-                playerTrackX = playerObject.transform.position.x;
-                playerTrackY = playerObject.transform.position.y;
-
-                trackingMasterX = playerTrackX - transform.position.x;
-                trackingMasterY = playerTrackY - transform.position.y;
-
-                enemyTrackX = transform.position.x;
-                enemyTrackY = transform.position.y;
-
-                if (trackingMasterY > 0)
-                {
-                    if (trackingMasterX > 0) //Quadrant 2
-                    {
-                        if (enemyShield && moveDirectionX == 0)
-                        {
-                            correctSideForDeathStrikeBool = false;
-                        }
-                        else
-                        {
-                            correctSideForDeathStrikeBool = true;
-                        }
-
-                        if (trackingMasterX < trackingMasterY)
-                        {
-                            lastMove.x = 0;
-                            lastMove.y = 0;
-                            moveDirectionX = 0;
-                            moveDirectionY = 0;
-                            actionControl = 1;
-                        }
-                        else
-                        {
-                            lastMove.x = 1;
-                            lastMove.y = 1;
-                            moveDirectionX = 1;
-                            moveDirectionY = 1;
-                            actionControl = 2;
-                        }
-                    }
-                    else if (trackingMasterX < 0)
-                    {
-                        if (Math.Abs(trackingMasterX) > trackingMasterY) //Quadrant 1
-                        {
-                            lastMove.x = 3;
-                            lastMove.y = 3;
-                            moveDirectionX = 3;
-                            moveDirectionY = 3;
-                            actionControl = 1;
-                        }
-                        else
-                        {
-                            lastMove.x = 0;
-                            lastMove.y = 0;
-                            moveDirectionX = 0;
-                            moveDirectionY = 0;
-                            actionControl = 3;
-                        }
-                    }
-                }
-                else if (trackingMasterY < 0) //Quadrant 4
-                {
-                    if (trackingMasterX < 0)
-                    {
-                        if (trackingMasterX > trackingMasterY)
-                        {
-                            lastMove.x = 2;
-                            lastMove.y = 2;
-                            moveDirectionX = 2;
-                            moveDirectionY = 2;
-                            actionControl = 0;
-                        }
-                        else if (trackingMasterX < trackingMasterY)
-                        {
-                            lastMove.x = 3;
-                            lastMove.y = 3;
-                            moveDirectionX = 3;
-                            moveDirectionY = 3;
-                            actionControl = 3;
-                        }
-                    }
-                    else if (trackingMasterX > 0) //Quadrant 3
-                    {
-                        if (Math.Abs(trackingMasterY) > trackingMasterX)
-                        {
-                            lastMove.x = 2;
-                            lastMove.y = 2;
-                            moveDirectionX = 2;
-                            moveDirectionY = 2;
-                            actionControl = 2;
-                        }
-                        else
-                        {
-                            lastMove.x = 1;
-                            lastMove.y = 1;
-                            moveDirectionX = 1;
-                            moveDirectionY = 1;
-                            actionControl = 0;
-                        }
-                    }
-                }
             }
         }
         else
@@ -929,7 +794,148 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         playerEngagement.enemyTestScriptVariables(localAttackLock);
     }
 
+    public void FollowingPlayer()
+    {
+        following = true;
+        if (raycastPath.lineOfSight && !playerEngagement.colliderOn)
+        {
+            raycastPath.enqueue = false;
+            // if (!shieldUpTwo)
+            // {
+            transform.position = Vector2.MoveTowards(transform.position,
+            playerObject.transform.position, speed * Time.deltaTime);
+            // }
+        }
+        else
+        {
+            if (raycastPath.path != null)
+            {
+                foreach (Vector2 n in raycastPath.path)
+                {
+                    enemyPos = enemyObject.transform.position;
+                    if (enemyPos != n)
+                    {
+                        transform.position = Vector2.MoveTowards(transform.position,
+                        n, (speed) * Time.deltaTime);
+                    }
+                    if (!raycastPath.lineOfSight)
+                    {
+                        raycastPath.enqueue = false;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                enemyMoving = false;
+                following = false;
+            }
+        }
+    }
 
+    public void ChooseDirection()
+    {
+        playerTrackX = playerObject.transform.position.x;
+        playerTrackY = playerObject.transform.position.y;
+
+        trackingMasterX = playerTrackX - transform.position.x;
+        trackingMasterY = playerTrackY - transform.position.y;
+
+        enemyTrackX = transform.position.x;
+        enemyTrackY = transform.position.y;
+
+        if (trackingMasterY > 0)
+        {
+            if (trackingMasterX > 0) //Quadrant 2
+            {
+                if (enemyShield && moveDirectionX == 0)
+                {
+                    correctSideForDeathStrikeBool = false;
+                }
+                else
+                {
+                    correctSideForDeathStrikeBool = true;
+                }
+
+                if (trackingMasterX < trackingMasterY)
+                {
+                    lastMove.x = 0;
+                    lastMove.y = 0;
+                    moveDirectionX = 0;
+                    moveDirectionY = 0;
+                    actionControl = 1;
+                }
+                else
+                {
+                    lastMove.x = 1;
+                    lastMove.y = 1;
+                    moveDirectionX = 1;
+                    moveDirectionY = 1;
+                    actionControl = 2;
+                }
+            }
+            else if (trackingMasterX < 0)
+            {
+                if (Math.Abs(trackingMasterX) > trackingMasterY) //Quadrant 1
+                {
+                    lastMove.x = 3;
+                    lastMove.y = 3;
+                    moveDirectionX = 3;
+                    moveDirectionY = 3;
+                    actionControl = 1;
+                }
+                else
+                {
+                    lastMove.x = 0;
+                    lastMove.y = 0;
+                    moveDirectionX = 0;
+                    moveDirectionY = 0;
+                    actionControl = 3;
+                }
+            }
+        }
+        else if (trackingMasterY < 0) //Quadrant 4
+        {
+            if (trackingMasterX < 0)
+            {
+                if (trackingMasterX > trackingMasterY)
+                {
+                    lastMove.x = 2;
+                    lastMove.y = 2;
+                    moveDirectionX = 2;
+                    moveDirectionY = 2;
+                    actionControl = 0;
+                }
+                else if (trackingMasterX < trackingMasterY)
+                {
+                    lastMove.x = 3;
+                    lastMove.y = 3;
+                    moveDirectionX = 3;
+                    moveDirectionY = 3;
+                    actionControl = 3;
+                }
+            }
+            else if (trackingMasterX > 0) //Quadrant 3
+            {
+                if (Math.Abs(trackingMasterY) > trackingMasterX)
+                {
+                    lastMove.x = 2;
+                    lastMove.y = 2;
+                    moveDirectionX = 2;
+                    moveDirectionY = 2;
+                    actionControl = 2;
+                }
+                else
+                {
+                    lastMove.x = 1;
+                    lastMove.y = 1;
+                    moveDirectionX = 1;
+                    moveDirectionY = 1;
+                    actionControl = 0;
+                }
+            }
+        }
+    }
 }
 
 
