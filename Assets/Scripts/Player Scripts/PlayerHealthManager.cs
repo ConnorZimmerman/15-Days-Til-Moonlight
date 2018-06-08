@@ -19,7 +19,6 @@ public class PlayerHealthManager : MonoBehaviour
 
     private SpriteRenderer playerSprite;
     private PlayerStats playerStatsScript;
-
     public float waitToReload;
 
     public bool playerIsDead;
@@ -36,8 +35,8 @@ public class PlayerHealthManager : MonoBehaviour
         playerDamage = false;
         playerSprite = GetComponent<SpriteRenderer>();
         playerStatsScript = FindObjectOfType<PlayerStats>();
-        playerCurrentHealth = GlobalDataScript.globalPlayerCurrentHealth;
         playerMaxHealth = GlobalDataScript.globalPlayerVitality;
+        playerCurrentHealth = GlobalDataScript.globalPlayerCurrentHealth;
         oldPlayerCurrentHealth = playerCurrentHealth;
         // thePlayer = FindObjectOfType<PlayerController>();
     }
@@ -50,14 +49,11 @@ public class PlayerHealthManager : MonoBehaviour
         if (playerCurrentHealth <= 0)
         {
             playerIsDead = true;
-            //PlayerController.staminaAttackDrainBool = false;
-            //thePlayer.staminaAttackDrainBool = false;
+
+            PlayerPrefs.SetString("Global Player Cur Lvl", "SnowyA");
+            PlayerPrefs.SetString("Global Player Start Point", "SnowyA_StartPoint");
 
             gameObject.SetActive(false);
-
-            //return;
-
-            //GetComponent<Reload>();
         }
 
         if (playerCurrentHealth > playerMaxHealth)

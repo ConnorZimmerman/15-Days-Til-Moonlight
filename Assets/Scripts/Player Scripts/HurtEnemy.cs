@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HurtEnemy : MonoBehaviour
 {
-    public int damageToGive;
+    private int damageToGive;
     public int currentDamage;
     public GameObject damageBurst;
     public Transform hitPoint;
@@ -20,6 +20,8 @@ public class HurtEnemy : MonoBehaviour
     private EngagedWithPlayer playerEngagement;
     private PlayerStaminaManager staminaManager;
     public bool recovVar;
+    private PlayerStats playerStats;
+
     void Start()
     {
         sfxMan = FindObjectOfType<SFXManager>();
@@ -28,10 +30,13 @@ public class HurtEnemy : MonoBehaviour
         thePlayer = FindObjectOfType<PlayerController>();
         hurtPlayer = FindObjectOfType<HurtPlayerUpdated>();
         staminaManager = FindObjectOfType<PlayerStaminaManager>();
+        playerStats = FindObjectOfType<PlayerStats>();
 
         thePS = FindObjectOfType<PlayerStats>();
 
         recovVar = false;
+
+        damageToGive = thePS.playerDamage;
         // damageBurst = GameObject.Find("BloodBurst");
 
     }
@@ -56,6 +61,7 @@ public class HurtEnemy : MonoBehaviour
             || other.gameObject.tag == "Enemy1")
         {
             enemyHit = true;
+            staminaManager.playerCurrentStamina += 20;
 
             if (playerEngagement.attacking && thePlayer.damagePossible
             && playerEngagement.faceOff)
@@ -68,20 +74,47 @@ public class HurtEnemy : MonoBehaviour
             //was else if
             if (!thePlayer.noDamageIsTaken && !playerEngagement.attacking)
             {
-                if (thePlayer.wasSprint && staminaManager.playerCurrentStamina > 500)
+                if (thePlayer.wasSprint && staminaManager.playerCurrentStamina > 50 && playerStats.dexterity >= 14 && playerStats.strength >= 9)
                 {
-                    currentDamage = damageToGive + thePS.currentAttack + 1;
+                    if (playerStats.strength == 11)
+                    {
+                        currentDamage = damageToGive + thePS.currentAttack + 2;
+                    }
+                    else
+                    {
+                        currentDamage = damageToGive + thePS.currentAttack + 1;
+                    }
+                    // currentDamage = damageToGive + thePS.currentAttack + 1;
+                    // Debug.Log(currentDamage);
                 }
                 else
                 {
-                    currentDamage = damageToGive + thePS.currentAttack;
+                    if (playerStats.strength == 11)
+                    {
+                        currentDamage = damageToGive + thePS.currentAttack + 1;
+                    }
+                    else
+                    {
+                        currentDamage = damageToGive + thePS.currentAttack;
+                    }
                 }
                 sfxMan.blood.Play();
-                other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(currentDamage);
-                Instantiate(damageBurst, hitPoint.position, hitPoint.rotation);
-                var clone = (GameObject)Instantiate(damageNumber, hitPoint.position,
-                    Quaternion.Euler(Vector3.zero));
-                clone.GetComponent<FloatingNumbers>().damageNumber = currentDamage;
+                if (this.gameObject.tag == "Throwing Knife")
+                {
+                    other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(1);
+                    Instantiate(damageBurst, hitPoint.position, hitPoint.rotation);
+                    var clone = (GameObject)Instantiate(damageNumber, hitPoint.position,
+                        Quaternion.Euler(Vector3.zero));
+                    clone.GetComponent<FloatingNumbers>().damageNumber = currentDamage;
+                }
+                else
+                {
+                    other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(currentDamage);
+                    Instantiate(damageBurst, hitPoint.position, hitPoint.rotation);
+                    var clone = (GameObject)Instantiate(damageNumber, hitPoint.position,
+                        Quaternion.Euler(Vector3.zero));
+                    clone.GetComponent<FloatingNumbers>().damageNumber = currentDamage;
+                }
             }
         }
         else if (other.gameObject.tag == "Enemy" && other.gameObject.GetComponent<EnemyTestScript>().enemyShield && !thePlayer.deathStrike

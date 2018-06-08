@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyMasterScript : MonoBehaviour
 {
-
     public int locateEnemyClass;
     public int enemyMaxHealth;
     public int damageToGive;
@@ -14,9 +13,9 @@ public class EnemyMasterScript : MonoBehaviour
     {
         if (this.gameObject.transform.tag == "Enemy")
         {
-            enemyMaxHealth = 2;
+            enemyMaxHealth = 3;
             locateEnemyClass = 1;
-            damageToGive = 2;
+            damageToGive = 3;
         }
         if (this.gameObject.transform.tag == "LargeEnemyBasic")
         {
@@ -25,7 +24,7 @@ public class EnemyMasterScript : MonoBehaviour
             damageToGive = 3;
         }
         if(this.gameObject.transform.tag == "BasicRangedEnemy"){
-            enemyMaxHealth = 1;
+            enemyMaxHealth = 2;
             damageToGive = 2;
         }
     }
@@ -35,7 +34,7 @@ public class EnemyMasterScript : MonoBehaviour
     {
         if (this.gameObject.transform.tag == "Enemy")
         {
-            enemyMaxHealth = 2;
+            enemyMaxHealth = 3;
             locateEnemyClass = 1;
             damageToGive = 2;
             return;
@@ -48,8 +47,8 @@ public class EnemyMasterScript : MonoBehaviour
             return;
         }
         if(this.gameObject.transform.tag == "BasicRangedEnemy"){
-            enemyMaxHealth = 1;
-            damageToGive = 2;
+            enemyMaxHealth = 2;
+            damageToGive = 1;
             return;
         }
     }

@@ -14,6 +14,7 @@ public class TrackingRaycast : MonoBehaviour
     //public List<Node> pathFound;
     public Vector2[] path;
     private Pathfinding pathfinder;
+    public float pathfindingTimer;
     public bool enqueue;
 
     // Use this for initialization
@@ -24,6 +25,7 @@ public class TrackingRaycast : MonoBehaviour
         playerObject = GameObject.Find("Player");
         pathfinder = FindObjectOfType<Pathfinding>();
         enqueue = false;
+        pathfindingTimer = 0.4f;
 
     }
 
@@ -37,37 +39,48 @@ public class TrackingRaycast : MonoBehaviour
 
             // if (!enemyScript.isPathfinding)
             // {
-            RaycastHit2D hit = Physics2D.Raycast(enemyObject.transform.position, targetDir, distanceToPlayer, 1 << 8 | 1 << 9 | 1 << 13);
-            // Debug.Log(hit.collider.tag);
-            if (hit.collider.tag == "Player")
+            if (pathfindingTimer == 0.4f)
             {
-                lineOfSight = true;
-            }
-            else
-            {
-                lineOfSight = false;
-                enemyPos = enemyObject.transform.position;
-                playerPos = playerObject.transform.position;
-                if (!enqueue)
+                RaycastHit2D hit = Physics2D.Raycast(enemyObject.transform.position, targetDir, distanceToPlayer, 1 << 8 | 1 << 9 | 1 << 13);
+                // Debug.Log(hit.collider.tag);
+                if (hit.collider.tag == "Player")
                 {
-                    // enemyScript.following = false;
-                    enqueue = true;
-                    PathRequestManager.RequestPath(enemyPos, playerPos, OnPathFound);
-                    // enemyScript.following = true;
+                    lineOfSight = true;
                 }
-                // }
-            }
-            if (!lineOfSight)
-            {
-                lineOfSight = false;
-                enemyPos = enemyObject.transform.position;
-                playerPos = playerObject.transform.position;
-                if (!enqueue)
+                else
                 {
-                    enqueue = true;
-                    PathRequestManager.RequestPath(enemyPos, playerPos, OnPathFound);
+                    lineOfSight = false;
+                    enemyPos = enemyObject.transform.position;
+                    playerPos = playerObject.transform.position;
+                    if (!enqueue)
+                    {
+                        // enemyScript.following = false;
+                        enqueue = true;
+                        PathRequestManager.RequestPath(enemyPos, playerPos, OnPathFound);
+                        // enemyScript.following = true;
+                    }
+                    // }
                 }
-                // pathFound = pathfinder.FindPath(enemyPos, playerPos);
+                if (!lineOfSight)
+                {
+                    lineOfSight = false;
+                    enemyPos = enemyObject.transform.position;
+                    playerPos = playerObject.transform.position;
+                    if (!enqueue)
+                    {
+                        enqueue = true;
+                        PathRequestManager.RequestPath(enemyPos, playerPos, OnPathFound);
+                    }
+                    // pathFound = pathfinder.FindPath(enemyPos, playerPos);
+                }
+            }
+            if (pathfindingTimer > 0)
+            {
+                pathfindingTimer -= Time.deltaTime;
+            }
+            if (pathfindingTimer <= 0)
+            {
+                pathfindingTimer = 0.4f;
             }
         }
     }

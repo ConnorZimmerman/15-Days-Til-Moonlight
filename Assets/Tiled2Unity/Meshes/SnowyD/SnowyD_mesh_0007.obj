@@ -1,0 +1,24 @@
+﻿# Tiled2Unity generated file. Do not modify by hand.
+# Wavefront file for 'SnowyD_mesh_0007.obj'
+
+# Vertices (Count = 4)
+v -46 -41 0
+v -48 -41 0
+v -48 -39 0
+v -46 -39 0
+
+# Texture cooridinates (Count = 4)
+vt 0.7692308 0.1363636
+vt 0.8461539 0.1363636
+vt 0.8461539 0.1818182
+vt 0.7692308 0.1818182
+
+# Normal
+vn 0 0 -1
+
+# Mesh description
+g SnowyD_mesh_0007
+
+# Faces
+f 1/1/1 2/2/1 3/3/1 4/4/1
+

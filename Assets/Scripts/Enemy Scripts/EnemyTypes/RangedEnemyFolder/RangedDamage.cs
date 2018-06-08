@@ -105,11 +105,17 @@ public class RangedDamage : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Swing Big")
+        {
+            thisKnife.SetActive(false);
+            Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
+            sfxMan.swordsColliding.Play();
+        }
+        if (other.gameObject.tag == "PlayerDamageZone")
         {
             playerEngagement.doingDamage(1, thisKnife);
         }
-        else if (other.gameObject.tag == "Wall")
+        else if (other.gameObject.tag == "Wall" || other.gameObject.tag == "Unwalkable")
         {
             distanceToPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
             if (distanceToPlayer < 12)
@@ -120,12 +126,12 @@ public class RangedDamage : MonoBehaviour
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
             thisKnife.SetActive(false);
         }
-        
+
 
     }
     public void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "PlayerDamageZone")
         {
             thisKnife.SetActive(false);
         }

@@ -1,0 +1,31 @@
+﻿# Tiled2Unity generated file. Do not modify by hand.
+# Wavefront file for 'MountainA_mesh_0006.obj'
+
+# Vertices (Count = 8)
+v -41 -41 0
+v -42 -41 0
+v -42 -40 0
+v -41 -40 0
+v -41 -42 0
+v -42 -42 0
+v -42 -41 0
+v -41 -41 0
+
+# Texture cooridinates (Count = 6)
+vt 0.4285714 0.4285714
+vt 0.5714286 0.4285714
+vt 0.5714286 0.5714285
+vt 0.4285714 0.5714285
+vt 0.7142857 0.4285714
+vt 0.7142857 0.5714285
+
+# Normal
+vn 0 0 -1
+
+# Mesh description
+g MountainA_mesh_0006
+
+# Faces
+f 1/1/1 2/2/1 3/3/1 4/4/1
+f 5/2/1 6/5/1 7/6/1 8/3/1
+

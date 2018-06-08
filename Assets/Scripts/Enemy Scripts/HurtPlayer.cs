@@ -30,7 +30,7 @@ public class HurtPlayer : MonoBehaviour
     {
         if (other.gameObject.name == "Player" && shield.shieldOn == false)
         {
-            currentDamage = damageToGive - thePS.currentDefense;
+            currentDamage = damageToGive - thePS.defense;
             if (currentDamage <= 0)
             {
                 currentDamage = 1;

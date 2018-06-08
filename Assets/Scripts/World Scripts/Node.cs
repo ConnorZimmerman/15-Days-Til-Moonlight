@@ -9,7 +9,7 @@ public class Node : IHeapItem<Node>
     public int gridX;
     public int gridY;
 
-    //Distance to enemy
+    //Distance from enemy
     public int gCost;
 
     //Distance to player
@@ -42,12 +42,14 @@ public class Node : IHeapItem<Node>
             heapIndex = value;
         }
     }
-    public int CompareTo(Node nodeToCompare){
-    	int compare = fCost.CompareTo(nodeToCompare.fCost);
-    	if(compare == 0){
-    		compare = hCost.CompareTo(nodeToCompare.hCost);
-    	}
-    	return -compare;
+    public int CompareTo(Node nodeToCompare)
+    {
+        int compare = fCost.CompareTo(nodeToCompare.fCost);
+        if (compare == 0)
+        {
+            compare = hCost.CompareTo(nodeToCompare.hCost);
+        }
+        return -compare;
     }
 
     // public int CompareTo(object obj)

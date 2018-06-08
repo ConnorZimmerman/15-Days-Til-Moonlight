@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class ShieldBlock : MonoBehaviour
 {
-
     public BoxCollider2D shieldBlock;
-
     private HurtPlayer damageControl;
-
     public int damageTest;
-
     public bool shieldOn;
-
     private float axisInput;
-
     private PlayerStaminaManager playerStaminaMan;
     private PlayerController thePlayer;
+    private PlayerStats playerStatsScript;
+    public int shieldBlocksLeft;
     public bool shieldLockBool; //bool to make player blocking more dynamic (shield is turned off when hit)
 
     // Use this for initialization
@@ -27,10 +23,12 @@ public class ShieldBlock : MonoBehaviour
         thePlayer = FindObjectOfType<PlayerController>();
 
         FindObjectOfType<HurtPlayer>();
+        playerStatsScript = FindObjectOfType<PlayerStats>();
 
         shieldOn = false;
 
         shieldLockBool = false;
+        shieldBlocksLeft = ShieldBlocksLeft();
     }
 
     // Update is called once per frame
@@ -44,12 +42,27 @@ public class ShieldBlock : MonoBehaviour
             shieldOn = false;
         }
 
-        if (axisInput >= 0.2f && playerStaminaMan.playerCurrentStamina > 0 
-            && thePlayer.preAttackCounter == 0.2f && thePlayer.recovAttackCounter == 0.3f 
+        if (!shieldOn)
+        {
+            shieldBlocksLeft = ShieldBlocksLeft();
+        }
+
+        if (shieldBlocksLeft <= 0)
+        {
+            shieldLockBool = true;
+        }
+
+        if (axisInput >= 0.2f && playerStaminaMan.playerCurrentStamina > 0
+            && thePlayer.preAttackCounter == 0.2f && thePlayer.recovAttackCounter == 0.3f
             && thePlayer.attackingCounterNew == 0.06f && !shieldLockBool)
         {
             shieldBlock.isTrigger = false;
             shieldOn = true;
+            // thePlayer.lockOn = true;
+        }
+        else
+        {
+            // thePlayer.lockOn = false;
         }
 
         if (axisInput <= 0f || shieldLockBool)
@@ -58,7 +71,8 @@ public class ShieldBlock : MonoBehaviour
             shieldOn = false;
         }
 
-        if(axisInput <= 0){
+        if (axisInput <= 0)
+        {
             shieldLockBool = false;
         }
 
@@ -73,5 +87,26 @@ public class ShieldBlock : MonoBehaviour
             shieldBlock.isTrigger = true;
             shieldOn = false;
         }
+    }
+
+    int ShieldBlocksLeft()
+    {
+        if (playerStatsScript.strength >= 4 && playerStatsScript.strength < 6)
+        {
+            shieldBlocksLeft = 2;
+        }
+        else if (playerStatsScript.strength >= 6 && playerStatsScript.strength <= 9)
+        {
+            shieldBlocksLeft = 3;
+        }
+        else if (playerStatsScript.strength >= 10)
+        {
+            shieldBlocksLeft = 4;
+        }
+        else
+        {
+            shieldBlocksLeft = 1;
+        }
+        return shieldBlocksLeft;
     }
 }

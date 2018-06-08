@@ -144,6 +144,15 @@ public class EngagedWithPlayer : MonoBehaviour
 
         playerInt = thePlayer.directionInt;
 
+        if (shield.shieldOn)
+        {
+            shieldOn = true;
+        }
+        else
+        {
+            shieldOn = false;
+        }
+
         if (shieldOn)
         {
             if (enemyMoveDirectionX - thePlayer.directionInt == -2
@@ -151,9 +160,13 @@ public class EngagedWithPlayer : MonoBehaviour
             {
                 deathStrike = false;
             }
-            else
+            else if (DetermineDeathStrikeAngle())
             {
                 deathStrike = true;
+            }
+            else
+            {
+                deathStrike = false;
             }
         }
         else
@@ -198,14 +211,6 @@ public class EngagedWithPlayer : MonoBehaviour
         }
 
 
-        if (shield.shieldOn)
-        {
-            shieldOn = true;
-        }
-        else
-        {
-            shieldOn = false;
-        }
 
         if (attacking)
         {
@@ -324,6 +329,7 @@ public class EngagedWithPlayer : MonoBehaviour
 
     public void OnTriggerStay2D(Collider2D other)
     {
+        // Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "Collision")
         {
             wallBlock = true;
@@ -354,8 +360,19 @@ public class EngagedWithPlayer : MonoBehaviour
     {
         if (playerStaminaDrain && playerShield.shieldOn && !deathStrike && colliderOn && !deathSeven)
         {
-            playerStaminaMan.playerCurrentStamina -= 500;
-            playerShield.shieldLockBool = true;
+            PlayerStats playerStats = FindObjectOfType<PlayerStats>();
+            int playerDefense = (playerStats.strength * 30) - 90;
+            if (playerDefense < 0)
+            {
+                playerDefense = 0;
+            }
+            // this else if is added in right now to account for adding to players stamina (remove later)
+            else if (playerDefense > 100)
+            {
+                playerDefense = 100;
+            }
+            playerStaminaMan.playerCurrentStamina -= 100 - playerDefense;
+            playerShield.shieldBlocksLeft -= 2;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
@@ -364,7 +381,7 @@ public class EngagedWithPlayer : MonoBehaviour
 
         if (enemyAttackCounter > 0f && deathStrike && colliderOn && !deathSeven)
         {
-            currentDamage = damageToGive - thePS.currentDefense;
+            currentDamage = damageToGive - CalculatePlayerDefense(thePS.defense);
             playerHealth.playerCurrentHealth -= currentDamage;
             sfxMan.blood.Play();
             if (enemyGameObject.tag == "Enemy")
@@ -378,8 +395,8 @@ public class EngagedWithPlayer : MonoBehaviour
                 Quaternion.Euler(Vector3.zero));
             clone.GetComponent<FloatingNumbers>().damageNumber = currentDamage;
         }
-        if (attacking && thePlayer.damagePossible
-        && faceOff)
+
+        if (attacking && thePlayer.damagePossible && faceOff)
         {
             strikeBlock = true;
 
@@ -404,49 +421,113 @@ public class EngagedWithPlayer : MonoBehaviour
 
     public void doingDamage(int currentDamage, GameObject knifeInstance)
     {
-        rangedDmg++;
-        if (!knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike && rangedDmg >= 2)
+        if (!knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike)
         {
-            playerStaminaMan.playerCurrentStamina -= 500;
+            PlayerStats playerStats = FindObjectOfType<PlayerStats>();
+            int playerDefense = (playerStats.strength * 30) - 90;
+            if (playerDefense < 0)
+            {
+                playerDefense = 0;
+            }
+            // this else if is added in right now to account for adding to players stamina (remove later)
+            else if (playerDefense > 50)
+            {
+                playerDefense = 50;
+            }
+            playerStaminaMan.playerCurrentStamina -= 50 - playerDefense;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
-            playerShield.shieldLockBool = true;
+            playerShield.shieldBlocksLeft -= 1;
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
-            rangedDmg = 0;
             return;
         }
-        else if (rangedDmg >= 2 && knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike)
+        else if (knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike)
         {
+            currentDamage -= CalculatePlayerDefense(thePS.defense);
             playerHealth.playerCurrentHealth -= currentDamage;
-            Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
-            sfxMan.blood.Play();
-            rangedDmg = 0;
+
+            if (currentDamage > 0)
+            {
+                Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
+                sfxMan.blood.Play();
+            }
+            else
+            {
+                sfxMan.swordsColliding.Play();
+                Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
+            }
         }
     }
 
-    //current player ranged damage
-    public void doingDamage(int currentDamage, GameObject knifeInstance, GameObject thePlayer)
-    {
-        rangedDmg++;
-        if (rangedDmg >= 2)
-        {
-            playerStaminaMan.playerCurrentStamina -= 500;
-            sfxMan.swordsColliding.volume = 1;
-            sfxMan.swordsColliding.Play();
-            Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
-            rangedDmg = 0;
-            return;
-        }
-        else if (rangedDmg >= 2 && knifeInstance.GetComponent<RangedDamage>().rangedDeathStrike)
-        {
-            playerHealth.playerCurrentHealth -= currentDamage;
-            Instantiate(bloodBurst, hitPoint.position, hitPoint.rotation);
-            sfxMan.blood.Play();
-            rangedDmg = 0;
-        }
-    }
     public void enemyTestScriptVariables(bool newLocalAttackLock)
     {
         localAttackLock = newLocalAttackLock;
+    }
+
+    // This method ensures that deathstrike can only occur if the enemy is either behind or on the players side
+    public bool DetermineDeathStrikeAngle()
+    {
+        GameObject playerObject = GameObject.Find("Player");
+        float playerTrackX = playerObject.transform.position.x;
+        float playerTrackY = playerObject.transform.position.y;
+
+        float trackingMasterX = playerTrackX - transform.position.x;
+        float trackingMasterY = playerTrackY - transform.position.y;
+
+        float enemyTrackX = transform.position.x;
+        float enemyTrackY = transform.position.y;
+
+        // Debug.Log("Enemy master x: " + trackingMasterX);
+        // Debug.Log("Enemy master Y: " + trackingMasterY);
+        if (trackingMasterX < 0)
+        {
+            if (trackingMasterY < 0)
+            {
+                if (thePlayer.directionInt == 0 && enemyMoveDirectionX == 3 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 0 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 1 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 3)
+                {
+                    return false;
+                }
+            }
+            else if (trackingMasterY > 0)
+            {
+                if (thePlayer.directionInt == 2 && enemyMoveDirectionX == 3 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 0 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 1 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 3)
+                {
+                    return false;
+                }
+            }
+        }
+        else if (trackingMasterX > 0)
+        {
+            if (trackingMasterY < 0)
+            {
+                if (thePlayer.directionInt == 0 && enemyMoveDirectionX == 1 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 0 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 3)
+                {
+                    return false;
+                }
+            }
+            else if (trackingMasterY > 0)
+            {
+                // extra ||s for bug where enemy can still hit player when blocking
+                if (thePlayer.directionInt == 2 && enemyMoveDirectionX == 1 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 0 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 1 || thePlayer.directionInt == 0 && enemyMoveDirectionX == 3)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public int CalculatePlayerDefense(int defense)
+    {
+        int damageReduction = 0;
+
+        Debug.Log("defense" + defense);
+
+        int randomNum = UnityEngine.Random.Range(1, 11);
+        if (randomNum <= defense)
+        {
+            damageReduction = 1;
+        }
+        return damageReduction;
     }
 }
