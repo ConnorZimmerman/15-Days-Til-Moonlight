@@ -132,7 +132,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     private TrackingRaycast raycastPath;
     private Vector2 enemyPos;
     public bool isPathfinding;
-
+    // initiates when player enters enemies zone
+    private bool followToDeath;
     public float shieldBreakRecoveryCounter;
 
     // Use this for initialization
@@ -185,6 +186,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         retreatingThree = false;
         shieldUpTwo = false;
 
+        followToDeath = false;
     }
 
     // Update is called once per frame
@@ -207,7 +209,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             shieldBreakRecoveryCounter = 0.5f;
         }
 
-        if (following)
+        if (followToDeath)
         {
             FollowingPlayer();
             ChooseDirection();
@@ -335,7 +337,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         /*#SwitchCases: what the enemy is doing (each case is the same [except for the direction the
         enemy is facing], but I'll explain what each actionDecision does in the 1st case)
         
-         Some of these are not even ever called upon in the current setup, but I'm keeping them around
+        Some of these are not even ever called upon in the current setup, but I'm keeping them around
          cuz I know I'll eventually want more actionDecisions*/
         switch (actionControl)
         {
@@ -758,7 +760,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         {
             if (!deathSeven) // && enemyMoving)
             {
-                following = true;
+                followToDeath = true;
             }
         }
         else

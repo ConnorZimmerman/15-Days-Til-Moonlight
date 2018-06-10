@@ -538,9 +538,11 @@ public class BasicRangedEnemy : MonoBehaviour
             myRigidbody.velocity = new Vector2(0, 0);
         }
     }
-    public void ChooseAction() /*#ActionDecisions: this is where the action decisions are made based
-        on what it retrieves from the ActionPriorities() function below*/
-                               //This section is separate from action priorities because there are potentially combinations from action priorities that can lead to different outcomes
+
+    /*#ActionDecisions: this is where the action decisions are made based
+     on what it retrieves from the ActionPriorities() function below*/
+    //This section is separate from action priorities because there are potentially combinations from action priorities that can lead to different outcomes
+    public void ChooseAction() 
     {
         if (deathSeven)
         {
