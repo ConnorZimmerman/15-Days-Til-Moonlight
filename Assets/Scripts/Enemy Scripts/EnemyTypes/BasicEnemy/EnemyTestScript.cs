@@ -199,14 +199,25 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             actionDecision = 7;
             myRigidbody.velocity = Vector2.zero;
         }
+
         if (enemyShieldStrike)
         {
             shieldBreakRecoveryCounter -= Time.deltaTime;
         }
+
         if (shieldBreakRecoveryCounter <= 0)
         {
             enemyShieldStrike = false;
             shieldBreakRecoveryCounter = 0.5f;
+        }
+
+        if (CalculatePlayerDistance() && !playerEngagement.colliderOn && !playerEngagement.wallBlock)
+        {
+            followToDeath = true;
+        }
+        else
+        {
+            followToDeath = false;
         }
 
         if (followToDeath)
@@ -220,21 +231,16 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             inPain = true;
             enemyHurtCounter -= Time.deltaTime;
         }
+
         if (enemyHurtCounter <= 0)
         {
             enemyHurtCounter = 2;
             inPain = false;
             enemyHealthMan.oldCurrentHealth = enemyHealthMan.CurrentHealth;
         }
-        // if (actionTimer == 0.5)
-        // {
-        //     actionTimer -= Time.deltaTime;
+
         ChooseAction();
-        // }
-        // if (actionTimer <= 0)
-        // {
-        //     actionTimer = 0.5f;
-        // }
+
         staminaLockBool = false;
 
         if (dodgeFirstTime && inPain)
@@ -754,20 +760,20 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         // }
     }
 
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.name == "Player" && !playerEngagement.colliderOn && !playerEngagement.wallBlock)
-        {
-            if (!deathSeven) // && enemyMoving)
-            {
-                followToDeath = true;
-            }
-        }
-        else
-        {
-            //randomMove.ChooseDirection();
-        }
-    }
+    // public void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.name == "Player" && !playerEngagement.colliderOn && !playerEngagement.wallBlock)
+    //     {
+    //         if (!deathSeven) // && enemyMoving)
+    //         {
+    //             followToDeath = true;
+    //         }
+    //     }
+    //     else
+    //     {
+    //         //randomMove.ChooseDirection();
+    //     }
+    // }
 
     // public void OnTriggerExit2D(Collider2D other)
     // {
@@ -801,7 +807,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         following = true;
         if (raycastPath.lineOfSight && !playerEngagement.colliderOn)
         {
-            raycastPath.enqueue = false;
+            raycastPath.enqueue = true;
             // if (!shieldUpTwo)
             // {
             transform.position = Vector2.MoveTowards(transform.position,
@@ -937,6 +943,18 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 }
             }
         }
+    }
+
+    public bool CalculatePlayerDistance()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
+
+        if (distanceToPlayer <= 13)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
 

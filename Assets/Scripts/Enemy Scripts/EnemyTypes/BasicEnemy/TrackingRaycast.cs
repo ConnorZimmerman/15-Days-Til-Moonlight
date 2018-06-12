@@ -37,12 +37,10 @@ public class TrackingRaycast : MonoBehaviour
             distanceToPlayer = Vector3.Distance(transform.position, playerObject.transform.position);
             Vector3 targetDir = playerObject.transform.position - enemyObject.transform.position;
 
-            // if (!enemyScript.isPathfinding)
-            // {
             if (pathfindingTimer == 0.4f)
             {
                 RaycastHit2D hit = Physics2D.Raycast(enemyObject.transform.position, targetDir, distanceToPlayer, 1 << 8 | 1 << 9 | 1 << 13);
-                // Debug.Log(hit.collider.tag);
+
                 if (hit.collider.tag == "Player")
                 {
                     lineOfSight = true;
@@ -52,14 +50,12 @@ public class TrackingRaycast : MonoBehaviour
                     lineOfSight = false;
                     enemyPos = enemyObject.transform.position;
                     playerPos = playerObject.transform.position;
+                    
                     if (!enqueue)
                     {
-                        // enemyScript.following = false;
-                        enqueue = true;
+                        enqueue = false;
                         PathRequestManager.RequestPath(enemyPos, playerPos, OnPathFound);
-                        // enemyScript.following = true;
                     }
-                    // }
                 }
                 if (!lineOfSight)
                 {
@@ -71,7 +67,6 @@ public class TrackingRaycast : MonoBehaviour
                         enqueue = true;
                         PathRequestManager.RequestPath(enemyPos, playerPos, OnPathFound);
                     }
-                    // pathFound = pathfinder.FindPath(enemyPos, playerPos);
                 }
             }
             if (pathfindingTimer > 0)
@@ -89,7 +84,7 @@ public class TrackingRaycast : MonoBehaviour
         if (pathSuccessful)
         {
             path = newPath;
-            // StopCoroutine("FollowPath");
+            StopCoroutine("FollowPath");
             // StartCoroutine("FollowPath");
         }
     }

@@ -22,21 +22,21 @@ public class RecognizeStalkZone : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.name == "StalkZone")
-        {
-            stalkZoneOn = true;
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.name == "StalkZone")
+    //     {
+    //         stalkZoneOn = true;
 
-        }
-    }
+    //     }
+    // }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.name == "StalkZone")
-        {
-            stalkZoneOn = false;
+    // private void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (other.gameObject.name == "StalkZone")
+    //     {
+    //         stalkZoneOn = false;
 
-        }
-    }
+    //     }
+    // }
 }

@@ -44,7 +44,7 @@ public class EnemyUIManager : MonoBehaviour
 
         //enemyCanvasObject = GameObject.Find("Enemy Canvas");
         enemyCanvasObject = this.gameObject;
-
+        healthbar.maxValue = enemyHealth.MaxHealth;
     }
 
     // Update is called once per frame
@@ -59,7 +59,7 @@ public class EnemyUIManager : MonoBehaviour
                 enemyCanvasObject.SetActive(false);
             }
 
-            healthbar.maxValue = enemyHealth.MaxHealth;
+            // healthbar.maxValue = enemyHealth.MaxHealth;
             healthbar.value = enemyHealth.CurrentHealth;
 
             // staminaBar.maxValue = enemyStamina.enemyMaxStamina;

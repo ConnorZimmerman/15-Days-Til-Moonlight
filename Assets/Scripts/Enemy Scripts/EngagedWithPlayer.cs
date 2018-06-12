@@ -144,6 +144,21 @@ public class EngagedWithPlayer : MonoBehaviour
 
         playerInt = thePlayer.directionInt;
 
+        if (CalculatePlayerDistance())
+        {
+            engaged = true;
+            colliderOn = true;
+            following = false;
+            enemyMoving = false;
+        }
+        else
+        {
+            engaged = false;
+            colliderOn = false;
+            following = true;
+            enemyMoving = true;
+        }
+
         if (shield.shieldOn)
         {
             shieldOn = true;
@@ -327,34 +342,31 @@ public class EngagedWithPlayer : MonoBehaviour
     }
 
 
-    public void OnTriggerStay2D(Collider2D other)
-    {
-        // Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "Collision")
-        {
-            wallBlock = true;
-            engaged = false;
-            colliderOn = false;
-        }
-        else if (other.gameObject.tag == "Player")
-        {
-            engaged = true;
-            colliderOn = true;
-            following = false;
-            enemyMoving = false;
-        }
-    }
+    // public void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     // Debug.Log(other.gameObject.tag);
+    //     if (other.gameObject.tag == "Collision")
+    //     {
+    //         wallBlock = true;
+    //         engaged = false;
+    //         colliderOn = false;
+    //     }
+    //     // else if (other.gameObject.tag == "Player")
+    //     // {
+    //     //     engaged = true;
+    //     //     colliderOn = true;
+    //     //     following = false;
+    //     //     enemyMoving = false;
+    //     // }
+    // }
 
-    public void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            activateAction = false;
-            colliderOn = false;
-            following = true;
-            enemyMoving = true;
-        }
-    }
+    // public void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (other.gameObject.tag == "Collision")
+    //     {
+    //         wallBlock = false;
+    //     }
+    // }
 
     public void doingDamage()
     {
@@ -529,5 +541,17 @@ public class EngagedWithPlayer : MonoBehaviour
             damageReduction = 1;
         }
         return damageReduction;
+    }
+
+    public bool CalculatePlayerDistance()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, hitPoint.position);
+
+        if (distanceToPlayer <= 1)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

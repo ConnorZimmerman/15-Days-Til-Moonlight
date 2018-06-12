@@ -10,7 +10,6 @@ public class Pathfinding : MonoBehaviour
     Grid grid;
     public int count;
     List<Node> pathFound;
-
     PathRequestManager requestManager;
 
     // Use this for initialization
@@ -18,11 +17,6 @@ public class Pathfinding : MonoBehaviour
     {
         grid = GetComponent<Grid>();
         requestManager = GetComponent<PathRequestManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     public void StartFindPath(Vector2 startPos, Vector2 targetPos)
@@ -138,7 +132,7 @@ public class Pathfinding : MonoBehaviour
             Vector2 directionNew = new Vector2(path[i - 1].gridX - path[i].gridX, path[i - 1].gridY - path[i].gridY);
             if (directionNew != directionOld)
             {
-                waypoints.Add(path[i].worldPosition);
+                waypoints.Add(path[i-1].worldPosition);
             }
             directionOld = directionNew;
         }
