@@ -220,7 +220,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             followToDeath = false;
         }
 
-        if (followToDeath)
+        if (followToDeath && !playerHealth.playerIsDead && !enemyHealthMan.fredIsDead)
         {
             FollowingPlayer();
             ChooseDirection();

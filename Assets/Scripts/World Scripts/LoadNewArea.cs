@@ -29,19 +29,22 @@ public class LoadNewArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // thePlayer = FindObjectOfType<PlayerController>();
-        // playerHealth = FindObjectOfType<PlayerHealthManager>();
-        // playerStamina = FindObjectOfType<PlayerStaminaManager>();
-        // playerRangedAttack = FindObjectOfType<PlayerRangedAttack>();
-        // playerStatsScript = FindObjectOfType<PlayerStats>();
-        // startPoint = FindObjectOfType<PlayerStartPoint>();
-        // globalDataScript = FindObjectOfType<GlobalDataScript>();
-        // itemSlotManager = FindObjectOfType<ItemSlotManager>();
-        // curLvl = SceneManager.GetActiveScene().name;
+        thePlayer = FindObjectOfType<PlayerController>();
+        playerHealth = FindObjectOfType<PlayerHealthManager>();
+        playerStamina = FindObjectOfType<PlayerStaminaManager>();
+        playerRangedAttack = FindObjectOfType<PlayerRangedAttack>();
+        playerStatsScript = FindObjectOfType<PlayerStats>();
+        startPoint = FindObjectOfType<PlayerStartPoint>();
+        globalDataScript = FindObjectOfType<GlobalDataScript>();
+        itemSlotManager = FindObjectOfType<ItemSlotManager>();
+        curLvl = SceneManager.GetActiveScene().name;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Debug.Log(other.gameObject.name);
+        Debug.Log(curLvl);
+        // Debug.Log(this.gameObject.name);
         //Snowy A Exits
         if (other.gameObject.name == "Player" && curLvl == "SnowyA" && this.gameObject.name == "SnowyBEntry")
         {
