@@ -42,9 +42,6 @@ public class LoadNewArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Debug.Log(other.gameObject.name);
-        Debug.Log(curLvl);
-        // Debug.Log(this.gameObject.name);
         //Snowy A Exits
         if (other.gameObject.name == "Player" && curLvl == "SnowyA" && this.gameObject.name == "SnowyBEntry")
         {

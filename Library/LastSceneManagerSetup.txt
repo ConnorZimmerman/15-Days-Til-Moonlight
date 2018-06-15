@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Snowy_Graveyard.unity
+- path: Assets/Scenes/SnowyA.unity
   isLoaded: 1
   isActive: 1

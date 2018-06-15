@@ -805,6 +805,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     public void FollowingPlayer()
     {
         following = true;
+        enemyMoving = true;
+
         if (raycastPath.lineOfSight && !playerEngagement.colliderOn)
         {
             raycastPath.enqueue = true;

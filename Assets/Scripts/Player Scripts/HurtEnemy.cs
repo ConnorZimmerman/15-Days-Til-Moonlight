@@ -101,7 +101,7 @@ public class HurtEnemy : MonoBehaviour
                 sfxMan.blood.Play();
                 if (this.gameObject.tag == "Throwing Knife")
                 {
-                    other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(1);
+                    other.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(2);
                     Instantiate(damageBurst, hitPoint.position, hitPoint.rotation);
                     var clone = (GameObject)Instantiate(damageNumber, hitPoint.position,
                         Quaternion.Euler(Vector3.zero));
