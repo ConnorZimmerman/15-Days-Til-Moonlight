@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,9 +18,6 @@ public class PlayerController : MonoBehaviour
     public bool attackBool;
     public bool attackBoolMouse;
     public bool attackPossible;
-    //new variable test for stamina bug
-    //public static bool staminaAttackDrainBool;
-    // public bool staminaAttackDrainBool;
     public bool preAttack;
     public bool recovAttack;
     public float preAttackCounter;
@@ -47,10 +45,6 @@ public class PlayerController : MonoBehaviour
     public bool dashPossible;
     public bool sprintActive;
     public bool sprintLock;
-    //public float trackX;
-    //public float trackY;
-    //public GameObject targetX;
-    //public GameObject targetY;
     public bool currentEnemyExists;
     private EnemyTestScript enemy;
     public bool damageBlock;
@@ -108,6 +102,9 @@ public class PlayerController : MonoBehaviour
     private TerrainManager terrainManager;
     private GlobalDataScript globalData;
     private EquipmentBuffManager equipmentBuffManagerScript;
+    public float movementVertical;
+    public float movementHorizontal;
+    public bool movementDisabilityBool;
 
     // Use this for initialization
     void Start()
@@ -229,15 +226,19 @@ public class PlayerController : MonoBehaviour
         }
 
         equipmentBuffManagerScript = FindObjectOfType<EquipmentBuffManager>();
-
-        // Debug.Log(equipmentBuffManagerScript.PlayerDefenseCalculator());
     }
 
     // Update is called once per frame
     void Update()
     {
         playerNewHealth = playerHealth.playerCurrentHealth;
-        //playerHealth.oldPlayerCurrentHealth = playerHealth.playerCurrentHealth;
+
+        // float temp1 = Input.GetAxisRaw("Horizontal") * 2;
+        // float temp2 = Input.GetAxisRaw("Vertical") * 2;
+        // movementHorizontal = ((float)Math.Round(Input.GetAxisRaw("Horizontal"), MidpointRounding.AwayFromZero)) / 2;
+        // movementVertical = ((float)Math.Round(Input.GetAxisRaw("Vertical"), MidpointRounding.AwayFromZero)) / 2;
+
+        MovementDisability();
 
         if (recovAttack || preAttack)
         {
@@ -329,7 +330,7 @@ public class PlayerController : MonoBehaviour
         if (staminaMan.playerCurrentStamina <= 0)
         {
             // moveSpeed = 1f;
-            moveSpeed = 4.5f;
+            // moveSpeed = 4.5f;
             sprintPossible = false;
             dashActive = false;
             sprintActive = false;
@@ -339,11 +340,11 @@ public class PlayerController : MonoBehaviour
         {
             moveSpeed = 2.5f;
         }
-
         else if (playerStats.dexterity >= 17 && staminaMan.playerCurrentStamina >= 200 && Input.GetButtonDown("DashX")
             || staminaMan.playerCurrentStamina >= 200 && Input.GetButtonDown("Dash"))
         {
             soFast = true;
+
             if (directionUp)
             {
                 rayCastHitDodge = Physics2D.Raycast(playerTransform.position, transform.up, 2.1f,
@@ -370,6 +371,7 @@ public class PlayerController : MonoBehaviour
                     dashPossible = true;
                 }
             }
+
             if (directionRight)
             {
                 rayCastHitDodge = Physics2D.Raycast(playerTransform.position, transform.right, 2.1f,
@@ -398,6 +400,7 @@ public class PlayerController : MonoBehaviour
                     dashPossible = true;
                 }
             }
+
             if (directionDown)
             {
                 rayCastHitDodge = Physics2D.Raycast(playerTransform.position, -transform.up, 2.1f,
@@ -426,6 +429,7 @@ public class PlayerController : MonoBehaviour
                     dashPossible = true;
                 }
             }
+
             if (directionLeft)
             {
                 rayCastHitDodge = Physics2D.Raycast(playerTransform.position, -transform.right, 2.1f,
@@ -462,7 +466,7 @@ public class PlayerController : MonoBehaviour
                 sprintPossible = true;
             }
         }
-        else if (staminaMan.playerCurrentStamina > 10)
+        else if (staminaMan.playerCurrentStamina > 10 && !movementDisabilityBool)
         {
             moveSpeed = 4.5f;
             dashActive = false;
@@ -472,6 +476,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            sprintActive = false;
             soFast = false;
             // moveSpeed = 2;
             // sprintPossible = false;
@@ -484,6 +489,7 @@ public class PlayerController : MonoBehaviour
             sprintActive = true;
             soFast = true;
         }
+
         if (sprintTimer <= 0)
         {
             sprintPossible = false;
@@ -502,14 +508,17 @@ public class PlayerController : MonoBehaviour
             {
                 directionInt = 0;
             }
+
             if (directionRight == true)
             {
                 directionInt = 1;
             }
+
             if (directionDown == true)
             {
                 directionInt = 2;
             }
+
             if (directionLeft == true)
             {
                 directionInt = 3;
@@ -626,11 +635,13 @@ public class PlayerController : MonoBehaviour
             preAttack = true;
             attacking = true;
         }
+
         if (preAttack)
         {
             preAttackCounter -= Time.deltaTime;
             //preAttackCounter -= Time.frameCount;
         }
+
         if (playerStats.dexterity >= 14 && Input.GetButton("Sprint") && wasMoving || playerStats.dexterity >= 14 && Input.GetButton("SprintX") && wasMoving)
         {
             wasSprint = true;
@@ -662,21 +673,25 @@ public class PlayerController : MonoBehaviour
                 playerTransform.position = new Vector2(playerTransform.position.x,
                 playerTransform.position.y + 0.05f);
             }
+
             if (directionInt == 1)
             {
                 playerTransform.position = new Vector2(playerTransform.position.x + 0.05f,
                 playerTransform.position.y);
             }
+
             if (directionInt == 2)
             {
                 playerTransform.position = new Vector2(playerTransform.position.x,
                 playerTransform.position.y - 0.05f);
             }
+
             if (directionInt == 3)
             {
                 playerTransform.position = new Vector2(playerTransform.position.x - 0.05f,
                 playerTransform.position.y);
             }
+
             attackPossible = true;
             damagePossible = true;
             sfxMan.playerAttack.Play();
@@ -709,17 +724,17 @@ public class PlayerController : MonoBehaviour
                 //staminaAttackDrainBool = true;
             }
         }
-
-        // else if (attackLock == false && staminaMan.playerCurrentStamina < 400)
-        // {
-        //     attackPossible = false;
-        // }
         else
         {
             attackBool = false;
             damagePossible = false;
             anim.SetBool("Attack", false);
         }
+
+        // else if (attackLock == false && staminaMan.playerCurrentStamina < 400)
+        // {
+        //     attackPossible = false;
+        // }
 
         if (attackLock)
         {
@@ -732,6 +747,7 @@ public class PlayerController : MonoBehaviour
         {
             recovAttackCounter -= Time.deltaTime;
         }
+        
         //*************trying to create a backward slash******************
         if (axisInput > -0.2)
         {
@@ -752,8 +768,6 @@ public class PlayerController : MonoBehaviour
         {
             damagePossible = false;
         }
-
-
 
         // if (staminaMan.playerCurrentStamina < 400)
         // {
@@ -938,6 +952,37 @@ public class PlayerController : MonoBehaviour
 
         minBounds = boundBox.bounds.min;
         maxBounds = boundBox.bounds.max;
+    }
+
+    // meant to encourage player to face correct direction when moving
+    public void MovementDisability()
+    {
+        movementHorizontal = Input.GetAxisRaw("Horizontal");
+        movementVertical = Input.GetAxisRaw("Vertical");
+
+        if (lockOn)
+        {
+            if (directionInt == 0 && movementVertical <= 0 || directionInt == 1 && movementHorizontal <= 0 || directionInt == 2 && movementVertical >= 0 || directionInt == 3 && movementHorizontal >= 0)
+            {
+                movementDisabilityBool = true;
+                moveSpeed = 3.45f;
+            }
+            else if (directionInt == 0 && movementHorizontal != 0 || directionInt == 1 && movementVertical != 0 || directionInt == 2 && movementHorizontal != 0 || directionInt == 3 && movementVertical != 0)
+            {
+                movementDisabilityBool = true;
+                moveSpeed = 4.5f;
+            }
+            else
+            {
+                movementDisabilityBool = true;
+                moveSpeed = 4.75f;
+            }
+        }
+        else
+        {
+            movementDisabilityBool = false;
+            moveSpeed = 4.5f;
+        }
     }
 }
 

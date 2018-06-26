@@ -5,23 +5,14 @@ using UnityEngine;
 public class PlayerStaminaManager : MonoBehaviour
 {
     public int playerMaxStamina;
-
     public int playerCurrentStamina;
-
     private PlayerController thePlayer;
-
     public ShieldBlock theShield;
-
     public DialogueManager dialog;
-
     public float staminaTimer;
-
     public bool staminaCharge;
-
     public bool staminaLock;
-
     public float playerStaminaPercent;
-
     public GameObject playerStaminaObject;
     public GameObject dmObject;
     private GlobalDataScript globalData;
@@ -45,6 +36,7 @@ public class PlayerStaminaManager : MonoBehaviour
     void Update()
     {
         playerMaxStamina = playerStats.dexterity * 50;
+
         if (playerCurrentStamina < 0)
         {
             playerCurrentStamina = 0;
