@@ -385,12 +385,21 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 //     // enemyMoving = false;
                 // }
 
-                /*The enemy is trying to put distance between itself and the player (either just being
-                hurt or trying to regain stamina*/
+                // enemy backing away and being cautious
+                if (actionDecision == 3)
+                {
+                    myRigidbody.velocity = new Vector2(-2, 0);
+                    enemyRecover = true;
+                    attackLock = true;
+                    following = false;
+                }
+
+                /*The enemy is trying to put distance between itself and the player (either it's just been
+                hurt, or its being cautious)*/
                 if (actionDecision == 4)
                 {
                     Shield();
-                    myRigidbody.velocity = new Vector2(-3, 0);
+                    myRigidbody.velocity = new Vector2(-2, 0);
                     enemyRecover = true;
                     attackLock = true;
                     following = false;
@@ -444,11 +453,18 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 //     attackLock = true;
                 //     // enemyMoving = false;
                 // }
+                if (actionDecision == 3)
+                {
+                    myRigidbody.velocity = new Vector2(2, 0);
+                    enemyRecover = true;
+                    attackLock = true;
+                    following = false;
+                }
 
                 if (actionDecision == 4)
                 {
                     Shield();
-                    myRigidbody.velocity = new Vector2(3, 0);
+                    myRigidbody.velocity = new Vector2(2, 0);
                     attackLock = true;
                     enemyRecover = true;
                     following = false;
@@ -502,11 +518,18 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 //     attackLock = true;
                 //     // enemyMoving = false;
                 // }
+                if (actionDecision == 3)
+                {
+                    myRigidbody.velocity = new Vector2(0, 2);
+                    enemyRecover = true;
+                    attackLock = true;
+                    following = false;
+                }
 
                 if (actionDecision == 4)
                 {
                     Shield();
-                    myRigidbody.velocity = new Vector2(0, 3);
+                    myRigidbody.velocity = new Vector2(0, 2);
                     enemyRecover = true;
                     attackLock = true;
                     following = false;
@@ -556,11 +579,17 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 //     attackLock = true;
                 //     // enemyMoving = false;
                 // }
-
+                if (actionDecision == 3)
+                {
+                    myRigidbody.velocity = new Vector2(0, -2);
+                    enemyRecover = true;
+                    attackLock = true;
+                    following = false;
+                }
 
                 if (actionDecision == 4)
                 {
-                    myRigidbody.velocity = new Vector2(0, -3);
+                    myRigidbody.velocity = new Vector2(0, -2);
                     enemyRecover = true;
                     attackLock = true;
                     Shield();
@@ -610,21 +639,19 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             actionDecision = 0;
             // }
         }
-        else if (retreatingThree && !deathSeven)
+        else if (retreatingThree && !deathSeven && !playerEngagement.preAttack || thePlayer.preAttack || thePlayer.attackBool || thePlayer.recovAttack)
+        {
+            actionDecision = 3;
+        }
+        else if (shieldUpTwo && !deathSeven && !playerEngagement.preAttack || thePlayer.preAttack || thePlayer.attackBool || thePlayer.recovAttack)
         {
             actionDecision = 4;
         }
         else if (shieldUpTwo && !deathSeven)
         {
-            actionDecision = 4;
+            actionDecision = 2;
         }
-
-        else if (playerHealthOne && !deathSeven)
-        {
-            actionDecision = 0;
-        }
-
-        else if (shieldUpTwo && !deathSeven)
+        else
         {
             actionDecision = 2;
         }
@@ -807,7 +834,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         following = true;
         enemyMoving = true;
 
-        if (raycastPath.lineOfSight && !playerEngagement.colliderOn)
+        if (raycastPath.lineOfSight && !playerEngagement.colliderOn && actionDecision != 3 && actionDecision != 4)
         {
             raycastPath.enqueue = true;
             // if (!shieldUpTwo)
@@ -837,7 +864,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             }
             else
             {
-                enemyMoving = false;
+                // enemyMoving = false;
                 following = false;
             }
         }
