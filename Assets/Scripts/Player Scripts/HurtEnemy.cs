@@ -21,7 +21,7 @@ public class HurtEnemy : MonoBehaviour
     private PlayerStaminaManager staminaManager;
     public bool recovVar;
     private PlayerStats playerStats;
-
+    float freezeFrame;
     void Start()
     {
         sfxMan = FindObjectOfType<SFXManager>();
@@ -37,8 +37,7 @@ public class HurtEnemy : MonoBehaviour
         recovVar = false;
 
         damageToGive = thePS.playerDamage;
-        // damageBurst = GameObject.Find("BloodBurst");
-
+        freezeFrame = 0.5f;
     }
 
     // Update is called once per frame
@@ -62,6 +61,16 @@ public class HurtEnemy : MonoBehaviour
         {
             enemyHit = true;
             staminaManager.playerCurrentStamina += 20;
+
+            Animator anim2 = other.gameObject.GetComponent<Animator>();
+            if (thePlayer.recovAttack)
+            {
+                anim2.enabled = false;
+            }
+            else
+            {
+                anim2.enabled = true;
+            }
 
             if (playerEngagement.attacking && thePlayer.damagePossible
             && playerEngagement.faceOff)
@@ -148,4 +157,30 @@ public class HurtEnemy : MonoBehaviour
     //         rangedDmg = 0;
     //     }
     // }
+
+    public bool FreezeFrame(Collider2D other)
+    {
+        // momentarily freezes animations for visceral attack feeling
+        Animator anim = thePlayer.GetComponent<Animator>();
+        Animator anim2 = other.gameObject.GetComponent<Animator>();
+
+        if (freezeFrame > 0)
+        {
+            freezeFrame -= Time.deltaTime;
+            anim.enabled = false;
+            anim2.enabled = false;
+            return false;
+        }
+        else
+        {
+            anim.enabled = true;
+            anim2.enabled = true;
+        }
+
+        if (freezeFrame <= 0)
+        {
+            freezeFrame = 0.5f;
+        }
+        return true;
+    }
 }

@@ -651,23 +651,10 @@ public class PlayerController : MonoBehaviour
             wasSprint = false;
         }
 
-        //if (preAttackCounter <= 0)
-        //{
-        //preAttack = false;
-        //}
 
 
-        //moved down
-        //if (preAttackCounter <= 0 && attackTimeCounter > 0)
-
-
-        //if (preAttackCounter <= 0)
         if (preAttackCounter <= 0 && preAttack)
         {
-
-            //moved from above
-            //preAttack = false;
-            //specialMove = true;
             if (directionInt == 0)
             {
                 playerTransform.position = new Vector2(playerTransform.position.x,
@@ -697,18 +684,7 @@ public class PlayerController : MonoBehaviour
             sfxMan.playerAttack.Play();
             //attackTimeCounter = attackTime; //I don't remember what this does.
             attackBool = true;
-            /* if(specialMove)
-             {
-                 moveSpeed = 100000;
-                 //myRigidbody.velocity = new Vector2(0, 3);
-                 specialMove = false;
-
-             }else
-             {
-                 moveSpeed = 4.5f;
-                 myRigidbody.velocity = Vector2.zero;
-             }*/
-
+            
             myRigidbody.velocity = Vector2.zero;
 
             anim.SetBool("Attack", true);
@@ -761,7 +737,6 @@ public class PlayerController : MonoBehaviour
         {
             attackingCounterNew = 0.06f;
             recovAttack = false;
-            //attackTimeCounter = 10;
             recovAttackCounter = 0.3f;
         }
         if (!attacking)
