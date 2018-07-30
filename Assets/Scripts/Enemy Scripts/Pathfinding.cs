@@ -58,7 +58,6 @@ public class Pathfinding : MonoBehaviour
                 //print("Path found: " + sw.ElapsedMilliseconds + " ms");
                 pathSuccess = true;
                 waypoints = RetracePath(startNode, targetNode);
-
                 break;
             }
             foreach (Node neighbor in grid.GetNeighbors(currentNode))

@@ -62,15 +62,15 @@ public class HurtEnemy : MonoBehaviour
             enemyHit = true;
             staminaManager.playerCurrentStamina += 20;
 
-            Animator anim2 = other.gameObject.GetComponent<Animator>();
-            if (thePlayer.recovAttack)
-            {
-                anim2.enabled = false;
-            }
-            else
-            {
-                anim2.enabled = true;
-            }
+            // Animator anim2 = other.gameObject.GetComponent<Animator>();
+            // if (thePlayer.recovAttack)
+            // {
+            //     anim2.enabled = false;
+            // }
+            // else
+            // {
+            //     anim2.enabled = true;
+            // }
 
             if (playerEngagement.attacking && thePlayer.damagePossible
             && playerEngagement.faceOff)

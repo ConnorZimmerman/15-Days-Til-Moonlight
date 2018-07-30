@@ -77,8 +77,8 @@ public class Reload : MonoBehaviour
 
                 waitToReload = 2;
 
-                Debug.Log(globalData.globalPlayerCurLvl);
-                Debug.Log(globalData.globalPlayerStartPoint);
+                // Debug.Log(globalData.globalPlayerCurLvl);
+                // Debug.Log(globalData.globalPlayerStartPoint);
                 SceneManager.LoadScene("SnowyA", LoadSceneMode.Single);
 
                 // if (thePlayer.startPoint == pointName)

@@ -105,6 +105,12 @@ public class PlayerController : MonoBehaviour
     public float movementVertical;
     public float movementHorizontal;
     public bool movementDisabilityBool;
+    public List<Transform> enemyList;
+    private bool newListBool;
+    private int curEnemyInt;
+    private bool switchEnemyBool;
+    public Transform currentEnemyLocked;
+    public GameObject damageBurst;
 
     // Use this for initialization
     void Start()
@@ -216,14 +222,18 @@ public class PlayerController : MonoBehaviour
         sprintTimer = 0.2f;
         sprintPossible = false;
 
-        if (globalData.globalPlayerLockOn == 1)
-        {
-            lockOn = true;
-        }
-        else
-        {
-            lockOn = false;
-        }
+        // if (globalData.globalPlayerLockOn == 1)
+        // {
+        //     lockOn = false;
+        // }
+        // else
+        // {
+        //     lockOn = false;
+        // }
+
+        lockOn = false;
+        newListBool = true;
+        switchEnemyBool = true;
 
         equipmentBuffManagerScript = FindObjectOfType<EquipmentBuffManager>();
     }
@@ -267,56 +277,56 @@ public class PlayerController : MonoBehaviour
             playerOldHealth = playerNewHealth;
         }
 
+
+        // lockOn code - should move to its own script
         if (Input.GetButtonUp("LockOn") && lockOn == false)
         {
             lockOn = true;
+            newListBool = true;
+            // AddEnemiesToList();
+            // FindClosestEnemy();
+            LockOn();
         }
         else if (Input.GetButtonUp("LockOn") && lockOn == true)
         {
             lockOn = false;
         }
 
-        if (lockOn)
+        if (currentEnemyLocked == null)
         {
-            lockOnHorizontal = Input.GetAxisRaw("LockOnHorizontal");
-            lockOnVertical = Input.GetAxisRaw("LockOnVertical");
-
-            if (lockOnHorizontal > 0.2f)
-            {
-                lockOnHorizontal = 0.5f;
-                directionInt = 1;
-            }
-
-            if (lockOnHorizontal < -0.2f)
-            {
-                lockOnHorizontal = -0.5f;
-                directionInt = 3;
-            }
-
-            if (lockOnVertical > 0.2f)
-            {
-                lockOnVertical = 0.5f;
-                directionInt = 0;
-            }
-
-            if (lockOnVertical < -0.2f)
-            {
-                lockOnVertical = -0.5f;
-                directionInt = 2;
-            }
-
-            if (lockOnHorizontal > 0.2f || lockOnHorizontal < -0.2f
-            || lockOnVertical > 0.2f || lockOnVertical < -0.2f)
-            {
-                lastMove = new Vector2(lockOnHorizontal, lockOnVertical);
-            }
+            lockOn = false;
         }
+        // Debug.Log("test: " + currentEnemyLocked);
+
+        // allows player to switch between enemies in lock on system
+        lockOnHorizontal = Input.GetAxisRaw("LockOnHorizontal");
+        lockOnVertical = Input.GetAxisRaw("LockOnVertical");
+
+        if (lockOnHorizontal > 0.2f && switchEnemyBool && lockOn || lockOnHorizontal < -0.2f && switchEnemyBool && lockOn || lockOnVertical > 0.2f && switchEnemyBool && lockOn || lockOnVertical < -0.2f && switchEnemyBool && lockOn)
+        {
+            currentEnemyLocked = FindNextClosestEnemy();
+            ChooseLockOnDirection(currentEnemyLocked);
+            switchEnemyBool = false;
+        }
+
+
+
+
+        // the switchEnemyBool forces FindNextClosestEnemy to only run once ^
+        if (lockOnHorizontal < 0.2f && lockOnHorizontal > -0.2f && lockOnVertical < 0.2f && lockOnVertical > -0.2f)
+        {
+            switchEnemyBool = true;
+        }
+
+
         if (!enemy.deathSeven)
         {
             check = enemy.moveDirectionX - directionInt;
             enemyInt = enemy.moveDirectionX;
             playerInt = directionInt;
         }
+
+        // Debug.Log(playerInt);
 
         if (playerShield.shieldOn)
         {
@@ -597,35 +607,35 @@ public class PlayerController : MonoBehaviour
                 wasMoving = false;
             }
 
-            if (Input.GetAxisRaw("Horizontal") > 0.2f)
-            {
-                directionRight = true;
-                directionLeft = false;
-                directionUp = false;
-                directionDown = false;
-            }
-            else if (Input.GetAxisRaw("Horizontal") < -0.2f)
-            {
-                directionLeft = true;
-                directionRight = false;
-                directionUp = false;
-                directionDown = false;
-            }
+            // if (Input.GetAxisRaw("Horizontal") > 0.2f)
+            // {
+            //     directionRight = true;
+            //     directionLeft = false;
+            //     directionUp = false;
+            //     directionDown = false;
+            // }
+            // else if (Input.GetAxisRaw("Horizontal") < -0.2f)
+            // {
+            //     directionLeft = true;
+            //     directionRight = false;
+            //     directionUp = false;
+            //     directionDown = false;
+            // }
 
-            if (Input.GetAxisRaw("Vertical") > 0.2f)
-            {
-                directionUp = true;
-                directionLeft = false;
-                directionRight = false;
-                directionDown = false;
-            }
-            else if (Input.GetAxisRaw("Vertical") < -0.2f)
-            {
-                directionDown = true;
-                directionUp = false;
-                directionLeft = false;
-                directionRight = false;
-            }
+            // if (Input.GetAxisRaw("Vertical") > 0.2f)
+            // {
+            //     directionUp = true;
+            //     directionLeft = false;
+            //     directionRight = false;
+            //     directionDown = false;
+            // }
+            // else if (Input.GetAxisRaw("Vertical") < -0.2f)
+            // {
+            //     directionDown = true;
+            //     directionUp = false;
+            //     directionLeft = false;
+            //     directionRight = false;
+            // }
         }
 
         //if (!attackLock && axisInput <= -0.2f && staminaMan.playerCurrentStamina > 400)
@@ -684,7 +694,7 @@ public class PlayerController : MonoBehaviour
             sfxMan.playerAttack.Play();
             //attackTimeCounter = attackTime; //I don't remember what this does.
             attackBool = true;
-            
+
             myRigidbody.velocity = Vector2.zero;
 
             anim.SetBool("Attack", true);
@@ -719,11 +729,12 @@ public class PlayerController : MonoBehaviour
 
             //staminaAttackDrainBool = false;
         }
+
         if (recovAttack)
         {
             recovAttackCounter -= Time.deltaTime;
         }
-        
+
         //*************trying to create a backward slash******************
         if (axisInput > -0.2)
         {
@@ -774,7 +785,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Mouse0) && staminaMan.playerCurrentStamina < 400)
         {
-            attackPossible = false;
+            // attackPossible = false;
             attackBoolMouse = false;
             attacking = false;
         }
@@ -783,22 +794,26 @@ public class PlayerController : MonoBehaviour
             attackBoolMouse = false;
         }
 
-        float clampX = Mathf.Clamp(transform.position.x, minBounds.x,
-           maxBounds.x);
-        float clampY = Mathf.Clamp(transform.position.y, minBounds.y,
-            maxBounds.y);
+        float clampX = Mathf.Clamp(transform.position.x, minBounds.x, maxBounds.x);
+        float clampY = Mathf.Clamp(transform.position.y, minBounds.y, maxBounds.y);
         transform.position = new Vector3(clampX, clampY, transform.position.z);
 
-        if (lockOn == false)
+        // if (lockOn == false)
+        // {
+        //     anim.SetFloat("MoveX", axisHorizontal);
+        //     anim.SetFloat("MoveY", axisVertical);
+        // }
+        // else
+        // {
+        // }
+        if (lockOn)
         {
-            anim.SetFloat("MoveX", axisHorizontal);
-            anim.SetFloat("MoveY", axisVertical);
+            ChooseLockOnDirection(currentEnemyLocked);
         }
-        else
-        {
-            anim.SetFloat("MoveX", lockOnHorizontal);
-            anim.SetFloat("MoveY", lockOnVertical);
-        }
+        // Debug.Log("Last Move********** :" + lastMove);
+
+        anim.SetFloat("MoveX", lockOnHorizontal);
+        anim.SetFloat("MoveY", lockOnVertical);
 
         anim.SetBool("PlayerMoving", playerMoving);
         anim.SetFloat("LastMoveX", lastMove.x);
@@ -808,6 +823,8 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("Preemptive Attack", preAttack);
         anim.SetBool("Recovery Attack", recovAttack);
         anim.SetBool("Attack Possible", attackPossible);
+        // anim.SetInteger("directionIntX", directionInt);
+        // anim.SetInteger("directionIntY", directionInt);
     }
 
 
@@ -958,6 +975,253 @@ public class PlayerController : MonoBehaviour
             movementDisabilityBool = false;
             moveSpeed = 4.5f;
         }
+    }
+
+    public void AddEnemiesToList()
+    {
+        // curEnemyInt = 0;
+        enemyList = new List<Transform>();
+        GameObject enemyMasterParentObject = GameObject.Find("Enemies");
+        foreach (Transform enemyParentObject in enemyMasterParentObject.GetComponentInChildren<Transform>())
+        {
+            foreach (Transform enemy in enemyParentObject.GetComponentInChildren<Transform>())
+            {
+                enemyList.Add(enemy);
+            }
+        }
+    }
+
+    public Transform FindClosestEnemy()
+    {
+        float distance = 0;
+        Transform closestEnemy = null;
+
+        // sets initial closest enemy to compare against
+        foreach (Transform enemy in enemyList)
+        {
+            if (enemy != null)
+            {
+                distance = Vector3.Distance(enemy.transform.position, this.transform.position);
+                closestEnemy = enemy;
+            }
+        }
+
+        foreach (Transform enemy in enemyList)
+        {
+            if (enemy != null)
+            {
+                if (Vector3.Distance(enemy.transform.position, this.transform.position) < distance)
+                {
+                    closestEnemy = enemy;
+                    distance = Vector3.Distance(enemy.transform.position, this.transform.position);
+                }
+            }
+        }
+        if (closestEnemy == null)
+        {
+            lockOn = false;
+        }
+        currentEnemyLocked = closestEnemy;
+        return closestEnemy;
+    }
+
+    public Transform FindNextClosestEnemy()
+    {
+        // float distance = 0;
+        Transform closestEnemy = null;
+        curEnemyInt++;
+        // {
+
+        // only add enemy if they are close enough to player
+        while (curEnemyInt < enemyList.Count && Vector3.Distance(enemyList[curEnemyInt].transform.position, this.transform.position) > 10)
+        {
+            closestEnemy = enemyList[curEnemyInt];
+
+            if (curEnemyInt + 1 == enemyList.Count)
+            {
+                curEnemyInt = -1;
+                // closestEnemy = enemyList[curEnemyInt];
+            }
+            curEnemyInt++;
+        }
+
+        if (curEnemyInt >= enemyList.Count)
+        {
+            curEnemyInt = -1;
+            // closestEnemy = enemyList[curEnemyInt];
+        }
+
+        if (Vector3.Distance(closestEnemy.transform.position, this.transform.position) > 10)
+        {
+            closestEnemy = FindClosestEnemy();
+        }
+
+        Debug.Log(curEnemyInt);
+        Debug.Log("Ummmmmmmmmmm " + enemyList.Count);
+
+
+        // sets initial closest enemy to compare against
+        // foreach (Transform enemy in enemyList)
+        // {
+        //     if (enemy != null)
+        //     {
+        //         distance = Vector3.Distance(enemy.transform.position, this.transform.position);
+        //         closestEnemy = enemy;
+        //     }
+        // }
+
+        // foreach (Transform enemy in enemyList)
+        // {
+        //     if (enemy != null)
+        //     {
+        //         if (Vector3.Distance(enemy.transform.position, this.transform.position) < distance)
+        //         {
+        //             closestEnemy = enemy;
+        //             distance = Vector3.Distance(enemy.transform.position, this.transform.position);
+        //         }
+        //     }
+        // }
+        // if (closestEnemy == null)
+        // {
+        //     lockOn = false;
+        // }
+        // currentEnemyLocked = closestEnemy;
+        return closestEnemy;
+    }
+
+
+    public void LockOn()
+    {
+        // newListBool = true;
+        if (newListBool)
+        {
+            AddEnemiesToList();
+            currentEnemyLocked = FindClosestEnemy();
+        }
+        ChooseLockOnDirection(currentEnemyLocked);
+        newListBool = false;
+
+        // Debug.Log(FindClosestEnemy());
+
+        // if (lockOn)
+        // {
+        //     lockOnHorizontal = Input.GetAxisRaw("LockOnHorizontal");
+        //     lockOnVertical = Input.GetAxisRaw("LockOnVertical");
+
+        //     if (lockOnHorizontal > 0.2f)
+        //     {
+        //         lockOnHorizontal = 0.5f;
+        //         directionInt = 1;
+        //     }
+
+        //     if (lockOnHorizontal < -0.2f)
+        //     {
+        //         lockOnHorizontal = -0.5f;
+        //         directionInt = 3;
+        //     }
+
+        //     if (lockOnVertical > 0.2f)
+        //     {
+        //         lockOnVertical = 0.5f;
+        //         directionInt = 0;
+        //     }
+
+        //     if (lockOnVertical < -0.2f)
+        //     {
+        //         lockOnVertical = -0.5f;
+        //         directionInt = 2;
+        //     }
+
+        //     if (lockOnHorizontal > 0.2f || lockOnHorizontal < -0.2f
+        //     || lockOnVertical > 0.2f || lockOnVertical < -0.2f)
+        //     {
+        //         lastMove = new Vector2(lockOnHorizontal, lockOnVertical);
+        //     }
+        // }
+    }
+
+    public void ChooseLockOnDirection(Transform enemy)
+    {
+        Instantiate(damageBurst, enemy.position, enemy.rotation);
+
+        float enemyTrackX = enemy.transform.position.x;
+        float enemyTrackY = enemy.transform.position.y;
+
+        float trackingMasterX = enemyTrackX - transform.position.x;
+        float trackingMasterY = enemyTrackY - transform.position.y;
+
+        // enemyTrackX = transform.position.x;
+        // enemyTrackY = transform.position.y;
+
+        if (trackingMasterY > 0)
+        {
+            if (trackingMasterX > 0) //Quadrant 2
+            {
+                if (trackingMasterX < trackingMasterY)
+                {
+                    directionInt = 0;
+                    lockOnVertical = 0.5f;
+                    lockOnHorizontal = 0f;
+                    // Debug.Log("test: getting here");
+                }
+                else
+                {
+                    directionInt = 1;
+                    lockOnHorizontal = 0.5f;
+                    lockOnVertical = 0f;
+                }
+            }
+            else if (trackingMasterX < 0)
+            {
+                if (Math.Abs(trackingMasterX) > trackingMasterY) //Quadrant 1
+                {
+                    directionInt = 3;
+                    lockOnHorizontal = -0.5f;
+                    lockOnVertical = 0f;
+                }
+                else
+                {
+                    directionInt = 0;
+                    lockOnVertical = 0.5f;
+                    lockOnHorizontal = 0;
+                    // Debug.Log("test: getting here");
+                }
+            }
+        }
+        else if (trackingMasterY < 0) //Quadrant 4
+        {
+            if (trackingMasterX < 0)
+            {
+                if (trackingMasterX > trackingMasterY)
+                {
+                    directionInt = 2;
+                    lockOnVertical = -0.5f;
+                    lockOnHorizontal = 0f;
+                }
+                else if (trackingMasterX < trackingMasterY)
+                {
+                    directionInt = 3;
+                    lockOnHorizontal = -0.5f;
+                    lockOnVertical = 0f;
+                }
+            }
+            else if (trackingMasterX > 0) //Quadrant 3
+            {
+                if (Math.Abs(trackingMasterY) > trackingMasterX)
+                {
+                    directionInt = 2;
+                    lockOnVertical = -0.5f;
+                    lockOnHorizontal = 0f;
+                }
+                else
+                {
+                    directionInt = 1;
+                    lockOnHorizontal = 0.5f;
+                    lockOnVertical = 0f;
+                }
+            }
+        }
+        lastMove = new Vector2(lockOnHorizontal, lockOnVertical);
     }
 }
 
