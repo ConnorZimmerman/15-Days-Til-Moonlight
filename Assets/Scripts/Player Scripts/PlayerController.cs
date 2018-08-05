@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviour
     private bool switchEnemyBool;
     public Transform currentEnemyLocked;
     public GameObject damageBurst;
+    private GameObject lockOnImage;
 
     // Use this for initialization
     void Start()
@@ -236,6 +237,9 @@ public class PlayerController : MonoBehaviour
         switchEnemyBool = true;
 
         equipmentBuffManagerScript = FindObjectOfType<EquipmentBuffManager>();
+
+        lockOnImage = GameObject.Find("lockOnImage");
+        lockOnImage.SetActive(false);
     }
 
     // Update is called once per frame
@@ -290,6 +294,7 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetButtonUp("LockOn") && lockOn == true)
         {
             lockOn = false;
+            lockOnImage.SetActive(false);
         }
 
         if (currentEnemyLocked == null)
@@ -1032,14 +1037,16 @@ public class PlayerController : MonoBehaviour
         curEnemyInt++;
         // {
 
-        // only add enemy if they are close enough to player
+        // only set enemy if they are close enough to player
         while (curEnemyInt < enemyList.Count && Vector3.Distance(enemyList[curEnemyInt].transform.position, this.transform.position) > 10)
         {
             closestEnemy = enemyList[curEnemyInt];
 
             if (curEnemyInt + 1 == enemyList.Count)
             {
-                curEnemyInt = -1;
+                // curEnemyInt = -1;
+                Debug.Log("break");
+                break;
                 // closestEnemy = enemyList[curEnemyInt];
             }
             curEnemyInt++;
@@ -1048,16 +1055,22 @@ public class PlayerController : MonoBehaviour
         if (curEnemyInt >= enemyList.Count)
         {
             curEnemyInt = -1;
+            Debug.Log("reset");
             // closestEnemy = enemyList[curEnemyInt];
+        }
+        else
+        {
+            closestEnemy = enemyList[curEnemyInt];
         }
 
         if (Vector3.Distance(closestEnemy.transform.position, this.transform.position) > 10)
         {
             closestEnemy = FindClosestEnemy();
+            Debug.Log("getting here too often I think " + curEnemyInt + " " + enemyList.Count);
         }
 
-        Debug.Log(curEnemyInt);
-        Debug.Log("Ummmmmmmmmmm " + enemyList.Count);
+        // Debug.Log(curEnemyInt);
+        // Debug.Log("Ummmmmmmmmmm " + enemyList.Count);
 
 
         // sets initial closest enemy to compare against
@@ -1142,16 +1155,14 @@ public class PlayerController : MonoBehaviour
 
     public void ChooseLockOnDirection(Transform enemy)
     {
-        Instantiate(damageBurst, enemy.position, enemy.rotation);
+        lockOnImage.SetActive(true);
+        lockOnImage.transform.position = enemy.position;
 
         float enemyTrackX = enemy.transform.position.x;
         float enemyTrackY = enemy.transform.position.y;
 
         float trackingMasterX = enemyTrackX - transform.position.x;
         float trackingMasterY = enemyTrackY - transform.position.y;
-
-        // enemyTrackX = transform.position.x;
-        // enemyTrackY = transform.position.y;
 
         if (trackingMasterY > 0)
         {
