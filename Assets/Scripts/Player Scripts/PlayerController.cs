@@ -106,6 +106,11 @@ public class PlayerController : MonoBehaviour
     public float movementHorizontal;
     public bool movementDisabilityBool;
     public List<Transform> enemyList;
+    public Dictionary<int, bool> enemyDict;
+    public int enemyCount;
+
+    // This int will count every time a new enemy is locked to and reset once list is reset.
+    public int enemyCounter;
     private bool newListBool;
     private int curEnemyInt;
     private bool switchEnemyBool;
@@ -984,16 +989,39 @@ public class PlayerController : MonoBehaviour
 
     public void AddEnemiesToList()
     {
-        // curEnemyInt = 0;
+        int dictCounter = 0;
         enemyList = new List<Transform>();
+        // Dictionary will allow check for if enemy has already been locked when finding next closest enemy.
+        enemyDict = new Dictionary<int, bool>();
         GameObject enemyMasterParentObject = GameObject.Find("Enemies");
         foreach (Transform enemyParentObject in enemyMasterParentObject.GetComponentInChildren<Transform>())
         {
             foreach (Transform enemy in enemyParentObject.GetComponentInChildren<Transform>())
             {
                 enemyList.Add(enemy);
+                enemyDict[dictCounter] = false;
+                dictCounter++;
             }
         }
+        enemyCount = enemyList.Count;
+        enemyCounter = 0;
+    }
+
+    public void ResetEnemyDict()
+    {
+        int dictCounter = 0;
+        enemyDict = new Dictionary<int, bool>();
+        GameObject enemyMasterParentObject = GameObject.Find("Enemies");
+        foreach (Transform enemyParentObject in enemyMasterParentObject.GetComponentInChildren<Transform>())
+        {
+            foreach (Transform enemy in enemyParentObject.GetComponentInChildren<Transform>())
+            {
+                enemyDict[dictCounter] = false;
+                dictCounter++;
+            }
+        }
+        enemyCount = enemyList.Count;
+        enemyCounter = 0;
     }
 
     public Transform FindClosestEnemy()
@@ -1001,7 +1029,7 @@ public class PlayerController : MonoBehaviour
         float distance = 0;
         Transform closestEnemy = null;
 
-        // sets initial closest enemy to compare against
+        // Sets initial closest enemy to compare against
         foreach (Transform enemy in enemyList)
         {
             if (enemy != null)
@@ -1032,41 +1060,86 @@ public class PlayerController : MonoBehaviour
 
     public Transform FindNextClosestEnemy()
     {
-        // float distance = 0;
         Transform closestEnemy = null;
+        // This variable is to test whether the loop below has searched every item other than the current enemy.
+        int endingEnemyInt = curEnemyInt;
         curEnemyInt++;
-        // {
+        int curClosestEnemyInt = curEnemyInt;
+
+        if (curEnemyInt + 1 >= enemyList.Count)
+        {
+            curEnemyInt = 0;
+            // curEnemyInt = -1;
+            // break;
+            // closestEnemy = enemyList[curEnemyInt];
+        }
+        // Setting next closest enemy to the next enemy on the list as a default.
+        closestEnemy = enemyList[curEnemyInt];
+        float curClosestDistance = Vector3.Distance(closestEnemy.transform.position, this.transform.position);
 
         // only set enemy if they are close enough to player
-        while (curEnemyInt < enemyList.Count && Vector3.Distance(enemyList[curEnemyInt].transform.position, this.transform.position) > 10)
-        {
-            closestEnemy = enemyList[curEnemyInt];
+        // while (curEnemyInt < enemyList.Count && Vector3.Distance(enemyList[curEnemyInt].transform.position, this.transform.position) > 10)
+        int loopCounter = 0;
 
-            if (curEnemyInt + 1 == enemyList.Count)
+        while (curEnemyInt + 1 != endingEnemyInt && !(curEnemyInt + 1 == enemyList.Count && endingEnemyInt == 0))
+        {
+            curEnemyInt++;
+
+            if (curEnemyInt >= enemyList.Count)
             {
+                curEnemyInt = 0;
                 // curEnemyInt = -1;
-                Debug.Log("break");
-                break;
+                // break;
                 // closestEnemy = enemyList[curEnemyInt];
             }
-            curEnemyInt++;
+
+            // if (curEnemyInt + 1 == endingEnemyInt || curEnemyInt + 1 == enemyList.Count && endingEnemyInt == 0)
+            // {
+            //     break;
+            // }
+
+            if (Vector3.Distance(enemyList[curEnemyInt].transform.position, this.transform.position) < curClosestDistance && enemyDict[curEnemyInt] == false)
+            {
+                closestEnemy = enemyList[curEnemyInt];
+                curClosestDistance = Vector3.Distance(enemyList[curEnemyInt].transform.position, this.transform.position);
+                curClosestEnemyInt = curEnemyInt;
+            }
+
+            // loop break
+            loopCounter++;
+            if(loopCounter > 100){
+                Debug.Log("error");
+                break;
+            }
+
+        }
+
+        enemyCounter++;
+
+        // If the whole enemy list has been checked then we want to reset the dictionary.
+        if (enemyCounter >= enemyList.Count)
+        {
+            ResetEnemyDict();
         }
 
         if (curEnemyInt >= enemyList.Count)
         {
             curEnemyInt = -1;
-            Debug.Log("reset");
             // closestEnemy = enemyList[curEnemyInt];
         }
-        else
-        {
-            closestEnemy = enemyList[curEnemyInt];
-        }
+        // else
+        // {
+        //     closestEnemy = enemyList[curEnemyInt];
+        // }
 
         if (Vector3.Distance(closestEnemy.transform.position, this.transform.position) > 10)
         {
             closestEnemy = FindClosestEnemy();
             Debug.Log("getting here too often I think " + curEnemyInt + " " + enemyList.Count);
+        }
+        else
+        {
+            enemyDict[curClosestEnemyInt] = true;
         }
 
         // Debug.Log(curEnemyInt);

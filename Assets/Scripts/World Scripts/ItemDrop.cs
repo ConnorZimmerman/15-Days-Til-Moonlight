@@ -49,7 +49,6 @@ public class ItemDrop : MonoBehaviour
     {
         // eventually add in method to do random calculations
         int randomNum = LuckCalculator();
-        Debug.Log("Luck: " + randomNum);
         if (enemyObject.tag == "BasicRangedEnemy" && randomNum > 70)
         {
             GameObject randomDrop = GameObject.Find("daggers");
