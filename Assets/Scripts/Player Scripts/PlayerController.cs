@@ -106,6 +106,10 @@ public class PlayerController : MonoBehaviour
     public float movementHorizontal;
     public bool movementDisabilityBool;
     public List<Transform> enemyList;
+    public List<Transform> enemyListUpLeft;
+    public List<Transform> enemyListUpRight;
+    public List<Transform> enemyListDownRight;
+    public List<Transform> enemyListDownLeft;
     public Dictionary<int, bool> enemyDict;
     public int enemyCount;
 
@@ -292,7 +296,7 @@ public class PlayerController : MonoBehaviour
         {
             lockOn = true;
             newListBool = true;
-            // AddEnemiesToList();
+            // AddEnemiesToLists();
             // FindClosestEnemy();
             LockOn();
         }
@@ -318,9 +322,6 @@ public class PlayerController : MonoBehaviour
             ChooseLockOnDirection(currentEnemyLocked);
             switchEnemyBool = false;
         }
-
-
-
 
         // the switchEnemyBool forces FindNextClosestEnemy to only run once ^
         if (lockOnHorizontal < 0.2f && lockOnHorizontal > -0.2f && lockOnVertical < 0.2f && lockOnVertical > -0.2f)
@@ -987,13 +988,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void AddEnemiesToList()
+    // This method will add enemies to 4 separate lists representing 4 quadrants surrounding the player. 
+    public void AddEnemiesToLists()
     {
         int dictCounter = 0;
         enemyList = new List<Transform>();
         // Dictionary will allow check for if enemy has already been locked when finding next closest enemy.
         enemyDict = new Dictionary<int, bool>();
         GameObject enemyMasterParentObject = GameObject.Find("Enemies");
+
         foreach (Transform enemyParentObject in enemyMasterParentObject.GetComponentInChildren<Transform>())
         {
             foreach (Transform enemy in enemyParentObject.GetComponentInChildren<Transform>())
@@ -1007,6 +1010,7 @@ public class PlayerController : MonoBehaviour
         enemyCounter = 0;
     }
 
+    // This method will receive a string which will represent which quadrant to reshape dictionary to: upLeft being the upper left quadrant where -x & +y.
     public void ResetEnemyDict()
     {
         int dictCounter = 0;
@@ -1069,34 +1073,22 @@ public class PlayerController : MonoBehaviour
         if (curEnemyInt + 1 >= enemyList.Count)
         {
             curEnemyInt = 0;
-            // curEnemyInt = -1;
-            // break;
-            // closestEnemy = enemyList[curEnemyInt];
         }
         // Setting next closest enemy to the next enemy on the list as a default.
         closestEnemy = enemyList[curEnemyInt];
         float curClosestDistance = Vector3.Distance(closestEnemy.transform.position, this.transform.position);
 
         // only set enemy if they are close enough to player
-        // while (curEnemyInt < enemyList.Count && Vector3.Distance(enemyList[curEnemyInt].transform.position, this.transform.position) > 10)
         int loopCounter = 0;
 
-        while (curEnemyInt + 1 != endingEnemyInt && !(curEnemyInt + 1 == enemyList.Count && endingEnemyInt == 0))
+        while (curEnemyInt + 1 != endingEnemyInt && !(curEnemyInt + 1 == enemyList.Count && endingEnemyInt == 0) && loopCounter < enemyList.Count)
         {
             curEnemyInt++;
 
             if (curEnemyInt >= enemyList.Count)
             {
                 curEnemyInt = 0;
-                // curEnemyInt = -1;
-                // break;
-                // closestEnemy = enemyList[curEnemyInt];
             }
-
-            // if (curEnemyInt + 1 == endingEnemyInt || curEnemyInt + 1 == enemyList.Count && endingEnemyInt == 0)
-            // {
-            //     break;
-            // }
 
             if (Vector3.Distance(enemyList[curEnemyInt].transform.position, this.transform.position) < curClosestDistance && enemyDict[curEnemyInt] == false)
             {
@@ -1105,13 +1097,7 @@ public class PlayerController : MonoBehaviour
                 curClosestEnemyInt = curEnemyInt;
             }
 
-            // loop break
             loopCounter++;
-            if(loopCounter > 100){
-                Debug.Log("error");
-                break;
-            }
-
         }
 
         enemyCounter++;
@@ -1181,7 +1167,7 @@ public class PlayerController : MonoBehaviour
         // newListBool = true;
         if (newListBool)
         {
-            AddEnemiesToList();
+            AddEnemiesToLists();
             currentEnemyLocked = FindClosestEnemy();
         }
         ChooseLockOnDirection(currentEnemyLocked);
