@@ -77,6 +77,7 @@
      <Compile Include="Assets\Scripts\Enemy Scripts\WayPoints.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\EquipmentBuffManager.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\HurtEnemy.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\LockOn.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerHealthManager.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerPathTracker.cs" />

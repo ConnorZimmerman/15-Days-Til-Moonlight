@@ -106,10 +106,10 @@ public class PlayerController : MonoBehaviour
     public float movementHorizontal;
     public bool movementDisabilityBool;
     public List<Transform> enemyList;
-    public List<Transform> enemyListUpLeft;
-    public List<Transform> enemyListUpRight;
-    public List<Transform> enemyListDownRight;
-    public List<Transform> enemyListDownLeft;
+    public List<Transform> enemyListLeft;
+    public List<Transform> enemyListUp;
+    public List<Transform> enemyListRight;
+    public List<Transform> enemyListDown;
     public Dictionary<int, bool> enemyDict;
     public int enemyCount;
 
@@ -318,7 +318,30 @@ public class PlayerController : MonoBehaviour
 
         if (lockOnHorizontal > 0.2f && switchEnemyBool && lockOn || lockOnHorizontal < -0.2f && switchEnemyBool && lockOn || lockOnVertical > 0.2f && switchEnemyBool && lockOn || lockOnVertical < -0.2f && switchEnemyBool && lockOn)
         {
-            currentEnemyLocked = FindNextClosestEnemy();
+            string analogDirection = DetermineAnalogQuadrant(lockOnHorizontal, lockOnVertical);
+            AddEnemiesToLists();
+
+            if (analogDirection == "up")
+            {
+                currentEnemyLocked = FindNextClosestEnemy(enemyListUp);
+            }
+            else if (analogDirection == "right")
+            {
+                currentEnemyLocked = FindNextClosestEnemy(enemyListRight);
+            }
+            else if (analogDirection == "down")
+            {
+                currentEnemyLocked = FindNextClosestEnemy(enemyListDown);
+            }
+            else if (analogDirection == "left")
+            {
+                currentEnemyLocked = FindNextClosestEnemy(enemyListLeft);
+            }
+            else
+            {
+                Debug.Log("error");
+            }
+
             ChooseLockOnDirection(currentEnemyLocked);
             switchEnemyBool = false;
         }
@@ -992,7 +1015,10 @@ public class PlayerController : MonoBehaviour
     public void AddEnemiesToLists()
     {
         int dictCounter = 0;
-        enemyList = new List<Transform>();
+        enemyListUp = new List<Transform>();
+        enemyListRight = new List<Transform>();
+        enemyListDown = new List<Transform>();
+        enemyListLeft = new List<Transform>();
         // Dictionary will allow check for if enemy has already been locked when finding next closest enemy.
         enemyDict = new Dictionary<int, bool>();
         GameObject enemyMasterParentObject = GameObject.Find("Enemies");
@@ -1001,6 +1027,28 @@ public class PlayerController : MonoBehaviour
         {
             foreach (Transform enemy in enemyParentObject.GetComponentInChildren<Transform>())
             {
+                string enemyQuadrant = DetermineQuadrant(enemy);
+
+                if (enemyQuadrant == "up")
+                {
+                    enemyListUp.Add(enemy);
+                }
+                else if (enemyQuadrant == "right")
+                {
+                    enemyListRight.Add(enemy);
+                }
+                else if (enemyQuadrant == "down")
+                {
+                    enemyListDown.Add(enemy);
+                }
+                else if (enemyQuadrant == "left")
+                {
+                    enemyListLeft.Add(enemy);
+                }
+                else
+                {
+                    Debug.Log("enemy is not in quadrant");
+                }
                 enemyList.Add(enemy);
                 enemyDict[dictCounter] = false;
                 dictCounter++;
@@ -1062,38 +1110,49 @@ public class PlayerController : MonoBehaviour
         return closestEnemy;
     }
 
-    public Transform FindNextClosestEnemy()
+    public Transform FindNextClosestEnemy(List<Transform> enemyListQuadrant)
     {
         Transform closestEnemy = null;
         // This variable is to test whether the loop below has searched every item other than the current enemy.
         int endingEnemyInt = curEnemyInt;
         curEnemyInt++;
         int curClosestEnemyInt = curEnemyInt;
+        float curClosestDistance = 0;
 
-        if (curEnemyInt + 1 >= enemyList.Count)
+        if (curEnemyInt + 1 >= enemyListQuadrant.Count)
         {
             curEnemyInt = 0;
         }
         // Setting next closest enemy to the next enemy on the list as a default.
-        closestEnemy = enemyList[curEnemyInt];
-        float curClosestDistance = Vector3.Distance(closestEnemy.transform.position, this.transform.position);
+        if (enemyListQuadrant.Count > 0)
+        {
+            Debug.Log(enemyListQuadrant.Count);
+            closestEnemy = enemyListQuadrant[curEnemyInt];
+            curClosestDistance = Vector3.Distance(closestEnemy.transform.position, this.transform.position);
+        }
+        else
+        {
+            enemyListQuadrant = enemyList;
+            closestEnemy = enemyListQuadrant[curEnemyInt];
+            curClosestDistance = Vector3.Distance(closestEnemy.transform.position, this.transform.position);
+        }
 
         // only set enemy if they are close enough to player
         int loopCounter = 0;
 
-        while (curEnemyInt + 1 != endingEnemyInt && !(curEnemyInt + 1 == enemyList.Count && endingEnemyInt == 0) && loopCounter < enemyList.Count)
+        while (curEnemyInt + 1 != endingEnemyInt && !(curEnemyInt + 1 == enemyListQuadrant.Count && endingEnemyInt == 0) && loopCounter < enemyListQuadrant.Count)
         {
             curEnemyInt++;
 
-            if (curEnemyInt >= enemyList.Count)
+            if (curEnemyInt >= enemyListQuadrant.Count)
             {
                 curEnemyInt = 0;
             }
 
-            if (Vector3.Distance(enemyList[curEnemyInt].transform.position, this.transform.position) < curClosestDistance && enemyDict[curEnemyInt] == false)
+            if (Vector3.Distance(enemyListQuadrant[curEnemyInt].transform.position, this.transform.position) < curClosestDistance && enemyDict[curEnemyInt] == false)
             {
-                closestEnemy = enemyList[curEnemyInt];
-                curClosestDistance = Vector3.Distance(enemyList[curEnemyInt].transform.position, this.transform.position);
+                closestEnemy = enemyListQuadrant[curEnemyInt];
+                curClosestDistance = Vector3.Distance(enemyListQuadrant[curEnemyInt].transform.position, this.transform.position);
                 curClosestEnemyInt = curEnemyInt;
             }
 
@@ -1103,12 +1162,12 @@ public class PlayerController : MonoBehaviour
         enemyCounter++;
 
         // If the whole enemy list has been checked then we want to reset the dictionary.
-        if (enemyCounter >= enemyList.Count)
+        if (enemyCounter >= enemyListQuadrant.Count)
         {
             ResetEnemyDict();
         }
 
-        if (curEnemyInt >= enemyList.Count)
+        if (curEnemyInt >= enemyListQuadrant.Count)
         {
             curEnemyInt = -1;
             // closestEnemy = enemyList[curEnemyInt];
@@ -1121,7 +1180,7 @@ public class PlayerController : MonoBehaviour
         if (Vector3.Distance(closestEnemy.transform.position, this.transform.position) > 10)
         {
             closestEnemy = FindClosestEnemy();
-            Debug.Log("getting here too often I think " + curEnemyInt + " " + enemyList.Count);
+            Debug.Log("getting here too often I think " + curEnemyInt + " " + enemyListQuadrant.Count);
         }
         else
         {
@@ -1293,8 +1352,125 @@ public class PlayerController : MonoBehaviour
         }
         lastMove = new Vector2(lockOnHorizontal, lockOnVertical);
     }
-}
 
+    // Will return which list the enemy should be added to (Up, Down, Left, Right)
+    public string DetermineQuadrant(Transform enemy)
+    {
+        float enemyTrackX = enemy.transform.position.x;
+        float enemyTrackY = enemy.transform.position.y;
+
+        float trackingMasterX = enemyTrackX - transform.position.x;
+        float trackingMasterY = enemyTrackY - transform.position.y;
+
+        if (trackingMasterY > 0) //Top
+        {
+            if (trackingMasterX > 0) //Quadrant 2
+            {
+                if (trackingMasterX < trackingMasterY)
+                {
+                    return "up";
+                }
+                else
+                {
+                    return "right";
+                }
+            }
+            else if (trackingMasterX < 0)
+            {
+                if (Math.Abs(trackingMasterX) > trackingMasterY) //Quadrant 1
+                {
+                    return "left";
+                }
+                else
+                {
+                    return "up";
+                }
+            }
+        }
+        else if (trackingMasterY < 0)  //Bottom
+        {
+            if (trackingMasterX < 0) //Quadrant 4
+            {
+                if (trackingMasterX > trackingMasterY)
+                {
+                    return "left";
+                }
+                else if (trackingMasterX < trackingMasterY)
+                {
+                    return "down";
+                }
+            }
+            else if (trackingMasterX > 0) //Quadrant 3
+            {
+                if (Math.Abs(trackingMasterY) > trackingMasterX)
+                {
+                    return "down";
+                }
+                else
+                {
+                    return "right";
+                }
+            }
+        }
+        return "none";
+    }
+
+    // Will return which direction the right analog stick is inputting.
+    public string DetermineAnalogQuadrant(float x, float y)
+    {
+        if (y >= 0) //Top
+        {
+            if (x >= 0) //Quadrant 2
+            {
+                if (x < y)
+                {
+                    return "up";
+                }
+                else
+                {
+                    return "right";
+                }
+            }
+            else if (x <= 0)
+            {
+                if (Math.Abs(x) >= y) //Quadrant 1
+                {
+                    return "left";
+                }
+                else
+                {
+                    return "up";
+                }
+            }
+        }
+        else if (y <= 0)  //Bottom
+        {
+            if (x <= 0) //Quadrant 4
+            {
+                if (x >= y)
+                {
+                    return "left";
+                }
+                else if (x < y)
+                {
+                    return "down";
+                }
+            }
+            else if (x >= 0) //Quadrant 3
+            {
+                if (Math.Abs(y) > x)
+                {
+                    return "down";
+                }
+                else
+                {
+                    return "right";
+                }
+            }
+        }
+        return "none";
+    }
+}
 
 
 
