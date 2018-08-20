@@ -40,7 +40,7 @@ public class GlobalDataScript : MonoBehaviour
         globalPlayerStrength = PlayerPrefs.GetInt("Global Player Strength", 3);
         globalPlayerDexterity = PlayerPrefs.GetInt("Global Player Dexterity", 10);
         globalPlayerIntelligence = PlayerPrefs.GetInt("Global Player Intelligence", 5);
-        globalPlayerDaggerCount = PlayerPrefs.GetInt("Global Player Dagger Count", 10);
+        globalPlayerDaggerCount = PlayerPrefs.GetInt("Global Player Dagger Count", 50);
         globalPlayerStartPoint = PlayerPrefs.GetString("Global Player Start Point", "SnowyA_StartPoint");
         globalPlayerLastMoveX = PlayerPrefs.GetFloat("Global Player Last Move X", 0);
         globalPlayerLastMoveY = PlayerPrefs.GetFloat("Global Player Last Move Y", -1);

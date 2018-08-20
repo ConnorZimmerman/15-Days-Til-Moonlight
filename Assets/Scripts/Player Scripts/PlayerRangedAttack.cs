@@ -29,8 +29,8 @@ public class PlayerRangedAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerDirection = playerObject.GetComponent<PlayerController>().DeterminePlayerDirection();
 
-        playerDirection = playerObject.GetComponent<PlayerController>().directionInt;
         if (playerDirection == 0)
         {
             targetDir = new Vector3(0, 1, 0);

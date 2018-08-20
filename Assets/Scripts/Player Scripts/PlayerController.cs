@@ -262,6 +262,7 @@ public class PlayerController : MonoBehaviour
         // movementVertical = ((float)Math.Round(Input.GetAxisRaw("Vertical"), MidpointRounding.AwayFromZero)) / 2;
 
         MovementDisability();
+        DeterminePlayerDirection();
 
         if (recovAttack || preAttack)
         {
@@ -546,28 +547,28 @@ public class PlayerController : MonoBehaviour
             dashPossible = false;
         }
 
-        if (lockOn == false)
-        {
-            if (directionUp == true)
-            {
-                directionInt = 0;
-            }
+        // if (lockOn == false)
+        // {
+        //     if (directionUp == true)
+        //     {
+        //         directionInt = 0;
+        //     }
 
-            if (directionRight == true)
-            {
-                directionInt = 1;
-            }
+        //     if (directionRight == true)
+        //     {
+        //         directionInt = 1;
+        //     }
 
-            if (directionDown == true)
-            {
-                directionInt = 2;
-            }
+        //     if (directionDown == true)
+        //     {
+        //         directionInt = 2;
+        //     }
 
-            if (directionLeft == true)
-            {
-                directionInt = 3;
-            }
-        }
+        //     if (directionLeft == true)
+        //     {
+        //         directionInt = 3;
+        //     }
+        // }
 
         playerMoving = false;
 
@@ -641,35 +642,7 @@ public class PlayerController : MonoBehaviour
                 wasMoving = false;
             }
 
-            // if (Input.GetAxisRaw("Horizontal") > 0.2f)
-            // {
-            //     directionRight = true;
-            //     directionLeft = false;
-            //     directionUp = false;
-            //     directionDown = false;
-            // }
-            // else if (Input.GetAxisRaw("Horizontal") < -0.2f)
-            // {
-            //     directionLeft = true;
-            //     directionRight = false;
-            //     directionUp = false;
-            //     directionDown = false;
-            // }
 
-            // if (Input.GetAxisRaw("Vertical") > 0.2f)
-            // {
-            //     directionUp = true;
-            //     directionLeft = false;
-            //     directionRight = false;
-            //     directionDown = false;
-            // }
-            // else if (Input.GetAxisRaw("Vertical") < -0.2f)
-            // {
-            //     directionDown = true;
-            //     directionUp = false;
-            //     directionLeft = false;
-            //     directionRight = false;
-            // }
         }
 
         //if (!attackLock && axisInput <= -0.2f && staminaMan.playerCurrentStamina > 400)
@@ -1126,7 +1099,6 @@ public class PlayerController : MonoBehaviour
         // Setting next closest enemy to the next enemy on the list as a default.
         if (enemyListQuadrant.Count > 0)
         {
-            Debug.Log(enemyListQuadrant.Count);
             closestEnemy = enemyListQuadrant[curEnemyInt];
             curClosestDistance = Vector3.Distance(closestEnemy.transform.position, this.transform.position);
         }
@@ -1469,6 +1441,48 @@ public class PlayerController : MonoBehaviour
             }
         }
         return "none";
+    }
+
+
+    public int DeterminePlayerDirection()
+    {
+        lockOnHorizontal = Input.GetAxisRaw("Horizontal");
+        lockOnVertical = Input.GetAxisRaw("Vertical");
+
+        if (!lockOn)
+        {
+
+            if (lockOnHorizontal > 0.2f)
+            {
+                lockOnHorizontal = 0.5f;
+                directionInt = 1;
+            }
+
+            if (lockOnHorizontal < -0.2f)
+            {
+                lockOnHorizontal = -0.5f;
+                directionInt = 3;
+            }
+
+            if (lockOnVertical > 0.2f)
+            {
+                lockOnVertical = 0.5f;
+                directionInt = 0;
+            }
+
+            if (lockOnVertical < -0.2f)
+            {
+                lockOnVertical = -0.5f;
+                directionInt = 2;
+            }
+
+            if (lockOnHorizontal > 0.2f || lockOnHorizontal < -0.2f
+            || lockOnVertical > 0.2f || lockOnVertical < -0.2f)
+            {
+                lastMove = new Vector2(lockOnHorizontal, lockOnVertical);
+            }
+        }
+        return directionInt;
     }
 }
 
