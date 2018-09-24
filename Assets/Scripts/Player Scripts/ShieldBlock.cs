@@ -14,6 +14,7 @@ public class ShieldBlock : MonoBehaviour
     private PlayerStats playerStatsScript;
     public int shieldBlocksLeft;
     public bool shieldLockBool; //bool to make player blocking more dynamic (shield is turned off when hit)
+    public float shieldBlockTimer;
 
     // Use this for initialization
     void Start()
@@ -29,6 +30,7 @@ public class ShieldBlock : MonoBehaviour
 
         shieldLockBool = false;
         shieldBlocksLeft = ShieldBlocksLeft();
+        shieldBlockTimer = 0.66f;
     }
 
     // Update is called once per frame
@@ -57,7 +59,18 @@ public class ShieldBlock : MonoBehaviour
             && thePlayer.attackingCounterNew == 0.06f && !shieldLockBool)
         {
             shieldBlock.isTrigger = false;
-            shieldOn = true;
+            shieldBlockTimer -= Time.deltaTime;
+
+            if (shieldBlockTimer > 0)
+            {
+                shieldOn = true;
+            }
+            else
+            {
+                shieldBlockTimer = 0.66f;
+                shieldOn = false;
+                shieldLockBool = true;
+            }
             // thePlayer.lockOn = true;
         }
         else
@@ -69,6 +82,7 @@ public class ShieldBlock : MonoBehaviour
         {
             shieldBlock.isTrigger = true;
             shieldOn = false;
+            shieldBlockTimer = 0.66f;
         }
 
         if (axisInput <= 0)

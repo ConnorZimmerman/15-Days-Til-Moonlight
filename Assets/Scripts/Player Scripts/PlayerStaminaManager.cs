@@ -29,13 +29,13 @@ public class PlayerStaminaManager : MonoBehaviour
         playerStaminaObject = GameObject.Find("Player");
         thePlayer = playerStaminaObject.GetComponent<PlayerController>();
         playerCurrentStamina = GlobalDataScript.globalPlayerCurrentStamina;
-        playerMaxStamina = GlobalDataScript.globalPlayerDexterity * 50;
+        playerMaxStamina = GlobalDataScript.globalPlayerDexterity * 20;
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerMaxStamina = playerStats.dexterity * 50;
+        playerMaxStamina = playerStats.dexterity * 20;
 
         if (playerCurrentStamina < 0)
         {
@@ -54,7 +54,7 @@ public class PlayerStaminaManager : MonoBehaviour
 
         if (dialog.dialogActive == false && thePlayer.dashActive == true)
         {
-            playerCurrentStamina -= 200;
+            playerCurrentStamina -= 250;
 
         }
 
@@ -90,24 +90,24 @@ public class PlayerStaminaManager : MonoBehaviour
         // }
 
 
-        // if (thePlayer.dashActive == false && thePlayer.sprintActive == false
-        //     && thePlayer.attackBool == false && thePlayer.attackBoolMouse == false && playerCurrentStamina <= 10000)
-        // {
-        //     if (staminaTimer == 2 && staminaLock == false && theShield.shieldOn == false)
-        //     {
-        //         playerCurrentStamina += 32;
-        //         staminaCharge = true;
-        //     }
-        //     else if (theShield.shieldOn == true && staminaTimer == 2 && staminaLock == false)
-        //     {
-        //         playerCurrentStamina += 20;
-        //         staminaCharge = true;
-        //     }
-        // }
-        // else
-        // {
-        //     staminaCharge = false;
-        // }
+        if (thePlayer.dashActive == false && thePlayer.sprintActive == false
+            && thePlayer.attackBool == false && thePlayer.attackBoolMouse == false && playerCurrentStamina <= 10000)
+        {
+            if (staminaTimer == 2 && staminaLock == false && theShield.shieldOn == false)
+            {
+                playerCurrentStamina += 1;
+                staminaCharge = true;
+            }
+            else if (theShield.shieldOn == true && staminaTimer == 2 && staminaLock == false)
+            {
+                playerCurrentStamina += 1;
+                staminaCharge = true;
+            }
+        }
+        else
+        {
+            staminaCharge = false;
+        }
 
         playerStaminaPercent = (float)(double)playerCurrentStamina / playerMaxStamina * 100;
 

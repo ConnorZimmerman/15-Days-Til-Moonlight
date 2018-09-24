@@ -309,6 +309,7 @@ public class EngagedWithPlayer : MonoBehaviour
                 recovAttackCounter -= Time.deltaTime;
                 attacking = false;
             }
+            
             if (recovAttackCounter <= 0)
             {
                 recovAttack = false;
