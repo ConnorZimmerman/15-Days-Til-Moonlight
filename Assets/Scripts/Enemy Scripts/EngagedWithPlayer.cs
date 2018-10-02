@@ -374,7 +374,7 @@ public class EngagedWithPlayer : MonoBehaviour
 
     public void doingDamage()
     {
-        FreezeFrame();
+        // FreezeFrame();
         if (playerStaminaDrain && playerShield.shieldOn && !deathStrike && colliderOn && !deathSeven)
         {
             PlayerStats playerStats = FindObjectOfType<PlayerStats>();
@@ -560,30 +560,30 @@ public class EngagedWithPlayer : MonoBehaviour
         return false;
     }
 
-    public void FreezeFrame()
-    {
-        Animator anim = thePlayer.GetComponent<Animator>();
-        // Animator anim2 = other.gameObject.GetComponent<Animator>();
+    // public void FreezeFrame()
+    // {
+    //     Animator anim = thePlayer.GetComponent<Animator>();
+    //     // Animator anim2 = other.gameObject.GetComponent<Animator>();
 
 
-        while (freezeFrame > 0)
-        {
-            Debug.Log(freezeFrame);
-            freezeFrame -= Time.deltaTime;
-            anim.enabled = false;
-            // anim2.enabled = false;
-            Time.timeScale = 0.8f;
-        }
+    //     while (freezeFrame > 0)
+    //     {
+    //         Debug.Log(freezeFrame);
+    //         freezeFrame -= Time.deltaTime;
+    //         anim.enabled = false;
+    //         // anim2.enabled = false;
+    //         Time.timeScale = 0.8f;
+    //     }
 
-        anim.enabled = true;
-        Time.timeScale = 1;
-        freezeFrame = 1f;
+    //     anim.enabled = true;
+    //     Time.timeScale = 1;
+    //     freezeFrame = 1f;
 
-        // if (freezeFrame <= 0)
-        // {
-        //     Time.timeScale = 1;
-        //     freezeFrame = 0.5f;
-        //     return;
-        // }
-    }
+    //     // if (freezeFrame <= 0)
+    //     // {
+    //     //     Time.timeScale = 1;
+    //     //     freezeFrame = 0.5f;
+    //     //     return;
+    //     // }
+    // }
 }

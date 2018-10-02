@@ -1201,7 +1201,7 @@ public class PlayerController : MonoBehaviour
             AddEnemiesToLists();
             currentEnemyLocked = FindClosestEnemy();
         }
-        ChooseLockOnDirection(currentEnemyLocked);
+        // ChooseLockOnDirection(currentEnemyLocked);
         newListBool = false;
 
         // Debug.Log(FindClosestEnemy());
@@ -1247,6 +1247,15 @@ public class PlayerController : MonoBehaviour
     {
         lockOnImage.SetActive(true);
         lockOnImage.transform.position = enemy.position;
+
+        if (enemy.GetComponent<EnemyHealthManager>().CurrentHealth <= 0)
+        {
+            lockOnImage.SetActive(false);
+            lockOn = false;
+            // enemy = FindClosestEnemy();
+            // lockOnImage.SetActive(true);
+            // lockOnImage.transform.position = enemy.position;
+        }
 
         float enemyTrackX = enemy.transform.position.x;
         float enemyTrackY = enemy.transform.position.y;

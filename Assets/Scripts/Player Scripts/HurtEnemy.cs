@@ -56,7 +56,7 @@ public class HurtEnemy : MonoBehaviour
         }
         theEnemy = other.gameObject.GetComponent<EnemyTestScript>();
 
-        FreezeFrame();
+        // FreezeFrame();
 
         if (other.gameObject.tag == "Enemy" && playerEngagement.thePlayerDeathStrike || other.gameObject.tag == "LargeEnemyBasic" && playerEngagement.thePlayerDeathStrike || other.gameObject.tag == "BasicRangedEnemy" && playerEngagement.thePlayerDeathStrike
             || other.gameObject.tag == "Enemy1")
@@ -161,30 +161,30 @@ public class HurtEnemy : MonoBehaviour
     // }
 
     // momentarily freezes animations for visceral attack feeling
-    public void FreezeFrame()
-    {
-        Animator anim = thePlayer.GetComponent<Animator>();
-        // Animator anim2 = other.gameObject.GetComponent<Animator>();
+    // public void FreezeFrame()
+    // {
+    //     Animator anim = thePlayer.GetComponent<Animator>();
+    //     // Animator anim2 = other.gameObject.GetComponent<Animator>();
 
 
-        while (freezeFrame > 0)
-        {
-            Debug.Log(freezeFrame);
-            freezeFrame -= Time.deltaTime;
-            anim.enabled = false;
-            // anim2.enabled = false;
-            Time.timeScale = 0.8f;
-        }
+    //     while (freezeFrame > 0)
+    //     {
+    //         Debug.Log(freezeFrame);
+    //         freezeFrame -= Time.deltaTime;
+    //         anim.enabled = false;
+    //         // anim2.enabled = false;
+    //         Time.timeScale = 0.8f;
+    //     }
 
-        anim.enabled = true;
-        Time.timeScale = 1;
-        freezeFrame = 1f;
+    //     anim.enabled = true;
+    //     Time.timeScale = 1;
+    //     freezeFrame = 1f;
 
-        // if (freezeFrame <= 0)
-        // {
-        //     Time.timeScale = 1;
-        //     freezeFrame = 0.5f;
-        //     return;
-        // }
-    }
+    //     // if (freezeFrame <= 0)
+    //     // {
+    //     //     Time.timeScale = 1;
+    //     //     freezeFrame = 0.5f;
+    //     //     return;
+    //     // }
+    // }
 }
