@@ -37,7 +37,7 @@ public class HurtEnemy : MonoBehaviour
         recovVar = false;
 
         damageToGive = thePS.playerDamage;
-        freezeFrame = 0.5f;
+        freezeFrame = 0.8f;
     }
 
     // Update is called once per frame
@@ -55,6 +55,8 @@ public class HurtEnemy : MonoBehaviour
             return;
         }
         theEnemy = other.gameObject.GetComponent<EnemyTestScript>();
+
+        FreezeFrame();
 
         if (other.gameObject.tag == "Enemy" && playerEngagement.thePlayerDeathStrike || other.gameObject.tag == "LargeEnemyBasic" && playerEngagement.thePlayerDeathStrike || other.gameObject.tag == "BasicRangedEnemy" && playerEngagement.thePlayerDeathStrike
             || other.gameObject.tag == "Enemy1")
@@ -158,29 +160,31 @@ public class HurtEnemy : MonoBehaviour
     //     }
     // }
 
-    public bool FreezeFrame(Collider2D other)
+    // momentarily freezes animations for visceral attack feeling
+    public void FreezeFrame()
     {
-        // momentarily freezes animations for visceral attack feeling
         Animator anim = thePlayer.GetComponent<Animator>();
-        Animator anim2 = other.gameObject.GetComponent<Animator>();
+        // Animator anim2 = other.gameObject.GetComponent<Animator>();
 
-        if (freezeFrame > 0)
+
+        while (freezeFrame > 0)
         {
+            Debug.Log(freezeFrame);
             freezeFrame -= Time.deltaTime;
             anim.enabled = false;
-            anim2.enabled = false;
-            return false;
-        }
-        else
-        {
-            anim.enabled = true;
-            anim2.enabled = true;
+            // anim2.enabled = false;
+            Time.timeScale = 0.8f;
         }
 
-        if (freezeFrame <= 0)
-        {
-            freezeFrame = 0.5f;
-        }
-        return true;
+        anim.enabled = true;
+        Time.timeScale = 1;
+        freezeFrame = 1f;
+
+        // if (freezeFrame <= 0)
+        // {
+        //     Time.timeScale = 1;
+        //     freezeFrame = 0.5f;
+        //     return;
+        // }
     }
 }

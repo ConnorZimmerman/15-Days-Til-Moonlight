@@ -30,7 +30,7 @@ public class ShieldBlock : MonoBehaviour
 
         shieldLockBool = false;
         shieldBlocksLeft = ShieldBlocksLeft();
-        shieldBlockTimer = 0.66f;
+        shieldBlockTimer = 1f;
     }
 
     // Update is called once per frame
@@ -67,7 +67,7 @@ public class ShieldBlock : MonoBehaviour
             }
             else
             {
-                shieldBlockTimer = 0.66f;
+                shieldBlockTimer = 1f;
                 shieldOn = false;
                 shieldLockBool = true;
             }
@@ -82,7 +82,7 @@ public class ShieldBlock : MonoBehaviour
         {
             shieldBlock.isTrigger = true;
             shieldOn = false;
-            shieldBlockTimer = 0.66f;
+            shieldBlockTimer = 1f;
         }
 
         if (axisInput <= 0)

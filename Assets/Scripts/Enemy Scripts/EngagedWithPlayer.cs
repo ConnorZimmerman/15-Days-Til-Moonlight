@@ -64,6 +64,7 @@ public class EngagedWithPlayer : MonoBehaviour
     public bool enemyMoving;
     public bool following;
     public bool deathSeven;
+    public float freezeFrame;
 
     // Use this for initialization
     void Start()
@@ -112,6 +113,8 @@ public class EngagedWithPlayer : MonoBehaviour
         preAttackCounter = 0.66f;
         recovAttackCounter = 0.3f;
         enemyAttackCounter = 0.06f;
+        freezeFrame = 1f;
+
 
     }
 
@@ -371,6 +374,7 @@ public class EngagedWithPlayer : MonoBehaviour
 
     public void doingDamage()
     {
+        FreezeFrame();
         if (playerStaminaDrain && playerShield.shieldOn && !deathStrike && colliderOn && !deathSeven)
         {
             PlayerStats playerStats = FindObjectOfType<PlayerStats>();
@@ -548,11 +552,38 @@ public class EngagedWithPlayer : MonoBehaviour
     {
         float distanceToPlayer = Vector3.Distance(transform.position, hitPoint.position);
 
-        if (distanceToPlayer <= 1)
+        if (distanceToPlayer <= 1.35f)
         {
             return true;
         }
 
         return false;
+    }
+
+    public void FreezeFrame()
+    {
+        Animator anim = thePlayer.GetComponent<Animator>();
+        // Animator anim2 = other.gameObject.GetComponent<Animator>();
+
+
+        while (freezeFrame > 0)
+        {
+            Debug.Log(freezeFrame);
+            freezeFrame -= Time.deltaTime;
+            anim.enabled = false;
+            // anim2.enabled = false;
+            Time.timeScale = 0.8f;
+        }
+
+        anim.enabled = true;
+        Time.timeScale = 1;
+        freezeFrame = 1f;
+
+        // if (freezeFrame <= 0)
+        // {
+        //     Time.timeScale = 1;
+        //     freezeFrame = 0.5f;
+        //     return;
+        // }
     }
 }

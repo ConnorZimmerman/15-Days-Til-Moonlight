@@ -35,7 +35,7 @@ public class GlobalDataScript : MonoBehaviour
         globalPlayerMaxStamina = PlayerPrefs.GetInt("Global Player Max Stamina", 200);
         globalPlayerCurrentXp = PlayerPrefs.GetInt("Global Player Current Xp", 0);
         globalPlayerLevel = PlayerPrefs.GetInt("Global Player Level", 1);
-        globalPlayerPointsToSpend = PlayerPrefs.GetInt("Global Player Points To Spend", 0);
+        globalPlayerPointsToSpend = PlayerPrefs.GetInt("Global Player Points To Spend", 10);
         globalPlayerVitality = PlayerPrefs.GetInt("Global Player Vitality", 5);
         globalPlayerStrength = PlayerPrefs.GetInt("Global Player Strength", 3);
         globalPlayerDexterity = PlayerPrefs.GetInt("Global Player Dexterity", 10);
