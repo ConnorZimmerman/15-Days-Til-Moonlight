@@ -1002,29 +1002,33 @@ public class PlayerController : MonoBehaviour
             {
                 string enemyQuadrant = DetermineQuadrant(enemy);
 
-                if (enemyQuadrant == "up")
+                // Only add enemies to list if they are not dead.
+                if (enemy.GetComponent<EnemyHealthManager>().CurrentHealth > 0)
                 {
-                    enemyListUp.Add(enemy);
+                    if (enemyQuadrant == "up")
+                    {
+                        enemyListUp.Add(enemy);
+                    }
+                    else if (enemyQuadrant == "right")
+                    {
+                        enemyListRight.Add(enemy);
+                    }
+                    else if (enemyQuadrant == "down")
+                    {
+                        enemyListDown.Add(enemy);
+                    }
+                    else if (enemyQuadrant == "left")
+                    {
+                        enemyListLeft.Add(enemy);
+                    }
+                    else
+                    {
+                        Debug.Log("enemy is not in quadrant");
+                    }
+                    enemyList.Add(enemy);
+                    enemyDict[dictCounter] = false;
+                    dictCounter++;
                 }
-                else if (enemyQuadrant == "right")
-                {
-                    enemyListRight.Add(enemy);
-                }
-                else if (enemyQuadrant == "down")
-                {
-                    enemyListDown.Add(enemy);
-                }
-                else if (enemyQuadrant == "left")
-                {
-                    enemyListLeft.Add(enemy);
-                }
-                else
-                {
-                    Debug.Log("enemy is not in quadrant");
-                }
-                enemyList.Add(enemy);
-                enemyDict[dictCounter] = false;
-                dictCounter++;
             }
         }
         enemyCount = enemyList.Count;
@@ -1082,7 +1086,7 @@ public class PlayerController : MonoBehaviour
         currentEnemyLocked = closestEnemy;
         return closestEnemy;
     }
-
+    // public Transform FindNextClosestEnemy(List<Transform> enemyListQuadrant, int curEnemyInt)
     public Transform FindNextClosestEnemy(List<Transform> enemyListQuadrant)
     {
         Transform closestEnemy = null;
@@ -1245,17 +1249,37 @@ public class PlayerController : MonoBehaviour
 
     public void ChooseLockOnDirection(Transform enemy)
     {
-        lockOnImage.SetActive(true);
-        lockOnImage.transform.position = enemy.position;
-
         if (enemy.GetComponent<EnemyHealthManager>().CurrentHealth <= 0)
         {
             lockOnImage.SetActive(false);
-            lockOn = false;
-            // enemy = FindClosestEnemy();
+            // lockOn = false;
+            enemyList.Remove(enemy);
+            try
+            {
+                AddEnemiesToLists();
+                enemy = FindClosestEnemy();
+            }
+            catch
+            {
+                lockOn = false;
+                lockOnImage.SetActive(false);
+                Debug.Log("it caught");
+                return;
+            }
             // lockOnImage.SetActive(true);
             // lockOnImage.transform.position = enemy.position;
         }
+
+        if (Vector3.Distance(enemy.transform.position, this.transform.position) > 10)
+        {
+            lockOn = false;
+            lockOnImage.SetActive(false);
+            return;
+        }
+
+
+        lockOnImage.SetActive(true);
+        lockOnImage.transform.position = enemy.position;
 
         float enemyTrackX = enemy.transform.position.x;
         float enemyTrackY = enemy.transform.position.y;

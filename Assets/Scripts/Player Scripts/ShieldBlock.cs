@@ -61,16 +61,16 @@ public class ShieldBlock : MonoBehaviour
             shieldBlock.isTrigger = false;
             shieldBlockTimer -= Time.deltaTime;
 
-            if (shieldBlockTimer > 0)
-            {
-                shieldOn = true;
-            }
-            else
-            {
-                shieldBlockTimer = 1f;
-                shieldOn = false;
-                shieldLockBool = true;
-            }
+            // if (shieldBlockTimer > 0)
+            // {
+            shieldOn = true;
+            // }
+            // else
+            // {
+            //     shieldBlockTimer = 1f;
+            //     shieldOn = false;
+            //     shieldLockBool = true;
+            // }
             // thePlayer.lockOn = true;
         }
         else
