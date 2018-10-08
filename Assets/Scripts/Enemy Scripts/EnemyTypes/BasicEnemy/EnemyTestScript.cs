@@ -844,7 +844,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
     public void Shield()
     {
-        if (!enemyShieldStrike && blockCounter < 3)
+        if (!enemyShieldStrike && blockCounter < 3 && !this.GetComponent<EngagedWithPlayer>().preAttack)
         {
             enemyShield = true;
         }
