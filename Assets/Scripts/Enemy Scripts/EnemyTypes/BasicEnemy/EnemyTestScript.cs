@@ -135,6 +135,13 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     // initiates when player enters enemies zone
     private bool followToDeath;
     public float shieldBreakRecoveryCounter;
+    float shieldTimer = 2f;
+
+    // If enemy block counter > 2 then the enemy can no longer block.
+    public int blockCounter = 0;
+
+    // This counter will determine when blockCounter is recovered.
+    float blockCounterTimer;
 
     // Use this for initialization
     void Start()
@@ -187,6 +194,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         shieldUpTwo = false;
 
         followToDeath = false;
+
+        blockCounterTimer = 3;
     }
 
     // Update is called once per frame
@@ -240,6 +249,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         }
 
         ChooseAction();
+        RecoverShieldBlock();
 
         staminaLockBool = false;
 
@@ -340,11 +350,9 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             // enemyMoving = false;
         }
 
-        /*#SwitchCases: what the enemy is doing (each case is the same [except for the direction the
-        enemy is facing], but I'll explain what each actionDecision does in the 1st case)
-        
-        Some of these are not even ever called upon in the current setup, but I'm keeping them around
-         cuz I know I'll eventually want more actionDecisions*/
+        // #SwitchCases: what the enemy is doing (each case is the same [except for the direction the
+        // enemy is facing], but I'll explain what each actionDecision does in the 1st case)
+
         switch (actionControl)
         {
             case 0:
@@ -352,11 +360,12 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 {
                     enemyRecover = false;
                     myRigidbody.velocity = new Vector2(0, 0);
+                    // myRigidbody.velocity = new Vector2(0, 0);
                     enemyShield = false;
                     attackLock = false;
                 }
 
-                // if (actionDecision == 1 && playerEngagement.colliderOn)//is not called upon currently
+                // if (actionDecision == 1 && playerEngagement.colliderOn)
                 // {
                 //     myRigidbody.velocity = new Vector2(0, 0);
                 //     Shield();
@@ -369,7 +378,9 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 if (actionDecision == 2)
                 {
                     enemyRecover = false;
-                    myRigidbody.velocity = new Vector2(0, 0);
+                    // myRigidbody.velocity = new Vector2(0, 0);
+                    myRigidbody.velocity = EnemyBackingAwayCalc();
+
                     Shield();
                     attackLock = true;
                 }
@@ -388,10 +399,12 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 // enemy backing away and being cautious
                 if (actionDecision == 3)
                 {
-                    myRigidbody.velocity = new Vector2(-2, 0);
+                    myRigidbody.velocity = new Vector2(-2f, 0);
                     enemyRecover = true;
                     attackLock = true;
                     following = false;
+                    Shield();
+
                 }
 
                 /*The enemy is trying to put distance between itself and the player (either it's just been
@@ -399,7 +412,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 if (actionDecision == 4)
                 {
                     Shield();
-                    myRigidbody.velocity = new Vector2(-2, 0);
+                    myRigidbody.velocity = new Vector2(-2f, 0);
                     enemyRecover = true;
                     attackLock = true;
                     following = false;
@@ -440,7 +453,9 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 if (actionDecision == 2)
                 {
                     enemyRecover = false;
-                    myRigidbody.velocity = new Vector2(0, 0);
+                    // myRigidbody.velocity = new Vector2(0, 0);
+                    myRigidbody.velocity = EnemyBackingAwayCalc();
+
                     Shield();
                     attackLock = true;
                 }
@@ -455,16 +470,18 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 // }
                 if (actionDecision == 3)
                 {
-                    myRigidbody.velocity = new Vector2(2, 0);
+                    myRigidbody.velocity = new Vector2(2f, 0);
                     enemyRecover = true;
                     attackLock = true;
                     following = false;
+                    Shield();
+
                 }
 
                 if (actionDecision == 4)
                 {
                     Shield();
-                    myRigidbody.velocity = new Vector2(2, 0);
+                    myRigidbody.velocity = new Vector2(2f, 0);
                     attackLock = true;
                     enemyRecover = true;
                     following = false;
@@ -502,7 +519,9 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
                 if (actionDecision == 2)
                 {
-                    myRigidbody.velocity = new Vector2(0, 0);
+                    // myRigidbody.velocity = new Vector2(0, 0);
+                    myRigidbody.velocity = EnemyBackingAwayCalc();
+                    // EnemyBackingAwayCalc()
                     enemyRecover = false;
                     Shield();
                     following = false;
@@ -520,16 +539,17 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 // }
                 if (actionDecision == 3)
                 {
-                    myRigidbody.velocity = new Vector2(0, 2);
+                    myRigidbody.velocity = new Vector2(0, 2f);
                     enemyRecover = true;
                     attackLock = true;
                     following = false;
+                    Shield();
                 }
 
                 if (actionDecision == 4)
                 {
                     Shield();
-                    myRigidbody.velocity = new Vector2(0, 2);
+                    myRigidbody.velocity = new Vector2(0, 2f);
                     enemyRecover = true;
                     attackLock = true;
                     following = false;
@@ -566,7 +586,9 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 if (actionDecision == 2)
                 {
                     enemyRecover = false;
-                    myRigidbody.velocity = new Vector2(0, 0);
+                    // myRigidbody.velocity = new Vector2(0, 0);
+                    myRigidbody.velocity = EnemyBackingAwayCalc();
+
                     Shield();
                     attackLock = true;
                 }
@@ -581,7 +603,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 // }
                 if (actionDecision == 3)
                 {
-                    myRigidbody.velocity = new Vector2(0, -2);
+                    myRigidbody.velocity = new Vector2(0, -2f);
                     enemyRecover = true;
                     attackLock = true;
                     following = false;
@@ -589,7 +611,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
                 if (actionDecision == 4)
                 {
-                    myRigidbody.velocity = new Vector2(0, -2);
+                    myRigidbody.velocity = new Vector2(0, -2f);
                     enemyRecover = true;
                     attackLock = true;
                     Shield();
@@ -606,8 +628,6 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 // }
                 break;
         }
-
-
 
         if (playerHealth.playerIsDead)
         {
@@ -626,6 +646,17 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             return;
         }
         ActionPriorities();
+
+        if (shieldTimer < 2f && shieldTimer > 0 && blockCounter < 3 || shieldUpTwo && blockCounter < 3)
+        {
+            actionDecision = 2;
+            shieldTimer -= Time.deltaTime;
+            return;
+        }
+        else
+        {
+            shieldTimer = 2f;
+        }
 
         if (playerHealthOne && !deathSeven)
         {
@@ -735,7 +766,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         // {
         //     dodgingFive = false;
         // }
-        if (playerStaminaMan.playerStaminaPercent >= 25 && inPain || playerStaminaMan.playerStaminaPercent >= 75 && enemyShieldStrike)
+        if (playerStaminaMan.playerStaminaPercent >= 25 && inPain || playerStaminaMan.playerStaminaPercent >= 75 && enemyShieldStrike || blockCounter >= 3)
         {
             retreatingThree = true;
         }
@@ -745,7 +776,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         }
 
         if (playerStaminaMan.playerStaminaPercent >= 25 && !playerHealthOne && !retreatingThree
-        || inPain && playerStaminaMan.playerStaminaPercent >= 25)
+        || inPain && playerStaminaMan.playerStaminaPercent >= 25 && blockCounter < 3 || UnityEngine.Random.Range(0, 150) == 0 && !this.GetComponent<EngagedWithPlayer>().preAttack && blockCounter < 3 || thePlayer.preAttack && UnityEngine.Random.Range(0, 150) == 0 && blockCounter < 3)
         {
             shieldUpTwo = true;
         }
@@ -813,7 +844,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
     public void Shield()
     {
-        if (!enemyShieldStrike)
+        if (!enemyShieldStrike && blockCounter < 3)
         {
             enemyShield = true;
         }
@@ -984,6 +1015,52 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         }
 
         return false;
+    }
+
+    public Vector2 EnemyBackingAwayCalc()
+    {
+        float x = 0;
+        float y = 0;
+        // switch (moveDirectionX)
+        // {
+        //     case 0:
+        //         // x = UnityEngine.Random.Range(0, 0);
+        //         // y = UnityEngine.Random.Range(-2, 0);
+        //         x = 0;
+        //         y = 5;
+        //         break;
+
+        //     case 1:
+        //         x = UnityEngine.Random.Range(0, 2);
+        //         y = UnityEngine.Random.Range(-1, 2);
+        //         break;
+
+        //     case 2:
+        //         x = UnityEngine.Random.Range(0, 2);
+        //         y = UnityEngine.Random.Range(-1, 0);
+        //         break;
+
+        //     case 3:
+        //         x = UnityEngine.Random.Range(-1, 0);
+        //         y = UnityEngine.Random.Range(-1, 2);
+        //         break;
+        // }
+
+        return new Vector2(x, y);
+    }
+
+    public void RecoverShieldBlock()
+    {
+        if (blockCounter > 0)
+        {
+            blockCounterTimer -= Time.deltaTime;
+
+            if (blockCounterTimer <= 0)
+            {
+                blockCounter--;
+                blockCounterTimer = 3;
+            }
+        }
     }
 }
 

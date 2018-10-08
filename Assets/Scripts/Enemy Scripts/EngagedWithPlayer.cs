@@ -552,7 +552,7 @@ public class EngagedWithPlayer : MonoBehaviour
     {
         float distanceToPlayer = Vector3.Distance(transform.position, hitPoint.position);
 
-        if (distanceToPlayer <= 1.35f)
+        if (distanceToPlayer <= 1.25f) //1.35
         {
             return true;
         }

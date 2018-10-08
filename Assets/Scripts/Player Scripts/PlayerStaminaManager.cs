@@ -29,13 +29,13 @@ public class PlayerStaminaManager : MonoBehaviour
         playerStaminaObject = GameObject.Find("Player");
         thePlayer = playerStaminaObject.GetComponent<PlayerController>();
         playerCurrentStamina = GlobalDataScript.globalPlayerCurrentStamina;
-        playerMaxStamina = GlobalDataScript.globalPlayerDexterity * 20;
+        playerMaxStamina = GlobalDataScript.globalPlayerDexterity * 10;
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerMaxStamina = playerStats.dexterity * 20;
+        playerMaxStamina = playerStats.dexterity * 10;
 
         if (playerCurrentStamina < 0)
         {
@@ -54,7 +54,7 @@ public class PlayerStaminaManager : MonoBehaviour
 
         if (dialog.dialogActive == false && thePlayer.dashActive == true)
         {
-            playerCurrentStamina -= 250;
+            playerCurrentStamina -= 1000;
 
         }
 
@@ -91,7 +91,7 @@ public class PlayerStaminaManager : MonoBehaviour
 
 
         if (thePlayer.dashActive == false && thePlayer.sprintActive == false
-            && thePlayer.attackBool == false && thePlayer.attackBoolMouse == false && playerCurrentStamina <= 10000)
+            && thePlayer.attackBool == false && thePlayer.attackBoolMouse == false && playerCurrentStamina <= playerMaxStamina)
         {
             if (staminaTimer == 2 && staminaLock == false && theShield.shieldOn == false)
             {

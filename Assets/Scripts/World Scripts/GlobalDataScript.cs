@@ -31,7 +31,7 @@ public class GlobalDataScript : MonoBehaviour
     {
         globalPlayerCurrentHealth = PlayerPrefs.GetInt("Global Player Current Health", 5);
         globalPlayerMaxHealth = PlayerPrefs.GetInt("Global Player Max Health", 5);
-        globalPlayerCurrentStamina = PlayerPrefs.GetInt("Global Player Current Stamina", 200);
+        globalPlayerCurrentStamina = PlayerPrefs.GetInt("Global Player Current Stamina", 1000);
         globalPlayerMaxStamina = PlayerPrefs.GetInt("Global Player Max Stamina", 200);
         globalPlayerCurrentXp = PlayerPrefs.GetInt("Global Player Current Xp", 0);
         globalPlayerLevel = PlayerPrefs.GetInt("Global Player Level", 1);

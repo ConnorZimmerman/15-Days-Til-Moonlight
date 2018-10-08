@@ -62,7 +62,7 @@ public class HurtEnemy : MonoBehaviour
             || other.gameObject.tag == "Enemy1")
         {
             enemyHit = true;
-            staminaManager.playerCurrentStamina += 20;
+            // staminaManager.playerCurrentStamina += 20;
 
             // Animator anim2 = other.gameObject.GetComponent<Animator>();
             // if (thePlayer.recovAttack)
@@ -135,6 +135,9 @@ public class HurtEnemy : MonoBehaviour
             other.gameObject.GetComponent<EnemyTestScript>().enemyShieldStrike = true;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();
+            // theEnemy= new Vector2(2,2);
+            theEnemy.blockCounter++;
+            // other.GetComponentInParent<Rigidbody2D>().rigidbody2D -= new Vector2(2,2);
             Instantiate(swordClash, swordClashPoint.position, swordClashPoint.rotation);
         }
     }

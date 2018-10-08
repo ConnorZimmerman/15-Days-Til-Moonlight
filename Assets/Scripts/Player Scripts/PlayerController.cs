@@ -1268,6 +1268,7 @@ public class PlayerController : MonoBehaviour
             }
             // lockOnImage.SetActive(true);
             // lockOnImage.transform.position = enemy.position;
+            return;
         }
 
         if (Vector3.Distance(enemy.transform.position, this.transform.position) > 10)
