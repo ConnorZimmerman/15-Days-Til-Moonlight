@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/SnowyA.unity
+- path: Assets/Scenes/Sewers_A.unity
   isLoaded: 1
   isActive: 1

@@ -776,7 +776,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         }
 
         if (playerStaminaMan.playerStaminaPercent >= 25 && !playerHealthOne && !retreatingThree
-        || inPain && playerStaminaMan.playerStaminaPercent >= 25 && blockCounter < 3 || UnityEngine.Random.Range(0, 150) == 0 && !this.GetComponent<EngagedWithPlayer>().preAttack && blockCounter < 3 || thePlayer.preAttack && UnityEngine.Random.Range(0, 150) == 0 && blockCounter < 3)
+        || inPain && playerStaminaMan.playerStaminaPercent >= 25 && blockCounter < 3 || UnityEngine.Random.Range(0, 150) == 0 /*&& !this.GetComponent<EngagedWithPlayer>().preAttack */ && blockCounter < 3 || thePlayer.preAttack && UnityEngine.Random.Range(0, 150) == 0 && blockCounter < 3)
         {
             shieldUpTwo = true;
         }
@@ -844,7 +844,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
     public void Shield()
     {
-        if (!enemyShieldStrike && blockCounter < 3 && !this.GetComponent<EngagedWithPlayer>().preAttack)
+        if (!enemyShieldStrike && blockCounter < 3 /* && !this.GetComponent<EngagedWithPlayer>().preAttack */)
         {
             enemyShield = true;
         }
