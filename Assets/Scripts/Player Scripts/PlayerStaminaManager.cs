@@ -35,7 +35,7 @@ public class PlayerStaminaManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerMaxStamina = playerStats.dexterity * 10;
+        playerMaxStamina = playerStats.dexterity * 100;
 
         if (playerCurrentStamina < 0)
         {
@@ -54,7 +54,7 @@ public class PlayerStaminaManager : MonoBehaviour
 
         if (dialog.dialogActive == false && thePlayer.dashActive == true)
         {
-            playerCurrentStamina -= 1000;
+            playerCurrentStamina -= 100;
 
         }
 
@@ -95,12 +95,12 @@ public class PlayerStaminaManager : MonoBehaviour
         {
             if (staminaTimer == 2 && staminaLock == false && theShield.shieldOn == false)
             {
-                playerCurrentStamina += 1;
+                playerCurrentStamina += 4;
                 staminaCharge = true;
             }
             else if (theShield.shieldOn == true && staminaTimer == 2 && staminaLock == false)
             {
-                playerCurrentStamina += 1;
+                playerCurrentStamina += 4;
                 staminaCharge = true;
             }
         }

@@ -530,7 +530,7 @@ public class PlayerController : MonoBehaviour
         if (sprintPossible && staminaMan.playerCurrentStamina >= 50)
         {
             sprintTimer -= Time.deltaTime;
-            moveSpeed = 12f;
+            moveSpeed = 8f;
             sprintActive = true;
             soFast = true;
         }
@@ -647,7 +647,7 @@ public class PlayerController : MonoBehaviour
 
         //if (!attackLock && axisInput <= -0.2f && staminaMan.playerCurrentStamina > 400)
         if (!attackLock && axisInput <= -0.2f
-            && recovAttackCounter == 0.3f)
+            && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 200)
         {
             preAttack = true;
             attacking = true;
@@ -713,7 +713,7 @@ public class PlayerController : MonoBehaviour
                 preAttack = false;
                 attackLock = true;
 
-                // staminaMan.playerCurrentStamina -= 1000;
+                staminaMan.playerCurrentStamina -= 200;
                 //staminaAttackDrainBool = true;
             }
         }

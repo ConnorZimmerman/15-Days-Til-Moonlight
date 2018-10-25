@@ -110,7 +110,7 @@ public class EngagedWithPlayer : MonoBehaviour
         preAttack = false;
         recovAttack = false;
 
-        preAttackCounter = 0.66f;
+        preAttackCounter = 0.6f;
         recovAttackCounter = 0.3f;
         enemyAttackCounter = 0.06f;
         freezeFrame = 1f;
@@ -254,7 +254,7 @@ public class EngagedWithPlayer : MonoBehaviour
         if (enemyGameObject.tag == "Enemy")
         {
             if (localAttackLock == false && colliderOn && engaged
-                && preAttackCounter == 0.66f && enemyAttackCounter == 0.06f
+                && preAttackCounter == 0.6f && enemyAttackCounter == 0.06f
                 && recovAttackCounter == 0.3f)
             {
                 preAttack = true;
@@ -317,7 +317,7 @@ public class EngagedWithPlayer : MonoBehaviour
             {
                 recovAttack = false;
                 beforeRecov = true;
-                preAttackCounter = 0.66f;
+                preAttackCounter = 0.6f;
                 recovAttackCounter = 0.3f;
                 enemyAttackCounter = 0.06f;
                 // enemyMoving = true;
@@ -388,7 +388,7 @@ public class EngagedWithPlayer : MonoBehaviour
             {
                 playerDefense = 100;
             }
-            playerStaminaMan.playerCurrentStamina -= 100 - playerDefense;
+            playerStaminaMan.playerCurrentStamina -= 150 - playerDefense;
             playerShield.shieldBlocksLeft -= 2;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();

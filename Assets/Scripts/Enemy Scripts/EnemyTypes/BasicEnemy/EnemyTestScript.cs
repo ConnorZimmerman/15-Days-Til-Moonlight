@@ -137,6 +137,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     public float shieldBreakRecoveryCounter;
     float shieldTimer = 2f;
 
+    // This int will allow for more randomization for enemy blocking
+    int blockCounterMax;
     // If enemy block counter > 2 then the enemy can no longer block.
     public int blockCounter = 0;
 
@@ -195,7 +197,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
         followToDeath = false;
 
-        blockCounterTimer = 3;
+        blockCounterMax = UnityEngine.Random.Range(2, 4);
+        blockCounterTimer = 1.5f;
     }
 
     // Update is called once per frame
@@ -647,7 +650,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         }
         ActionPriorities();
 
-        if (shieldTimer < 2f && shieldTimer > 0 && blockCounter < 3 || shieldUpTwo && blockCounter < 3)
+        if (shieldTimer < 2f && shieldTimer > 0 && blockCounter < blockCounterMax || shieldUpTwo && blockCounter < blockCounterMax)
         {
             actionDecision = 2;
             shieldTimer -= Time.deltaTime;
@@ -766,7 +769,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         // {
         //     dodgingFive = false;
         // }
-        if (playerStaminaMan.playerStaminaPercent >= 25 && inPain || playerStaminaMan.playerStaminaPercent >= 75 && enemyShieldStrike || blockCounter >= 3)
+        if (playerStaminaMan.playerStaminaPercent >= 25 && inPain || playerStaminaMan.playerStaminaPercent >= 75 && enemyShieldStrike || blockCounter >= blockCounterMax)
         {
             retreatingThree = true;
         }
@@ -776,7 +779,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         }
 
         if (playerStaminaMan.playerStaminaPercent >= 25 && !playerHealthOne && !retreatingThree
-        || inPain && playerStaminaMan.playerStaminaPercent >= 25 && blockCounter < 3 || UnityEngine.Random.Range(0, 150) == 0 /*&& !this.GetComponent<EngagedWithPlayer>().preAttack */ && blockCounter < 3 || thePlayer.preAttack && UnityEngine.Random.Range(0, 150) == 0 && blockCounter < 3)
+        || inPain && playerStaminaMan.playerStaminaPercent >= 25 && blockCounter < blockCounterMax || UnityEngine.Random.Range(0, 150) == 0 /*&& !this.GetComponent<EngagedWithPlayer>().preAttack */ && blockCounter < blockCounterMax || thePlayer.preAttack && UnityEngine.Random.Range(0, 150) == 0 && blockCounter < blockCounterMax)
         {
             shieldUpTwo = true;
         }
@@ -844,7 +847,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
     public void Shield()
     {
-        if (!enemyShieldStrike && blockCounter < 3 /* && !this.GetComponent<EngagedWithPlayer>().preAttack */)
+        if (!enemyShieldStrike && blockCounter < blockCounterMax /* && !this.GetComponent<EngagedWithPlayer>().preAttack */)
         {
             enemyShield = true;
         }
@@ -1058,7 +1061,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             if (blockCounterTimer <= 0)
             {
                 blockCounter--;
-                blockCounterTimer = 3;
+                blockCounterTimer = 1.25f;
             }
         }
     }
