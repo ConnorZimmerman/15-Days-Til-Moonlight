@@ -95,7 +95,6 @@ public class ShieldBlock : MonoBehaviour
             shieldBlock.isTrigger = false;
             shieldOn = true;
         }
-
         else if (Input.GetButton("Block") && shieldOn == true)
         {
             shieldBlock.isTrigger = true;

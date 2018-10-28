@@ -256,11 +256,6 @@ public class PlayerController : MonoBehaviour
     {
         playerNewHealth = playerHealth.playerCurrentHealth;
 
-        // float temp1 = Input.GetAxisRaw("Horizontal") * 2;
-        // float temp2 = Input.GetAxisRaw("Vertical") * 2;
-        // movementHorizontal = ((float)Math.Round(Input.GetAxisRaw("Horizontal"), MidpointRounding.AwayFromZero)) / 2;
-        // movementVertical = ((float)Math.Round(Input.GetAxisRaw("Vertical"), MidpointRounding.AwayFromZero)) / 2;
-
         MovementDisability();
         DeterminePlayerDirection();
 
@@ -641,17 +636,19 @@ public class PlayerController : MonoBehaviour
                 myRigidbody.velocity = Vector2.zero;
                 wasMoving = false;
             }
-
-
         }
 
         //if (!attackLock && axisInput <= -0.2f && staminaMan.playerCurrentStamina > 400)
         if (!attackLock && axisInput <= -0.2f
-            && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 200)
+            && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 300)
         {
             preAttack = true;
             attacking = true;
         }
+        // else
+        // {
+        //     GameObject.Find("StaminaTell").SetActive(true);
+        // }
 
         if (preAttack)
         {
@@ -667,8 +664,6 @@ public class PlayerController : MonoBehaviour
         {
             wasSprint = false;
         }
-
-
 
         if (preAttackCounter <= 0 && preAttack)
         {
@@ -713,7 +708,7 @@ public class PlayerController : MonoBehaviour
                 preAttack = false;
                 attackLock = true;
 
-                staminaMan.playerCurrentStamina -= 200;
+                staminaMan.playerCurrentStamina -= 300;
                 //staminaAttackDrainBool = true;
             }
         }

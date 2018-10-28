@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
     {
         if (shieldBlockScript.shieldOn)
         {
-            shieldImageObject.SetActive(true);
+            // shieldImageObject.SetActive(true);
             shieldTextObject.SetActive(true);
         }
         else
@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
             "/" + playerHealth.playerMaxHealth;
 
         daggerText.text = ": " + playerRanged.daggerCount;
-        shieldText.text = ": " + shieldBlockScript.shieldBlocksLeft;
+        shieldText.text = "" + shieldBlockScript.shieldBlocksLeft;
         potionText.text = " x " + ItemSlotManager.potionCount;
 
 
