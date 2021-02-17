@@ -7,38 +7,79 @@ labels:
 - Tileset
 - Pixelart
 - 2D
-timeCreated: 1461189125
-licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Shadow_Edge-Long-Vert_UpLeft
-    21300002: Shadow_Edge-Round_UpLeft
-    21300004: Shadow_Edge-Round_LowLeft
-    21300006: Shadow_Edge-Round_LowRight
-    21300008: Shadow_Edge-Round_UpRight
-    21300010: Shadow_Edge-Long-Vert_UpRight
-    21300012: Shadow_Edge-Short_UpLeft
-    21300014: Shadow_Tile_Wide
-    21300016: Shadow_Edge-Short_UpRight
-    21300018: Shadow_Edge-Long-Horz_UpLeft
-    21300020: Shadow_Tile_Large
-    21300022: Shadow_Tile_Long
-    21300024: Shadow_Tile_Small
-    21300026: Shadow_Edge-Long-Horz_UpRight
-    21300028: Shadow_Edge-Long-Vert_LowLeft
-    21300030: Shadow_Edge-Short_LowLeft
-    21300032: Shadow_Edge-Long-Horz_LowRight
-    21300034: Shadow_Edge-Short_LowRight
-    21300036: Shadow_Edge-Long-Vert_LowRight
-    21300038: Shadow_Edge-Long-Horz_LowLeft
-  serializedVersion: 2
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Shadow_Edge-Long-Vert_UpLeft
+  - first:
+      213: 21300002
+    second: Shadow_Edge-Round_UpLeft
+  - first:
+      213: 21300004
+    second: Shadow_Edge-Round_LowLeft
+  - first:
+      213: 21300006
+    second: Shadow_Edge-Round_LowRight
+  - first:
+      213: 21300008
+    second: Shadow_Edge-Round_UpRight
+  - first:
+      213: 21300010
+    second: Shadow_Edge-Long-Vert_UpRight
+  - first:
+      213: 21300012
+    second: Shadow_Edge-Short_UpLeft
+  - first:
+      213: 21300014
+    second: Shadow_Tile_Wide
+  - first:
+      213: 21300016
+    second: Shadow_Edge-Short_UpRight
+  - first:
+      213: 21300018
+    second: Shadow_Edge-Long-Horz_UpLeft
+  - first:
+      213: 21300020
+    second: Shadow_Tile_Large
+  - first:
+      213: 21300022
+    second: Shadow_Tile_Long
+  - first:
+      213: 21300024
+    second: Shadow_Tile_Small
+  - first:
+      213: 21300026
+    second: Shadow_Edge-Long-Horz_UpRight
+  - first:
+      213: 21300028
+    second: Shadow_Edge-Long-Vert_LowLeft
+  - first:
+      213: 21300030
+    second: Shadow_Edge-Short_LowLeft
+  - first:
+      213: 21300032
+    second: Shadow_Edge-Long-Horz_LowRight
+  - first:
+      213: 21300034
+    second: Shadow_Edge-Short_LowRight
+  - first:
+      213: 21300036
+    second: Shadow_Edge-Long-Vert_LowRight
+  - first:
+      213: 21300038
+    second: Shadow_Edge-Long-Horz_LowLeft
+  externalObjects: {}
+  serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -47,37 +88,60 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 7
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -3
   maxTextureSize: 128
   textureSettings:
+    serializedVersion: 2
     filterMode: 0
     aniso: 1
-    mipBias: -1
-    wrapMode: 1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: 50
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 128
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: Shadow_Edge-Long-Vert_UpLeft
+    - serializedVersion: 2
+      name: Shadow_Edge-Long-Vert_UpLeft
       rect:
         serializedVersion: 2
         x: 0
@@ -88,7 +152,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Round_UpLeft
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Round_UpLeft
       rect:
         serializedVersion: 2
         x: 16
@@ -99,7 +173,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Round_LowLeft
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Round_LowLeft
       rect:
         serializedVersion: 2
         x: 32
@@ -110,7 +194,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Round_LowRight
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Round_LowRight
       rect:
         serializedVersion: 2
         x: 48
@@ -121,7 +215,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Round_UpRight
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62305410000000000800000000000000
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Round_UpRight
       rect:
         serializedVersion: 2
         x: 64
@@ -132,7 +236,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Long-Vert_UpRight
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82305410000000000800000000000000
+      internalID: 21300008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Long-Vert_UpRight
       rect:
         serializedVersion: 2
         x: 80
@@ -143,7 +257,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Short_UpLeft
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2305410000000000800000000000000
+      internalID: 21300010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Short_UpLeft
       rect:
         serializedVersion: 2
         x: 16
@@ -154,7 +278,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Tile_Wide
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2305410000000000800000000000000
+      internalID: 21300012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Tile_Wide
       rect:
         serializedVersion: 2
         x: 32
@@ -165,7 +299,17 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Short_UpRight
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2305410000000000800000000000000
+      internalID: 21300014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Short_UpRight
       rect:
         serializedVersion: 2
         x: 64
@@ -176,7 +320,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Long-Horz_UpLeft
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03305410000000000800000000000000
+      internalID: 21300016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Long-Horz_UpLeft
       rect:
         serializedVersion: 2
         x: 0
@@ -187,7 +341,17 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Tile_Large
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23305410000000000800000000000000
+      internalID: 21300018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Tile_Large
       rect:
         serializedVersion: 2
         x: 32
@@ -197,12 +361,18 @@ TextureImporter:
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 32}
-        - {x: -16, y: 0}
-        - {x: 16, y: 0}
-        - {x: 16, y: 32}
-    - name: Shadow_Tile_Long
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43305410000000000800000000000000
+      internalID: 21300020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Tile_Long
       rect:
         serializedVersion: 2
         x: 64
@@ -213,7 +383,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Tile_Small
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63305410000000000800000000000000
+      internalID: 21300022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Tile_Small
       rect:
         serializedVersion: 2
         x: 80
@@ -224,7 +404,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Long-Horz_UpRight
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83305410000000000800000000000000
+      internalID: 21300024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Long-Horz_UpRight
       rect:
         serializedVersion: 2
         x: 0
@@ -235,7 +425,17 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Long-Vert_LowLeft
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3305410000000000800000000000000
+      internalID: 21300026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Long-Vert_LowLeft
       rect:
         serializedVersion: 2
         x: 0
@@ -246,7 +446,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Short_LowLeft
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3305410000000000800000000000000
+      internalID: 21300028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Short_LowLeft
       rect:
         serializedVersion: 2
         x: 16
@@ -257,7 +467,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Long-Horz_LowRight
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3305410000000000800000000000000
+      internalID: 21300030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Long-Horz_LowRight
       rect:
         serializedVersion: 2
         x: 32
@@ -268,7 +488,17 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Short_LowRight
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04305410000000000800000000000000
+      internalID: 21300032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Short_LowRight
       rect:
         serializedVersion: 2
         x: 64
@@ -279,7 +509,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Long-Vert_LowRight
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24305410000000000800000000000000
+      internalID: 21300034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Long-Vert_LowRight
       rect:
         serializedVersion: 2
         x: 80
@@ -290,7 +530,17 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Shadow_Edge-Long-Horz_LowLeft
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44305410000000000800000000000000
+      internalID: 21300036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Edge-Long-Horz_LowLeft
       rect:
         serializedVersion: 2
         x: 32
@@ -301,8 +551,28 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64305410000000000800000000000000
+      internalID: 21300038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
   spritePackingTag: 
+  pSDRemoveMatte: 1
+  pSDShowRemoveMatteOption: 1
   userData: 
   assetBundleName: 
   assetBundleVariant: 
