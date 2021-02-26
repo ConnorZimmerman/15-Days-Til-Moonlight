@@ -499,7 +499,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else if (playerStats.dexterity >= 14 && staminaMan.playerCurrentStamina > 50 && Input.GetButtonDown("Sprint") && playerMoving || playerStats.dexterity >= 14 && Input.GetButtonDown("SprintX") && playerMoving && !sprintPossible)
+        else if (playerStats.dexterity >= 14 && staminaMan.playerCurrentStamina > 50 && Input.GetButtonDown("Sprint") && playerMoving || playerStats.dexterity >= 14 && Input.GetButtonDown("SprintX") && playerMoving && !sprintPossible || playerStats.dexterity >= 14 && staminaMan.playerCurrentStamina > 50 && Input.GetKeyDown(KeyCode.LeftShift) && playerMoving)
         {
             if (sprintTimer > 0)
             {
@@ -640,7 +640,7 @@ public class PlayerController : MonoBehaviour
 
         //if (!attackLock && axisInput <= -0.2f && staminaMan.playerCurrentStamina > 400)
         if (!attackLock && axisInput <= -0.2f
-            && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 300)
+            && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 300 || !attackLock && Input.GetMouseButtonDown(0) && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 300)
         {
             preAttack = true;
             attacking = true;
@@ -656,7 +656,7 @@ public class PlayerController : MonoBehaviour
             //preAttackCounter -= Time.frameCount;
         }
 
-        if (playerStats.dexterity >= 14 && Input.GetButton("Sprint") && wasMoving || playerStats.dexterity >= 14 && Input.GetButton("SprintX") && wasMoving)
+        if (playerStats.dexterity >= 14 && Input.GetButton("Sprint") && wasMoving || playerStats.dexterity >= 14 && Input.GetButton("SprintX") && wasMoving || playerStats.dexterity >= 14 && Input.GetKeyDown(KeyCode.LeftShift) && wasMoving)
         {
             wasSprint = true;
         }

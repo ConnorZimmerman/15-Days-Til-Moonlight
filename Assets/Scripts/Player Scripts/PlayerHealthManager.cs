@@ -50,8 +50,10 @@ public class PlayerHealthManager : MonoBehaviour
         {
             playerIsDead = true;
 
-            PlayerPrefs.SetString("Global Player Cur Lvl", "SnowyA");
-            PlayerPrefs.SetString("Global Player Start Point", "SnowyA_StartPoint");
+            // PlayerPrefs.SetString("Global Player Cur Lvl", "SnowyA");
+            // PlayerPrefs.SetString("Global Player Start Point", "SnowyA_StartPoint");
+            PlayerPrefs.SetString("Global Player Cur Lvl", "Sewers_A");
+            PlayerPrefs.SetString("Global Player Start Point", "Sewers_A_StartPoint");
 
             gameObject.SetActive(false);
         }

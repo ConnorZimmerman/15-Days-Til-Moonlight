@@ -62,8 +62,10 @@ public class Reload : MonoBehaviour
                 playerHealth.playerIsDead = false;
                 PlayerPrefs.DeleteAll();
                 PlayerPrefs.SetInt("Global Music Tracker", 0);
-                PlayerPrefs.SetString("Global Player Cur Lvl", "SnowyA");
-                PlayerPrefs.SetString("Global Player Start Point", "SnowyA_StartPoint");
+                // PlayerPrefs.SetString("Global Player Cur Lvl", "SnowyA");
+                // PlayerPrefs.SetString("Global Player Start Point", "SnowyA_StartPoint");
+                PlayerPrefs.SetString("Global Player Cur Lvl", "Sewers_A");
+                PlayerPrefs.SetString("Global Player Start Point", "Sewers_A_StartPoint");
 
                 thePlayer.swingBig.SetActive(false);
                 thePlayer.swingBig.transform.localRotation = new Quaternion(0, 0, 0, 0);
@@ -79,7 +81,8 @@ public class Reload : MonoBehaviour
 
                 // Debug.Log(globalData.globalPlayerCurLvl);
                 // Debug.Log(globalData.globalPlayerStartPoint);
-                SceneManager.LoadScene("SnowyA", LoadSceneMode.Single);
+                // SceneManager.LoadScene("SnowyA", LoadSceneMode.Single);
+                SceneManager.LoadScene("Sewers_A", LoadSceneMode.Single);
 
                 // if (thePlayer.startPoint == pointName)
                 // {

@@ -60,7 +60,7 @@ public class PlayerRangedAttack : MonoBehaviour
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
             rotatingObject.transform.rotation = Quaternion.RotateTowards(rotatingObject.transform.rotation, q, 1000 * Time.deltaTime);
         }
-        if (playerStats.dexterity >= 12 && Input.GetButtonDown("Throw") && daggerCount > 0)
+        if (playerStats.dexterity >= 12 && Input.GetButtonDown("Throw") && daggerCount > 0 || playerStats.dexterity >= 12 && Input.GetKeyDown(KeyCode.Space) && daggerCount > 0)
         {
             daggerCount--;
             GameObject newKnife = Instantiate(projectile, rotatingObject.transform.position, rotatingObject.transform.rotation);

@@ -17,7 +17,7 @@ public class UsingItemManager : MonoBehaviour
     void Update()
     {
         playerObject = GameObject.Find("Player");
-        if (Input.GetButtonDown("UseItem"))
+        if (Input.GetButtonDown("UseItem") || Input.GetKeyDown("x"))
         {
             if (ItemSlotManager.potionCount > 0)
             {

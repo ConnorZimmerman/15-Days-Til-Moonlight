@@ -43,12 +43,12 @@ public class PauseMenu : MonoBehaviour
             inventoryPanel.SetActive(true);
         }
 
-        if (Input.GetButtonDown("Pause") && !pauseStatus)
+        if (Input.GetButtonDown("Pause") && !pauseStatus || Input.GetKeyDown("i") && !pauseStatus)
         {
             pauseMenu.SetActive(true);
             pauseStatus = true;
         }
-        else if (Input.GetButtonDown("Pause") && pauseStatus)
+        else if (Input.GetButtonDown("Pause") && pauseStatus || Input.GetKeyDown("i") && pauseStatus)
         {
             pauseMenu.SetActive(false);
             pauseStatus = false;

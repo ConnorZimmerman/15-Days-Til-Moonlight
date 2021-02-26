@@ -54,9 +54,11 @@ public class ShieldBlock : MonoBehaviour
             shieldLockBool = true;
         }
 
-        if (axisInput >= 0.2f && playerStaminaMan.playerCurrentStamina > 0
-            && thePlayer.preAttackCounter == 0.2f && thePlayer.recovAttackCounter == 0.3f
-            && thePlayer.attackingCounterNew == 0.06f && !shieldLockBool)
+        if (axisInput >= 0.2f && playerStaminaMan.playerCurrentStamina > 0 &&
+            thePlayer.preAttackCounter == 0.2f && thePlayer.recovAttackCounter == 0.3f &&
+            thePlayer.attackingCounterNew == 0.06f && !shieldLockBool || Input.GetMouseButtonDown(1) && playerStaminaMan.playerCurrentStamina > 0 &&
+            thePlayer.preAttackCounter == 0.2f && thePlayer.recovAttackCounter == 0.3f &&
+            thePlayer.attackingCounterNew == 0.06f && !shieldLockBool)
         {
             shieldBlock.isTrigger = false;
             shieldBlockTimer -= Time.deltaTime;
@@ -64,6 +66,14 @@ public class ShieldBlock : MonoBehaviour
             // if (shieldBlockTimer > 0)
             // {
             shieldOn = true;
+            // if (shieldBlocksLeft > 0)
+            // {
+            // }
+            // else
+            // {
+            //     shieldLockBool = true;
+            // }
+
             // }
             // else
             // {
@@ -76,26 +86,27 @@ public class ShieldBlock : MonoBehaviour
         else
         {
             // thePlayer.lockOn = false;
+            shieldOn = false;
         }
 
-        if (axisInput <= 0f || shieldLockBool)
+        if (axisInput <= 0f && !Input.GetMouseButton(1) || shieldLockBool)
         {
             shieldBlock.isTrigger = true;
             shieldOn = false;
             shieldBlockTimer = 1f;
         }
 
-        if (axisInput <= 0)
+        if (axisInput <= 0 && !Input.GetMouseButton(1))
         {
             shieldLockBool = false;
         }
 
-        if (Input.GetButton("Block") && shieldOn == false && playerStaminaMan.playerCurrentStamina > 0)
+        if (Input.GetButton("Block") && shieldOn == false && playerStaminaMan.playerCurrentStamina > 0 && !shieldLockBool || Input.GetMouseButtonDown(1) && shieldOn == false && playerStaminaMan.playerCurrentStamina > 0 && !shieldLockBool)
         {
             shieldBlock.isTrigger = false;
             shieldOn = true;
         }
-        else if (Input.GetButton("Block") && shieldOn == true)
+        else if (Input.GetButton("Block") && shieldOn == true || Input.GetMouseButtonDown(1) && shieldOn == true)
         {
             shieldBlock.isTrigger = true;
             shieldOn = false;
@@ -104,22 +115,26 @@ public class ShieldBlock : MonoBehaviour
 
     int ShieldBlocksLeft()
     {
-        if (playerStatsScript.strength >= 4 && playerStatsScript.strength < 6)
+        if (!Input.GetMouseButton(1))
         {
-            shieldBlocksLeft = 2;
+            if (playerStatsScript.strength >= 4 && playerStatsScript.strength < 6)
+            {
+                shieldBlocksLeft = 2;
+            }
+            else if (playerStatsScript.strength >= 6 && playerStatsScript.strength <= 9)
+            {
+                shieldBlocksLeft = 3;
+            }
+            else if (playerStatsScript.strength >= 10)
+            {
+                shieldBlocksLeft = 4;
+            }
+            else
+            {
+                shieldBlocksLeft = 1;
+            }
         }
-        else if (playerStatsScript.strength >= 6 && playerStatsScript.strength <= 9)
-        {
-            shieldBlocksLeft = 3;
-        }
-        else if (playerStatsScript.strength >= 10)
-        {
-            shieldBlocksLeft = 4;
-        }
-        else
-        {
-            shieldBlocksLeft = 1;
-        }
+
         return shieldBlocksLeft;
     }
 }
