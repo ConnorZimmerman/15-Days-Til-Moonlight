@@ -48,7 +48,7 @@ public class Reload : MonoBehaviour
 
         if (playerHealth.playerCurrentHealth <= 0)
         {
-            itemSlotManagerScript.InventoryReset();
+            // itemSlotManagerScript.InventoryReset();
             globalData.Save(itemSlotManagerScript.listOfSlots, itemSlotManagerScript.equippedArmor);
             // loadNewAreaScript.SetAllForLvl();
 
