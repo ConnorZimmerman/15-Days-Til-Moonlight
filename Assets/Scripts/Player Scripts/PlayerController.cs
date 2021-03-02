@@ -121,6 +121,9 @@ public class PlayerController : MonoBehaviour
     public Transform currentEnemyLocked;
     public GameObject damageBurst;
     private GameObject lockOnImage;
+    
+    // If the shield is down when the player initiates attack then the enemy can not raise their shield
+    public static bool enemyShieldLock = false;
 
     // Use this for initialization
     void Start()
@@ -286,7 +289,6 @@ public class PlayerController : MonoBehaviour
             playerOldHealth = playerNewHealth;
         }
 
-
         // lockOn code - should move to its own script
         if (Input.GetButtonUp("LockOn") && lockOn == false)
         {
@@ -348,7 +350,6 @@ public class PlayerController : MonoBehaviour
             switchEnemyBool = true;
         }
 
-
         if (!enemy.deathSeven)
         {
             check = enemy.moveDirectionX - directionInt;
@@ -380,15 +381,15 @@ public class PlayerController : MonoBehaviour
         {
             moveSpeed = 2.5f;
         }
-        else if (playerStats.dexterity >= 17 && staminaMan.playerCurrentStamina >= 200 && Input.GetButtonDown("DashX")
-            || staminaMan.playerCurrentStamina >= 200 && Input.GetButtonDown("Dash"))
+        else if (playerStats.dexterity >= 17 && staminaMan.playerCurrentStamina >= 200 && Input.GetButtonDown("DashX") ||
+            staminaMan.playerCurrentStamina >= 200 && Input.GetButtonDown("Dash"))
         {
             soFast = true;
 
             if (directionUp)
             {
                 rayCastHitDodge = Physics2D.Raycast(playerTransform.position, transform.up, 2.1f,
-            layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
+                    layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
 
                 if (rayCastHitDodge.collider != null)
                 {
@@ -415,7 +416,7 @@ public class PlayerController : MonoBehaviour
             if (directionRight)
             {
                 rayCastHitDodge = Physics2D.Raycast(playerTransform.position, transform.right, 2.1f,
-            layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
+                    layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
 
                 if (rayCastHitDodge.collider != null)
                 {
@@ -425,8 +426,8 @@ public class PlayerController : MonoBehaviour
                     if (rayCastHitObjectString == "Collision")
                     {
                         chargeDistantFloat = rayCastHitDodge.distance;
-                        playerTransform.position = new Vector2(playerTransform.position.x
-                            + chargeDistantFloat, playerTransform.position.y);
+                        playerTransform.position = new Vector2(playerTransform.position.x +
+                            chargeDistantFloat, playerTransform.position.y);
                         dashActive = true;
                         dashPossible = true;
                         rayCastHitObjectString = "Im Pickle Rick";
@@ -444,7 +445,7 @@ public class PlayerController : MonoBehaviour
             if (directionDown)
             {
                 rayCastHitDodge = Physics2D.Raycast(playerTransform.position, -transform.up, 2.1f,
-            layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
+                    layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
 
                 if (rayCastHitDodge.collider != null)
                 {
@@ -473,7 +474,7 @@ public class PlayerController : MonoBehaviour
             if (directionLeft)
             {
                 rayCastHitDodge = Physics2D.Raycast(playerTransform.position, -transform.right, 2.1f,
-            layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
+                    layerMaskPlayer & layerMaskBounds & layerMaskEnemy);
 
                 if (rayCastHitDodge.collider != null)
                 {
@@ -536,8 +537,8 @@ public class PlayerController : MonoBehaviour
             sprintTimer = 0.2f;
         }
 
-        if (staminaMan.playerCurrentStamina <= 200 && Input.GetButtonDown("DashX")
-            || staminaMan.playerCurrentStamina <= 200 && Input.GetButtonDown("Dash"))
+        if (staminaMan.playerCurrentStamina <= 200 && Input.GetButtonDown("DashX") ||
+            staminaMan.playerCurrentStamina <= 200 && Input.GetButtonDown("Dash"))
         {
             dashPossible = false;
         }
@@ -615,8 +616,8 @@ public class PlayerController : MonoBehaviour
             moveInput = new Vector2(Input.GetAxisRaw("Horizontal"),
                 Input.GetAxisRaw("Vertical")).normalized;
 
-            if (axisHorizontal > 0.2f || axisHorizontal < -0.2f
-                || axisVertical > 0.2f || axisVertical < -0.2f && moveInput != Vector2.zero)
+            if (axisHorizontal > 0.2f || axisHorizontal < -0.2f ||
+                axisVertical > 0.2f || axisVertical < -0.2f && moveInput != Vector2.zero)
             {
                 myRigidbody.velocity = new Vector2(moveInput.x * moveSpeed,
                     moveInput.y * moveSpeed);
@@ -639,11 +640,23 @@ public class PlayerController : MonoBehaviour
         }
 
         //if (!attackLock && axisInput <= -0.2f && staminaMan.playerCurrentStamina > 400)
-        if (!attackLock && axisInput <= -0.2f
-            && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 300 || !attackLock && Input.GetMouseButtonDown(0) && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 300)
+        if (!attackLock && axisInput <= -0.2f &&
+            recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 700 || !attackLock && Input.GetMouseButtonDown(0) && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 700)
+        // recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 300 || !attackLock && Input.GetMouseButtonDown(0) && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 300)
         {
             preAttack = true;
             attacking = true;
+
+            enemyShieldLock = true;
+        }
+        else if (Input.GetMouseButtonDown(0) && staminaMan.playerCurrentStamina < 700)
+        {
+            attackPossible = false;
+            preAttack = false;
+            attacking = false;
+            enemyShieldLock = false;
+            // EnemyTestScript.staminaLockBool = true;
+            // PlayerUIManager.staminaTell.text = "-STAMINA";
         }
         // else
         // {
@@ -670,25 +683,25 @@ public class PlayerController : MonoBehaviour
             if (directionInt == 0)
             {
                 playerTransform.position = new Vector2(playerTransform.position.x,
-                playerTransform.position.y + 0.05f);
+                    playerTransform.position.y + 0.05f);
             }
 
             if (directionInt == 1)
             {
                 playerTransform.position = new Vector2(playerTransform.position.x + 0.05f,
-                playerTransform.position.y);
+                    playerTransform.position.y);
             }
 
             if (directionInt == 2)
             {
                 playerTransform.position = new Vector2(playerTransform.position.x,
-                playerTransform.position.y - 0.05f);
+                    playerTransform.position.y - 0.05f);
             }
 
             if (directionInt == 3)
             {
                 playerTransform.position = new Vector2(playerTransform.position.x - 0.05f,
-                playerTransform.position.y);
+                    playerTransform.position.y);
             }
 
             attackPossible = true;
@@ -708,7 +721,7 @@ public class PlayerController : MonoBehaviour
                 preAttack = false;
                 attackLock = true;
 
-                staminaMan.playerCurrentStamina -= 300;
+                staminaMan.playerCurrentStamina -= 700;
                 //staminaAttackDrainBool = true;
             }
         }
@@ -750,6 +763,7 @@ public class PlayerController : MonoBehaviour
         {
             attackingCounterNew = 0.06f;
             recovAttack = false;
+            enemyShieldLock = false;
             recovAttackCounter = 0.3f;
         }
         if (!attacking)
@@ -775,7 +789,8 @@ public class PlayerController : MonoBehaviour
             attackLock = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && staminaMan.playerCurrentStamina > 400)
+        // if (Input.GetKeyDown(KeyCode.Mouse0) && staminaMan.playerCurrentStamina > 400)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && staminaMan.playerCurrentStamina > 700)
         {
             sfxMan.playerAttack.Play();
             attacking = true;
@@ -785,7 +800,8 @@ public class PlayerController : MonoBehaviour
             damagePossible = true;
             attackPossible = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Mouse0) && staminaMan.playerCurrentStamina < 400)
+        // else if (Input.GetKeyDown(KeyCode.Mouse0) && staminaMan.playerCurrentStamina < 400)
+        else if (Input.GetKeyDown(KeyCode.Mouse0) && staminaMan.playerCurrentStamina < 700)
         {
             // attackPossible = false;
             attackBoolMouse = false;
@@ -828,7 +844,6 @@ public class PlayerController : MonoBehaviour
         // anim.SetInteger("directionIntX", directionInt);
         // anim.SetInteger("directionIntY", directionInt);
     }
-
 
     /*
     void LateUpdate()
@@ -1161,7 +1176,6 @@ public class PlayerController : MonoBehaviour
         // Debug.Log(curEnemyInt);
         // Debug.Log("Ummmmmmmmmmm " + enemyList.Count);
 
-
         // sets initial closest enemy to compare against
         // foreach (Transform enemy in enemyList)
         // {
@@ -1190,7 +1204,6 @@ public class PlayerController : MonoBehaviour
         // currentEnemyLocked = closestEnemy;
         return closestEnemy;
     }
-
 
     public void LockOn()
     {
@@ -1272,7 +1285,6 @@ public class PlayerController : MonoBehaviour
             lockOnImage.SetActive(false);
             return;
         }
-
 
         lockOnImage.SetActive(true);
         lockOnImage.transform.position = enemy.position;
@@ -1388,7 +1400,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else if (trackingMasterY < 0)  //Bottom
+        else if (trackingMasterY < 0) //Bottom
         {
             if (trackingMasterX < 0) //Quadrant 4
             {
@@ -1444,7 +1456,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else if (y <= 0)  //Bottom
+        else if (y <= 0) //Bottom
         {
             if (x <= 0) //Quadrant 4
             {
@@ -1471,7 +1483,6 @@ public class PlayerController : MonoBehaviour
         }
         return "none";
     }
-
 
     public int DeterminePlayerDirection()
     {
@@ -1505,8 +1516,8 @@ public class PlayerController : MonoBehaviour
                 directionInt = 2;
             }
 
-            if (lockOnHorizontal > 0.2f || lockOnHorizontal < -0.2f
-            || lockOnVertical > 0.2f || lockOnVertical < -0.2f)
+            if (lockOnHorizontal > 0.2f || lockOnHorizontal < -0.2f ||
+                lockOnVertical > 0.2f || lockOnVertical < -0.2f)
             {
                 lastMove = new Vector2(lockOnHorizontal, lockOnVertical);
             }
@@ -1514,8 +1525,3 @@ public class PlayerController : MonoBehaviour
         return directionInt;
     }
 }
-
-
-
-
-

@@ -228,8 +228,6 @@ public class EngagedWithPlayer : MonoBehaviour
             faceOff = false;
         }
 
-
-
         if (attacking)
         {
             bloodCounterOn = true;
@@ -388,7 +386,7 @@ public class EngagedWithPlayer : MonoBehaviour
             {
                 playerDefense = 100;
             }
-            playerStaminaMan.playerCurrentStamina -= 150 - playerDefense;
+            playerStaminaMan.playerCurrentStamina -= 700 - playerDefense;
             playerShield.shieldBlocksLeft -= 2;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();

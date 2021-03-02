@@ -264,7 +264,7 @@ public class BasicRangedEnemy : MonoBehaviour
         //     dodgeCounter -= Time.deltaTime;
         // }
 
-        if (staminaLockBool == true) //part of the crippling effect of a stamina lock
+        if (staminaLockBool) //part of the crippling effect of a stamina lock
         {
             speed = 1;
         }
