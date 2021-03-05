@@ -17,13 +17,16 @@ public class EnemyMasterScript : MonoBehaviour
             locateEnemyClass = 1;
             damageToGive = 3;
         }
+
         if (this.gameObject.transform.tag == "LargeEnemyBasic")
         {
             locateEnemyClass = 2;
             enemyMaxHealth = 20;
             damageToGive = 3;
         }
-        if(this.gameObject.transform.tag == "BasicRangedEnemy"){
+        
+        if (this.gameObject.transform.tag == "BasicRangedEnemy")
+        {
             enemyMaxHealth = 2;
             damageToGive = 2;
         }
@@ -46,7 +49,8 @@ public class EnemyMasterScript : MonoBehaviour
             damageToGive = 3;
             return;
         }
-        if(this.gameObject.transform.tag == "BasicRangedEnemy"){
+        if (this.gameObject.transform.tag == "BasicRangedEnemy")
+        {
             enemyMaxHealth = 2;
             damageToGive = 1;
             return;
@@ -56,12 +60,10 @@ public class EnemyMasterScript : MonoBehaviour
     public void enemyStats()
     {
         if (locateEnemyClass == 1)
-        {
-        }
+        { }
         if (locateEnemyClass == 2)
         {
             damageToGive = 3;
         }
     }
 }
-

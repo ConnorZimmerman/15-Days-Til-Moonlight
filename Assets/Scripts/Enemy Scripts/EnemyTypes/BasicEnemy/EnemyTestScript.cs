@@ -851,7 +851,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         {
             enemyShield = false;
         }
-        if (!enemyShieldStrike && blockCounter < blockCounterMax /* && !this.GetComponent<EngagedWithPlayer>().preAttack */)
+        else if (!enemyShieldStrike && blockCounter < blockCounterMax /* && !this.GetComponent<EngagedWithPlayer>().preAttack */)
         {
             enemyShield = true;
         }

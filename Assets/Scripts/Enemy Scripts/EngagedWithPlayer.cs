@@ -386,7 +386,7 @@ public class EngagedWithPlayer : MonoBehaviour
             {
                 playerDefense = 100;
             }
-            playerStaminaMan.playerCurrentStamina -= 700 - playerDefense;
+            playerStaminaMan.playerCurrentStamina -= 500 - playerDefense;
             playerShield.shieldBlocksLeft -= 2;
             sfxMan.swordsColliding.volume = 1;
             sfxMan.swordsColliding.Play();

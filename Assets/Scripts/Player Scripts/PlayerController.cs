@@ -641,7 +641,7 @@ public class PlayerController : MonoBehaviour
 
         //if (!attackLock && axisInput <= -0.2f && staminaMan.playerCurrentStamina > 400)
         if (!attackLock && axisInput <= -0.2f &&
-            recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 700 || !attackLock && Input.GetMouseButtonDown(0) && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 700)
+            recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 600 || !attackLock && Input.GetMouseButtonDown(0) && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 600)
         // recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 300 || !attackLock && Input.GetMouseButtonDown(0) && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 300)
         {
             preAttack = true;
@@ -649,7 +649,7 @@ public class PlayerController : MonoBehaviour
 
             enemyShieldLock = true;
         }
-        else if (Input.GetMouseButtonDown(0) && staminaMan.playerCurrentStamina < 700)
+        else if (Input.GetMouseButtonDown(0) && staminaMan.playerCurrentStamina < 600)
         {
             attackPossible = false;
             preAttack = false;
@@ -721,7 +721,8 @@ public class PlayerController : MonoBehaviour
                 preAttack = false;
                 attackLock = true;
 
-                staminaMan.playerCurrentStamina -= 700;
+                // Stamina lost from attacking
+                staminaMan.playerCurrentStamina -= 600;
                 //staminaAttackDrainBool = true;
             }
         }
