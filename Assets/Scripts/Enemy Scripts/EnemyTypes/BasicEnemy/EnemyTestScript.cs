@@ -3,60 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class EnemyTestScript : MonoBehaviour //Welcome to the most complex script out of all 34 scripts
+public class EnemyTestScript : MonoBehaviour
 {
     private EnemyHealthManager enemyHealthMan;
-    // private EnemyStaminaManager enemyStaminaMan;
     private PlayerHealthManager playerHealthMan;
     private PlayerStaminaManager playerStaminaMan;
-
     public PlayerController thePlayer;
     private HurtPlayerUpdated hurtPlayer;
     private PlayerHealthManager playerHealth;
     private EngagedWithPlayer playerEngagement;
-    //    private RandomMovement randomMove;
     public bool enemyShieldStrike;
     public float speed;
     private Rigidbody2D myRigidbody;
-    public Vector2 lastMove; /*lastMove stores whichever way the character was facing last so that
-    when there is no input the image does not go to a default position*/
-
-    public GameObject target; //The player is the target (used to follow player)
-
+    // lastMove stores whichever way the character was facing last so that when there is no input the image does not go to a default position
+    public Vector2 lastMove; 
+    // The player is the target (used to follow player)
+    public GameObject target; 
     private static bool enemyExists;
-
-    private float playerTrackX; //These two bad boys are the players coordinates
+    // These two bad boys are the players coordinates
+    private float playerTrackX; 
     private float playerTrackY;
-
     public float enemyTrackX;
     public float enemyTrackY;
-
-
+    // These badder boys are the difference in coordinates between player and enemy
     public float trackingMasterX;
-    public float trackingMasterY; /*These badder boys are the difference in coordinates between player
-    and enemy*/
-
-    public int moveDirectionX; //Dictates which image is displayed based on which way enemy is facing
+    public float trackingMasterY; 
+    // Dictates which image is displayed based on which way enemy is facing
+    public int moveDirectionX; 
     public int moveDirectionY;
-
     private Animator anim;
-
     public bool enemyMoving;
-    public bool following; //Following player
-
-    public BoxCollider2D enemyArea; /*This is currently ineffective as it covers the whole map, but
-    it's the box that that triggers when the enemy is aggroed*/
-
-    private int actionControl; /*This int is assigned based on where the player is relative to the
-    enemy and it dictates to the #SwitchCases where the actions are carried out so that the enemy 
-    knows which way its facing while carrying out its action*/
-
-    public float actionTimer; /*This timer manipulates the enemies #ActionDecisions so that every
-    time it hits 0 a new action is given based on the enemies priorities*/
-
-    private int actionDecision; /*The #ActionDecisions are based on the enemies priorities and tell 
-    the enemy what to do... Pretty much the enemies brain*/
-
+    // Following player
+    public bool following; 
+    // it's the box that that triggers when the enemy is aggroed
+    public BoxCollider2D enemyArea; 
+    // This int is assigned based on where the player is relative to the enemy and it dictates to the #SwitchCases where the actions are carried out so that the enemy knows which way its facing while carrying out its action
+    private int actionControl; 
+    // This timer manipulates the enemies ActionDecisions so that every time it hits 0 a new action is given based on the enemies priorities
+    public float actionTimer; 
+    // The ActionDecisions are based on the enemies priorities and tell the enemy what to do... Pretty much the enemies brain
+    private int actionDecision; 
     /*The AI Priorities: there were originally only 4 that were in order of importance, but more were
     added as I kept working so they're not in order of importance anymore... I'll eventually reorganize
     them once I don't think I'll be adding more*/
@@ -67,30 +53,30 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     // public bool dodgingFive;
     // public bool patienceSix;
     public bool deathSeven;
-
-    //New experimental (simplified) priorities
+    // New experimental (simplified) priorities
     public bool playerHealthOne;
     public bool shieldUpTwo;
     public bool retreatingThree;
     public bool patienceFour;
     public bool enemyShield;
-    public GameObject shieldTell; //Shield icon over the enemies head when enemy blocks
+    // Shield icon over the enemies head when enemy blocks
+    public GameObject shieldTell; 
     public Transform Fred;
-    public float tellCounter; //How long the red Stamina icon stays over the enemies head
-
-    private bool attackLock; //Dictates whether or not the enemy is allowed to attack
-    public bool staminaLockBool; //Cripples the enemy if there stamina hits 0
-    public float staminaLock; //Counter for how long the enemy is cripped
-
-    private bool enemyRecover; /*Whether or now the enemy is trying to regain its stamina (effects its
-    priorities)*/
-
-    public float dodgeCounter; //Puts a timer on how often the enemy can dodge
-
-    private int attackWhileBlocking; /*A variable that is randomly generated to decide if the enemy will
-    attack while its blocking*/
+    // How long the red Stamina icon stays over the enemies head
+    public float tellCounter; 
+    // Dictates whether or not the enemy is allowed to attack
+    private bool attackLock; 
+    // Cripples the enemy if there stamina hits 0
+    public bool staminaLockBool; 
+    // Counter for how long the enemy is crippled
+    public float staminaLock; 
+    // Whether or not the enemy is trying to regain its stamina (effects its priorities)
+    private bool enemyRecover; 
+    // Puts a timer on how often the enemy can dodge
+    public float dodgeCounter; 
+    // A variable that is randomly generated to decide if the enemy will attack while its blocking
+    private int attackWhileBlocking; 
     private bool attackWhileBlockingBool;
-
     /*The enemy's (and player's attack) is currently set up to be 3 different blend trees. The following
      4 variables dictate which stage the enemy is in of its attack based on timers and bools
     public bool preAttack; 
@@ -102,31 +88,19 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     //Both of variables show whether or not the enemy is hurt to trigger blood and damage
     public float enemyHurtCounter;
     public bool inPain;
-
     public bool dodging;
-
-    public bool dodgeFirstTime; /*Can't quite remember the point of this... but, I remember it's 
-    important*/
-
+    public bool dodgeFirstTime; 
     private ShieldBlock playerShield;
-
-    private RecognizeStalkZone stalkZone; /*An important scipt that tells the enemy when it should
-    stop moving at the player to attack the player*/
-
-    /*These are both random variables that tell the enemy whether it should jump away or back away
-     while in dodge priority*/
+    // An important scipt that tells the enemy when it should stop moving at the player to attack the player
+    private RecognizeStalkZone stalkZone; 
+    // These are both random variables that tell the enemy whether it should jump away or back awa while in dodge priority
     public float dashOrBack;
     private bool dashOrBackActive;
-
     bool dodgeOnlyOnceBool;
-
     public GameObject playerObject;
-
     public bool correctSideForDeathStrikeBool;
-
     GameObject enemyObject;
     public GameObject engageWithPlayerObject;
-
     public GameObject stalkZoneObject;
     private int walkDirection;
     private TrackingRaycast raycastPath;
@@ -136,12 +110,10 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     private bool followToDeath;
     public float shieldBreakRecoveryCounter;
     float shieldTimer = 2f;
-
     // This int will allow for more randomization for enemy blocking
     int blockCounterMax;
     // If enemy block counter > 2 then the enemy can no longer block.
     public int blockCounter = 0;
-
     // This counter will determine when blockCounter is recovered.
     float blockCounterTimer;
 
@@ -152,7 +124,6 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         enemyObject = this.gameObject;
         engageWithPlayerObject = this.gameObject.transform.GetChild(0).gameObject;
         enemyHealthMan = enemyObject.GetComponent<EnemyHealthManager>();
-        // enemyStaminaMan = enemyObject.GetComponent<EnemyStaminaManager>();
         playerEngagement = engageWithPlayerObject.GetComponent<EngagedWithPlayer>();
         stalkZoneObject = this.gameObject.transform.GetChild(7).gameObject;
         stalkZone = stalkZoneObject.GetComponent<RecognizeStalkZone>();
@@ -204,7 +175,6 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
     // Update is called once per frame
     void Update()
     {
-        // if (enemyHealthMan.fredIsDead)
         if (enemyHealthMan.fredIsDead && enemyHealthMan.CurrentHealth <= 0)
         {
             deathSeven = true;
@@ -280,7 +250,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             dodgeCounter -= Time.deltaTime;
         }
 
-        if (staminaLockBool == true) //part of the crippling effect of a stamina lock
+        // Part of the crippling effect of a stamina lock
+        if (staminaLockBool == true) 
         {
             speed = 1;
         }
@@ -315,8 +286,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             correctSideForDeathStrikeBool = false;
         }
 
-        /*The colliderOn is triggered by the stalkZone telling the enemy when to stop following and 
-         start attacking*/
+        // The colliderOn is triggered by the stalkZone telling the enemy when to stop following and start attacking
         if (playerEngagement.colliderOn)
         {
             following = false;
@@ -337,8 +307,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             shieldTell.SetActive(false);
         }
 
-        /*I think this code is an extra safe guard telling the enemy that if its not doing anything
-        than it shouldn't be moving*/
+        // I think this code is an extra safe guard telling the enemy that if its not doing anything than it shouldn't be moving
         if (!playerEngagement.attacking && !following && !playerEngagement.colliderOn && !enemyMoving)
         {
             myRigidbody.velocity = Vector2.zero;
@@ -359,7 +328,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         switch (actionControl)
         {
             case 0:
-                if (actionDecision == 0) //Enemy is attacking
+                // Enemy is attacking
+                if (actionDecision == 0) 
                 {
                     enemyRecover = false;
                     myRigidbody.velocity = new Vector2(0, 0);
@@ -376,8 +346,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 //     attackLock = true;
                 // }
 
-                /*Enemies health is its priority and it's shield is up, but it stays close to the player
-                looking for an opportunity to strike*/
+                // Enemies health is its priority and it's shield is up, but it stays close to the player looking for an opportunity to strike
                 if (actionDecision == 2)
                 {
                     enemyRecover = false;
@@ -410,8 +379,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
                 }
 
-                /*The enemy is trying to put distance between itself and the player (either it's just been
-                hurt, or its being cautious)*/
+                // The enemy is trying to put distance between itself and the player (either it's just been hurt, or its being cautious)
                 if (actionDecision == 4)
                 {
                     Shield();
@@ -421,8 +389,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     following = false;
                 }
 
-                /*The enemy is leaping away (currently pretty broken as there needs to be a timer on how
-                long the enemy is leaping away for*/
+                // The enemy is leaping away (currently pretty broken as there needs to be a timer on how long the enemy is leaping away for
                 //if (actionDecision == 5)
                 // if (actionDecision == 5 && !dodgeOnlyOnceBool)
                 // {
@@ -462,6 +429,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     Shield();
                     attackLock = true;
                 }
+
                 // if (actionDecision == 3)
                 // {
                 //     Shield();
@@ -471,6 +439,7 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 //     attackLock = true;
                 //     // enemyMoving = false;
                 // }
+
                 if (actionDecision == 3)
                 {
                     myRigidbody.velocity = new Vector2(2f, 0);
@@ -639,9 +608,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             myRigidbody.velocity = new Vector2(0, 0);
         }
     }
-
-    public void ChooseAction() /*#ActionDecisions: this is where the action decisions are made based
-        on what it retrieves from the ActionPriorities() function below*/
+    // ActionDecisions: this is where the action decisions are made based on what it retrieves from the ActionPriorities() function below
+    public void ChooseAction() 
     {
         if (deathSeven)
         {
@@ -742,9 +710,10 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
         }
 
     }
-    //#PickUp
-    public void ActionPriorities() /*#ActionDecisions: this is the core of the enemies action decisions,
-        basing each of its priorities on whether or not the variables line up.*/
+
+    // #PickUp
+    // #ActionDecisions: this is the core of the enemies action decisions, basing each of its priorities on whether or not the variables line up.
+    public void ActionPriorities() 
     {
         /*if (thePlayer.preAttack)
         {
@@ -921,7 +890,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
 
         if (trackingMasterY > 0)
         {
-            if (trackingMasterX > 0) //Quadrant 2
+            // Quadrant 2
+            if (trackingMasterX > 0) 
             {
                 if (enemyShield && moveDirectionX == 0)
                 {
@@ -951,7 +921,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
             }
             else if (trackingMasterX < 0)
             {
-                if (Math.Abs(trackingMasterX) > trackingMasterY) //Quadrant 1
+                // Quadrant 1
+                if (Math.Abs(trackingMasterX) > trackingMasterY) 
                 {
                     lastMove.x = 3;
                     lastMove.y = 3;
@@ -969,7 +940,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                 }
             }
         }
-        else if (trackingMasterY < 0) //Quadrant 4
+        // Quadrant 4
+        else if (trackingMasterY < 0) 
         {
             if (trackingMasterX < 0)
             {
@@ -990,7 +962,8 @@ public class EnemyTestScript : MonoBehaviour //Welcome to the most complex scrip
                     actionControl = 3;
                 }
             }
-            else if (trackingMasterX > 0) //Quadrant 3
+            // Quadrant 3
+            else if (trackingMasterX > 0) 
             {
                 if (Math.Abs(trackingMasterY) > trackingMasterX)
                 {
