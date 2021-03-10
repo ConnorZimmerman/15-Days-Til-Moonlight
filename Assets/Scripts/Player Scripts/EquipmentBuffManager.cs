@@ -14,10 +14,6 @@ public class EquipmentBuffManager : MonoBehaviour
         playerStatsScript = FindObjectOfType<PlayerStats>();
     }
 
-    // // Update is called once per frame
-    // void Update () {
-
-    // }
     public int PlayerDefenseCalculator()
     {
         int defense = 0;

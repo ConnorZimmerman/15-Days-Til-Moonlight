@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 808, y: 300}
   m_MaxSize: {x: 22003, y: 10000}
   vertical: 0
-  controlID: 2136
+  controlID: 500
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 302, y: 300}
   m_MaxSize: {x: 8002, y: 8021}
   vertical: 1
-  controlID: 2137
+  controlID: 501
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_MinSize: {x: 302, y: 200}
   m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
-  controlID: 2138
+  controlID: 502
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -222,7 +222,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 20f1ffff72fbffff5a390000463a0000
+      m_ExpandedIDs: 72fbffff2e3800005a390000f8390000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1118,19 +1118,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Player Scripts
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Player Scripts
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Connor\15_Days\15-Days-Til-Moonlight
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c44d0000
-    m_LastClickedID: 19908
+    m_SelectedIDs: 5e4d0000
+    m_LastClickedID: 19806
     m_ExpandedIDs: 000000005e4d0000604d0000624d0000644d0000664d0000684d00006a4d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1184,9 +1184,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 1a2e0000
+    m_LastClickedInstanceID: 11802
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 4e27000074350b00e23f00002a370000b4360d000a290000464100008c370000c643000024b3fcff5c420000f2b2fbff7473f2ff3c420000f2270000c2270000a6430000e26b000082390000840affff6028000070420000267400006e420000b6530000124a0000ae4700000cf0090018f00900688e0a00b2470000202800007052000014c2ffffa25affffbe470000184a0000ba470000bc47000060b50000ec26000088930000f6a20000f82600007056000000000000ba450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1278,7 +1278,7 @@ MonoBehaviour:
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
-  m_LastInspectedObjectInstanceID: -1
+  m_LastInspectedObjectInstanceID: 11802
   m_LastVerticalScrollValue: 0
 --- !u!114 &18
 MonoBehaviour:

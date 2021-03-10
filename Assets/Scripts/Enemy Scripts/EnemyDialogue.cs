@@ -21,7 +21,6 @@ public class EnemyDialogue : MonoBehaviour
 
     // private PlayerController thePlayer;
 
-
     // Use this for initialization
     void Start()
     {
@@ -49,7 +48,7 @@ public class EnemyDialogue : MonoBehaviour
         // if(timeStart){
         //     talkTime -= Time.deltaTime;
         // }
-        
+
     }
 
     public void FearCounterZero()

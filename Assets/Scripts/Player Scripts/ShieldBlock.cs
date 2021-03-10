@@ -13,7 +13,8 @@ public class ShieldBlock : MonoBehaviour
     private PlayerController thePlayer;
     private PlayerStats playerStatsScript;
     public int shieldBlocksLeft;
-    public bool shieldLockBool; //bool to make player blocking more dynamic (shield is turned off when hit)
+    // Bool to make player blocking more dynamic (shield is turned off when hit)
+    public bool shieldLockBool;
     public float shieldBlockTimer;
 
     // Use this for initialization
@@ -62,30 +63,10 @@ public class ShieldBlock : MonoBehaviour
         {
             shieldBlock.isTrigger = false;
             shieldBlockTimer -= Time.deltaTime;
-
-            // if (shieldBlockTimer > 0)
-            // {
             shieldOn = true;
-            // if (shieldBlocksLeft > 0)
-            // {
-            // }
-            // else
-            // {
-            //     shieldLockBool = true;
-            // }
-
-            // }
-            // else
-            // {
-            //     shieldBlockTimer = 1f;
-            //     shieldOn = false;
-            //     shieldLockBool = true;
-            // }
-            // thePlayer.lockOn = true;
         }
         else
         {
-            // thePlayer.lockOn = false;
             shieldOn = false;
         }
 

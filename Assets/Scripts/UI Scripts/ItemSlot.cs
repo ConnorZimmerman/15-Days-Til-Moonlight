@@ -1,11 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
-
 
 [Serializable]
 public class ItemSlot : MonoBehaviour

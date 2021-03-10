@@ -8,15 +8,13 @@ public class Node : IHeapItem<Node>
     public Vector2 worldPosition;
     public int gridX;
     public int gridY;
-
-    //Distance from enemy
+    // Distance from enemy
     public int gCost;
-
-    //Distance to player
+    // Distance to player
     public int hCost;
     public Node parent;
-
     int heapIndex;
+
     public Node(bool _walkable, Vector2 _worldPos, int _gridX, int _gridY)
     {
         walkable = _walkable;
@@ -24,6 +22,7 @@ public class Node : IHeapItem<Node>
         gridX = _gridX;
         gridY = _gridY;
     }
+
     public int fCost
     {
         get
@@ -31,6 +30,7 @@ public class Node : IHeapItem<Node>
             return gCost + hCost;
         }
     }
+
     public int HeapIndex
     {
         get
@@ -42,6 +42,7 @@ public class Node : IHeapItem<Node>
             heapIndex = value;
         }
     }
+
     public int CompareTo(Node nodeToCompare)
     {
         int compare = fCost.CompareTo(nodeToCompare.fCost);
@@ -51,18 +52,4 @@ public class Node : IHeapItem<Node>
         }
         return -compare;
     }
-
-    // public int CompareTo(object obj)
-    // {
-    //     Node nodeToCompare = obj as Node;
-
-    //     int compare = fCost.CompareTo(nodeToCompare.fCost);
-
-    //     if (compare == 0)
-    //     {
-    //         compare = hCost.CompareTo(nodeToCompare.hCost);
-    //     }
-
-    //     return -compare;
-    // }
 }

@@ -42,17 +42,9 @@ public class UIManager : MonoBehaviour
         shieldTextObject.SetActive(false);
         shieldImageObject.SetActive(false);
 
-        // daggerImageObject.GetComponent<Image>().Sprite = YourSprite;
-
         if (!UIExists)
         {
             UIExists = true;
-            //DontDestroyOnLoad(transform.gameObject);
-        }
-
-        else
-        {
-            //Destroy(gameObject);
         }
 
         thePS = GetComponent<PlayerStats>();
@@ -63,7 +55,6 @@ public class UIManager : MonoBehaviour
     {
         if (shieldBlockScript.shieldOn)
         {
-            // shieldImageObject.SetActive(true);
             shieldTextObject.SetActive(true);
         }
         else

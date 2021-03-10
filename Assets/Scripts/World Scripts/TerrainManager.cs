@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class TerrainManager : MonoBehaviour
 {
-
     private PlayerController thePlayer;
     private SFXManager sFX;
     public bool inWater;
-	private bool isPlaying;
+    private bool isPlaying;
 
     // // Use this for initialization
     // void Start()
@@ -16,7 +15,7 @@ public class TerrainManager : MonoBehaviour
     //     thePlayer = FindObjectOfType<PlayerController>();
     //     inWater = false;
     //     sFX = FindObjectOfType<SFXManager>();
-	// 	isPlaying = true;
+    // 	isPlaying = true;
     // }
 
     // // Update is called once per frame
@@ -24,7 +23,6 @@ public class TerrainManager : MonoBehaviour
     // {
 
     // }
-
 
     // public void OnTriggerStay2D(Collider2D other)
     // {
@@ -41,7 +39,7 @@ public class TerrainManager : MonoBehaviour
     //         }
     //         else
     //         {
-	// 			isPlaying = true;
+    // 			isPlaying = true;
     //             sFX.waterWalk.Stop();
     //         }
     //         // thePlayer.moveSpeed = 2;

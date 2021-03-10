@@ -6,14 +6,8 @@ public class FloatingItemFind : MonoBehaviour
 {
     public float moveSpeed;
     public int daggerCount;
-	public string itemType;
+    public string itemType;
     public Text displayNumber;
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()

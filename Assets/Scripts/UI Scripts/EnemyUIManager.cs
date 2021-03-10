@@ -5,23 +5,15 @@ using UnityEngine.UI;
 
 public class EnemyUIManager : MonoBehaviour
 {
-
     public Slider healthbar;
     public Slider staminaBar;
-
     public EnemyHealthManager enemyHealth;
-    // public EnemyStaminaManager enemyStamina;
-
     public Text staminaTellText;
     public object staminaTellObject;
-
     private EnemyTestScript enemyScript;
     private BasicRangedEnemy enemyRangedScript;
-
     public GameObject enemyCanvasObject;
-
     GameObject enemyObject;
-
     private EnemyMasterScript enemyMaster;
     public string enemyType;
 
@@ -40,9 +32,6 @@ public class EnemyUIManager : MonoBehaviour
             enemyType = "BasicRangedEnemy";
         }
         enemyMaster = enemyObject.GetComponent<EnemyMasterScript>();
-        //enemyScript = FindObjectOfType<EnemyTestScript>();
-
-        //enemyCanvasObject = GameObject.Find("Enemy Canvas");
         enemyCanvasObject = this.gameObject;
         healthbar.maxValue = enemyHealth.MaxHealth;
     }
@@ -52,18 +41,12 @@ public class EnemyUIManager : MonoBehaviour
     {
         if (enemyType == "BasicEnemy")
         {
-
             if (enemyScript.deathSeven)
             {
-                //GameObject."Enemy".GetEnumerator
                 enemyCanvasObject.SetActive(false);
             }
 
-            // healthbar.maxValue = enemyHealth.MaxHealth;
             healthbar.value = enemyHealth.CurrentHealth;
-
-            // staminaBar.maxValue = enemyStamina.enemyMaxStamina;
-            // staminaBar.value = enemyStamina.enemyCurrentStamina;
 
             if (enemyScript.staminaLockBool)
             {
@@ -78,14 +61,10 @@ public class EnemyUIManager : MonoBehaviour
         {
             if (enemyRangedScript.deathSeven)
             {
-                //GameObject."Enemy".GetEnumerator
                 enemyCanvasObject.SetActive(false);
             }
             healthbar.maxValue = enemyHealth.MaxHealth;
             healthbar.value = enemyHealth.CurrentHealth;
-
-            // staminaBar.maxValue = enemyStamina.enemyMaxStamina;
-            // staminaBar.value = enemyStamina.enemyCurrentStamina;
 
             staminaTellText.text = "";
         }

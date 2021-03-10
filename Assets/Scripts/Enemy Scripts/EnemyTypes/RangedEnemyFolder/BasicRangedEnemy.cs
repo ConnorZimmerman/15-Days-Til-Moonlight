@@ -7,7 +7,6 @@ public class BasicRangedEnemy : MonoBehaviour
 {
     private EnemyRangedAttack rangedAttack;
     private EnemyHealthManager enemyHealthMan;
-    // private EnemyStaminaManager enemyStaminaMan;
     private PlayerHealthManager playerHealthMan;
     private PlayerStaminaManager playerStaminaMan;
     public PlayerController thePlayer;
@@ -17,109 +16,76 @@ public class BasicRangedEnemy : MonoBehaviour
     private RandomMovement randomMove;
     public float speed;
     private Rigidbody2D myRigidbody;
-
-    public Vector2 lastMove; /*lastMove stores whichever way the character was facing last so that
-    when there is no input the image does not go to a default position*/
-
-    public GameObject target; //The player is the target (used to follow player)
-
+    // lastMove stores whichever way the character was facing last so that when there is no input the image does not go to a default position
+    public Vector2 lastMove;
+    // The player is the target (used to follow player)
+    public GameObject target;
     private static bool enemyExists;
-
-    private float playerTrackX; //These two bad boys are the players coordinates
+    // These two bad boys are the players coordinates
+    private float playerTrackX;
     private float playerTrackY;
-
     public float enemyTrackX;
     public float enemyTrackY;
-
-
     public float trackingMasterX;
-    public float trackingMasterY; /*These badder boys are the difference in coordinates between player
-    and enemy*/
-
-    public int moveDirectionX; //Dictates which image is displayed based on which way enemy is facing
+    // These badder boys are the difference in coordinates between player and enemy
+    public float trackingMasterY;
+    // Dictates which image is displayed based on which way enemy is facing
+    public int moveDirectionX;
     public int moveDirectionY;
-
     private Animator anim;
-
     public bool enemyMoving;
-    public bool following; //Following player
-
-    public BoxCollider2D enemyArea; /*This is currently ineffective as it covers the whole map, but
-    it's the box that that triggers when the enemy is aggroed*/
-
-    private int actionControl; /*This int is assigned based on where the player is relative to the
-    enemy and it dictates to the #SwitchCases where the actions are carried out so that the enemy 
-    knows which way its facing while carrying out its action*/
-
-    public float actionTimer; /*This timer manipulates the enemies #ActionDecisions so that every
-    time it hits 0 a new action is given based on the enemies priorities*/
-
-    public int actionDecision; /*The #ActionDecisions are based on the enemies priorities and tell 
-    the enemy what to do... Pretty much the enemies brain*/
-
-    /*The AI Priorities: there were originally only 4 that were in order of importance, but more were
-    added as I kept working so they're not in order of importance anymore... I'll eventually reorganize
-    them once I don't think I'll be adding more*/
+    // Following player
+    public bool following;
+    // This is currently ineffective as it covers the whole map, but it's the box that that triggers when the enemy is aggroed
+    public BoxCollider2D enemyArea;
+    // This int is assigned based on where the player is relative to the enemy and it dictates to the #SwitchCases where the actions are carried out so that the enemy knows which way its facing while carrying out its action
+    private int actionControl;
+    // This timer manipulates the enemies #ActionDecisions so that every time it hits 0 a new action is given based on the enemies priorities
+    public float actionTimer;
+    // The #ActionDecisions are based on the enemies priorities and tell the enemy what to do... Pretty much the enemies brain
+    public int actionDecision;
+    // The AI Priorities: there were originally only 4 that were in order of importance, but more were added as I kept working so they're not in order of importance anymore... I'll eventually reorganize them once I don't think I'll be adding more
     public bool isAttackingOne;
     public bool fleeTwo;
     public bool dodgingThree;
     public bool snipeSpotFour;
     public bool inRangeFive;
     public bool deathSeven;
-
     public bool enemyShield;
-    public GameObject shieldTell; //Shield icon over the enemies head when enemy blocks
+    // Shield icon over the enemies head when enemy blocks
+    public GameObject shieldTell;
     public Transform Thomas;
-    public float tellCounter; //How long the red Stamina icon stays over the enemies head
-
-    private bool attackLock; //Dictates whether or not the enemy is allowed to attack
-    public bool staminaLockBool; //Cripples the enemy if there stamina hits 0
-    public float staminaLock; //Counter for how long the enemy is cripped
-
-    private bool enemyRecover; /*Whether or now the enemy is trying to regain its stamina (effects its
-    priorities)*/
-
-    public float dodgeCounter; //Puts a timer on how often the enemy can dodge
-
-    private int attackWhileBlocking; /*A variable that is randomly generated to decide if the enemy will
-    attack while its blocking*/
+    // How long the red Stamina icon stays over the enemies head
+    public float tellCounter;
+    // Dictates whether or not the enemy is allowed to attack
+    private bool attackLock;
+    // Cripples the enemy if there stamina hits 0
+    public bool staminaLockBool;
+    // Counter for how long the enemy is cripped
+    public float staminaLock;
+    //Whether or now the enemy is trying to regain its stamina (effects its priorities)
+    private bool enemyRecover;
+    // Puts a timer on how often the enemy can dodge
+    public float dodgeCounter;
+    // A variable that is randomly generated to decide if the enemy will attack while its blocking
+    private int attackWhileBlocking;
     private bool attackWhileBlockingBool;
-
-    /*The enemy's (and player's attack) is currently set up to be 3 different blend trees. The following
-     4 variables dictate which stage the enemy is in of its attack based on timers and bools
-   */
-
-    //Both of variables show whether or not the enemy is hurt to trigger blood and damage
+    // Both of variables show whether or not the enemy is hurt to trigger blood and damage
     public float enemyHurtCounter;
     public bool inPain;
-
-    // public bool dodging;
-
-    // public bool dodgeFirstTime; /*Can't quite remember the point of this... but, I remember it's 
-    //important*/
-
     private ShieldBlock playerShield;
-
-    private RecognizeStalkZone stalkZone; /*An important scipt that tells the enemy when it should
-    stop moving at the player to attack the player*/
-
-    /*These are both random variables that tell the enemy whether it should jump away or back away
-     while in dodge priority*/
+    // An important scipt that tells the enemy when it should stop moving at the player to attack the player
+    private RecognizeStalkZone stalkZone;
+    // These are both random variables that tell the enemy whether it should jump away or back away while in dodge priority
     public float dashOrBack;
     private bool dashOrBackActive;
-
     bool dodgeOnlyOnceBool;
-
     public GameObject playerObject;
-
     public bool correctSideForDeathStrikeBool;
-
     GameObject enemyObject;
     public GameObject engageWithPlayerObject;
-
     public GameObject stalkZoneObject;
     private int walkDirection;
-
     private Vector2 enemyPos;
     private Vector2 playerPos;
     bool followToDeath;
@@ -131,7 +97,6 @@ public class BasicRangedEnemy : MonoBehaviour
         enemyObject = this.gameObject;
         engageWithPlayerObject = this.gameObject.transform.GetChild(0).gameObject;
         enemyHealthMan = enemyObject.GetComponent<EnemyHealthManager>();
-        // enemyStaminaMan = enemyObject.GetComponent<EnemyStaminaManager>();
         playerEngagement = engageWithPlayerObject.GetComponent<EngagedWithPlayer>();
         stalkZoneObject = this.gameObject.transform.GetChild(7).gameObject;
         stalkZone = stalkZoneObject.GetComponent<RecognizeStalkZone>();
@@ -145,9 +110,6 @@ public class BasicRangedEnemy : MonoBehaviour
 
         hurtPlayer = FindObjectOfType<HurtPlayerUpdated>();
         randomMove = FindObjectOfType<RandomMovement>();
-
-        //this needs to grab child object script
-        //playerEngagement = FindObjectOfType<EngagedWithPlayer>();
 
         playerObject = GameObject.Find("Player");
         thePlayer = playerObject.GetComponent<PlayerController>();
@@ -166,15 +128,7 @@ public class BasicRangedEnemy : MonoBehaviour
         if (!enemyExists)
         {
             enemyExists = true;
-            //DontDestroyOnLoad(transform.gameObject);
         }
-        else
-        {
-            //Destroy(gameObject);
-        }
-
-        // dodging = true;
-        // dodgeFirstTime = true;
 
         //For now enemy will always have a correct line of sight and the fleeing system is not yet set up.
         fleeTwo = false;
@@ -200,11 +154,6 @@ public class BasicRangedEnemy : MonoBehaviour
             myRigidbody.velocity = Vector2.zero;
         }
 
-        // if (thePlayer.preAttack || thePlayer.damagePossible || playerEngagement.thePlayerDeathStrike && playerEngagement.colliderOn)
-        // {
-        //     dodgingThree = true;
-        // }
-
         if (enemyHealthMan.CurrentHealth < enemyHealthMan.oldCurrentHealth)
         {
             inPain = true;
@@ -224,7 +173,6 @@ public class BasicRangedEnemy : MonoBehaviour
         else
         {
             followToDeath = false;
-            // following = false;
         }
 
         if (followToDeath)
@@ -240,31 +188,8 @@ public class BasicRangedEnemy : MonoBehaviour
             staminaLock = 2;
         }
 
-        // if (dodgeFirstTime && inPain)
-        // {
-        //     dodgeCounter -= Time.deltaTime;
-        // }
-
-        // if (dodgeCounter <= 0)
-        // {
-        //     dodgeCounter = 2.2f;
-
-        //     //should be right spot?
-        //     dodgeOnlyOnceBool = false;
-
-        //     dodgeFirstTime = false;
-        // }
-        // if (dodgeCounter >= 2f && !inPain)
-        // {
-        //     dodging = true;
-        // }
-        // if (dodgeCounter < 2f)
-        // {
-        //     dodging = false;
-        //     dodgeCounter -= Time.deltaTime;
-        // }
-
-        if (staminaLockBool) //part of the crippling effect of a stamina lock
+        // Part of the crippling effect of a stamina lock
+        if (staminaLockBool)
         {
             speed = 1;
         }
@@ -280,17 +205,8 @@ public class BasicRangedEnemy : MonoBehaviour
         anim.SetBool("Enemy Following", following);
         anim.SetFloat("LastMoveX", lastMove.x);
         anim.SetFloat("LastMoveY", lastMove.y);
-        // anim.SetBool("Collider On", playerEngagement.colliderOn);
-        // anim.SetBool("Attacking", playerEngagement.attacking);
-        // anim.SetInteger("Action Control", actionControl);
-        // anim.SetFloat("Action Timer", actionTimer);
-        // anim.SetBool("Player Dead", playerHealth.playerIsDead);
         anim.SetInteger("Action Decision", actionDecision);
-        // anim.SetBool("Shield On", enemyShield);
-        // anim.SetBool("Preemptive Attack", playerEngagement.preAttack);
-        // anim.SetBool("Recovery Attack", playerEngagement.recovAttack);
         anim.SetBool("Fred is dead", enemyHealthMan.fredIsDead);
-        // anim.SetBool("Damage Possible", playerEngagement.enemyDamagePossible);
         anim.SetBool("Enqueue", rangedAttack.enqueue);
 
         if (enemyShield)
@@ -298,17 +214,8 @@ public class BasicRangedEnemy : MonoBehaviour
             correctSideForDeathStrikeBool = false;
         }
 
-        /*The colliderOn is triggered by the stalkZone telling the enemy when to stop following and 
-         start attacking*/
-        // if (playerEngagement.colliderOn)
-        // {
-        //     following = false;
-        //     enemyMoving = false;
-        // }
         if (actionTimer <= 0)
         {
-            // actionTimer = 0.2f;
-
             playerEngagement.activateAction = false;
         }
 
@@ -322,63 +229,49 @@ public class BasicRangedEnemy : MonoBehaviour
             shieldTell.SetActive(false);
         }
 
-        /*I think this code is an extra safe guard telling the enemy that if its not doing anything
-        than it shouldn't be moving*/
+        // I think this code is an extra safe guard telling the enemy that if its not doing anything than it shouldn't be moving
         if (!playerEngagement.attacking && !following && !playerEngagement.colliderOn && !enemyMoving)
         {
             myRigidbody.velocity = Vector2.zero;
         }
 
-        // if (following)
-        // {
-        //     enemyMoving = true;
-        // }
-        // else
-        // {
-        //     enemyMoving = false;
-        // }
         switch (actionControl)
         {
             case 0:
-                if (actionDecision == 0) //Enemy is attacking
+                // Enemy is attacking
+                if (actionDecision == 0)
                 {
-                    // enemyRecover = false;
                     myRigidbody.velocity = new Vector2(0, 0);
                     enemyShield = false;
                     attackLock = false;
                 }
 
-                //Running away from the player if the player is close enough after it throws 
+                // Running away from the player if the player is close enough after it throws 
                 if (actionDecision == 1)
                 {
-                    //Shield();
                     myRigidbody.velocity = new Vector2(0, 0);
-                    // enemyRecover = true;
-                    //enemyShield = false;
                     attackLock = true;
                     enemyMoving = false;
                 }
 
-                /*Backing away from if it has already thrown and player is close enough*/
+                // Backing away from if it has already thrown and player is close enough
                 if (actionDecision == 2)
                 {
                     myRigidbody.velocity = new Vector2(-2, 0);
-                    // enemyRecover = true;
                     attackLock = true;
                 }
 
-                /*Getting a clear line of sight to throw at player*/
+                // Getting a clear line of sight to throw at player
                 if (actionDecision == 3 && !dodgeOnlyOnceBool)
                 {
                     myRigidbody.velocity = new Vector2(-75, 0);
                     enemyShield = false;
                     dodgeCounter -= Time.deltaTime;
-                    // enemyRecover = true;
-                    // enemyStaminaMan.enemyCurrentStamina -= 400;
 
                     dodgeOnlyOnceBool = true;
                 }
 
+                // Getting close enough to player to throw
                 if (actionDecision == 4)
                 {
                     enemyMoving = true;
@@ -390,24 +283,19 @@ public class BasicRangedEnemy : MonoBehaviour
                     enemyMoving = false;
                 }
 
-                //Getting close enough to player to throw
                 break;
 
             case 1:
                 if (actionDecision == 0)
                 {
                     myRigidbody.velocity = new Vector2(0, 0);
-                    // enemyRecover = false;
                     enemyShield = false;
                     attackLock = false;
                 }
 
                 if (actionDecision == 1)
                 {
-                    //Shield();
                     myRigidbody.velocity = new Vector2(0, 0);
-                    // enemyRecover = true;
-                    //enemyShield = false;
                     attackLock = true;
                     enemyMoving = false;
                 }
@@ -416,18 +304,14 @@ public class BasicRangedEnemy : MonoBehaviour
                 {
                     myRigidbody.velocity = new Vector2(2, 0);
                     attackLock = true;
-                    // enemyRecover = true;
                 }
 
                 if (actionDecision == 3 && !dodgeOnlyOnceBool)
                 {
                     attackLock = true;
-                    // enemyRecover = true;
                     myRigidbody.velocity = new Vector2(75, 0);
                     enemyShield = false;
                     dodgeCounter -= Time.deltaTime;
-                    // enemyStaminaMan.enemyCurrentStamina -= 400;
-
                     dodgeOnlyOnceBool = true;
                 }
                 if (actionDecision == 4)
@@ -449,13 +333,11 @@ public class BasicRangedEnemy : MonoBehaviour
                     myRigidbody.velocity = new Vector2(0, 0);
                     enemyShield = false;
                     attackLock = false;
-                    // enemyRecover = false;
                 }
 
                 if (actionDecision == 1)
                 {
                     myRigidbody.velocity = new Vector2(0, 0);
-                    // enemyRecover = true;
                     attackLock = true;
                     enemyMoving = false;
                 }
@@ -463,17 +345,14 @@ public class BasicRangedEnemy : MonoBehaviour
                 if (actionDecision == 2)
                 {
                     myRigidbody.velocity = new Vector2(0, 2);
-                    // enemyRecover = true;
                     attackLock = true;
                 }
 
                 if (actionDecision == 3 && !dodgeOnlyOnceBool)
                 {
-                    // enemyRecover = true;
                     myRigidbody.velocity = new Vector2(0, 75);
                     enemyShield = false;
                     dodgeCounter -= Time.deltaTime;
-                    // enemyStaminaMan.enemyCurrentStamina -= 400;
 
                     dodgeOnlyOnceBool = true;
                 }
@@ -487,12 +366,12 @@ public class BasicRangedEnemy : MonoBehaviour
                 {
                     enemyMoving = false;
                 }
+
                 break;
 
             case 3:
                 if (actionDecision == 0)
                 {
-                    // enemyRecover = false;
                     myRigidbody.velocity = new Vector2(0, 0);
                     enemyShield = false;
                     attackLock = false;
@@ -501,28 +380,23 @@ public class BasicRangedEnemy : MonoBehaviour
                 if (actionDecision == 1)
                 {
                     myRigidbody.velocity = new Vector2(0, 0);
-                    //enemyRecover = true;
                     attackLock = true;
                     enemyMoving = false;
                 }
 
-
                 if (actionDecision == 2)
                 {
                     myRigidbody.velocity = new Vector2(0, -2);
-                    //enemyRecover = true;
                     attackLock = true;
                 }
 
                 if (actionDecision == 3 && !dodgeOnlyOnceBool)
                 {
-                    //enemyRecover = true;
                     myRigidbody.velocity = new Vector2(0, -75);
                     dodgeCounter -= Time.deltaTime;
-                    // enemyStaminaMan.enemyCurrentStamina -= 100;
-
                     dodgeOnlyOnceBool = true;
                 }
+
                 if (actionDecision == 4)
                 {
                     enemyMoving = true;
@@ -532,8 +406,10 @@ public class BasicRangedEnemy : MonoBehaviour
                 {
                     enemyMoving = false;
                 }
+
                 break;
         }
+
         if (playerHealth.playerIsDead)
         {
             playerEngagement.engaged = false;
@@ -542,9 +418,8 @@ public class BasicRangedEnemy : MonoBehaviour
         }
     }
 
-    /*#ActionDecisions: this is where the action decisions are made based
-     on what it retrieves from the ActionPriorities() function below*/
-    //This section is separate from action priorities because there are potentially combinations from action priorities that can lead to different outcomes
+    // ActionDecisions: this is where the action decisions are made based on what it retrieves from the ActionPriorities() function below
+    // This section is separate from action priorities because there are potentially combinations from action priorities that can lead to different outcomes
     public void ChooseAction()
     {
         if (deathSeven)
@@ -576,8 +451,9 @@ public class BasicRangedEnemy : MonoBehaviour
             actionDecision = 0;
         }
     }
-    public void ActionPriorities() /*#ActionDecisions: this is the core of the enemies action decisions,
-        basing each of its priorities on whether or not the variables line up.*/
+    public void ActionPriorities()
+    /*#ActionDecisions: this is the core of the enemies action decisions,
+           basing each of its priorities on whether or not the variables line up.*/
     {
 
         if (!deathSeven)
@@ -610,14 +486,6 @@ public class BasicRangedEnemy : MonoBehaviour
         //     actionDecision = 1;
         // }
     }
-    // public void OnTriggerExit2D(Collider2D other)
-    // {
-    //     if (other.gameObject.name == "Player")
-    //     {
-    //         following = false;
-    //         enemyMoving = false;
-    //     }
-    // }
 
     public void engagedWithPlayerPrivateVariables(bool localAttackLock)
     {
@@ -649,7 +517,7 @@ public class BasicRangedEnemy : MonoBehaviour
                 {
                     rangedAttack.enqueue = false;
                     transform.position = Vector2.MoveTowards(transform.position,
-                    playerObject.transform.position, speed * Time.deltaTime);
+                        playerObject.transform.position, speed * Time.deltaTime);
                 }
                 else
                 {
@@ -662,7 +530,7 @@ public class BasicRangedEnemy : MonoBehaviour
                             if (enemyPos != n)
                             {
                                 transform.position = Vector2.MoveTowards(transform.position,
-                                n, (speed - 2f) * Time.deltaTime);
+                                    n, (speed - 2f) * Time.deltaTime);
                             }
                             if (!snipeSpotFour)
                             {
@@ -694,7 +562,8 @@ public class BasicRangedEnemy : MonoBehaviour
 
         if (trackingMasterY > 0)
         {
-            if (trackingMasterX > 0) //Quadrant 2
+            // Quadrant 2
+            if (trackingMasterX > 0)
             {
                 if (enemyShield && moveDirectionX == 0)
                 {
@@ -724,7 +593,8 @@ public class BasicRangedEnemy : MonoBehaviour
             }
             else if (trackingMasterX < 0)
             {
-                if (Math.Abs(trackingMasterX) > trackingMasterY) //Quadrant 1
+                // Quadrant 1
+                if (Math.Abs(trackingMasterX) > trackingMasterY)
                 {
                     lastMove.x = 3;
                     lastMove.y = 3;
@@ -742,7 +612,8 @@ public class BasicRangedEnemy : MonoBehaviour
                 }
             }
         }
-        else if (trackingMasterY < 0) //Quadrant 4
+        // Quadrant 4
+        else if (trackingMasterY < 0)
         {
             if (trackingMasterX < 0)
             {
@@ -763,7 +634,8 @@ public class BasicRangedEnemy : MonoBehaviour
                     actionControl = 3;
                 }
             }
-            else if (trackingMasterX > 0) //Quadrant 3
+            // Quadrant 3
+            else if (trackingMasterX > 0)
             {
                 if (Math.Abs(trackingMasterY) > trackingMasterX)
                 {

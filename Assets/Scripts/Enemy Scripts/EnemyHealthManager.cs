@@ -6,23 +6,24 @@ public class EnemyHealthManager : MonoBehaviour
 {
     public int MaxHealth;
     public int CurrentHealth;
-    public int oldCurrentHealth; /*This variable was created to know when the enemy has been hurt
-    it is used by functions in the enemyTestScript*/
+    // This variable was created to know when the enemy has been hurt it is used by functions in the enemyTestScript
+    public int oldCurrentHealth;
     public int expToGive;
     public EnemyTestScript enemy;
-    public PlayerStats thePlayerStats; //player stats added to give xp upon enemies death
+    // Player stats added to give xp upon enemies death
+    public PlayerStats thePlayerStats;
     public GameObject thePlayer;
-    public float enemyHealthPercent; /*All health/stamina has percentages for the enemy to calculate
-    its priorities more efficiently*/
-    public bool fredIsDead; //Fred is the enemy
-    private float deathCounter; //how long the death animation lasts for before deleting Fred
+    // All health/stamina has percentages for the enemy to calculate its priorities more efficiently
+    public float enemyHealthPercent;
+    // Fred is the enemy
+    public bool fredIsDead;
+    // How long the death animation lasts for before deleting Fred
+    private float deathCounter;
     private GameObject enemyObject;
     private EnemyMasterScript enemyMaster;
     public bool setCurrentHealthAtStart;
     public BoxCollider2D bodyCollider;
     public ItemDrop itemDropScript;
-
-    // static ItemDrop instance;
 
     // Use this for initialization
     void Start()
@@ -63,7 +64,8 @@ public class EnemyHealthManager : MonoBehaviour
             fredIsDead = true;
         }
 
-        if(CurrentHealth > MaxHealth){
+        if (CurrentHealth > MaxHealth)
+        {
             CurrentHealth = MaxHealth;
         }
 
@@ -75,8 +77,9 @@ public class EnemyHealthManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        enemyHealthPercent = (float)(double)CurrentHealth / MaxHealth * 100; /*(float)(double) was
-        just something I found online on how to convert to percentages (not sure how it works)*/
+        enemyHealthPercent = (float)(double)CurrentHealth / MaxHealth * 100;
+        /*(float)(double) was
+               just something I found online on how to convert to percentages (not sure how it works)*/
     }
 
     public void HurtEnemy(int damageToGive) //damage from player

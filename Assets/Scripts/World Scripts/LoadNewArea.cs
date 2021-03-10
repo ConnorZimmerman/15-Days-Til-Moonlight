@@ -19,13 +19,6 @@ public class LoadNewArea : MonoBehaviour
     public static int counter;
     public string curLvl;
 
-    // Use this for initialization
-    void Start()
-    {
-        // globalDataScript.Load();
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -42,7 +35,7 @@ public class LoadNewArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Snowy A Exits
+        // Snowy A Exits
         if (other.gameObject.name == "Player" && curLvl == "SnowyA" && this.gameObject.name == "SnowyBEntry")
         {
             SetAllForLvl();
@@ -149,6 +142,7 @@ public class LoadNewArea : MonoBehaviour
         PlayerPrefs.SetFloat("Global Player Last Move X", thePlayer.lastMove.x);
         PlayerPrefs.SetFloat("Global Player Last Move Y", thePlayer.lastMove.y);
         PlayerPrefs.SetString("Global Player Cur Lvl", curLvl);
+
         if (thePlayer.lockOn)
         {
             PlayerPrefs.SetInt("Global Player Lock On", 1);

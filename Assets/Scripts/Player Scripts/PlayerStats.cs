@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-
     public int currentLevel;
     public int currentExp;
     public int playerDamage;
     public int[] toLevelUp;
     public int[] HPLevels;
     public int[] attackLevels;
-    // public int[] defenseLevels;
     public int currentHP;
     public int currentAttack;
-    // public int currentDefense;
     public int vitality;
     public int strength;
     public int dexterity;
@@ -23,7 +20,6 @@ public class PlayerStats : MonoBehaviour
     private PauseMenuButtons pauseMenuButtonsScript;
     private PlayerHealthManager thePlayerHealth;
     private EquipmentBuffManager equipmentBuffManagerScript;
-    // private GlobalDataScript globalData;
     public int pointsToSpend;
 
     // Use this for initialization

@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ItemSlotManager : MonoBehaviour
 {
@@ -492,7 +492,6 @@ public class ItemSlotManager : MonoBehaviour
 
         itemSection.transform.GetChild(rowIndex).GetChild(itemNumber).GetChild(0).GetChild(1).GetComponent<Image>().sprite = GameObject.Find("Image").GetComponent<Image>().sprite;
 
-
     }
 
     public void InventoryReset()
@@ -533,4 +532,3 @@ public class ItemSlotManager : MonoBehaviour
         }
     }
 }
-

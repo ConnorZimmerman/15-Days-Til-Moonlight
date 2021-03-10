@@ -44,8 +44,7 @@ public class EngagedWithPlayer : MonoBehaviour
     public bool beforeRecov;
     public float enemyAttackCounter;
     public bool enemyDamagePossible;
-    /*The enemy's (and player's attack) is currently set up to be 3 different blend trees. The following
-     4 variables dictate which stage the enemy is in of its attack based on timers and bools*/
+    // The enemy's (and player's attack) is currently set up to be 3 different blend trees. The following 4 variables dictate which stage the enemy is in of its attack based on timers and bools
     public bool preAttack;
     public float preAttackCounter;
     public bool recovAttack;
@@ -115,7 +114,6 @@ public class EngagedWithPlayer : MonoBehaviour
         enemyAttackCounter = 0.06f;
         freezeFrame = 1f;
 
-
     }
 
     // Update is called once per frame
@@ -123,7 +121,7 @@ public class EngagedWithPlayer : MonoBehaviour
     {
         damageToGive = enemyMaster.damageToGive;
 
-        //Defining variables for enemy type
+        // Defining variables for enemy type
         if (enemyGameObject.tag == "Enemy")
         {
             enemy.engagedWithPlayerPrivateVariables(localAttackLock);
@@ -173,8 +171,8 @@ public class EngagedWithPlayer : MonoBehaviour
 
         if (shieldOn)
         {
-            if (enemyMoveDirectionX - thePlayer.directionInt == -2
-                || enemyMoveDirectionX - thePlayer.directionInt == 2)
+            if (enemyMoveDirectionX - thePlayer.directionInt == -2 ||
+                enemyMoveDirectionX - thePlayer.directionInt == 2)
             {
                 deathStrike = false;
             }
@@ -194,8 +192,8 @@ public class EngagedWithPlayer : MonoBehaviour
 
         if (enemyShield)
         {
-            if (enemyMoveDirectionX - thePlayer.directionInt == -2 || !correctSideForDeathStrikeBool
-                || enemyMoveDirectionX - thePlayer.directionInt == 2)
+            if (enemyMoveDirectionX - thePlayer.directionInt == -2 || !correctSideForDeathStrikeBool ||
+                enemyMoveDirectionX - thePlayer.directionInt == 2)
             {
                 thePlayerDeathStrike = false;
             }
@@ -218,8 +216,8 @@ public class EngagedWithPlayer : MonoBehaviour
             thePlayer.damageBlock = false;
         }
 
-        if (enemyMoveDirectionX - thePlayer.directionInt == -2
-            || enemyMoveDirectionX - thePlayer.directionInt == 2)
+        if (enemyMoveDirectionX - thePlayer.directionInt == -2 ||
+            enemyMoveDirectionX - thePlayer.directionInt == 2)
         {
             faceOff = true;
         }
@@ -251,9 +249,9 @@ public class EngagedWithPlayer : MonoBehaviour
         }
         if (enemyGameObject.tag == "Enemy")
         {
-            if (localAttackLock == false && colliderOn && engaged
-                && preAttackCounter == 0.6f && enemyAttackCounter == 0.06f
-                && recovAttackCounter == 0.3f)
+            if (localAttackLock == false && colliderOn && engaged &&
+                preAttackCounter == 0.6f && enemyAttackCounter == 0.06f &&
+                recovAttackCounter == 0.3f)
             {
                 preAttack = true;
                 enemyMoving = false;
@@ -267,30 +265,30 @@ public class EngagedWithPlayer : MonoBehaviour
             {
                 enemyAttackCounter -= Time.deltaTime;
             }
-            if (preAttackCounter <= 0 && enemyAttackCounter > 0 && !recovAttack
-                && preAttack == true)
+            if (preAttackCounter <= 0 && enemyAttackCounter > 0 && !recovAttack &&
+                preAttack == true)
             {
                 if (preAttackCounter <= 0 && preAttack)
                 {
                     if (enemyMoveDirectionX == 0)
                     {
                         enemyTransform.position = new Vector2(enemyTransform.position.x,
-                        enemyTransform.position.y + 0.31f);
+                            enemyTransform.position.y + 0.31f);
                     }
                     if (enemyMoveDirectionX == 1)
                     {
                         enemyTransform.position = new Vector2(enemyTransform.position.x + 0.31f,
-                        enemyTransform.position.y);
+                            enemyTransform.position.y);
                     }
                     if (enemyMoveDirectionX == 2)
                     {
                         enemyTransform.position = new Vector2(enemyTransform.position.x,
-                        enemyTransform.position.y - 0.31f);
+                            enemyTransform.position.y - 0.31f);
                     }
                     if (enemyMoveDirectionX == 3)
                     {
                         enemyTransform.position = new Vector2(enemyTransform.position.x - 0.31f,
-                        enemyTransform.position.y);
+                            enemyTransform.position.y);
                     }
                     attacking = true;
                     preAttack = false;
@@ -310,7 +308,7 @@ public class EngagedWithPlayer : MonoBehaviour
                 recovAttackCounter -= Time.deltaTime;
                 attacking = false;
             }
-            
+
             if (recovAttackCounter <= 0)
             {
                 recovAttack = false;
@@ -342,7 +340,6 @@ public class EngagedWithPlayer : MonoBehaviour
             }
         }
     }
-
 
     // public void OnTriggerEnter2D(Collider2D other)
     // {
@@ -444,7 +441,7 @@ public class EngagedWithPlayer : MonoBehaviour
             {
                 playerDefense = 0;
             }
-            // this else if is added in right now to account for adding to players stamina (remove later)
+            // This else if is added in right now to account for adding to players stamina (remove later)
             else if (playerDefense > 50)
             {
                 playerDefense = 50;
@@ -562,7 +559,6 @@ public class EngagedWithPlayer : MonoBehaviour
     // {
     //     Animator anim = thePlayer.GetComponent<Animator>();
     //     // Animator anim2 = other.gameObject.GetComponent<Animator>();
-
 
     //     while (freezeFrame > 0)
     //     {

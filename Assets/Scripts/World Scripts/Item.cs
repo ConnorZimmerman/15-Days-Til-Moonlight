@@ -12,14 +12,4 @@ public class Item : MonoBehaviour {
 		this.amount = amount;
 		this.pouchObject = GameObject.Find("Item_Pouch");
 	}
-
-	// // Use this for initialization
-	// void Start () {
-		
-	// }
-	
-	// // Update is called once per frame
-	// void Update () {
-		
-	// }
 }

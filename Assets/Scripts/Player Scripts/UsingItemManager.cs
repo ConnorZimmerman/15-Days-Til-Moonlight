@@ -7,12 +7,6 @@ public class UsingItemManager : MonoBehaviour
     private GameObject playerObject;
     public GameObject itemDesc;
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -24,7 +18,7 @@ public class UsingItemManager : MonoBehaviour
                 FindObjectOfType<PlayerHealthManager>().playerCurrentHealth += 3;
                 ItemSlotManager.potionCount--;
                 var clone = (GameObject)Instantiate(itemDesc, playerObject.transform.position,
-                Quaternion.Euler(Vector3.zero));
+                    Quaternion.Euler(Vector3.zero));
                 clone.GetComponent<FloatingItemFind>().itemType = " health";
                 clone.GetComponent<FloatingItemFind>().daggerCount = 3;
             }

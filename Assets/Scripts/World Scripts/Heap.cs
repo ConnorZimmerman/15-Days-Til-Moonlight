@@ -30,20 +30,24 @@ public class Heap<T> where T : IHeapItem<T>
         currentItemCount++;
     }
 
-	public bool Contains(T item){
-		return Equals(items[item.HeapIndex], item);
-	}
+    public bool Contains(T item)
+    {
+        return Equals(items[item.HeapIndex], item);
+    }
 
-	public void UpdateItem(T item){
-		SortUp(item);
-		//SortDown
-	}
+    public void UpdateItem(T item)
+    {
+        SortUp(item);
+        //SortDown
+    }
 
-	public int Count{
-		get{
-			return currentItemCount;
-		}
-	}
+    public int Count
+    {
+        get
+        {
+            return currentItemCount;
+        }
+    }
 
     void SortDown(T item)
     {
@@ -61,18 +65,22 @@ public class Heap<T> where T : IHeapItem<T>
                 {
                     if (items[childIndexLeft].CompareTo(items[childIndexRight]) < 0)
                     {
-						swapIndex = childIndexRight;
+                        swapIndex = childIndexRight;
                     }
                 }
-				if(item.CompareTo(items[swapIndex]) < 0){
-					Swap(item, items[swapIndex]);
-				}else{
-					return;
-				}
+                if (item.CompareTo(items[swapIndex]) < 0)
+                {
+                    Swap(item, items[swapIndex]);
+                }
+                else
+                {
+                    return;
+                }
             }
-			else{
-				return;
-			}
+            else
+            {
+                return;
+            }
         }
     }
     void SortUp(T item)
@@ -111,8 +119,4 @@ public interface IHeapItem<T> : IComparable<T>
         get;
         set;
     }
-
-    //int CompareTo<T>(T parentItem) where T : IHeapItem<T>;
-
-    //int CompareTo<T>(T parentItem) where T : IHeapItem<T>;
 }

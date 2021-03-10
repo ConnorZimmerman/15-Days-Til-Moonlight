@@ -6,15 +6,10 @@ public class DialogueHolder : MonoBehaviour
 {
     public string dialogue;
     private DialogueManager dMan;
-
     public string[] dialogLines;
-
     public GameObject thePlayer;
-
     public Transform target;
-
     public VillagerMovement villagerScript;
-
     public bool dialogLock;
 
     // Use this for initialization
@@ -22,12 +17,6 @@ public class DialogueHolder : MonoBehaviour
     {
         dMan = FindObjectOfType<DialogueManager>();
         dialogLock = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnTriggerStay2D(Collider2D other)

@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
+// Script to choose class at the beginning of game
 public class CharacterSelect : MonoBehaviour
 {
-	public EventSystem eventSystem;
+    public EventSystem eventSystem;
     private GameObject WarriorButton;
     private GameObject RogueButton;
     private GameObject ScholarButton;
@@ -27,27 +28,5 @@ public class CharacterSelect : MonoBehaviour
             // vitalityObject.SetActive(true);
             // vitalityText.text = "Will increase max health by 1";
         }
-        // else
-        // {
-        //     vitalityObject.SetActive(false);
-        // }
-        // if (eventSystem.currentSelectedGameObject == StrengthButton)
-        // {
-        //     strengthObject.SetActive(true);
-        //     strengthText.text = StrengthText(playerStats.strength);
-        // }
-        // else
-        // {
-        //     strengthObject.SetActive(false);
-        // }
-        // if (eventSystem.currentSelectedGameObject == DexterityButton)
-        // {
-        //     dexterityObject.SetActive(true);
-        //     dexterityText.text = DexterityText(playerStats.dexterity);
-        // }
-        // else
-        // {
-        //     dexterityObject.SetActive(false);
-        // }
     }
 }

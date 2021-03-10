@@ -11,7 +11,6 @@ public class TrackingRaycast : MonoBehaviour
     public bool lineOfSight;
     private Vector2 enemyPos;
     private Vector2 playerPos;
-    //public List<Node> pathFound;
     public Vector2[] path;
     private Pathfinding pathfinder;
     public float pathfindingTimer;
@@ -50,7 +49,7 @@ public class TrackingRaycast : MonoBehaviour
                     lineOfSight = false;
                     enemyPos = enemyObject.transform.position;
                     playerPos = playerObject.transform.position;
-                    
+
                     if (!enqueue)
                     {
                         enqueue = false;

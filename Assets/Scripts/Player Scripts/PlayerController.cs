@@ -73,7 +73,6 @@ public class PlayerController : MonoBehaviour
     public bool specialMove;
     public bool wasSprint;
     public bool wasMoving;
-    //public RaycastHit rayCastHitDodge;
     public RaycastHit2D rayCastHitDodge;
     public int[] rayCastDodgeArray;
     public Ray rayDodge;
@@ -89,8 +88,6 @@ public class PlayerController : MonoBehaviour
     GameObject playerObject;
     public Transform playerTransform;
     private GameObject dummyGameObject;
-    //doesn't work with this kind of collider gives incorrect collision location
-    //public float dodgeDistanceFloat;
     public Vector2 wallDistanceVector;
     public float dodgeDistance;
     public float chargeDistantFloat;
@@ -112,7 +109,6 @@ public class PlayerController : MonoBehaviour
     public List<Transform> enemyListDown;
     public Dictionary<int, bool> enemyDict;
     public int enemyCount;
-
     // This int will count every time a new enemy is locked to and reset once list is reset.
     public int enemyCounter;
     private bool newListBool;
@@ -121,18 +117,15 @@ public class PlayerController : MonoBehaviour
     public Transform currentEnemyLocked;
     public GameObject damageBurst;
     private GameObject lockOnImage;
-    
     // If the shield is down when the player initiates attack then the enemy can not raise their shield
     public static bool enemyShieldLock = false;
 
     // Use this for initialization
     void Start()
     {
-        // dodgeDistanceFloat = 3;
         enemyD = FindObjectOfType<EnemyDialogue>();
 
         dummyGameObject = GameObject.Find("Dummy Object");
-        //rayCastHitDodge.size;
         rayCastDodgeArray = new int[100];
 
         playerObject = GameObject.Find("Player");
@@ -185,11 +178,6 @@ public class PlayerController : MonoBehaviour
         if (!playerExists)
         {
             playerExists = true;
-            //DontDestroyOnLoad(transform.gameObject);
-        }
-        else
-        {
-            //Destroy(gameObject);
         }
 
         canMove = true;
@@ -294,8 +282,6 @@ public class PlayerController : MonoBehaviour
         {
             lockOn = true;
             newListBool = true;
-            // AddEnemiesToLists();
-            // FindClosestEnemy();
             LockOn();
         }
         else if (Input.GetButtonUp("LockOn") && lockOn == true)
@@ -308,9 +294,8 @@ public class PlayerController : MonoBehaviour
         {
             lockOn = false;
         }
-        // Debug.Log("test: " + currentEnemyLocked);
 
-        // allows player to switch between enemies in lock on system
+        // Allows player to switch between enemies in lock on system
         lockOnHorizontal = Input.GetAxisRaw("LockOnHorizontal");
         lockOnVertical = Input.GetAxisRaw("LockOnVertical");
 
@@ -357,8 +342,6 @@ public class PlayerController : MonoBehaviour
             playerInt = directionInt;
         }
 
-        // Debug.Log(playerInt);
-
         if (playerShield.shieldOn)
         {
             shieldTell.SetActive(true);
@@ -370,8 +353,6 @@ public class PlayerController : MonoBehaviour
 
         if (staminaMan.playerCurrentStamina <= 0)
         {
-            // moveSpeed = 1f;
-            // moveSpeed = 4.5f;
             sprintPossible = false;
             dashActive = false;
             sprintActive = false;
@@ -513,14 +494,11 @@ public class PlayerController : MonoBehaviour
             dashActive = false;
             sprintActive = false;
             soFast = false;
-            // sprintPossible = false;
         }
         else
         {
             sprintActive = false;
             soFast = false;
-            // moveSpeed = 2;
-            // sprintPossible = false;
         }
 
         if (sprintPossible && staminaMan.playerCurrentStamina >= 50)
@@ -542,29 +520,6 @@ public class PlayerController : MonoBehaviour
         {
             dashPossible = false;
         }
-
-        // if (lockOn == false)
-        // {
-        //     if (directionUp == true)
-        //     {
-        //         directionInt = 0;
-        //     }
-
-        //     if (directionRight == true)
-        //     {
-        //         directionInt = 1;
-        //     }
-
-        //     if (directionDown == true)
-        //     {
-        //         directionInt = 2;
-        //     }
-
-        //     if (directionLeft == true)
-        //     {
-        //         directionInt = 3;
-        //     }
-        // }
 
         playerMoving = false;
 
@@ -610,7 +565,7 @@ public class PlayerController : MonoBehaviour
             axisVertical = -0.5f;
         }
 
-        //if (!attacking || !preAttack || !recovAttack)
+        // if (!attacking || !preAttack || !recovAttack)
         if (preAttackCounter == 0.2f && recovAttackCounter == 0.3f && attackingCounterNew == 0.06f)
         {
             moveInput = new Vector2(Input.GetAxisRaw("Horizontal"),
@@ -639,10 +594,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //if (!attackLock && axisInput <= -0.2f && staminaMan.playerCurrentStamina > 400)
         if (!attackLock && axisInput <= -0.2f &&
             recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 600 || !attackLock && Input.GetMouseButtonDown(0) && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 600)
-        // recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 300 || !attackLock && Input.GetMouseButtonDown(0) && recovAttackCounter == 0.3f && staminaMan.playerCurrentStamina >= 300)
         {
             preAttack = true;
             attacking = true;
@@ -655,18 +608,11 @@ public class PlayerController : MonoBehaviour
             preAttack = false;
             attacking = false;
             enemyShieldLock = false;
-            // EnemyTestScript.staminaLockBool = true;
-            // PlayerUIManager.staminaTell.text = "-STAMINA";
         }
-        // else
-        // {
-        //     GameObject.Find("StaminaTell").SetActive(true);
-        // }
 
         if (preAttack)
         {
             preAttackCounter -= Time.deltaTime;
-            //preAttackCounter -= Time.frameCount;
         }
 
         if (playerStats.dexterity >= 14 && Input.GetButton("Sprint") && wasMoving || playerStats.dexterity >= 14 && Input.GetButton("SprintX") && wasMoving || playerStats.dexterity >= 14 && Input.GetKeyDown(KeyCode.LeftShift) && wasMoving)
@@ -707,7 +653,6 @@ public class PlayerController : MonoBehaviour
             attackPossible = true;
             damagePossible = true;
             sfxMan.playerAttack.Play();
-            //attackTimeCounter = attackTime; //I don't remember what this does.
             attackBool = true;
 
             myRigidbody.velocity = Vector2.zero;
@@ -723,7 +668,6 @@ public class PlayerController : MonoBehaviour
 
                 // Stamina lost from attacking
                 staminaMan.playerCurrentStamina -= 600;
-                //staminaAttackDrainBool = true;
             }
         }
         else
@@ -733,17 +677,10 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Attack", false);
         }
 
-        // else if (attackLock == false && staminaMan.playerCurrentStamina < 400)
-        // {
-        //     attackPossible = false;
-        // }
-
         if (attackLock)
         {
             preAttackCounter = .2f;
             recovAttack = true;
-
-            //staminaAttackDrainBool = false;
         }
 
         if (recovAttack)
@@ -772,25 +709,11 @@ public class PlayerController : MonoBehaviour
             damagePossible = false;
         }
 
-        // if (staminaMan.playerCurrentStamina < 400)
-        // {
-        //     attacking = false;
-        // }
-        // else if (attackLock == false && staminaMan.playerCurrentStamina < 400)
-        // {
-        //     attackPossible = false;
-        // }
-        // else
-        // {
-        //     attackBool = false;
-        // }
-
         if (axisInput >= 0f)
         {
             attackLock = false;
         }
 
-        // if (Input.GetKeyDown(KeyCode.Mouse0) && staminaMan.playerCurrentStamina > 400)
         if (Input.GetKeyDown(KeyCode.Mouse0) && staminaMan.playerCurrentStamina > 700)
         {
             sfxMan.playerAttack.Play();
@@ -801,10 +724,8 @@ public class PlayerController : MonoBehaviour
             damagePossible = true;
             attackPossible = true;
         }
-        // else if (Input.GetKeyDown(KeyCode.Mouse0) && staminaMan.playerCurrentStamina < 400)
         else if (Input.GetKeyDown(KeyCode.Mouse0) && staminaMan.playerCurrentStamina < 700)
         {
-            // attackPossible = false;
             attackBoolMouse = false;
             attacking = false;
         }
@@ -817,19 +738,10 @@ public class PlayerController : MonoBehaviour
         float clampY = Mathf.Clamp(transform.position.y, minBounds.y, maxBounds.y);
         transform.position = new Vector3(clampX, clampY, transform.position.z);
 
-        // if (lockOn == false)
-        // {
-        //     anim.SetFloat("MoveX", axisHorizontal);
-        //     anim.SetFloat("MoveY", axisVertical);
-        // }
-        // else
-        // {
-        // }
         if (lockOn)
         {
             ChooseLockOnDirection(currentEnemyLocked);
         }
-        // Debug.Log("Last Move********** :" + lastMove);
 
         anim.SetFloat("MoveX", lockOnHorizontal);
         anim.SetFloat("MoveY", lockOnVertical);
@@ -842,8 +754,6 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("Preemptive Attack", preAttack);
         anim.SetBool("Recovery Attack", recovAttack);
         anim.SetBool("Attack Possible", attackPossible);
-        // anim.SetInteger("directionIntX", directionInt);
-        // anim.SetInteger("directionIntY", directionInt);
     }
 
     /*
@@ -1046,7 +956,7 @@ public class PlayerController : MonoBehaviour
         enemyCounter = 0;
     }
 
-    // This method will receive a string which will represent which quadrant to reshape dictionary to: upLeft being the upper left quadrant where -x & +y.
+    // Receives a string which will represent which quadrant to reshape dictionary to: upLeft being the upper left quadrant where -x & +y.
     public void ResetEnemyDict()
     {
         int dictCounter = 0;
@@ -1097,7 +1007,6 @@ public class PlayerController : MonoBehaviour
         currentEnemyLocked = closestEnemy;
         return closestEnemy;
     }
-    // public Transform FindNextClosestEnemy(List<Transform> enemyListQuadrant, int curEnemyInt)
     public Transform FindNextClosestEnemy(List<Transform> enemyListQuadrant)
     {
         Transform closestEnemy = null;
@@ -1124,7 +1033,7 @@ public class PlayerController : MonoBehaviour
             curClosestDistance = Vector3.Distance(closestEnemy.transform.position, this.transform.position);
         }
 
-        // only set enemy if they are close enough to player
+        // Only set enemy if they are close enough to player
         int loopCounter = 0;
 
         while (curEnemyInt + 1 != endingEnemyInt && !(curEnemyInt + 1 == enemyListQuadrant.Count && endingEnemyInt == 0) && loopCounter < enemyListQuadrant.Count)
@@ -1157,12 +1066,7 @@ public class PlayerController : MonoBehaviour
         if (curEnemyInt >= enemyListQuadrant.Count)
         {
             curEnemyInt = -1;
-            // closestEnemy = enemyList[curEnemyInt];
         }
-        // else
-        // {
-        //     closestEnemy = enemyList[curEnemyInt];
-        // }
 
         if (Vector3.Distance(closestEnemy.transform.position, this.transform.position) > 10)
         {
@@ -1174,47 +1078,17 @@ public class PlayerController : MonoBehaviour
             enemyDict[curClosestEnemyInt] = true;
         }
 
-        // Debug.Log(curEnemyInt);
-        // Debug.Log("Ummmmmmmmmmm " + enemyList.Count);
-
-        // sets initial closest enemy to compare against
-        // foreach (Transform enemy in enemyList)
-        // {
-        //     if (enemy != null)
-        //     {
-        //         distance = Vector3.Distance(enemy.transform.position, this.transform.position);
-        //         closestEnemy = enemy;
-        //     }
-        // }
-
-        // foreach (Transform enemy in enemyList)
-        // {
-        //     if (enemy != null)
-        //     {
-        //         if (Vector3.Distance(enemy.transform.position, this.transform.position) < distance)
-        //         {
-        //             closestEnemy = enemy;
-        //             distance = Vector3.Distance(enemy.transform.position, this.transform.position);
-        //         }
-        //     }
-        // }
-        // if (closestEnemy == null)
-        // {
-        //     lockOn = false;
-        // }
-        // currentEnemyLocked = closestEnemy;
         return closestEnemy;
     }
 
     public void LockOn()
     {
-        // newListBool = true;
         if (newListBool)
         {
             AddEnemiesToLists();
             currentEnemyLocked = FindClosestEnemy();
         }
-        // ChooseLockOnDirection(currentEnemyLocked);
+
         newListBool = false;
 
         // Debug.Log(FindClosestEnemy());
@@ -1275,8 +1149,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("it caught");
                 return;
             }
-            // lockOnImage.SetActive(true);
-            // lockOnImage.transform.position = enemy.position;
+
             return;
         }
 
@@ -1298,14 +1171,14 @@ public class PlayerController : MonoBehaviour
 
         if (trackingMasterY > 0)
         {
-            if (trackingMasterX > 0) //Quadrant 2
+            // Quadrant 2
+            if (trackingMasterX > 0)
             {
                 if (trackingMasterX < trackingMasterY)
                 {
                     directionInt = 0;
                     lockOnVertical = 0.5f;
                     lockOnHorizontal = 0f;
-                    // Debug.Log("test: getting here");
                 }
                 else
                 {
@@ -1316,7 +1189,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (trackingMasterX < 0)
             {
-                if (Math.Abs(trackingMasterX) > trackingMasterY) //Quadrant 1
+                // Quadrant 1
+                if (Math.Abs(trackingMasterX) > trackingMasterY)
                 {
                     directionInt = 3;
                     lockOnHorizontal = -0.5f;
@@ -1327,11 +1201,11 @@ public class PlayerController : MonoBehaviour
                     directionInt = 0;
                     lockOnVertical = 0.5f;
                     lockOnHorizontal = 0;
-                    // Debug.Log("test: getting here");
                 }
             }
         }
-        else if (trackingMasterY < 0) //Quadrant 4
+        // Quadrant 4
+        else if (trackingMasterY < 0)
         {
             if (trackingMasterX < 0)
             {
@@ -1348,7 +1222,8 @@ public class PlayerController : MonoBehaviour
                     lockOnVertical = 0f;
                 }
             }
-            else if (trackingMasterX > 0) //Quadrant 3
+            // Quadrant 3
+            else if (trackingMasterX > 0)
             {
                 if (Math.Abs(trackingMasterY) > trackingMasterX)
                 {
@@ -1376,9 +1251,11 @@ public class PlayerController : MonoBehaviour
         float trackingMasterX = enemyTrackX - transform.position.x;
         float trackingMasterY = enemyTrackY - transform.position.y;
 
-        if (trackingMasterY > 0) //Top
+        // Top quadrant
+        if (trackingMasterY > 0)
         {
-            if (trackingMasterX > 0) //Quadrant 2
+            // Quadrant 2
+            if (trackingMasterX > 0)
             {
                 if (trackingMasterX < trackingMasterY)
                 {
@@ -1389,9 +1266,10 @@ public class PlayerController : MonoBehaviour
                     return "right";
                 }
             }
+            // Quadrant 1
             else if (trackingMasterX < 0)
             {
-                if (Math.Abs(trackingMasterX) > trackingMasterY) //Quadrant 1
+                if (Math.Abs(trackingMasterX) > trackingMasterY)
                 {
                     return "left";
                 }
@@ -1401,9 +1279,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else if (trackingMasterY < 0) //Bottom
+        // Bottom quadrant
+        else if (trackingMasterY < 0)
         {
-            if (trackingMasterX < 0) //Quadrant 4
+            // Quadrant 4
+            if (trackingMasterX < 0)
             {
                 if (trackingMasterX > trackingMasterY)
                 {
@@ -1414,7 +1294,8 @@ public class PlayerController : MonoBehaviour
                     return "down";
                 }
             }
-            else if (trackingMasterX > 0) //Quadrant 3
+            // Quadrant 3
+            else if (trackingMasterX > 0)
             {
                 if (Math.Abs(trackingMasterY) > trackingMasterX)
                 {
@@ -1432,9 +1313,11 @@ public class PlayerController : MonoBehaviour
     // Will return which direction the right analog stick is inputting.
     public string DetermineAnalogQuadrant(float x, float y)
     {
-        if (y >= 0) //Top
+        // Top
+        if (y >= 0)
         {
-            if (x >= 0) //Quadrant 2
+            // Quadrant 2
+            if (x >= 0)
             {
                 if (x < y)
                 {
@@ -1447,7 +1330,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (x <= 0)
             {
-                if (Math.Abs(x) >= y) //Quadrant 1
+                // Quadrant 1
+                if (Math.Abs(x) >= y)
                 {
                     return "left";
                 }
@@ -1457,9 +1341,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else if (y <= 0) //Bottom
+        // Bottom
+        else if (y <= 0)
         {
-            if (x <= 0) //Quadrant 4
+            // Quadrant 4
+            if (x <= 0)
             {
                 if (x >= y)
                 {
@@ -1470,7 +1356,8 @@ public class PlayerController : MonoBehaviour
                     return "down";
                 }
             }
-            else if (x >= 0) //Quadrant 3
+            // Quadrant 3
+            else if (x >= 0)
             {
                 if (Math.Abs(y) > x)
                 {
@@ -1492,7 +1379,6 @@ public class PlayerController : MonoBehaviour
 
         if (!lockOn)
         {
-
             if (lockOnHorizontal > 0.2f)
             {
                 lockOnHorizontal = 0.5f;

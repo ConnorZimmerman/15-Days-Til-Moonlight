@@ -47,7 +47,7 @@ public class ItemDrop : MonoBehaviour
 
     public void CreateItem(GameObject enemyObject)
     {
-        // eventually add in method to do random calculations
+        // Eventually add in method to do random calculations
         int randomNum = LuckCalculator();
         if (enemyObject.tag == "BasicRangedEnemy" && randomNum > 70)
         {
@@ -111,7 +111,7 @@ public class ItemDrop : MonoBehaviour
         {
             randomNum = (UnityEngine.Random.Range(50, 101)) + ((playerStatScript.intelligence));
 
-            // tier 2
+            // Tier 2
             if (randomNum >= 95)
             {
                 if (playerStatScript.intelligence >= 10)
@@ -122,7 +122,7 @@ public class ItemDrop : MonoBehaviour
                 {
                     randomNum = (UnityEngine.Random.Range(101, 201));
                 }
-                // tier 3
+                // Tier 3
                 if (randomNum >= 200)
                 {
                     if (playerStatScript.intelligence >= 20)
@@ -133,7 +133,7 @@ public class ItemDrop : MonoBehaviour
                     {
                         randomNum = (UnityEngine.Random.Range(201, 301));
                     }
-                    // tier 4
+                    // Tier 4
                     if (randomNum >= 300)
                     {
                         if (playerStatScript.intelligence >= 30)
@@ -145,7 +145,7 @@ public class ItemDrop : MonoBehaviour
                             randomNum = (UnityEngine.Random.Range(301, 401));
                         }
                     }
-                    // tier 5
+                    // Tier 5
                     if (randomNum >= 400)
                     {
                         if (playerStatScript.intelligence >= 40)
@@ -157,7 +157,7 @@ public class ItemDrop : MonoBehaviour
                             randomNum = (UnityEngine.Random.Range(401, 501));
                         }
                     }
-                    // tier 6
+                    // Tier 6
                     if (randomNum >= 500)
                     {
                         if (playerStatScript.intelligence >= 50)

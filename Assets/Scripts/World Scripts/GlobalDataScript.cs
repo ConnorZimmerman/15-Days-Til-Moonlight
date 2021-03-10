@@ -1,9 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 public class GlobalDataScript : MonoBehaviour
 {
@@ -97,14 +97,12 @@ class PlayerData
 {
     public List<string> inventory;
     public List<string> equippedArmor;
-    // public string type;
 
     public PlayerData(List<ItemSlot> oldInventory, List<ItemSlot> equippedList)
     {
         this.inventory = new List<string>();
         this.equippedArmor = new List<string>();
-        // Debug.Log(oldInventory[0].slotStatus);
-        // type = inventory[0].type;
+
         foreach (ItemSlot item in oldInventory.ToArray())
         {
             this.inventory.Add(item.itemName);
@@ -116,6 +114,3 @@ class PlayerData
     }
 
 }
-
-
-

@@ -56,18 +56,8 @@ public class SlimeController : MonoBehaviour
                 timeToMoveCounter = Random.Range(timeToMove * 0.75f, timeBetweenMove * 1.25f);
 
                 moveDirection = new Vector3(Random.Range(-1f, 1f) * moveSpeed,
-                        Random.Range(-1f, 1f) * moveSpeed, 0f);
+                    Random.Range(-1f, 1f) * moveSpeed, 0f);
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-

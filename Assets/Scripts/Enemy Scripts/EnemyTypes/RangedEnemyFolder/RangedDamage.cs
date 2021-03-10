@@ -87,8 +87,8 @@ public class RangedDamage : MonoBehaviour
 
         if (playerShield.shieldOn)
         {
-            if (knifeDirection - thePlayer.directionInt == -2
-                || knifeDirection - thePlayer.directionInt == 2)
+            if (knifeDirection - thePlayer.directionInt == -2 ||
+                knifeDirection - thePlayer.directionInt == 2)
             {
                 rangedDeathStrike = false;
             }
@@ -126,7 +126,6 @@ public class RangedDamage : MonoBehaviour
             Instantiate(swordClash, hitPoint.position, hitPoint.rotation);
             thisKnife.SetActive(false);
         }
-
 
     }
     public void OnTriggerExit2D(Collider2D other)

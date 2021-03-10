@@ -5,22 +5,13 @@ using UnityEngine;
 public class VolumeController : MonoBehaviour
 {
     private AudioSource theAudio;
-
     private float audioLvl;
     public float defaultAduio;
 
     // Use this for initialization
     void Start()
     {
-
         theAudio = GetComponent<AudioSource>();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void SetAudioLvl(float volume)

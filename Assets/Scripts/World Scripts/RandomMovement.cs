@@ -7,36 +7,23 @@ public class RandomMovement : MonoBehaviour
     public float moveSpeed;
     private Vector2 minWalkPoint;
     private Vector2 maxWalkPoint;
-
     private Rigidbody2D myRigidbody;
-
     public bool isWalking;
-
     public float walkTime;
     private float walkCounter;
     public float waitTime;
     private float waitCounter;
-
     private int walkDirection;
-
     public Animator anim;
     public Vector2 lastMove;
-
     public Collider2D walkZone;
     private bool hasWalkZone;
-
     public bool canMove;
-
     private DialogueManager theDM;
-
     public int directionInt;
-
     public bool working;
-
     private PlayerController thePlayer;
-
     private bool dialogueDirection;
-
     private EngagedWithPlayer playerEngagement;
     public GameObject engageWithPlayerObject;
     private GameObject enemyGameObject;
@@ -57,7 +44,6 @@ public class RandomMovement : MonoBehaviour
 
         enemyGameObject = this.gameObject;
         enemyTransform = enemyGameObject.transform;
-
 
         walkCounter = Random.Range(walkTime * 0.75f, walkTime * 1.25f);
         waitCounter = Random.Range(waitTime * 0.75f, walkTime * 1.25f);
@@ -85,28 +71,28 @@ public class RandomMovement : MonoBehaviour
             {
                 case 0:
                     enemyTransform.position = new Vector2(enemyTransform.position.x,
-                    enemyTransform.position.y + 0.2f);
+                        enemyTransform.position.y + 0.2f);
                     playerEngagement.wallBlock = false;
 
                     break;
 
                 case 1:
                     enemyTransform.position = new Vector2(enemyTransform.position.x + 0.2f,
-                    enemyTransform.position.y);
+                        enemyTransform.position.y);
                     playerEngagement.wallBlock = false;
 
                     break;
 
                 case 2:
                     enemyTransform.position = new Vector2(enemyTransform.position.x,
-                    enemyTransform.position.y - 0.2f);
+                        enemyTransform.position.y - 0.2f);
                     playerEngagement.wallBlock = false;
 
                     break;
 
                 case 3:
                     enemyTransform.position = new Vector2(enemyTransform.position.x - 0.2f,
-                    enemyTransform.position.y);
+                        enemyTransform.position.y);
                     playerEngagement.wallBlock = false;
 
                     break;

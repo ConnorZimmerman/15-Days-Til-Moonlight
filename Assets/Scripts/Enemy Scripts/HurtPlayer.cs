@@ -17,9 +17,7 @@ public class HurtPlayer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         shield = FindObjectOfType<ShieldBlock>();
-
         thePS = FindObjectOfType<PlayerStats>();
     }
 
@@ -43,6 +41,5 @@ public class HurtPlayer : MonoBehaviour
             clone.GetComponent<FloatingNumbers>().damageNumber = currentDamage;
         }
     }
-
 
 }

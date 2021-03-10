@@ -1,9 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Diagnostics;
 using System.Linq;
-using System;
+using UnityEngine;
 
 public class Pathfinding : MonoBehaviour
 {
@@ -53,7 +53,7 @@ public class Pathfinding : MonoBehaviour
                 }
 
                 int newMovementCostToNeighbor = currentNode.gCost + GetDistance(currentNode, neighbor);
-                
+
                 if (newMovementCostToNeighbor < neighbor.gCost || !openSet.Contains(neighbor))
                 {
                     neighbor.gCost = newMovementCostToNeighbor;
@@ -77,7 +77,7 @@ public class Pathfinding : MonoBehaviour
         {
             waypoints = RetracePath(startNode, targetNode);
         }
-        
+
         requestManager.FinishedProcessingPath(waypoints, pathSuccess);
     }
 
@@ -106,7 +106,7 @@ public class Pathfinding : MonoBehaviour
             Vector2 directionNew = new Vector2(path[i - 1].gridX - path[i].gridX, path[i - 1].gridY - path[i].gridY);
             if (directionNew != directionOld)
             {
-                waypoints.Add(path[i-1].worldPosition);
+                waypoints.Add(path[i - 1].worldPosition);
             }
             directionOld = directionNew;
         }

@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PauseMenuButtons : MonoBehaviour
 {
@@ -13,24 +13,19 @@ public class PauseMenuButtons : MonoBehaviour
     public GameObject lastSelected;
     private PauseMenu pauseMenuScript;
     private ItemSlotManager itemSlotManagerScript;
-
     // Lvl Up Buttons
     private GameObject VitalityButton;
     public GameObject vitalityObject;
     public Text vitalityText;
-
     private GameObject StrengthButton;
     public GameObject strengthObject;
     public Text strengthText;
-
     private GameObject DexterityButton;
     public GameObject dexterityObject;
     public Text dexterityText;
-
     private GameObject IntelligenceButton;
     public GameObject intelligenceObject;
     public Text intelligenceText;
-
     // Inventory Buttons
     private GameObject ItemSlot0AButton;
     private GameObject ItemSlot0BButton;
@@ -52,7 +47,6 @@ public class PauseMenuButtons : MonoBehaviour
     private GameObject ItemSlot3CButton;
     private GameObject ItemSlot3DButton;
     private GameObject ItemSlot3EButton;
-
     // Armor slots
     private GameObject HeadSlotButton;
     private GameObject BodyArmorButton;
@@ -122,70 +116,70 @@ public class PauseMenuButtons : MonoBehaviour
         if (pauseMenuScript.pauseStatus)
         {
             if (eventSystem.currentSelectedGameObject == VitalityButton ||
-            eventSystem.currentSelectedGameObject == StrengthButton ||
-            eventSystem.currentSelectedGameObject == DexterityButton ||
-            eventSystem.currentSelectedGameObject == IntelligenceButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot0AButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot0BButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot0CButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot0DButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot0EButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot1AButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot1BButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot1CButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot1DButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot1EButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot2AButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot2BButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot2CButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot2DButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot2EButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot3AButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot3BButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot3CButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot3DButton ||
-            eventSystem.currentSelectedGameObject == ItemSlot3EButton ||
-            eventSystem.currentSelectedGameObject == HeadSlotButton ||
-            eventSystem.currentSelectedGameObject == BodyArmorButton ||
-            eventSystem.currentSelectedGameObject == GlovesButton ||
-            eventSystem.currentSelectedGameObject == BootsButton ||
-            eventSystem.currentSelectedGameObject == RingOneButton ||
-            eventSystem.currentSelectedGameObject == RingTwoButton ||
-            eventSystem.currentSelectedGameObject == RingThreeButton ||
-            eventSystem.currentSelectedGameObject == RingFourButton)
+                eventSystem.currentSelectedGameObject == StrengthButton ||
+                eventSystem.currentSelectedGameObject == DexterityButton ||
+                eventSystem.currentSelectedGameObject == IntelligenceButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot0AButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot0BButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot0CButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot0DButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot0EButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot1AButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot1BButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot1CButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot1DButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot1EButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot2AButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot2BButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot2CButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot2DButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot2EButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot3AButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot3BButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot3CButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot3DButton ||
+                eventSystem.currentSelectedGameObject == ItemSlot3EButton ||
+                eventSystem.currentSelectedGameObject == HeadSlotButton ||
+                eventSystem.currentSelectedGameObject == BodyArmorButton ||
+                eventSystem.currentSelectedGameObject == GlovesButton ||
+                eventSystem.currentSelectedGameObject == BootsButton ||
+                eventSystem.currentSelectedGameObject == RingOneButton ||
+                eventSystem.currentSelectedGameObject == RingTwoButton ||
+                eventSystem.currentSelectedGameObject == RingThreeButton ||
+                eventSystem.currentSelectedGameObject == RingFourButton)
             {
                 lastSelected = eventSystem.currentSelectedGameObject;
             }
 
             if (eventSystem.currentSelectedGameObject != VitalityButton && eventSystem.currentSelectedGameObject != StrengthButton && eventSystem.currentSelectedGameObject != DexterityButton && eventSystem.currentSelectedGameObject != IntelligenceButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot0AButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot0BButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot0CButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot0DButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot0EButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot1AButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot1BButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot1CButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot1DButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot1EButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot2AButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot2BButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot2CButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot2DButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot2EButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot3AButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot3BButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot3CButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot3DButton ||
-            eventSystem.currentSelectedGameObject != ItemSlot3EButton ||
-            eventSystem.currentSelectedGameObject != HeadSlotButton ||
-            eventSystem.currentSelectedGameObject != BodyArmorButton ||
-            eventSystem.currentSelectedGameObject != GlovesButton ||
-            eventSystem.currentSelectedGameObject != BootsButton ||
-            eventSystem.currentSelectedGameObject != RingOneButton ||
-            eventSystem.currentSelectedGameObject != RingTwoButton ||
-            eventSystem.currentSelectedGameObject != RingThreeButton ||
-            eventSystem.currentSelectedGameObject != RingFourButton)
+                eventSystem.currentSelectedGameObject != ItemSlot0AButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot0BButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot0CButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot0DButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot0EButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot1AButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot1BButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot1CButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot1DButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot1EButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot2AButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot2BButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot2CButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot2DButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot2EButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot3AButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot3BButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot3CButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot3DButton ||
+                eventSystem.currentSelectedGameObject != ItemSlot3EButton ||
+                eventSystem.currentSelectedGameObject != HeadSlotButton ||
+                eventSystem.currentSelectedGameObject != BodyArmorButton ||
+                eventSystem.currentSelectedGameObject != GlovesButton ||
+                eventSystem.currentSelectedGameObject != BootsButton ||
+                eventSystem.currentSelectedGameObject != RingOneButton ||
+                eventSystem.currentSelectedGameObject != RingTwoButton ||
+                eventSystem.currentSelectedGameObject != RingThreeButton ||
+                eventSystem.currentSelectedGameObject != RingFourButton)
             {
                 eventSystem.SetSelectedGameObject(lastSelected);
             }
@@ -241,6 +235,7 @@ public class PauseMenuButtons : MonoBehaviour
                 {
                     intelligenceObject.SetActive(false);
                 }
+
                 // Ensures that the last button cannot be scrolled off from
                 if (eventSystem.currentSelectedGameObject != VitalityButton && eventSystem.currentSelectedGameObject != StrengthButton && eventSystem.currentSelectedGameObject != DexterityButton && eventSystem.currentSelectedGameObject != IntelligenceButton || eventSystem.currentSelectedGameObject != ItemSlot0AButton)
                 {
@@ -259,11 +254,6 @@ public class PauseMenuButtons : MonoBehaviour
                 if (itemNumber < 20)
                 {
                     descriptionText.text = itemSlotManagerScript.listOfSlots[itemNumber].itemDescription;
-                    // Debug.Log("getting here");
-                    // Debug.Log(itemSlotManagerScript.listOfSlots[itemNumber].itemDescription);
-                    // Debug.Log(itemNumber);
-                    // Debug.Log(itemNumber);
-                    // descriptionText.text = itemSlotManagerScript.listOfSlots[itemNumber].itemDescription;
                 }
                 else
                 {
@@ -272,6 +262,7 @@ public class PauseMenuButtons : MonoBehaviour
             }
         }
     }
+
     public void Vitality()
     {
         if (playerStats.pointsToSpend > 0)
@@ -281,6 +272,7 @@ public class PauseMenuButtons : MonoBehaviour
             playerStats.pointsToSpend--;
         }
     }
+
     public void Strength()
     {
         if (playerStats.pointsToSpend > 0)
@@ -289,6 +281,7 @@ public class PauseMenuButtons : MonoBehaviour
             playerStats.pointsToSpend--;
         }
     }
+
     public void Dexterity()
     {
         if (playerStats.pointsToSpend > 0)
@@ -299,6 +292,7 @@ public class PauseMenuButtons : MonoBehaviour
         }
 
     }
+
     public void Intelligence()
     {
         if (playerStats.pointsToSpend > 0)
@@ -307,6 +301,7 @@ public class PauseMenuButtons : MonoBehaviour
             playerStats.pointsToSpend--;
         }
     }
+
     public void ItemSlot0A()
     {
         // playerStats.vitality++;
@@ -413,9 +408,6 @@ public class PauseMenuButtons : MonoBehaviour
         }
         return "None";
     }
-    // public string IntelligenceText(int intelligence)
-    // {
-    // }
 
     public int MappingButtonNums(string lastSelected)
     {
@@ -534,9 +526,4 @@ public class PauseMenuButtons : MonoBehaviour
         }
         return numToReturn;
     }
-
-    // public int MapEquippedItemButtons(string lastSelected){
-    //     int numToReturn = 0;
-    //     return numToReturn;        
-    // }
 }

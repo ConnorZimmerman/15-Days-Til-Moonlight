@@ -5,12 +5,9 @@ using UnityEngine;
 public class PathTracker : MonoBehaviour
 {
     public string pathName;
-
     private GameObject enemyObject;
     private EnemyRangedAttack rangedAttack;
-
     private PlayerPathTracker thePlayerTracker;
-
     private bool stillOutOfSight;
 
     // Use this for initialization
@@ -20,10 +17,9 @@ public class PathTracker : MonoBehaviour
         enemyObject = this.gameObject.transform.parent.gameObject;
         rangedAttack = enemyObject.GetComponent<EnemyRangedAttack>();
 
-        //still out sight is created to not have the player going back and forth when in range but player out of sight between enemies path and players path
+        // stillOutOfSight is created to not have the player going back and forth when in range but player out of sight between enemies path and players path
         stillOutOfSight = false;
     }
-
 
     // Update is called once per frame
     void Update()
@@ -57,6 +53,5 @@ public class PathTracker : MonoBehaviour
     //         pathName = thePlayerTracker.pathName;
     //     }
     // }
-
 
 }

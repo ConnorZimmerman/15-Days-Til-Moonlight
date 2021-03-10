@@ -21,7 +21,6 @@ public class PlayerStaminaManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //thePlayer = GetComponent<PlayerController>();
         dmObject = GameObject.Find("Dialogue Manager");
         dialog = dmObject.GetComponent<DialogueManager>();
         playerStats = FindObjectOfType<PlayerStats>();
@@ -58,40 +57,8 @@ public class PlayerStaminaManager : MonoBehaviour
 
         }
 
-        //test condition
-        //if (PlayerController.staminaAttackDrainBool == true)
-        //{
-        //    playerCurrentStamina -= 1;
-        //}a
-
-
-
-        //testing new conditions for stamina bug
-        //if (thePlayer.damagePossible == true || thePlayer.attackBoolMouse == true)
-        //if (thePlayer.damagePossible == true && PlayerController.staminaAttackDrainBool 
-        //if (thePlayer.damagePossible == true && thePlayer.staminaAttackDrainBool)
-        //|| thePlayer.attackBoolMouse == true
-
-        // {
-        //    playerCurrentStamina -= 400;
-        //}
-
-        // if (playerCurrentStamina <= 0)
-        // {
-        //     staminaTimer -= Time.deltaTime;
-        //     staminaLock = true;
-        // }
-
-        // if (staminaTimer <= 0)
-        // {
-        //     staminaLock = false;
-        //     staminaCharge = true;
-        //     staminaTimer = 2;
-        // }
-
-
-        if (thePlayer.dashActive == false && thePlayer.sprintActive == false
-            && thePlayer.attackBool == false && thePlayer.attackBoolMouse == false && playerCurrentStamina <= playerMaxStamina)
+        if (thePlayer.dashActive == false && thePlayer.sprintActive == false &&
+            thePlayer.attackBool == false && thePlayer.attackBoolMouse == false && playerCurrentStamina <= playerMaxStamina)
         {
             if (staminaTimer == 2 && staminaLock == false && theShield.shieldOn == false)
             {

@@ -28,7 +28,6 @@ public class PauseMenu : MonoBehaviour
         inventoryPanel = GameObject.Find("InventoryPanel");
         pauseMenu.SetActive(false);
         inventoryPanel.SetActive(false);
-        // lvlUpPanel.SetActive(false);
         pauseStatus = false;
         lvlUpPanelStatus = true;
         inventoryPanelStatus = false;
@@ -77,6 +76,3 @@ public class PauseMenu : MonoBehaviour
 
     }
 }
-
-
-

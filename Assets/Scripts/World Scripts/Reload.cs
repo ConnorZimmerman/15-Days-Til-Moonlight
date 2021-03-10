@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class Reload : MonoBehaviour
 {
     private CameraController theCamera;
@@ -22,7 +21,6 @@ public class Reload : MonoBehaviour
     private ItemSlotManager itemSlotManagerScript;
 
     void Start()
-
     {
         thePlayer = FindObjectOfType<PlayerController>();
         loadNewAreaScript = FindObjectOfType<LoadNewArea>();
@@ -48,10 +46,7 @@ public class Reload : MonoBehaviour
 
         if (playerHealth.playerCurrentHealth <= 0)
         {
-            // itemSlotManagerScript.InventoryReset();
             globalData.Save(itemSlotManagerScript.listOfSlots, itemSlotManagerScript.equippedArmor);
-            // loadNewAreaScript.SetAllForLvl();
-
             waitToReload -= Time.deltaTime;
             reloadIs = true;
 
@@ -69,35 +64,19 @@ public class Reload : MonoBehaviour
 
                 thePlayer.swingBig.SetActive(false);
                 thePlayer.swingBig.transform.localRotation = new Quaternion(0, 0, 0, 0);
-
                 staminaMan.playerCurrentStamina = staminaMan.playerMaxStamina;
-
                 playerHealth.playerCurrentHealth = playerHealth.playerMaxHealth;
-
                 playerHealth.oldPlayerCurrentHealth = playerHealth.playerCurrentHealth;
 
-
                 waitToReload = 2;
-
-                // Debug.Log(globalData.globalPlayerCurLvl);
-                // Debug.Log(globalData.globalPlayerStartPoint);
-                // SceneManager.LoadScene("SnowyA", LoadSceneMode.Single);
                 SceneManager.LoadScene("Sewers_A", LoadSceneMode.Single);
-
-                // if (thePlayer.startPoint == pointName)
-                // {
-
-                // thePlayer.transform.position = GameObject.Find("SnowyA_Startpoint").transform.position;
                 theDM.dialogActive = false;
                 theDM.dBox.SetActive(false);
                 thePlayer.canMove = true;
-
                 playerHealth.gameObject.SetActive(true);
-
                 theCamera = FindObjectOfType<CameraController>();
                 theCamera.transform.position = new Vector3(transform.position.x, transform.position.y,
                     theCamera.transform.position.z);
-                // }
             }
         }
     }

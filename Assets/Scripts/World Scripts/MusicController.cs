@@ -4,37 +4,16 @@ using UnityEngine;
 
 public class MusicController : MonoBehaviour
 {
-
     public static bool mcExist;
-
     public AudioSource[] musicTracks;
-
     public int currentTrack;
-
     public bool musicCanPlay;
 
-    // Use this for initialization
-
-    void Awake()
-    {
-
-    }
     void Start()
     {
-     //   Debug.Log(PlayerPrefs.GetInt("Global Music Tracker"));
-        // if (PlayerPrefs.GetInt("Global Music Tracker") == 0)
-        // {
-        //     DontDestroyOnLoad(this.gameObject);
-        // }
-
         if (!mcExist)
         {
             mcExist = true;
-            // DontDestroyOnLoad(transform.gameObject);
-        }
-        else
-        {
-            //Destroy(gameObject);
         }
     }
 

@@ -4,48 +4,31 @@ using UnityEngine;
 
 public class VillagerMovement : MonoBehaviour
 {
-
     public float moveSpeed;
     private Vector2 minWalkPoint;
     private Vector2 maxWalkPoint;
-
     private Rigidbody2D myRigidbody;
-
     public bool isWalking;
-
     public float walkTime;
     private float walkCounter;
     public float waitTime;
     private float waitCounter;
-
     private int walkDirection;
-
     public Animator anim;
     public Vector2 lastMove;
-
     public Collider2D walkZone;
     private bool hasWalkZone;
-
     public bool canMove;
-
     private DialogueManager theDM;
-
     public int directionInt;
-
     public bool working;
-
     private PlayerController thePlayer;
-
     private bool dialogueDirection;
-
 
     void Start()
     {
-
         thePlayer = FindObjectOfType<PlayerController>();
-
         theDM = FindObjectOfType<DialogueManager>();
-
         anim = GetComponent<Animator>();
         myRigidbody = GetComponent<Rigidbody2D>();
 
@@ -68,16 +51,12 @@ public class VillagerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         directionInt = thePlayer.directionInt;
-
         anim.SetBool("CanMove", canMove);
-
 
         if (!theDM.dialogActive)
         {
             canMove = true;
-
             anim.speed = 1;
         }
 

@@ -24,7 +24,7 @@ public class EnemyMasterScript : MonoBehaviour
             enemyMaxHealth = 20;
             damageToGive = 3;
         }
-        
+
         if (this.gameObject.transform.tag == "BasicRangedEnemy")
         {
             enemyMaxHealth = 2;
@@ -59,8 +59,7 @@ public class EnemyMasterScript : MonoBehaviour
 
     public void enemyStats()
     {
-        if (locateEnemyClass == 1)
-        { }
+        if (locateEnemyClass == 1) { }
         if (locateEnemyClass == 2)
         {
             damageToGive = 3;

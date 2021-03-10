@@ -68,16 +68,13 @@ public class WaypointRaycast : MonoBehaviour
         distanceToWaypoint = Vector3.Distance(transform.position, otherWaypoint.transform.position);
         Vector2 targetDir = otherWaypoint.transform.position - curWaypoint.transform.position;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir, distanceToWaypoint, ~1 >> 12 | ~1 >> 8);
-        //Debug.DrawRay(transform.position, targetDir, Color.green, 1000);
+
         if (hit.collider.tag == "WayPoint")
         {
-            //Debug.Log("true");
-            //Debug.Log(hit.collider.tag);
             return true;
         }
         else
         {
-            //Debug.Log("False");
             return false;
         }
     }

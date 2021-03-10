@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LargeBasicEnemy : MonoBehaviour {
-
+public class LargeBasicEnemy : MonoBehaviour
+{
     public int locateEnemyClass;
     public int enemyMaxHealth;
     public int damageToGive;
@@ -16,12 +16,14 @@ public class LargeBasicEnemy : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         damageToGive = 3;
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         damageToGive = 3;
     }
 }
